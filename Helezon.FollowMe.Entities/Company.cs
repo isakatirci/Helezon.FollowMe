@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Repository.Pattern.Ef6;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Helezon.FollowMe.Service
+namespace Helezon.FollowMe.Entities
 {
-    public class Class1
+    public class Company : Entity
     {
     }
 }

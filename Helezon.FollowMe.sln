@@ -7,17 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Core", "He
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.WebUI", "Helezon.FollowMe.WebUI\Helezon.FollowMe.WebUI.csproj", "{D410487A-4B16-4AA0-9C3F-D225B32F9F33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Repository.Pattern", "Helezon.FollowMe.Repository.Pattern\Helezon.FollowMe.Repository.Pattern.csproj", "{31674236-C4F3-401B-9D26-E59715A27B83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Pattern", "Helezon.FollowMe.Repository.Pattern\Repository.Pattern.csproj", "{31674236-C4F3-401B-9D26-E59715A27B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Repository.Pattern.Ef6", "Helezon.FollowMe.Repository.Pattern.Ef6\Helezon.FollowMe.Repository.Pattern.Ef6.csproj", "{51901D12-4980-40D7-BC9F-03DA365421EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Pattern.Ef6", "Helezon.FollowMe.Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj", "{51901D12-4980-40D7-BC9F-03DA365421EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Service.Pattern", "Helezon.FollowMe.Service.Pattern\Helezon.FollowMe.Service.Pattern.csproj", "{A2EFFB3B-665F-4539-B1AC-02C389A3F726}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Pattern", "Helezon.FollowMe.Service.Pattern\Service.Pattern.csproj", "{A2EFFB3B-665F-4539-B1AC-02C389A3F726}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Entities", "Helezon.FollowMe.Entities\Helezon.FollowMe.Entities.csproj", "{59589202-F93D-48A9-80FE-F507C0596F36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Service", "Helezon.FollowMe.Service\Helezon.FollowMe.Service.csproj", "{3A75C615-57F9-49FA-81CC-00D3C12799BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helezon.FollowMe.Repository", "Helezon.FollowMe.Repository\Helezon.FollowMe.Repository.csproj", "{BD4F3ED9-FD68-4878-BB7B-718EC239C351}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{0E92D1ED-2C97-4127-83F9-D5E0C5C8C031}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31674236-C4F3-401B-9D26-E59715A27B83} = {0E92D1ED-2C97-4127-83F9-D5E0C5C8C031}
+		{51901D12-4980-40D7-BC9F-03DA365421EA} = {0E92D1ED-2C97-4127-83F9-D5E0C5C8C031}
+		{A2EFFB3B-665F-4539-B1AC-02C389A3F726} = {0E92D1ED-2C97-4127-83F9-D5E0C5C8C031}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {529D341B-9A00-47DD-9C23-2FD6C26617F6}

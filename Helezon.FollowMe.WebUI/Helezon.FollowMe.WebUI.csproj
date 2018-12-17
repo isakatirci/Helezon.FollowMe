@@ -6161,6 +6161,7 @@
     <Content Include="Content\pages\media\pages\Thumbs.db" />
     <Content Include="Models\EF.Reverse.POCO.Core.ttinclude" />
     <Content Include="Models\EF.Reverse.POCO.ttinclude" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts.old\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts.old\jquery-3.3.1.js" />
     <Content Include="Scripts.old\jquery-3.3.1.min.js" />
