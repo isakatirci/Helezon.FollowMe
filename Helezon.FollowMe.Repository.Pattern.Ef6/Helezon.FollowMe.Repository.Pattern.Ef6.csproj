@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{41F8E63F-3562-4046-AD2B-0CA8DEFF0CC8}</ProjectGuid>
+    <ProjectGuid>{51901D12-4980-40D7-BC9F-03DA365421EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Helezon.FollowMe.Core</RootNamespace>
-    <AssemblyName>Helezon.FollowMe.Core</AssemblyName>
+    <RootNamespace>Helezon.FollowMe.Repository.Pattern.Ef6</RootNamespace>
+    <AssemblyName>Helezon.FollowMe.Repository.Pattern.Ef6</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
