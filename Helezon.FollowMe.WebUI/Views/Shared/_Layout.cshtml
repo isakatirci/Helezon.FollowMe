@@ -1,44 +1,160 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+﻿@using Microsoft.AspNet.Identity
+@{
 
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+    ViewBag.OptionLabel = "Please Select";
+    var hidden = ViewBag.Hidden != null && (bool)ViewBag.Hidden;
+}
+@RenderSection("afterGlobalStyles", required: false)
+<style type="text/css">
+    /*.modal-body {
+        overflow: hidden !important
+    }*/
+</style>
+<style>
+    .companyTable table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .companyTable td, .companyTable th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    /*.companyTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }*/
+    /*.companyTable tr:hover {
+    background-color: #ddd;
+    }*/
+    .companyTable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        /*background-color: #4CAF50;*/
+        /*color: white;*/
+    }
+
+</style>
+<div class="page-wrapper">
+
+    <!-- BEGIN HEADER -->
+    @{
+        Html.RenderPartial("_Header");
+    }
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        @{
+            Html.RenderPartial("_SideBar");
+        }
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEADER-->
+                <!-- BEGIN THEME PANEL -->
+                @{
+                    Html.RenderPartial("_ThemePanel");
+                }
+                <!-- END THEME PANEL -->
+                <!-- BEGIN PAGE BAR -->
+                @*@{
+                    Html.RenderPartial("_PageBar");
+                }*@
+                <!-- END PAGE BAR -->
+                <!-- BEGIN PAGE TITLE-->
+                <h1 class="page-title">
+                    @*Blank Page Layout*@
+                    @ViewBag.Title
+
+                    @*<small>blank page layout</small>*@
+                    <small>  @ViewBag.Action </small>
+                </h1>
+                <!-- END PAGE TITLE-->
+                <!-- END PAGE HEADER-->
+                @RenderBody()
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        @{
+            Html.RenderPartial("_QuickSideBar");
+        }
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    @{
+        Html.RenderPartial("_Footer");
+    }
+
+    <!-- END FOOTER -->
+    <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="70%" data-height="600">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @*<div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>*@
+                <iframe src="" style="border:none;height:100%;width:100%;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+                @*<button type="button" class="btn green">Save changes</button>*@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+    <div id="content-modal" class="modal fade" tabindex="-1" data-width="70%" data-height="600">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @*<div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>*@
+                @*<iframe src="" style="border:none;height:100%;width:100%;"></iframe>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+                @*<button type="button" class="btn green">Save changes</button>*@
+            </div>
+        </div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+    <!-- BEGIN QUICK NAV -->
+    @*@{
+            Html.RenderPartial("_QuickNav");
+        }*@
+    <!-- END QUICK NAV -->
+</div>
+
+
+
+
+
+@section afterGlobalScripts {
+    @RenderSection("afterGlobalScripts", required: false)
+
+}
+
+@section beforeGlobalScripts {
+
+    @RenderSection("beforeGlobalScripts", required: false)
+
+}

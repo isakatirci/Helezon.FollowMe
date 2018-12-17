@@ -1,0 +1,267 @@
+﻿@model FollowMe.Web.Models.Terms
+<div class="row">
+<div class="col-md-12">
+    <div class="portlet light bordered">
+        <div class="portlet-body ">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CompanyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="input-group input-large">
+                                @Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button class="btn blue ajax-demo" data-url="@Url.Action("Edit", "Company")" data-toggle="modal" type="button">
+                                        <i class="icon-plus"></i>
+                                    </button>
+                                    <button class="btn green ajax-refresh" data-url="@Url.Action("DropDownListRefresh", "Base")" data-dropdownlistid="CompanyId" data-table-name="Company" type="button">
+                                        <i class="icon-refresh"></i>
+                                    </button>
+                                    <button class="btn red ajax-taxonomies" data-url="@Url.Action("Taxonomies", "Terms")" data-dropdownlistid="CompanyId" data-table-name="Company" type="button">
+                                        <i class="icon-refresh"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(x => x.CompanyId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bubble font-red"></i>
+                    <span class="caption-subject font-red sbold uppercase">New List</span>
+                </div>
+                <div class="tools">
+                    @*<a href="" class="collapse"> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                    <a href="" class="reload"> </a>
+                    <a href="" class="remove"> </a>*@
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="dd" id="nestable_list_2">
+                    <div class="dd-empty"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bubble font-green"></i>
+                    <span class="caption-subject font-green sbold uppercase"> @ViewBag.Taxonomy List </span>
+                </div>
+                <div class="actions">
+                    @*<div class="btn-group">
+                        <a class="btn green-haze btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            Actions
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;"> Option 1</a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li>
+                                <a href="javascript:;">Option 2</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">Option 3</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">Option 4</a>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+            </div>
+            <div class="portlet-body ">
+                <div class="dd" id="nestable_list_1">
+                    @Html.Raw(ViewBag.NestedListHtmlString)
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="inputItemName" class="col-md-2 control-label">Item Name:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputItemName" placeholder="Item Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" id="buttonAddNewItem" class="btn blue">Add New Item</button>
+                    <button type="submit" id="buttonSave" class="btn default">Save</button>
+                    @*<button type="submit" id="buttonRefresh" class="btn default">Refresh</button>
+                        <button type="submit" id="buttonClean" class="btn default">Clean</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portlet light bordered">
+    <div class="portlet-body ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="margin-bottom-10" id="nestable_list_menu">
+                    <button type="button" class="btn green btn-outline sbold uppercase" data-action="expand-all">Expand All</button>
+                    <button type="button" class="btn red btn-outline sbold uppercase" data-action="collapse-all">Collapse All</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Serialised Output (per list)</h3>
+                <textarea id="nestable_list_1_output" class="form-control col-md-12 margin-bottom-10"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+@section beforeGlobalScripts {
+    <script src="~/Content/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>
+
+}
+
+@section afterGlobalScripts {
+    <script src="~/Content/pages/scripts/ui-nestable.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#buttonAddNewItem").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddNewTerm", "Terms")?companyId=" + $("#CompanyId").val(),
+                    data: '{ Name: "' + $("#inputItemName").val() + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        if ($("#nestable_list_2 > .dd-empty").length) {
+                            $("#nestable_list_2 > .dd-empty").remove();
+                        }
+
+                        console.log(response);
+
+                        if ($("#nestable_list_2 > ol").length) {
+                            $("#nestable_list_2 > ol").append("<li class=\"dd-item\" data-name=\"" + response.Name + "\"   data-id=\"" + response.Term_Id + "\"><div class=\"dd-handle\">" + response.Name + " " + response.Term_Id  + " </div></li>");
+                        } else {
+                            $("#nestable_list_2").append("<ol class=\"dd-list\"><li class=\"dd-item\" data-name=\"" + response.Name + "\"   data-id=\"" + response.Term_Id + "\"><div class=\"dd-handle\">" + response.Name + " " + response.Term_Id + " </div></li></ol>");
+                        }
+
+                        UINestable.updateOutput($('#nestable_list_2').data('output', $('#nestable_list_1_output')));
+                        $("#inputItemName").val('');
+                    },
+                    failure: function (response) {
+                        console.log(response);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+
+            });
+
+            $("#buttonSave").click(function () {
+
+                console.log($('#nestable_list_1 .dd').nestable('serialize'));
+                //console.log($("#nestable_list_1_output").val());
+
+                var temppp = "@Url.Action("Term_Taxonomy", "Terms")?companyId=" + $("#CompanyId").val();
+                alert(temppp);
+                $.ajax({
+                    type: "POST",
+                    url: temppp,
+                    data: { nestableList: $('#nestable_list_1 .dd').nestable('serialize'), taxonomy: '@ViewBag.Taxonomy'} ,
+                    success: function (response) {
+                        //console.log(response);
+                        if (response.IsSucceeded) {
+                            swal("Success.", '@ViewBag.Taxonomy' + " Saved!", "success");
+
+                        } else {
+                            swal("Error!", response.Message, "error");
+                        }
+                    },
+                    failure: function (response) {
+                        console.log(response);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+
+            });
+            $(".ajax-taxonomies").click(function () {
+                var temp1 = $(this).data('url') + '?taxonomy=' + '@ViewBag.Taxonomy' + '&companyId=' + $("#CompanyId").val();
+                alert(temp1);
+
+                window.location.href = temp1;
+
+            });
+
+            $("#buttonClean").click(function () {
+
+                $('#nestable_list_1').empty();
+                updateOutput($('#nestable_list_1').data('output', $('#nestable_list_1_output')));
+
+
+            });
+
+        });
+    </script>
+
+}
+
+@*<ol class="dd-list">
+                   <li class="dd-item" data-id="1">
+            <div class="dd-handle"> Item 1 </div>
+        </li>
+        <li class="dd-item" data-id="2">
+            <div class="dd-handle"> Item 2 </div>
+            <ol class="dd-list">
+                <li class="dd-item" data-id="3">
+                    <div class="dd-handle"> Item 3 </div>
+                </li>
+                <li class="dd-item" data-id="4">
+                    <div class="dd-handle"> Item 4 </div>
+                </li>
+                <li class="dd-item" data-id="5">
+                    <div class="dd-handle"> Item 5 </div>
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="6">
+                            <div class="dd-handle"> Item 6 </div>
+                        </li>
+                        <li class="dd-item" data-id="7">
+                            <div class="dd-handle"> Item 7 </div>
+                        </li>
+                        <li class="dd-item" data-id="8">
+                            <div class="dd-handle"> Item 8 </div>
+                        </li>
+                    </ol>
+                </li>
+                <li class="dd-item" data-id="9">
+                    <div class="dd-handle"> Item 9 </div>
+                </li>
+                <li class="dd-item" data-id="10">
+                    <div class="dd-handle"> Item 10 </div>
+                </li>
+            </ol>
+        </li>
+        <li class="dd-item" data-id="11">
+            <div class="dd-handle"> Item 11 </div>
+        </li>
+        <li class="dd-item" data-id="12">
+            <div class="dd-handle"> Item 12 </div>
+        </li>
+    </ol>*@

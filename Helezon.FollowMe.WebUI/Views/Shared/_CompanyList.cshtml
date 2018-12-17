@@ -1,0 +1,172 @@
+﻿@using FollowMe.Web.Controllers
+@using System.Linq;
+@model System.Data.DataTable
+@{
+
+    var modelIsAvailable = Model != null;
+
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel-group accordion" id="accordion3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1"> Company Fields </a>
+                    </h4>
+                </div>
+                <div id="collapse_3_1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="portlet light bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-bubble font-green"></i>
+                                            <span class="caption-subject font-green sbold uppercase">Disabled Fields</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body ">
+                                        <div class="dd" id="company_disabled_field_list">
+                                            @if (ViewBag.CompanyFields.Count != 0)
+                                            {
+                                            <ol class="dd-list">
+                                                @foreach (var item in ViewBag.CompanyFields)
+                                                {
+                                                    <li class="dd-item" data-ordinal-position="@((int)@item.ordinalPosition)" data-column-name="@item.columnName" data-column-display-name="@item.columnDisplayName">
+                                                        <div class="dd-handle"> @item.columnDisplayName </div>
+                                                    </li>
+                                                }
+                                            </ol>
+                                            }
+                                            @*else
+                                                {
+                                                    <div class="dd-empty"></div>
+                                                }*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="portlet light bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-bubble font-red"></i>
+                                            <span class="caption-subject font-red sbold uppercase">Enabled Fields</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="dd" id="company_enabled_field_list">
+                                            @if (ViewBag.JsonEnabled.Count != 0)
+                                            {
+                                                <ol class="dd-list">
+                                                    @foreach (var item in ViewBag.JsonEnabled)
+                                                    {
+                                                        <li class="dd-item" data-ordinal-position="@((int)@item.ordinalPosition)" data-column-name="@item.columnName" data-column-display-name="@item.columnDisplayName">
+                                                            <div class="dd-handle"> @item.columnDisplayName </div>
+                                                        </li>
+                                                    }
+                                                </ol>
+                                            }
+                                            @*else
+                                                {
+                                                    <div class="dd-empty"></div>
+                                                }*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="button" id="btnCompanyFieldsSave" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green">
+                    <i class="icon-settings font-red"></i>
+                    <span class="caption-subject bold uppercase">Company List</span>
+                </div>
+                <div class="tools"> </div>
+            </div>
+            <div class="portlet-body table-both-scroll">
+                @*<div class="table-responsive">*@
+                <table class="table table-striped table-bordered table-hover order-column" id="sample_3">
+                    <thead>
+                        <tr>                        
+                            @if (Model != null)
+                            {
+                            <th>
+                                <span>Is Passive</span>
+                            </th>
+                                <th>
+                                    <span>Code&nbsp;-&nbsp;Name</span>
+                                </th>
+                                if (Model.Columns.Count > 5)
+                                {
+                                    for (int i = 6; i < Model.Columns.Count; i++)
+                                    {
+                                        <th>
+                                            @Model.Columns[i].ColumnName
+                                        </th>
+                                    }
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            for (int i = 0; i < Model.Rows.Count; i++)
+                            {
+                                <tr id="row_@i">    
+                                    <td>
+                                        @(bool.Parse(Model.Rows[i][3].ToString()) ? "Pasif" : "Aktif")
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action(actionName:"CompanyCard",controllerName:"Company", routeValues: new { id = @Model.Rows[i][0].ToString() })">
+                                            @Model.Rows[i][1].ToString()&nbsp;-&nbsp;@Model.Rows[i][2].ToString()
+                                        </a>
+                                    </td>
+                                    @if (Model.Columns.Count > 5)
+                                    {
+                                        for (int j = 6; j < Model.Columns.Count; j++)
+                                        {
+                                            <td>
+                                                @Model.Rows[i][j].ToString()
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @*</div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+

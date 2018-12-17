@@ -1,0 +1,11 @@
+﻿@*<script>
+    
+        ajaxTreeFill('@taxonomyViewModel_CompanySubType.TermId', '@Url.Action("JSTreeData", "Terms")?taxonomy=@((int)FollowMe.Web.Controllers.Utils.TaxonomyType.CompanySubType)' + '&companyId=' + $("#Id").val());
+            setTimeout(function () {
+
+                $("@taxonomyViewModel_CompanySubType.TermId").jstree("select_node", @(Model.CompanySubType != null ? Html.Raw("'#" + Model.CompanySubType.TermId.ToString()+"'") : Html.Raw(string.Empty)));
+
+            }, 1000);
+
+
+</script>*@

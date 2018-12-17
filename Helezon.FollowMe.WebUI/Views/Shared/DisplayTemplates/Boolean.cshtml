@@ -1,0 +1,16 @@
+﻿@model bool?
+
+
+
+    @(!Model.HasValue ? Html.Raw("Not Selected")
+     : Model.HasValue && Model.Value ? Html.Raw("Yes")
+     : Model.HasValue && !Model.Value ? Html.Raw("No") :Html.Raw(string.Empty)  )
+
+
+
+
+@*<select class="form-control @ViewBag.SelectClass" id="@ViewBag.SelectId" name="@ViewBag.SelectName">
+        <option @(!Model.HasValue ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="">Please Select</option>
+        <option @(Model.HasValue && Model.Value ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="true">Yes</option>
+        <option @(Model.HasValue && !Model.Value ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="false">No</option>
+    </select>*@

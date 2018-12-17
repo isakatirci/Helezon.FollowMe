@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Helezon.FollowMe.WebUI.Models;
+using FollowMe.Web.Models;
+using Helezon.FollowMe.WebUI;
 
-namespace Helezon.FollowMe.WebUI.Controllers
+namespace FollowMe.Web.Controllers
 {
     [Authorize]
     public class ManageController : Controller

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<FollowMe.Web.Models.Person>
+
+@{
+
+    var rnd = new Random();
+    var temp = rnd.Next();
+
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1_@temp"> Personnels </a>
+        </h4>
+    </div>
+    <div id="collapse_3_1_@temp" class="panel-collapse in">
+        <div class="panel-body">
+            <div class="table-scrollable">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedAt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.BirthDay)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Tckn)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id, companyId = item.CompanyId }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id, companyId = item.CompanyId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id, companyId = item.CompanyId })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action(actionName:"Edit",controllerName:"People")?id=@item.Id&companyId=@item.CompanyId">@Html.DisplayFor(modelItem => item.FirstName)&nbsp;                              
+                                   @Html.DisplayFor(modelItem => item.LastName)</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BirthDay)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tckn)
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

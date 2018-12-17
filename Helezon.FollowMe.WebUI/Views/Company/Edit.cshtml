@@ -1,0 +1,1186 @@
+﻿@using FollowMe.Web.Controllers
+@model FollowMe.Web.Models.Company
+
+@{
+	ViewBag.Title = "Company Edit";
+	ViewBag.Action = "Company Edit";
+	var idIsEmpty = (Model == null
+		|| string.IsNullOrWhiteSpace(Model.Id)
+		|| string.CompareOrdinal(Model.Id,Guid.Empty.ToString()) == 0);
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var isCenterAddress = !idIsEmpty && Model.AddressTypeId.HasValue && Model.AddressTypeId.Value == (int)AddressType.Merkez;
+	var addingNewChild = (bool)(ViewBag.IsAddingNewSubchild != null && ((bool)ViewBag.IsAddingNewSubchild));
+
+	if (addingNewChild)
+	{
+		Model.Name = string.Empty;
+		Model.AddressTypeId = 0;
+	}
+
+}
+
+
+
+@*http://www.gencayyildiz.com/blog/asp-net-mvc-viewbag-ile-dropdownlist-kullanim-kolayligi/*@
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Company", method: FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.ValidationSummary()
+
+	<div class="portlet box purple">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i>  Company Edit
+			</div>
+			<div class="tools">
+				@*<a href="javascript:;" class="collapse"> </a>
+					<a href="#portlet-config" data-toggle="modal" class="config"> </a>
+					<a href="javascript:;" class="reload"> </a>
+					<a href="javascript:;" class="remove"> </a>*@
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="panel-group accordion" id="accordion2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_2_1"> Group #1 </a>
+						</h4>
+					</div>
+					<div id="collapse_2_1" class="panel-collapse in">
+						<div class="panel-body">
+							<div class="form-horizontal">
+
+								@if (!addingNewChild)
+								{
+									<input id="Id"
+										   name="Id"
+										   class="form-control"
+										   type="hidden"
+										   value="@Model.Id">
+								}
+								else {
+
+									
+											<input id="ParentId"
+										   name="ParentId"
+										   class="form-control"
+										   type="hidden"
+										   value="@Model.Id">
+								}
+
+
+
+								<input id="@(Model.CompanyTypesTaxonomyViewModel.TaxonomyEnumName + "Id")"
+									   name="@(Model.CompanyTypesTaxonomyViewModel.TaxonomyEnumName + "Id")"
+									   class="form-control"
+									   type="hidden"
+									   value="@Model.CompanyTypesTaxonomyViewModel.TermIds">
+								<input id="@(Model.CompanyTypesTaxonomyViewModel.TaxonomyEnumName + "Name")"
+									   name="@(Model.CompanyTypesTaxonomyViewModel.TaxonomyEnumName + "Name")"
+									   class="form-control"
+									   type="hidden"
+									   value="@Model.CompanyTypesTaxonomyViewModel.TermNames">
+
+
+								@if (isCenterAddress && !addingNewChild)
+								{
+									<div class="form-group">
+										<div class="col-md-4 col-md-offset-2">
+											<button type="button"
+													onclick="location.href='@Html.Raw(string.Format("/Company/Edit?id={0}&operation=addsubchild", Model.Id))'"
+													class="btn btn-primary">
+												Add Subchild
+											</button>
+										</div>
+									</div>
+								}
+
+
+								@if (!idIsEmpty && !addingNewChild)
+								{
+									<div class="form-group">
+										@Html.LabelFor(model => model.IsPassive, "Is Passive", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.EditorFor(x => x.IsPassive, new { SelectName = "IsPassive", SelectId = "IsPassive", OnChange = "javascript:hideReasonWhyPassive($(this))" })
+											@Html.ValidationMessageFor(model => model.IsPassive, "", new { @class = "text-danger" })
+										</div>
+									</div>
+									<div class="form-group" id="hideReasonWhyPassive">
+										@Html.LabelFor(model => model.TempReasonWhyPassiveTermId, "Reason Why Passive", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.DropDownListFor(x => x.TempReasonWhyPassiveTermId, (List<SelectListItem>)ViewBag.ReasonWhyPassives, optionLabel: "Please Select", htmlAttributes: new { @class = "form-control  select2 " })
+											@Html.ValidationMessageFor(model => model.TempReasonWhyPassiveTermId, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								}
+
+								<div class="form-group">
+									@Html.Label("AddressTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.DropDownList("AddressTypeId", Utils.GetAddressTypes(Model.AddressTypeId, EntityType.Company,addingNewChild)
+									   , optionLabel: "Please Select"
+									   , htmlAttributes: new { @class = "form-control select2"
+										   //, onchange = "javascript:hideParentCompamy($(this))"
+									   })
+									</div>
+								</div>
+
+
+
+
+
+
+								@if (!idIsEmpty && !addingNewChild)
+								{
+									<input type="hidden" value="@Model.CompanyRootTypeId" id="CompanyRootTypeId" name="CompanyRootTypeId" />
+
+									<div class="form-group">
+										@Html.LabelFor(model => model.CompanyRootTypeName, "Company Root Type", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.TextBoxFor(model => model.CompanyRootTypeName, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+										</div>
+									</div>
+								}
+								else
+								{
+
+									<div class="form-group">
+										@Html.LabelFor(model => model.CompanyRootTypeId, "CompanyRootTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.DropDownListFor(x => x.CompanyRootTypeId, (List<SelectListItem>)ViewBag.ParentCompanyTypes, optionLabel: "Please Select"
+										   , htmlAttributes: new { @class = "form-control  select2" })
+											@Html.ValidationMessageFor(model => model.CompanyRootTypeId, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								}
+
+
+
+
+
+								<div class="form-group">
+									<div class="col-md-4 col-md-offset-2">
+										<div class="panel panel-default">
+											<div class="panel-body">
+												<div id="@Model.CompanyTypesTaxonomyViewModel.TreeId" class="tree-demo"> </div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								@{
+
+									var dichtmlAttributesCode = new Dictionary<string, object>();
+									if (!idIsEmpty)
+									{
+										dichtmlAttributesCode.Add("disabled", "disabled");
+										//@disabled = "@disabled"
+									}
+									dichtmlAttributesCode.Add("class", "form-control");
+
+								}
+
+								@if (!idIsEmpty)
+								{
+									<div class="form-group">
+										@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.TextBoxFor(model => model.Code, "", htmlAttributes: new { @class = "form-control ", @readonly = "readonly" })
+										</div>
+									</div>
+								}
+								else
+								{
+
+									<div class="form-group">
+										@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-4">
+											@Html.TextBoxFor(model => model.Code, "", htmlAttributes: new { @class = "form-control mask_number_field" })
+											@Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger " })
+										</div>
+									</div>
+								}
+
+
+
+								@*şirket adı*@
+								<div class="form-group">
+									@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control transform_none" } })
+										@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control text_lowercase" } })
+										@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.Label("WebSiteIsAvailable", "Website Is Available", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.IsWebsiteAvailable, new { SelectName = "IsWebsiteAvailable", SelectId = "IsWebsiteAvailable", OnChange = "javascript:hideWebsiteField($(this))" })
+									</div>
+								</div>
+
+								<div class="form-group" id="hideWebsite">
+									@Html.LabelFor(model => model.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control company-web-site text_lowercase" } })
+										@Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_2_2"> Group #2 </a>
+						</h4>
+					</div>
+					<div id="collapse_2_2" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-horizontal">
+
+								@*ünvan*@
+								<div class="form-group">
+									@Html.LabelFor(model => model.CompanyTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.CompanyTitle, new { htmlAttributes = new { @class = "form-control" } })
+										@Html.ValidationMessageFor(model => model.CompanyTitle, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								@*vergi dairesi*@
+								<div class="form-group">
+									@Html.LabelFor(model => model.TaxOffice, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.TaxOffice, new { htmlAttributes = new { @class = "form-control" } })
+										@Html.ValidationMessageFor(model => model.TaxOffice, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								@*vergi numarası*@
+								<div class="form-group">
+									@Html.LabelFor(model => model.TaxNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.TaxNumber, new { htmlAttributes = new { @class = "form-control transform_none mask_tax required_length_taxno" } })
+										@Html.ValidationMessageFor(model => model.TaxNumber, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.TradeRegisterNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@Html.EditorFor(model => model.TradeRegisterNumber, new { htmlAttributes = new { @class = "form-control transform_none mask_number_field" } })
+										@Html.ValidationMessageFor(model => model.TradeRegisterNumber, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.FoundingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-4">
+										@*@Html.(model => model.FoundingDate, new { ElementName = "TempFoundingDate", GroupClass = "" })*@
+										@Html.TextBoxFor(model=>model.TempFoundingDate, htmlAttributes: new { @class = "form-control mask_date2" })
+										@Html.ValidationMessageFor(model => model.FoundingDate, "", new { @class = "text-danger" })
+									</div>
+								</div>                         
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="dynamicform" class="panel panel-default hidden">
+
+
+				</div>
+
+				@Html.Action("PartialPanelCompanyTelephone", new { telephones = ViewBag.Telephones })
+
+				@Html.Action("PartialPanelCompanyAddress", new { addresses = ViewBag.Addresses })
+
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_logisticscompany"> Logistics Companies </a>
+						</h4>
+					</div>
+					<div id="collapse_logisticscompany" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-horizontal repeater">
+								<div data-repeater-list="group-logisticscompany">             
+
+									@foreach (FollowMe.Web.Models.LogisticsCompany logisticscompany in (List<FollowMe.Web.Models.LogisticsCompany>)ViewBag.LogisticsCompanies)
+									{
+										<div data-repeater-item>
+											<div class="form-group">
+												<div class="col-md-2 col-md-offset-2">
+													@Html.DropDownList("LogisticsCompanyId", new SelectList(ViewBag.LogisticsCompanyList, "LogisticsCompanyId", "LogisticsCompanyName"
+												   , logisticscompany.LogisticsCompanyId)
+												   , optionLabel: "Please Select", htmlAttributes: new { @class = "form-control custom_validation_logistics", @onchange= "importExportEnabled($(this))" })
+												</div>
+												<div class="col-md-2">
+													@Html.TextBox("ImportCode", logisticscompany.ImportCode,
+												   new { @class = "form-control transform_none"
+												   , @placeholder = "Import Code" })
+												</div>
+												<div class="col-md-2">
+													@Html.TextBox("ExportCode", logisticscompany.ExportCode
+												   , new { @class = "form-control transform_none"
+												   , @placeholder = "Export Code" })
+												</div>
+												<div class="col-md-2">
+													<button class="btn btn-danger" type="button" data-repeater-delete>Delete</button>
+												</div>
+											</div>
+										</div>
+									}
+								</div>
+								<div class="form-group">
+									<div class="col-md-4 col-md-offset-2">
+										<button class="btn btn-primary" type="button" data-repeater-create>Add</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				@*@Html.Action("PartialPanelEmail", new { emails = ViewBag.Emails })*@
+
+
+				@Html.Action("PartialCompanyPanelBank", new { banks = ViewBag.Banks })
+
+
+
+				<div class="panel panel-default" @(Html.Raw(Model.Person_FirstName.IsNullOrWhiteSpace().Not() && 
+												 Model.Person_FirstName == "null"?"style=\"display:none;\"":string.Empty))>
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-parent="#accordion2" href="javascript:void(0);"> Person </a>
+						</h4>
+					</div>               
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<h3 class="panel-title">Person</h3>
+										</div>
+										<div class="panel-body well" style="margin-bottom: 0px;">
+
+											<div class="form-horizontal">
+
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_GenderTypeId, "Gender", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_GenderTypeId, new SelectList(items: FollowMe.Web.Controllers.Utils.GetGenderTypes(), dataValueField: "Value", dataTextField: "Text"), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+														@Html.ValidationMessageFor(model => model.Person_GenderTypeId, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_FirstName", "First Name", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_FirstName, htmlAttributes: new { @class = "form-control  mask_alpha" })
+														@Html.ValidationMessageFor(model => model.Person_FirstName, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_LastName", "LastName", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_LastName, htmlAttributes: new { @class = "form-control  mask_alpha" })
+														@Html.ValidationMessageFor(model => model.Person_LastName, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_Position", "Position", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_Position, htmlAttributes: new { @class = "form-control " })
+														@Html.ValidationMessageFor(model => model.Person_Position, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												@*<div class="form-group">
+			@Html.Label("AreaCode", "Area Code", htmlAttributes: new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBox(name: "Person_AreaCodeCoutry", value: string.Empty, htmlAttributes: new { @class = "form-control " })
+			</div>
+		</div>*@
+
+												<div class="form-group">
+													@Html.Label("Person_Telephone", "Office Mobile Telephone", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-3">
+
+														@Html.DropDownList("Person_AreaCode", new SelectList(ViewBag.AreaCodes, "Id", "Name", Model.Person_AreaCode),
+													   "Please Select",
+													   htmlAttributes: new { @class = "form-control select2"
+													   , @onchange = "javascript:setPersonAreaCodeCoutry($(this))"
+													   })
+
+														@Html.ValidationMessageFor(model => model.Person_AreaCode, "", new { @class = "text-danger" })
+													</div>
+													<div class="col-md-5" style="padding-left: 0;">
+														@Html.TextBoxFor(x => x.Person_Telephone, htmlAttributes: new { @class = "form-control mask_phone required_length_phone" })
+														@Html.ValidationMessageFor(model => model.Person_Telephone, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_Interphone", "Interphone", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_Interphone, htmlAttributes: new { @class = "form-control mask_interphone" })
+														@Html.ValidationMessageFor(model => model.Person_Interphone, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_Email", "Company Email", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.EditorFor(model => model.Person_Email, new { htmlAttributes = new { @class = "form-control text_lowercase" } })
+														@Html.ValidationMessageFor(model => model.Person_Email, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_Email", "Personnel Email", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.EditorFor(model => model.Person_PersonnelEmail, new { htmlAttributes = new { @class = "form-control text_lowercase" } })
+														@Html.ValidationMessageFor(model => model.Person_PersonnelEmail, "", new { @class = "text-danger" })
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.Label("Person_BirthDay", "BirthDay", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_BirthDay, null, htmlAttributes: new { @class = "form-control mask_date2" })
+														@Html.ValidationMessageFor(model => model.Person_BirthDay, "", new { @class = "text-danger" })
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<h3 class="panel-title">Banks</h3>
+										</div>
+
+										<div class="panel-body well well-sm" style="margin-bottom: 0px;">
+											<div class="form-horizontal">
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_Name, "Bank Name", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_Name,
+													   new SelectList(ViewBag.BankNames, "Value", "Text", @Model.Person_Bank_BankNameTermId + "|" + @Model.Person_Bank_BankNameTermName)
+													   , "Please Select"
+													   , htmlAttributes: new { @class = "form-control select2"
+													   , @onchange = "javascript:getPersonBankProvinces($(this))"
+													   })
+														@*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })         *@
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_Province, "Province", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_Province, new SelectList(ViewBag.PersonBankProvinceList ?? new List<string>()
+													   , @Model.Person_Bank_Province), "Please Select", new { @class = "form-control select2",
+														   @onchange = "javascript:getPersonBankDistricts($(this))"
+													   })
+														@*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_District, "District", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_District, new SelectList(ViewBag.PersonBankDistrictList ?? new List<string>()
+													   , @Model.Person_Bank_District), "Please Select", new { @class = "form-control select2",
+														   @onchange = "javascript:getPersonBankBranchNameCodes($(this))" })
+														@*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_BranchNameCode, "Branch Name and Code", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_BranchNameCode, new SelectList(ViewBag.PersonBankBranchNameCodeList ?? new List<string>(), @Model.Person_Bank_BranchName + " - " + @Model.Person_Bank_BranchCode), "Please Select", new { @class = "form-control select2", @onchange = "javascript:getPersonBankBSwiftNos($(this))" })
+														@*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_SwiftNo, "SwiftNo", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_SwiftNo, new SelectList(ViewBag.PersonBankSwiftNoList ?? new List<string>(), @Model.Person_Bank_SwiftNo), "Please Select", new { @class = "form-control select2" })
+														@*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_CurrencyType, "CurrencyType", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.DropDownListFor(x => x.Person_Bank_CurrencyType, new SelectList(ViewBag.CurrencyTypes, "Value", "Text", @Model.Person_Bank_CurrencyTypeTermId + "|" + @Model.Person_Bank_CurrencyTypeTermName), "Please Select", htmlAttributes: new { @class = "form-control   select2" })
+														@*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_AccountNo, "Account No", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_Bank_AccountNo, htmlAttributes: new { @class = "form-control mask_account_no" })
+														@*@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+
+												<div class="form-group">
+													@Html.LabelFor(x => x.Person_Bank_Iban, "Iban", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
+														@Html.TextBoxFor(x => x.Person_Bank_Iban, htmlAttributes: new { @class = "form-control mask_iban" })
+														@*@Html.ValidationMessageFor(model => model.Iban, "", new { @class = "text-danger" })*@
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+				  
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-3">
+								<input type="submit" value="Save" class="btn btn-default" />
+							</div>
+						</div>
+					</div>
+
+				</div>
+				@*@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel { PanelTitle = "ProductType", PortletTitle = "ProductTypes", TaxonomyName = "ProductType", TermId = (Model.ProductType != null ? Model.ProductType.TermId.ToString() : string.Empty), TermName = (Model.ProductType != null ? Model.ProductType.TermName : string.Empty), TreeId = "tree_producttype" })
+
+
+		@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel { PanelTitle = "Sector", PortletTitle = "Sectors", TaxonomyName = "Sector", TermId = (Model.Sector != null ? Model.Sector.TermId.ToString() : string.Empty), TermName = (Model.ProductType != null ? Model.ProductType.TermName : string.Empty), TreeId = "tree_sector" })*@
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<!-- END ACCORDION PORTLET-->
+
+
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
+
+@section afterGlobalScripts
+{
+
+
+
+<script>
+
+	//var CompanyTypeNameSelector = "#CompanyTypeName";
+	//var CompanyTypeIdSelector = "#CompanyTypeId";
+
+	var CompanyTypeNameSelector = "#CompanyTypeName";
+	var CompanyTypeIdSelector = "#CompanyTypeId";
+	var tree_companytype_selector = "#tree_companytype";
+
+
+		function btnShowSubFields(btn) {
+
+			//console.log($(btn).closest(".form-group").next().find('#Label').val());
+
+
+			$(btn).closest(".parent-panel").find(".panel-collapse").collapse("toggle");
+
+
+			//if ($(btn).closest(".form-group").next().find('#Label').val() == "") {
+			//    $(btn).closest(".form-group").next().find('div.form-group').not(':first,:last').remove();
+			//}
+
+			//$(btn).closest(".form-group").next().slideToggle(1000);
+		}
+
+		function btnGenerateSubFields(btn) {
+
+			//console.log($(btn).closest(".form-group").next().find('#Label').val());
+
+
+			$(btn).closest(".dynamic-form-repater").find("#dataRepeaterCreate").click();
+
+
+			//if ($(btn).closest(".form-group").next().find('#Label').val() == "") {
+			//    $(btn).closest(".form-group").next().find('div.form-group').not(':first,:last').remove();
+			//}
+
+			//$(btn).closest(".form-group").next().slideToggle(1000);
+		}
+
+
+
+		var companyTypesTaxonomyViewModelTreeId = "@Model.CompanyTypesTaxonomyViewModel.TreeId";
+		var $bpc3ct7w = "@Url.Action("JSTreeData", "Terms")";
+		var $2nc3qg5a = "@Html.Raw((int) TaxonomyType.ProductType)";
+		//hideWebsiteField
+
+		function hideWebsiteField(d) {
+			debugger;
+			if (d.val().length !== 0 && d.val() == "false") {
+				$("#hideWebsite").addClass('hidden');
+
+			} else {
+				$("#hideWebsite").removeClass('hidden');
+			}
+		}
+
+		function hideReasonWhyPassive(d) {
+			if (d.length) {
+				if (d.val().length !== 0 && d.val() == "true") {
+					$("#hideReasonWhyPassive").removeClass('hidden');
+				} else {
+					$("#hideReasonWhyPassive").addClass('hidden');
+				}
+			}
+		}
+	hideReasonWhyPassive($("#IsPassive"));
+
+
+	//function hideParentCompamy(d) {
+	//	//if (d.length) {
+	//	//	if (d.val().length !== 0 && d.val() !== "2") {
+	//	//		$("#parentCompanyHide").removeClass('hidden');
+	//	//	} else {
+	//	//		$("#parentCompanyHide").addClass('hidden');
+	//	//	}
+	//	//}
+	//}
+	//hideParentCompamy($("#AddressTypeId"));
+	////$("#parentCompanyHide").addClass('hidden');
+
+
+		function fieldRepeater() {
+
+			$('.field-repeater').repeater({
+				// (Optional)
+				// start with an empty list of repeaters. Set your first (and only)
+				// "data-repeater-item" with style="display:none;" and pass the
+				// following configuration flag
+				initEmpty: false,
+				// (Optional)
+				// "defaultValues" sets the values of added items.  The keys of
+				// defaultValues refer to the value of the input's name attribute.
+				// If a default value is not specified for an input, then it will
+				// have its value cleared.
+				defaultValues: {
+					//'text-input': 'foo'
+
+				},
+				// (Optional)
+				// "show" is called just after an item is added.  The item is hidden
+				// at this point.  If a show callback is not given the item will
+				// have $(this).show() called on it.
+				show: function() {
+					$(this).slideDown();
+
+					//$(this).find('.mask_phone').inputmask("mask", {
+					//    "mask": "(999) 999-9999"
+					//});
+
+
+					//$(this).find("[data-repeater-item]").not(":first").remove();
+
+
+					//$(this).find(".select2").select2({
+					//    placeholder: 'Please Select',
+					//    width: null
+					//});
+					event.stopPropagation();
+				},
+				// (Optional)
+				// "hide" is called when a user clicks on a data-repeater-delete
+				// element.  The item is still visible.  "hide" is passed a function
+				// as its first argument which will properly remove the item.
+				// "hide" allows for a confirmation step, to send a delete request
+				// to the server, etc.  If a hide callback is not given the item
+				// will be deleted.
+				hide: function(deleteElement) {
+					if (confirm('Are you sure you want to delete this element?')) {
+						$(this).slideUp(deleteElement);
+					}
+					event.stopPropagation();
+				},
+				// (Optional)
+				// You can use this if you need to manually re-index the list
+				// for example if you are using a drag and drop library to reorder
+				// list items.
+				ready: function(setIndexes) {
+					//$dragAndDrop.on('drop', setIndexes);
+				},
+				// (Optional)
+				// Removes the delete button from the first list item
+				// defaults to false.
+				isFirstItemUndeletable: false
+			});
+
+		};
+
+
+		var dynamicFormRepeaterActivate = function() {
+
+			$('.dynamic-form-repater').each(function() {
+				$(this).repeater({
+					// (Optional)
+					// start with an empty list of repeaters. Set your first (and only)
+					// "data-repeater-item" with style="display:none;" and pass the
+					// following configuration flag
+					initEmpty: false,
+					// (Optional)
+					// "defaultValues" sets the values of added items.  The keys of
+					// defaultValues refer to the value of the input's name attribute.
+					// If a default value is not specified for an input, then it will
+					// have its value cleared.
+					defaultValues: {
+						//'text-input': 'foo'
+
+					},
+					// (Optional)
+					// "show" is called just after an item is added.  The item is hidden
+					// at this point.  If a show callback is not given the item will
+					// have $(this).show() called on it.
+					show: function() {
+						$(this).slideDown();
+						$(this).find('.mask_phone').inputmask("mask", {
+							"mask": "(999) 999-9999"
+						});
+
+						//$(this).find("[data-repeater-item]").not(":first").remove();
+
+
+						$(this).find("select[multiple='multiple']").mousedown(function (e) {
+							e.preventDefault();
+							$(this).prop('selected', !$(this).prop('selected'));
+							return false;
+						});
+
+
+						event.stopPropagation();
+					},
+					// (Optional)
+					// "hide" is called when a user clicks on a data-repeater-delete
+					// element.  The item is still visible.  "hide" is passed a function
+					// as its first argument which will properly remove the item.
+					// "hide" allows for a confirmation step, to send a delete request
+					// to the server, etc.  If a hide callback is not given the item
+					// will be deleted.
+					hide: function(deleteElement) {
+						if (confirm('Are you sure you want to delete this element?')) {
+							$(this).slideUp(deleteElement);
+						}
+						event.stopPropagation();
+					},
+					// (Optional)
+					// You can use this if you need to manually re-index the list
+					// for example if you are using a drag and drop library to reorder
+					// list items.
+					ready: function(setIndexes) {
+						//$dragAndDrop.on('drop', setIndexes);
+					},
+					// (Optional)
+					// Removes the delete button from the first list item,
+					// defaults to false.
+					isFirstItemUndeletable: false
+					//,repeaters: [
+					//    {
+					//        // (Required)
+					//        // Specify the jQuery selector for this nested repeater
+					//        selector: '.dynamic-form-inner-repeater',
+					//        show: function() {
+					//            $(this).slideDown();
+					//            //$(this).find('.mask_phone').inputmask("mask", {
+					//            //    "mask": "(999) 999-9999"
+					//            //});
+
+					//            //$(this).find(".select2").select2({
+					//            //    placeholder: 'Please Select',
+					//            //    width: null
+					//            //});
+					//            event.stopPropagation();
+					//        },
+					//        hide: function(deleteElement) {
+					//            if (confirm('Are you sure you want to delete this element?')) {
+					//                $(this).slideUp(deleteElement);
+					//            }
+					//            event.stopPropagation();
+					//        }
+					//    }
+					//]
+				});
+
+
+			});
+
+		};
+
+
+		$(document).ready(function() {
+
+		 
+
+			var ajaxTreeFillCompany = function(selector, url) {
+
+				var tmp = $(selector).jstree(true);
+				if (tmp) {
+					tmp.destroy();
+				}
+				$(selector).jstree({
+					'plugins': ['checkbox', 'wholerow'],
+					'core': {
+						"multiple": true,
+						"themes": {
+							"responsive": false,
+							'icons': false
+						},
+						'data': {
+							'url': function(node) {
+								return url;
+							},
+							'data': function(node) {
+								//console.log(node);
+
+								return { 'parent': node.id };
+							}
+						}
+					},
+					'checkbox': {
+						'keep_selected_style': true,
+						//'three_state': false,
+						//'cascade': 'down'
+					}
+					//'checkbox': {
+					//    'keep_selected_style': false,
+					//    'three_state': false,
+					//    'cascade': 'down'
+					//}
+					//,"types": {
+					//    "default": {
+					//        "icon": "fa fa-folder icon-state-warning icon-lg"
+					//    },
+					//    "file": {
+					//        "icon": "fa fa-file icon-state-warning icon-lg"
+					//    }
+					//}
+				}).bind('ready.jstree',
+					function(e, data) {
+
+						$('#' + companyTypesTaxonomyViewModelTreeId).jstree("open_all");
+
+						if ($('#CompanyTypeId').val().length !== 0) {
+
+							var $types = $('#CompanyTypeId').val().split(',');
+
+							for (var i = 0; i < $types.length; i++) {
+
+								$('#' + companyTypesTaxonomyViewModelTreeId).jstree("select_node", '#' + $.trim($types[i]));
+							}
+						}
+						//// invoked after jstree has loaded
+						//$(this).jstree("open_node", $(nodes[i]));
+					});
+
+				$(selector).on('changed.jstree',
+				function (e, data) {
+					var i, j, r = [], t = [];
+					for (i = 0, j = data.selected.length; i < j; i++) {
+						var node = data.instance.get_node(data.selected[i]);
+						r.push(node.id);
+						t.push(node.text);
+					}
+
+
+
+					debugger;
+					$("#dynamicform").empty();
+					$("#dynamicform").addClass("hidden");
+
+					$(CompanyTypeNameSelector).val(t.join(', '));
+					$(CompanyTypeIdSelector).val(r.join(', '));
+
+					//if (r.length !== 0) {
+					//    getDynamicHtml(r);
+					//}
+
+				});
+
+			};
+
+
+			// Dropdown list change event.
+
+
+			@Html.Partial("_TaxonomyScript", new FollowMe.Web.Models.TaxonomyViewModel (TaxonomyType.ProductType) {TermList = Model.ProductType})
+			@Html.Partial("_TaxonomyScript", new FollowMe.Web.Models.TaxonomyViewModel (TaxonomyType.Sector) { TermList = Model.Sector})
+
+			ajaxTreeFill('#tree_producttype', $bpc3ct7w + '?taxonomy=' + $2nc3qg5a + '&companyId=' + $("#Id").val());
+
+		 
+
+			ajaxTreeFill('#tree_sector',
+				$bpc3ct7w +
+				'?taxonomy=@((int) TaxonomyType.Sector)' +
+				'&companyId=' +
+				$("#Id").val());
+
+		 
+
+
+			var companyTypesTaxonomyViewModelTreeId = "@Model.CompanyTypesTaxonomyViewModel.TreeId";
+			var $zb3c4kx6 = "@Html.Raw((int) TaxonomyType.CompanyType)";
+			var $8zsw9jg8 = "@Url.Action("JSTreeDataDescendances", "Terms")";
+
+			var $CompanyRootTypeId = $('#CompanyRootTypeId');
+
+			$CompanyRootTypeId.change(function() {
+
+				if ($CompanyRootTypeId.val().length !== 0) {
+
+					ajaxTreeFillCompany('#' + companyTypesTaxonomyViewModelTreeId,
+						$8zsw9jg8 +
+						'?taxonomy=' +
+						$zb3c4kx6 +
+						'&companyId=' +
+						$("#Id").val() +
+						'&termId=' +
+						$("#CompanyRootTypeId").val());
+				}
+
+					findCode();
+
+
+			});
+
+			setTimeout(function() {
+
+					if ($CompanyRootTypeId.val().length !== 0) {
+
+						ajaxTreeFillCompany('#' + companyTypesTaxonomyViewModelTreeId,
+							$8zsw9jg8 +
+							'?taxonomy=' +
+							$zb3c4kx6 +
+							'&companyId=' +
+							$("#Id").val() +
+							'&termId=' +
+							$("#CompanyRootTypeId").val());
+
+					}
+				},
+				1000);      
+
+
+			function findCode() {
+
+				if ($.trim($("#CompanyRootTypeId").val()) != "" && $.trim($("#Code").val()) != "") {
+					var jqXHR = $.ajax({
+						type: "POST",
+						url: "/Company/CofirmCode",
+						data: {
+							code: $('#Code').val(),
+							companyRootType: $('#CompanyRootTypeId').val()
+						}
+					}).done(function (data, status, jqXHR) {
+						console.log(data);
+						$('#Code').val(data);
+						//if (data.IsSucceeded) {
+						//    swal("Success.", 'Taxonomy Saved.', "success");
+						//} else {
+						//    swal("Error!", data.Message, "error");
+						//}
+					}).fail(function (jqXHR, status, err) {
+						swal("Error!", err + '', "error");
+					});
+				}
+			}
+
+
+
+			$("#Code").blur(function () {
+				findCode();
+			});
+
+
+			//var CompanyTypeNameSelector = "#CompanyTypeName";
+			//var CompanyTypeIdSelector = "#CompanyTypeId";
+
+			$(tree_companytype_selector).on('changed.jstree',
+				function(e, data) {
+					var i, j, r = [], t = [];
+					for (i = 0, j = data.selected.length; i < j; i++) {
+						var node = data.instance.get_node(data.selected[i]);
+						r.push(node.id);
+						t.push(node.text);
+					}
+					debugger;
+					//$("#dynamicform").empty();
+					//$("#dynamicform").addClass("hidden");
+
+					$(CompanyTypeNameSelector).val(t.join(', '));
+					$(CompanyTypeIdSelector).val(r.join(', '));
+
+					//if (r.length !== 0) {
+					//    getDynamicHtml(r);
+					//}
+
+				});
+
+			var $98rvczuq = '@((int) EntityType.Company)';
+
+			var getDynamicHtml = function(termIds) {
+				//alert(termIds);
+				App.blockUI();
+
+				if (termIds.length !== 0) {
+					var jqXHR = $.ajax({
+						type: "POST",
+						url: "/Company/GetDynamicForm",
+						data: {
+							"termIds": termIds,
+							"entityId": $("#Id").val(),
+							"entityType": $98rvczuq
+						}
+					}).done(function(data, status, jqXHR) {
+						//console.log(data);
+						//$('#Code').val(data);
+						//$("#container").html(data);
+						if (data.length !== 0) {
+							$("#dynamicform").removeClass("hidden");
+							$("#dynamicform").html(data);
+
+							setTimeout(function() {
+
+									dynamicFormRepeaterActivate();
+
+								$("select[multiple='multiple']").each(function () {
+									debugger;
+									$(this).find("option").mousedown(function (e) {
+										e.preventDefault();
+										$(this).prop('selected', !$(this).prop('selected'));
+										return false;
+									});
+								});
+								},
+								1500);
+
+
+							if (App.isAngularJsApp() === false) {
+								//FormInputMask.init();
+							}
+						} else {
+							$("#dynamicform").addClass("hidden");
+						}
+						//console.log(typeof data);
+						//console.log(data);
+						//if (data.IsSucceeded) {
+						//    swal("Success.", 'Taxonomy Saved.', "success");
+						//} else {
+						//    swal("Error!", data.Message, "error");
+						//}
+					}).fail(function(jqXHR, status, err) {
+						swal("Error!", err + '', "error");
+					}).always(function() {
+						App.unblockUI();
+					});
+				}
+			};
+
+			$(".custom_validation_logistics").each(function () {
+
+				var self = $(this);
+				if (self.val().length === 0) {
+
+					$(self).closest(".form-group").find("#ImportCode").attr('disabled', 'disabled');
+					$(self).closest(".form-group").find("#ExportCode").attr('disabled', 'disabled');
+				}
+
+
+			});
+
+		  
+
+		});
+
+	function importExportEnabled(ddl) {
+		debugger;
+		if ($(ddl).val().length === 0) {
+			$(ddl).closest(".form-group").find("#ImportCode").attr('disabled', 'disabled');
+			$(ddl).closest(".form-group").find("#ExportCode").attr('disabled', 'disabled');
+		} else {
+			$(ddl).closest(".form-group").find("#ImportCode").removeAttr('disabled');
+			$(ddl).closest(".form-group").find("#ExportCode").removeAttr('disabled');
+		}
+	}
+	
+</script>
+	@Scripts.Render("~/bundles/jqueryval")
+
+
+	<script>    
+
+	
+
+
+		(function ($) {
+			$.validator.addMethod("websitevalidation", function (value, element, params) {
+
+				var $websiteElementValue = $.trim($(element).val());
+
+				if ($websiteElementValue != "")
+					return true;
+
+				var $otherPropValue = $.trim($('#' + params).val());
+
+				return !($websiteElementValue === "" && $otherPropValue !== "false");
+			   
+			});
+			$.validator.unobtrusive.adapters.addSingleVal("websitevalidation", "comparisonproperty");
+
+		}(jQuery));
+
+
+	</script>
+
+
+}
+
+
+
+
+

@@ -1,0 +1,203 @@
+﻿@model FollowMe.Web.Models.Bank
+
+@{
+    ViewBag.Title = "add new bank";
+    ViewBag.Action = "Add New";
+}
+
+
+<div class="panel-body">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bubble font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Add New Bank</span>
+            </div>
+            <div class="actions">
+                @*<div class="btn-group">
+                        <a class="btn green-haze btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            Actions
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;"> Option 1</a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li>
+                                <a href="javascript:;">Option 2</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">Option 3</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">Option 4</a>
+                            </li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-6">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.CreatedAt)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CompanyId, "CompanyId", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="input-group input-large">
+                                    @Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control select2" })
+                                    <span class="input-group-btn">
+                                        <button class="btn blue ajax-demo" data-url="@Url.Action("Edit", "Company")" data-toggle="modal" type="button">
+                                            <i class="icon-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BranchName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BranchName, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BranchCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BranchCode, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AccountNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AccountNo, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Iban, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Iban, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.Iban, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="WorkPhone">CurrencyTypes</label>
+                                <div class="col-md-10 ">
+                                    <input class="form-control input-large" id="CurrencyTypeName" readonly name="CurrencyTypeName" type="text" value="@(Model.CurrencyType != null ? Model.CurrencyType.TermName : string.Empty)">
+                                    <input id="CurrencyTypeId" name="CurrencyTypeId" type="hidden" value="@(Model.CurrencyType != null ? Model.CurrencyType.TermId.ToString() : string.Empty)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div id="tree_currencytype" class="tree-demo"></div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="form-group">
+            @Html.LabelFor(model => model.CurrencyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrencyTypeId, new { htmlAttributes = new { @class = "form-control input-large" } })
+                @Html.ValidationMessageFor(model => model.CurrencyTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SwiftNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SwiftNo, new { htmlAttributes = new { @class = "form-control input-large" } })
+                                @Html.ValidationMessageFor(model => model.SwiftNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control input-large" } })
+                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div id="tree_region" class="tree-demo"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section afterGlobalScripts {
+    
+<script>
+        $(document).ready(function () {
+
+            $('#tree_currencytype').on('changed.jstree', function (e, data) {
+                var i, j, r = [], t = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    var node = data.instance.get_node(data.selected[i]);
+                    r.push(node.id);
+                    t.push(node.text);
+                }
+                $('#CurrencyTypeName').val(t.join(', '));
+                $('#CurrencyTypeId').val(r.join(', '));
+            });
+
+            ajaxTreeFill('#tree_currencytype', '@Url.Action("JSTreeData", "Terms")?taxonomy=@((int)FollowMe.Web.Controllers.Utils.TaxonomyType.CurrencyType)' + '&companyId=' + $("#CompanyId").val());
+
+            setTimeout(function () {
+
+                $("#tree_currencytype").jstree("select_node", @(Model.CurrencyType != null ? Html.Raw("'#" + Model.CurrencyType.TermId.ToString()+"'") : Html.Raw(string.Empty)));
+
+            }, 1000);
+
+        });
+
+
+</script>
+    
+    }

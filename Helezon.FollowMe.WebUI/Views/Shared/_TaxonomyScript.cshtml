@@ -1,0 +1,12 @@
+﻿@model  FollowMe.Web.Models.TaxonomyViewModel
+
+    $("#@(Model.TreeId)").on("changed.jstree", function (e, data) {
+        var i, j, r = [], t = [];
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            var node = data.instance.get_node(data.selected[i]);
+            r.push(node.id);
+            t.push(node.text);
+        }
+        $("#@(Model.TaxonomyName+"Name")").val(t.join(", "));
+        $("#@(Model.TaxonomyName + "Id")").val(r.join(", "));
+    });

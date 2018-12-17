@@ -5,7 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Helezon.FollowMe.WebUI.Models;
+using FollowMe.Web.Models;
+using FollowMe.Web;
 
 namespace Helezon.FollowMe.WebUI
 {

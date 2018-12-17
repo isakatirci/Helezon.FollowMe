@@ -1,0 +1,330 @@
+﻿@model FollowMe.Web.Models.Person
+
+@{
+	ViewBag.Title = "Personnel Edit";
+	ViewBag.Action = "Personnel Edit";
+	var idIsEmpty = Model == null || string.IsNullOrWhiteSpace(Model.Id)
+		|| string.Compare(Model.Id, Guid.Empty.ToString(), StringComparison.InvariantCultureIgnoreCase) == 0;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	<!-- BEGIN ACCORDION PORTLET-->
+	<div class="portlet box purple">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i>Personnel Edit
+			</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="panel-group accordion" id="accordion2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_2_1"> Group #1 </a>
+						</h4>
+					</div>
+					<div id="collapse_2_1" class="panel-collapse in">
+						<div class="panel-body">
+							<div class="form-horizontal">
+								@Html.HiddenFor(x => x.Id)
+								@if (!idIsEmpty)
+								{
+
+									<div class="form-group" >
+										@Html.LabelFor(model => model.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-10">
+											@Html.EditorFor(model => model.IsPassive, new { SelectClass = "input-large"
+										   , SelectId = "IsPassive", SelectName = "IsPassive"
+										   , OnChange = "javascript:hideReasonWhyPassive($(this))" })
+											@Html.ValidationMessageFor(model => model.IsPassive, "", new { @class = "text-danger" })
+										</div>
+									</div>
+
+									<div class="form-group" id="hideReasonWhyPassive">
+										@Html.Label("ReasonWhyPassiveId", "Reason Why Passive", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-10">
+											<div class="input-group input-large">
+												@Html.DropDownList("ReasonWhyPassiveId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+												@Html.ValidationMessageFor(model => model.ReasonWhyPassiveId, "", new { @class = "text-danger" })
+											</div>
+										</div>
+									</div>
+								}
+
+
+								@if (idIsEmpty)
+								{
+									<div class="form-group">
+										@Html.LabelFor(model => model.CompanyId, "CompanyId", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-10">
+											<div class="input-group input-large">
+												@Html.DropDownList("CompanyId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+												@Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+
+											</div>
+										</div>
+									</div>
+								}
+								else
+								{
+									<input type="hidden" value="@Model.CompanyId" name="CompanyId" id="CompanyId" />
+									<div class="form-group">
+										@Html.LabelFor(model => model.CompanyName, "Company Name", htmlAttributes: new { @class = "control-label col-md-2" })
+										<div class="col-md-10">
+											<div class="input-group input-large">
+												@Html.TextBoxFor(x => x.CompanyName, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+											</div>
+										</div>
+									</div>
+								}
+
+								<div class="form-group">
+									@Html.LabelFor(x => x.GenderTypeId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										<div class="input-group input-large">
+											@Html.DropDownListFor(x => x.GenderTypeId, new SelectList(items: FollowMe.Web.Controllers.Utils.GetGenderTypes(), dataValueField: "Value", dataTextField: "Text"), "Please Select", htmlAttributes: new { @class = "form-control  select2" })
+											@Html.ValidationMessageFor(model => model.GenderTypeId, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control input-large  mask_alpha" } })
+										@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control input-large  mask_alpha" } })
+										@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.Email, "Company Mail Adress", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input-large text_lowercase" } })
+										@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.PersonnelEmail, "Personnel Mail Adres", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.PersonnelEmail, new { htmlAttributes = new { @class = "form-control input-large text_lowercase" } })
+										@Html.ValidationMessageFor(model => model.PersonnelEmail, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.Interphone, "Personnel Interphone", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.Interphone, new { htmlAttributes = new { @class = "form-control input-large mask_number_field" } })
+										@Html.ValidationMessageFor(model => model.Interphone, "", new { @class = "text-danger" })
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_indentity"> Indentity Information </a>
+						</h4>
+					</div>
+					<div id="collapse_indentity" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-horizontal">
+								<div class="form-group">
+									@Html.LabelFor(model => model.Tckn, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.Tckn, new { htmlAttributes = new { @class = "form-control input-large mask_tckno required_length_tckn" } })
+										@Html.ValidationMessageFor(model => model.Tckn, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.Label("BloodGroupId", "BloodGroupId", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										<div class="input-group input-large">
+											@Html.DropDownList("BloodGroupId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+											@Html.ValidationMessageFor(model => model.BloodGroupId, "", new { @class = "text-danger" })
+
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									@Html.LabelFor(model => model.DriversLicenseNo, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.DriversLicenseNo, new { htmlAttributes = new { @class = "form-control input-large transform_none" } })
+										@Html.ValidationMessageFor(model => model.DriversLicenseNo, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor(model => model.PassportNo, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.PassportNo, new { htmlAttributes = new { @class = "form-control input-large transform_none" } })
+										@Html.ValidationMessageFor(model => model.PassportNo, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor(model => model.ForeignIdentityNo, htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.ForeignIdentityNo, new { htmlAttributes = new { @class = "form-control input-large mask_number_field" } })
+										@Html.ValidationMessageFor(model => model.ForeignIdentityNo, "", new { @class = "text-danger" })
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_group2"> Group #2 </a>
+						</h4>
+					</div>
+					<div id="collapse_group2" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-horizontal">
+								<div class="form-group">
+									@Html.LabelFor(model => model.BirthDayString, "Birth Day", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.BirthDayString, new { htmlAttributes = new { @class = "form-control input-large mask_date2" } })
+										@Html.ValidationMessageFor(model => model.BirthDayString, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor(model => model.Birthplace, "Birth Place", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.Birthplace, new { htmlAttributes = new { @class = "form-control input-large mask_alpha" } })
+										@Html.ValidationMessageFor(model => model.Birthplace, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.Label("ReligionId", "Religion", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										<div class="input-group input-large">
+											@Html.DropDownList("ReligionId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+											@Html.ValidationMessageFor(model => model.ReligionId, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor(model => model.NameDay, "Name Day", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										@Html.EditorFor(model => model.NameDay, new { htmlAttributes = new { @class = "form-control input-large transform_none mask_name_day" } })
+										@Html.ValidationMessageFor(model => model.NameDay, "", new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.Label("RelationshipStatusId", "Relationship Status", htmlAttributes: new { @class = "control-label col-md-2" })
+									<div class="col-md-10">
+										<div class="input-group input-large">
+											@Html.DropDownList("RelationshipStatusId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+											@Html.ValidationMessageFor(model => model.RelationshipStatusId, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@*<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_education"> Education Info </a>
+				</h4>
+			</div>
+			<div id="collapse_education" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="form-horizontal">
+						<div class="form-group">
+							@Html.Label("EducationLevelId", "Education Level", htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								<div class="input-group input-large">
+									@Html.DropDownList("EducationLevelId", null, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+									@Html.ValidationMessageFor(model => model.EducationLevelId, "", new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>*@
+				@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel(TaxonomyType.Language) { TermList = Model.Languages })
+				@*@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel(TaxonomyType.RelationshipStatus) { TermList = Model.RelationshipStatus })*@
+
+				@Html.Action("PartialPanelPersonnelAddress", new { addresses = ViewBag.Addresses })
+				@Html.Action("PartialPersonnelPanelBank", new { banks = ViewBag.Banks })
+				@Html.Action("PartialPanelPersonnelTelephone", new { telephones = ViewBag.Telephones })
+				@Html.Action("PartialPanelPersonnelEducation", new { education = ViewBag.Educations })
+
+				@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel(TaxonomyType.Position) { TermList = Model.Positions })
+				@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel(TaxonomyType.Hobby) { TermList = Model.Hobby })
+				@Html.Partial("_Taxonomy", new FollowMe.Web.Models.TaxonomyViewModel(TaxonomyType.ComputerSkills) { TermList = Model.ComputerSkills })
+
+
+			</div>
+		</div>
+	</div>
+	<!-- END ACCORDION PORTLET-->
+
+	<div class="form-horizontal">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Save" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
+
+@section afterGlobalScripts {
+
+	@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+		$(document).ready(function () {
+			
+			@Html.Raw(Model.ChangedJstreeScript)
+
+			@Html.Raw(Model.AjaxTreeFillScript)
+
+			setTimeout(function () {
+
+				@Html.Raw(Model.JstreeSelectNodeScript)
+
+			}, 1000);
+
+	});
+
+	function hideReasonWhyPassive(d) {
+		if (d.length) {
+			if (d.val().length !== 0 && d.val() == "true") {
+				$("#hideReasonWhyPassive").removeClass('hidden');
+			} else {
+				$("#hideReasonWhyPassive").addClass('hidden');
+			}
+		}
+	}
+	hideReasonWhyPassive($("#IsPassive"));
+</script>
+
+}

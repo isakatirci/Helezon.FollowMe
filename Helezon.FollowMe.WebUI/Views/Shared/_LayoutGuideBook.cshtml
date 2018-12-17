@@ -1,0 +1,482 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var companyListIspresent = ViewBag.CompanyList != null;
+}
+@section afterGlobalStyles
+{
+    <link href="/Content/global/plugins/jquery-nestable2/jquery.nestable.min.css" rel="stylesheet" />
+}
+
+<style type="text/css">
+
+    .dataTables_scrollBody {
+        height: 800px !important;
+    }
+</style>
+
+<!-- BEGIN DASHBOARD STATS 1-->
+@*<div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" data-url="@Url.Action("Edit", "Company")" data-toggle="modal" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                            <button class="btn btn-default ajax-demo" data-url="@Url.Action("Edit", "Company")" data-toggle="modal" type="button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+            </div>
+        </div>
+    </div>*@
+<hr />
+<div class="row">
+
+    @if (ViewBag.BlueHref != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 blue" href="@ViewBag.BlueHref">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.BlueCounter">0</span>
+                    </div>
+                    <div class="desc"> @ViewBag.BlueDesc </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (ViewBag.RedHref != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 red" href="@ViewBag.RedHref">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.RedCounter">0</span>
+                    </div>
+                    <div class="desc"> @ViewBag.RedDesc </div>
+                </div>
+            </a>
+        </div>
+    }
+
+
+
+    @if (ViewBag.OthersHref != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 green" href="@ViewBag.OthersHref">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.OthersCounter">0</span>
+                    </div>
+                    <div class="desc"> 	@ViewBag.OthersDesc  </div>
+                </div>
+            </a>
+        </div>
+    }
+
+
+    @if (ViewBag.ZetaaHref != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 purple" href="@ViewBag.ZetaaHref">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+
+                        <span data-counter="counterup" data-value="@ViewBag.ZetaaCounter"></span>
+                    </div>
+                    <div class="desc"> @ViewBag.ZetaaDesc </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (ViewBag.BlueHref2 != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 blue" href="@ViewBag.BlueHref2">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.BlueCounter2">0</span>
+                    </div>
+                    <div class="desc"> @ViewBag.BlueDesc2 </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (ViewBag.RedHref2 != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 red" href="@ViewBag.RedHref2">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.RedCounter2">0</span>
+                    </div>
+                    <div class="desc"> @ViewBag.RedDesc2 </div>
+                </div>
+            </a>
+        </div>
+    }
+
+
+
+    @if (ViewBag.OthersHref2 != null)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-v2 green" href="@ViewBag.OthersHref2">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="@ViewBag.OthersCounter2">0</span>
+                    </div>
+                    <div class="desc"> 	@ViewBag.OthersDesc2  </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+<div class="clearfix"></div>
+
+@{
+
+    //Html.RenderPartial(partialViewName: "_CompanyList", model: (object)ViewBag.CompanyList);
+
+}
+
+@Html.Action("PartialCompanyList", "GuideBook", new { type = ViewBag.CompanyType })
+
+
+@RenderBody()
+
+@section beforeGlobalScripts {
+    @RenderSection("beforeGlobalScripts", required: false)
+
+    <script src="~/Content/global/scripts/datatable.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+
+    <script src="~/Content/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/horizontal-timeline/horizontal-timeline.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+
+    <script src="/Content/global/plugins/jquery-nestable2/jquery.nestable.js" type="text/javascript"></script>
+
+}
+
+
+
+@section afterGlobalScripts {
+    @RenderSection("afterGlobalScripts", required: false)
+    @*<script src="~/Content/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+
+        <script src="~/Content/pages/scripts/table-datatables-scroller.min.js"></script>*@
+
+    <script>
+
+
+        var getPersonList = function (companyId, rowId) {
+
+            App.blockUI();
+
+            if (companyId.length !== 0) {
+                var jqXHR = $.ajax({
+                    type: "POST",
+                    url: "/Company/PersonPartialList",
+                    cache: false,
+                    data: {
+                        "companyId": companyId
+                    }
+                }).done(function (data, status, jqXHR) {
+                    //console.log(data);
+                    //$('#Code').val(data);
+                    //$("#container").html(data);
+                    if (data.length !== 0) {
+
+
+                        $('#personTable').remove();
+
+                        debugger;
+                        $('tbody #' + rowId).after('<tr id=\"personTable\"><td colspan="' + $("tbody").find("tr:first td").length + '">' + data + '</td></tr>');
+                        //$('tbody').append('<tr class=\"personTable\"><td>' + data+'</td></tr>')
+
+                        //$persontablerow.append('<tr class=\"innerTable\"><td>" + "</td></tr>');
+                    } else {
+                        swal("Hata!", "Şirketin Personeli Yok", "error");
+                    }
+                    //console.log(typeof data);
+                    //console.log(data);
+                    //if (data.IsSucceeded) {
+                    //    swal("Success.", 'Taxonomy Saved.', "success");
+                    //} else {
+                    //    swal("Error!", data.Message, "error");
+                    //}
+                }).fail(function (jqXHR, status, err) {
+                    swal("Error!", err + '', "error");
+                }).always(function () {
+                    App.unblockUI();
+                });
+            }
+        };
+
+
+        var initTable3 = function () {
+            var table = $('#sample_3');
+
+            var oTable = table.dataTable({
+
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "_MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+
+                // Or you can use remote translation file
+                //"language": {
+                //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
+                //},
+
+                // setup buttons extension: http://datatables.net/extensions/buttons/
+                buttons: [
+                    //{ extend: 'print', className: 'btn dark btn-outline' },
+                    //{ extend: 'pdf', className: 'btn green btn-outline' },
+                    //{ extend: 'csv', className: 'btn purple btn-outline ' }
+                ],
+
+                // scroller extension: http://datatables.net/extensions/scroller/
+                scrollY: 450,
+                deferRender: true,
+                scroller: true,
+                deferRender: true,
+                scrollX: true,
+                scrollCollapse: true,
+
+                stateSave: true,
+
+                "order": [
+                    [0, 'asc']
+                ],
+
+                "lengthMenu": [
+                    [10, 15, 20, -1],
+                    [10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+
+                "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row' <'col-md-12'T>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+            });
+        }
+
+
+
+        $(document).ready(function () {
+
+            initTable3();
+
+
+            $('#company_disabled_field_list').nestable({
+                group: 1,
+                maxDepth: 1,
+                callback: function (l, e) {
+                    // l is the main container
+                    // e is the element that was moved
+                    //alert('test1');
+                    //refreshNestableList();
+                },
+                onDragStart: function (l, e) {
+                    // l is the main container
+                    // e is the element that was moved
+                    //data-nodrag
+
+                    //if (!$('#dragAndDropOnOff').is(':checked')) {
+                    //    return false;
+                    //}
+
+                    //if ($(e).data("nodrag") == "1") {
+                    //    return false;
+                    //}
+
+
+
+                }
+            });
+                //.on('change', refreshNestableList);
+
+            // activate Nestable for list 2
+            $('#company_enabled_field_list').nestable({
+                group: 1,
+                maxDepth: 1,
+                callback: function (l, e) {
+                    // l is the main container
+                    // e is the element that was moved
+                    //alert('test2');
+                    //refreshNestableList();
+                },
+                onDragStart: function (l, e) {
+                    // l is the main container
+                    // e is the element that was moved
+                    //debugger;
+                    //var nodrag = $(e).data('nodrag');
+                    //if (nodrag == "1") {
+                    //    return false;
+                    //}
+
+
+                    //if (!$('#dragAndDropOnOff').is(':checked')) {
+
+                    //    return false;
+                    //}
+
+                    //if ($(e).data("nodrag") == "1") {
+                    //    return false;
+                    //}
+                }
+            });            
+
+            $("#btnCompanyFieldsSave").click(function () {
+
+                console.log(JSON.stringify($('#company_disabled_field_list').nestable("serialize")));
+                console.log(JSON.stringify($('#company_enabled_field_list').nestable("serialize"))); 
+
+                var jqXHR = $.ajax({
+                    type: "POST",
+                    url: "/GuideBook/SaveCompanyFieldLists",
+                    data: {
+                        companyDisabledFieldList: JSON.stringify($('#company_disabled_field_list').nestable('serialize')),
+                        companyEnabledFieldList: JSON.stringify($('#company_enabled_field_list').nestable('serialize')),
+                    }
+                }).done(function (data, status, jqXHR) {
+                    console.log(data);
+                    if (!data.IsFailed) {
+
+                        swal({
+                            title: "Success",
+                            text: data.Message,
+                            type: "info",
+                            allowOutsideClick: false,
+                            showConfirmButton: true,
+                            showCancelButton: false
+                            //closeOnConfirm: false
+                            //confirmButtonText: sa_confirmButtonText,
+                            //cancelButtonText: sa_cancelButtonText,
+                        },
+                            function (isConfirm) {
+
+                                setTimeout(function () {
+
+
+                                    $(location).attr("href", "/GuideBook/Index");
+
+
+                                }, 300);
+
+
+                                
+
+
+                                //if (isConfirm){
+                                //    swal(sa_popupTitleSuccess, sa_popupMessageSuccess, "success");
+                                //} else {
+                                //    swal(sa_popupTitleCancel, sa_popupMessageCancel, "error");
+                                //}
+
+                                //$(location).attr("href",
+                                //    "/Terms/Taxonomies?companyId=" + $CompanyId + '&taxonomyId=' + $TaxonomyId);
+
+                            });
+
+                    } else {
+                        swal("Error!", data.Message, "error");
+                    }
+                }).fail(function (jqXHR, status, err) {
+                    swal("Error!", "Could Not Be Saved!", "error");
+                }).always(function () {
+                    $blockMultiRefresh = true;
+                    App.unblockUI();
+                });
+
+
+            });
+
+
+
+                //.on('change', refreshNestableList);;
+        });
+
+
+
+
+
+    </script>
+}

@@ -1,0 +1,7 @@
+﻿@model bool?
+
+<select class="form-control @ViewBag.SelectClass" onchange="@ViewBag.OnChange" id="@ViewBag.SelectId" name="@ViewBag.SelectName">
+    @*<option @(!Model.HasValue ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="">Please Select</option>*@
+    <option @(Model.HasValue && Model.Value ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="true">Yes</option>
+    <option @(!Model.HasValue || (Model.HasValue && !Model.Value) ? Html.Raw("selected = \"selected\"") : Html.Raw(string.Empty)) value="false">No</option>
+</select>

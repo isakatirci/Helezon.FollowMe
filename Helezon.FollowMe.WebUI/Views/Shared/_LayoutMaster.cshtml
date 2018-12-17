@@ -1,0 +1,1366 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="tr">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Follow Me | @ViewBag.Title </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for blank page layout" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="~/Content/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/Content/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/global/plugins/jquery-nestable/jquery.nestable.css" rel="stylesheet" type="text/css" />*@
+    @*<link href="~/Content/global/plugins/jquery-nestable2/jquery.nestable.min.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css"/>*@
+    @*<link href="~/Content/global/plugins/jstree/dist/themes/default-dark/style.min.css" rel="stylesheet" type="text/css"/>*@
+    @*<link href="~/Content/global/plugins/jstree/dist/themes/style.min.css" rel="stylesheet"  type="text/css"/>*@
+    @*metronic/admin_1/ui_extended_modals.html*@
+    @*<link href="~/Content/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />*@
+    @*metronic/admin_1/ui_extended_modals.html*@
+
+    @*BEGIN Home/Index*@
+    <link href="~/Content/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
+    @*END Home/Index*@
+
+    <link href="~/Content/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="~/Content/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/Content/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="~/Content/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/Content/layouts/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />*@
+    <link href="~/Content/layouts/layout/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="~/Content/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    @RenderSection("afterGlobalStyles", required: false)
+    <style>
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .field-validation-valid {
+            display: none;
+        }
+
+        .input-validation-error {
+            border: 1px solid #f00;
+            background-color: #fee;
+        }
+
+
+        .dynamic-field-validation-error {
+            color: #f00;
+        }
+
+        .dynamic-field-validation-valid {
+            display: none;
+        }
+
+        .dynamic-input-validation-error {
+            border: 1px solid #f00;
+            background-color: #fee;
+        }
+
+
+
+
+        .validation-summary-errors {
+            font-weight: bold;
+            color: #f00;
+        }
+
+        .validation-summary-valid {
+            display: none;
+        }
+
+        li.active > a {
+            font-weight: bolder !important
+        }
+
+        input[type="text"]:not(.mask_date2):not(.mask_alpha):not(.company-web-site):not(.mask_name_day):not(.transform_none), textarea {
+            text-transform: uppercase !important;
+        }
+
+        .text_lowercase {
+            text-transform: lowercase !important;
+        }
+    </style>
+
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    @RenderBody()
+
+    <!--[if lt IE 9]>
+    <script src="~/Content/global/plugins/respond.min.js"></script>
+    <script src="~/Content/global/plugins/excanvas.min.js"></script>
+    <script src="~/Content/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/Content/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/Content/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+    @*<script src="~/Content/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>*@
+    <script src="~/Content/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+
+
+    @*metronic/admin_1/ui_extended_modals.html*@
+    @*<script src="~/Content/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>*@
+    @*metronic/admin_1/ui_extended_modals.html*@
+
+    <script src="~/Content/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+
+    <script src="~/Content/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+
+    <script src="~/Content/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+
+
+    <script src="~/Content/global/plugins/jquery-repeater/jquery.repeater.js" type="text/javascript"></script>
+
+    <script src="~/Content/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+
+    @*<script src="~/Content/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>*@
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    @RenderSection("beforeGlobalScripts", required: false)
+
+    <script>
+
+        var ajaxTreeFill = function (selector, url) {
+            var tmp = $(selector).jstree(true);
+            if (tmp) { tmp.destroy(); }
+            $(selector).jstree({
+                'plugins': ["wholerow", "checkbox", "types"],
+                'core': {
+                    "multiple": true,
+                    "themes": {
+                        "responsive": false,
+                        'icons': false
+
+                    },
+                    'data': {
+                        'url': function (node) {
+                            return url;
+                        },
+                        'data': function (node) {
+                            //console.log(node);
+
+                            return { 'parent': node.id };
+                        }
+                    }
+                },
+                'checkbox': {
+                    'keep_selected_style': false,
+                    'three_state': false,
+                    'cascade': ''
+                },
+                //"types": {
+                //    "default": {
+                //        "icon": "fa fa-folder icon-state-warning icon-lg"
+                //    },
+                //    "file": {
+                //        "icon": "fa fa-file icon-state-warning icon-lg"
+                //    }
+                //}
+            });
+        };
+
+    </script>
+
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/Content/global/scripts/app.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    @*<script src="~/Content/pages/scripts/form-repeater.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Content/pages/scripts/ui-blockui.js" type="text/javascript"></script>*@
+
+    <script src="~/Content/layouts/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/Content/layouts/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="~/Content/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/Content/layouts/global/scripts/quick-nav.js" type="text/javascript"></script>
+    @*<script src="~/Content/pages/scripts/ui-sweetalert.min.js" type="text/javascript"></script>*@
+    <script src="~/Content/pages/scripts/components-editors.min.js" type="text/javascript"></script>
+
+    <script src="~/Content/pages/scripts/components-select2.js" type="text/javascript"></script>
+
+
+    @*metronic/admin_1/ui_extended_modals.html*@
+    @*<script src="~/Content/pages/scripts/ui-extended-modals.js" type="text/javascript"></script>*@
+    @*metronic/admin_1/ui_extended_modals.html*@
+
+
+    <script src="~/Content/pages/scripts/ui-tree.js" type="text/javascript"></script>
+
+    @*<script src="~/Content/global/plugins/jquery.inputmask.bundle.js"></script>*@
+
+    <script src="~/Content/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script>
+        var getBranchNameCodesURL = '@Url.Action("GetBranchNameCodes", "Base")';
+        var getBankDistrictesURL = '@Url.Action("GetBankDistrictes", "Base")';
+        var getBankProvincesURL = '@Url.Action("GetBankProvinces", "Base")';
+        var getSwiftNosURL = '@Url.Action("GetSwiftNos", "Base")';
+        var getPersonBankBranchNameCodesURL = '@Url.Action("GetBranchNameCodes", "Base")';
+        var getPersonBankBSwiftNosURL = '@Url.Action("GetSwiftNos", "Base")';
+
+        function getBankProvinces(d) {
+
+            var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
+            var $BankName = d.closest(".row").find("#BankName");
+            var $SwiftNo = d.closest(".row").find("#SwiftNo");
+            var $BankProvince = d.closest(".row").find("#Province");
+            var $BankDistrict = d.closest(".row").find("#District");
+
+            if ($BankName.val().length !== 0) {
+
+             
+                $BankProvince.empty();
+                $BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBankProvincesURL, { termId: $BankName.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BankProvince.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BankProvince.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BankProvince.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+        function getBankDistrictes(d) {
+
+            var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
+            var $BankName = d.closest(".row").find("#BankName");
+            var $SwiftNo = d.closest(".row").find("#SwiftNo");
+            var $BankProvince = d.closest(".row").find("#Province");
+            var $BankDistrict = d.closest(".row").find("#District");
+
+            if ($BankName.val().length !== 0) {
+
+                //$BankProvince.empty();
+                $BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBankDistrictesURL, { termId: $BankName.val(), province : $BankProvince.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BankDistrict.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BankDistrict.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BankDistrict.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+
+        function getBranchNameCodes(d) {
+
+
+            var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
+            var $BankName = d.closest(".row").find("#BankName");
+            var $SwiftNo = d.closest(".row").find("#SwiftNo");
+            var $BankProvince = d.closest(".row").find("#Province");
+            var $BankDistrict = d.closest(".row").find("#District");
+
+            if ($BankName.val().length !== 0) {
+
+                //$BankProvince.empty();
+                //$BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBranchNameCodesURL, { termId: $BankName.val(), province : $BankProvince.val(), district : $BankDistrict.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BranchNameCode.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+
+
+
+        function getSwiftNos(d) {
+            debugger;
+
+            var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
+            var $BankName = d.closest(".row").find("#BankName");
+            var $SwiftNo = d.closest(".row").find("#SwiftNo");
+            var $BankProvince = d.closest(".row").find("#Province");
+            var $BankDistrict = d.closest(".row").find("#District");
+
+            if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
+
+                //$BankProvince.empty();
+                //$BankDistrict.empty();
+                //$BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+                    if (data.length != 0) {
+                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $SwiftNo.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+        function getPersonBankProvinces(d) {
+
+            var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
+            var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
+            var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
+            var $BankName = d.closest(".row").find("#Person_Bank_Name");
+            var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
+
+            if ($BankName.val().length !== 0) {
+
+
+                $BankProvince.empty();
+                $BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBankProvincesURL, { termId: $BankName.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BankProvince.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BankProvince.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BankProvince.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+        function getPersonBankDistricts(d) {
+
+            var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
+            var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
+            var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
+            var $BankName = d.closest(".row").find("#Person_Bank_Name");
+            var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
+
+            if ($BankName.val().length !== 0) {
+
+                //$BankProvince.empty();
+                $BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBankDistrictesURL, { termId: $BankName.val(), province: $BankProvince.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BankDistrict.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BankDistrict.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BankDistrict.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+
+
+        function getPersonBankBranchNameCodes(d) {
+
+            var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
+            var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
+            var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
+            var $BankName = d.closest(".row").find("#Person_Bank_Name");
+            var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
+
+            if ($BankName.val().length !== 0) {
+
+                //$BankProvince.empty();
+                //$BankDistrict.empty();
+                $BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getBranchNameCodesURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val() }, function (data) {
+                    if (data.length != 0) {
+                        $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $BranchNameCode.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+        function getPersonBankBSwiftNos(d) {
+            debugger;
+
+            var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
+            var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
+            var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
+            var $BankName = d.closest(".row").find("#Person_Bank_Name");
+            var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
+
+            if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
+
+                //$BankProvince.empty();
+                //$BankDistrict.empty();
+                //$BranchNameCode.empty();
+                $SwiftNo.empty();
+
+                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+                    if (data.length != 0) {
+                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $SwiftNo.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+
+
+
+
+
+        var getProvincesURL = '@Url.Action("GetProvinces", "Base")';
+        var getDistrictsURL = '@Url.Action("GetDistricts", "Base")';
+        var getSuburbAreasURL = '@Url.Action("GetSuburbAreas", "Base")';
+        var getTownsURL = '@Url.Action("GetTowns", "Base")';
+        var getZipCodesURL = '@Url.Action("GetZipCodes", "Base")';
+
+        function getProvinces(d) {
+            debugger;
+
+            var $country = d.closest(".row").find("#Country");
+            var $province = d.closest(".row").find("#Province");
+            var $district = d.closest(".row").find("#District");
+            var $suburbArea = d.closest(".row").find("#SuburbArea");
+            var $town = d.closest(".row").find("#Town");
+            var $zipCode = d.closest(".row").find("#ZipCode");
+
+
+            if ($country.val().length !== 0) {
+
+                $province.empty();
+                $district.empty();
+                $suburbArea.empty();
+                $town.empty();
+                $zipCode.empty();
+
+                $.getJSON(getProvincesURL, { country: $country.val() }, function (data) {
+                    if (data.length != 0) {
+                        $province.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $province.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $province.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+        function getDistricts(d) {
+
+            var $country = d.closest(".row").find("#Country");
+            var $province = d.closest(".row").find("#Province");
+            var $district = d.closest(".row").find("#District");
+            var $suburbArea = d.closest(".row").find("#SuburbArea");
+            var $town = d.closest(".row").find("#Town");
+            var $zipCode = d.closest(".row").find("#ZipCode");
+
+
+            if ($country.val().length !== 0 && $province.val().length !== 0) {
+
+                $district.empty();
+                $suburbArea.empty();
+                $town.empty();
+                $zipCode.empty();
+
+                $.getJSON(getDistrictsURL, { country: $country.val(), province: $province.val() }, function (data) {
+                    if (data.length != 0) {
+                        $province.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+
+                            $district.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $district.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+        }
+
+        function getSuburbAreas(d) {
+
+            var $country = d.closest(".row").find("#Country");
+            var $province = d.closest(".row").find("#Province");
+            var $district = d.closest(".row").find("#District");
+            var $suburbArea = d.closest(".row").find("#SuburbArea");
+            var $town = d.closest(".row").find("#Town");
+            var $zipCode = d.closest(".row").find("#ZipCode");
+
+
+            if ($country.val().length !== 0 && $province.val().length !== 0 && $district.val().length !== 0) {
+
+                $suburbArea.empty();
+                $town.empty();
+                $zipCode.empty();
+
+                $.getJSON(getSuburbAreasURL, { country: $country.val(), province: $province.val(), district: $district.val() }, function (data) {
+                    if (data.length != 0) {
+                        $suburbArea.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $suburbArea.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $suburbArea.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+
+        }
+
+        function getTowns(d) {
+            debugger;
+            var $country = d.closest(".row").find("#Country");
+            var $province = d.closest(".row").find("#Province");
+            var $district = d.closest(".row").find("#District");
+            var $suburbArea = d.closest(".row").find("#SuburbArea");
+            var $town = d.closest(".row").find("#Town");
+            var $zipCode = d.closest(".row").find("#ZipCode");
+
+
+            if ($country.val().length !== 0 && $province.val().length !== 0 && $district.val().length !== 0 && $suburbArea.val().length !== 0) {
+
+                $town.empty();
+                $zipCode.empty();
+
+                $.getJSON(getTownsURL, { country: $country.val(), province: $province.val(), district: $district.val(), suburbArea: $suburbArea.val() }, function (data) {
+                    if (data.length != 0) {
+
+                        $town.append('<option value="">' + 'Please Select' + '</option>');
+
+                        $.each(data, function () {
+                            $town.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $town.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+
+                $.getJSON(getZipCodesURL, { country: $country.val(), province: $province.val(), district: $district.val(), suburbArea: $suburbArea.val() }, function (data) {
+                    if (data.length != 0) {
+                        //$zipCode.append('<option value="">' + 'Please Select' + '</option>');
+                        $.each(data, function () {
+                            $zipCode.append('<option>' + this + '</option>');
+                        });
+                    }
+                    else {
+                        $zipCode.append('<option value="">' + 'Please Select' + '</option>');
+                    }
+                });
+            }
+
+        }
+
+        //function getZipCodes(d) {
+        //    debugger;
+        //    var $country = d.closest(".row").find("#Country");
+        //    var $province = d.closest(".row").find("#Province");
+        //    var $district = d.closest(".row").find("#District");
+        //    var $suburbArea = d.closest(".row").find("#SuburbArea");
+        //    var $town = d.closest(".row").find("#Town");
+        //    var $zipCode = d.closest(".row").find("#ZipCode");
+
+        //    if ($country.val().length !== 0 && $province.val().length !== 0 && $district.val().length !== 0 && $suburbArea.val().length !== 0 && $town.val().length !== 0) {
+
+        //        $zipCode.empty();
+
+
+        //    }
+
+        //}
+
+
+
+
+        $(document).ready(function () {
+
+
+
+
+            //$(".select2").select2({
+            //    placeholder: 'Please Select',
+            //    width: null
+            //});
+
+
+
+
+
+            $('.repeater').repeater({
+                // (Optional)
+                // start with an empty list of repeaters. Set your first (and only)
+                // "data-repeater-item" with style="display:none;" and pass the
+                // following configuration flag
+                initEmpty: false,
+                // (Optional)
+                // "defaultValues" sets the values of added items.  The keys of
+                // defaultValues refer to the value of the input's name attribute.
+                // If a default value is not specified for an input, then it will
+                // have its value cleared.
+                defaultValues:
+                    {
+                        //'text-input': 'foo'
+                    },
+                // (Optional)
+                // "show" is called just after an item is added.  The item is hidden
+                // at this point.  If a show callback is not given the item will
+                // have $(this).show() called on it.
+                show: function () {
+
+                    $(this).slideDown();
+
+                    $(this).find("#ImportCode").attr("disabled", "disabled");
+                    $(this).find("#ExportCode").attr("disabled", "disabled");
+
+                    $(this).find("input[type='text']:not(.mask_date2):not(.mask_name_day):not(.company-web-site)").each(function () {
+                        var selfInput = $(this);
+                        selfInput.keyup(function () {
+                            selfInput.val(selfInput.val().toUpperCase());
+                        })
+                    });
+
+                    $(this).find(".mask_date2").inputmask("d.m.y", {
+                        "placeholder": "dd.mm.yyyy"
+                    }); //multi-char placeholder
+
+
+                    $(this).find(".mask_phone").inputmask("mask", {
+                        "mask": "(999) 999-9999"
+                    }); //specifying fn & options
+
+                    $(this).find(".mask_phone2").inputmask("mask", {
+                        "mask": "+[9999] (999) 999-9999",
+                        "placeholder": "+0000 (000) 000-0000"
+                    }); //specifying fn & options
+
+                    $(this).find(".mask_interphone").inputmask({
+                        "mask": "9",
+                        "repeat": 5,
+                        "greedy": false
+                    }); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+                    $(this).find(".mask_iban").inputmask({ mask: "aa 99 9999 9999 9999 9999 9999 99" }); //specifying fn & options
+
+                    $(this).find(".mask_account_no").inputmask({
+                        "mask": "9",
+                        "repeat": 20,
+                        "greedy": false
+                    }); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+                    //$(".email_mask").inputmask({
+                    //    mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@@*{1,20}[.*{2,6}][.*{1,2}]",
+                    //    greedy: false,
+                    //    onBeforePaste: function (pastedValue, opts) {
+                    //        pastedValue = pastedValue.toLowerCase();
+                    //        return pastedValue.replace("mailto:", "");
+                    //    },
+                    //    definitions: {
+                    //        '*': {
+                    //            validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                    //            casing: "lower"
+                    //        }
+                    //    }
+                    //});
+
+                  
+
+                    $(this).find(".select2").each(function () {
+                        var selfInput = $(this);
+                        selfInput.select2({
+                            placeholder: 'Please Select',
+                            width: null
+                        })
+                    });
+
+                    var self = $(this);
+
+                    setTimeout(function () {
+
+                        self.find(".select2").closest(".col-md-2,.col-md-8").find(".select2-container:last-child").remove();
+
+                    }, 100);
+
+
+                    //select2-container
+
+                    //    .each(function () {
+                    //    var selfInput = $(this);
+                    //    console.log(selfInput.find(".select2-container--below select2-container--focus"));
+                    //    selfInput.find(".select2-container--below select2-container--focus").remove();                     
+
+                    //});
+
+                },
+                // (Optional)
+                // "hide" is called when a user clicks on a data-repeater-delete
+                // element.  The item is still visible.  "hide" is passed a function
+                // as its first argument which will properly remove the item.
+                // "hide" allows for a confirmation step, to send a delete request
+                // to the server, etc.  If a hide callback is not given the item
+                // will be deleted.
+                hide: function (deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+                // (Optional)
+                // You can use this if you need to manually re-index the list
+                // for example if you are using a drag and drop library to reorder
+                // list items.
+                ready: function (setIndexes) {
+                    //$dragAndDrop.on('drop', setIndexes);
+                    $(this).find("#ImportCode").attr("disabled", "disabled");
+                    $(this).find("#ExportCode").attr("disabled", "disabled");
+                },
+                // (Optional)
+                // Removes the delete button from the first list item,
+                // defaults to false.
+                isFirstItemUndeletable: false
+            })
+
+
+
+
+
+
+
+
+            //$(".email_mask").inputmask({
+            //    mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@@*{1,20}[.*{2,6}][.*{1,2}]",
+            //    greedy: false,
+            //    onBeforePaste: function (pastedValue, opts) {
+            //        pastedValue = pastedValue.toLowerCase();
+            //        return pastedValue.replace("mailto:", "");
+            //    },
+            //    definitions: {
+            //        '*': {
+            //            validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+            //            casing: "lower"
+            //        }
+            //    }
+            //});
+
+            //$(".mask_interphone").inputmask({
+            //    "mask": "9999",
+            //    placeholder: "" // remove underscores from the input mask
+            //});
+
+            //$(this).find('.mask_phone').inputmask("mask", {
+            //    "mask": "(999) 999-9999"
+            //});
+
+            //swal({
+            //    title: sa_title,
+            //    text: sa_message,
+            //    type: sa_type,
+            //    allowOutsideClick: sa_allowOutsideClick,
+            //    showConfirmButton: sa_showConfirmButton,
+            //    showCancelButton: sa_showCancelButton,
+            //    confirmButtonClass: sa_confirmButtonClass,
+            //    cancelButtonClass: sa_cancelButtonClass,
+            //    closeOnConfirm: sa_closeOnConfirm,
+            //    closeOnCancel: sa_closeOnCancel,
+            //    confirmButtonText: sa_confirmButtonText,
+            //    cancelButtonText: sa_cancelButtonText,
+            //},
+            //    function (isConfirm) {
+            //        if (isConfirm) {
+            //            swal(sa_popupTitleSuccess, sa_popupMessageSuccess, "success");
+            //        } else {
+            //            swal(sa_popupTitleCancel, sa_popupMessageCancel, "error");
+            //        }
+            //    });
+
+
+
+            @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+            {
+                <text>
+                    swal({
+                        html: true,
+                        title: "Error!",
+                        text: @(Html.Raw("\"<ul><li><div>" + ViewBag.ErrorMessage.Replace(".","").Replace("\r", "").Replace("\n","") + "</div></li></ul>\"")),
+                        type: "error",
+                        allowOutsideClick: true,
+                        allowEscapeKey: true,
+                        textClass: 'text-left text-danger',
+                    });
+
+                </text>
+            }
+            else if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+            {
+                <text>
+                    swal({
+                        html: true,
+                        title: "Success.",
+                        text: "@(Html.Raw(ViewBag.SuccessMessage))",
+                        type: "success",
+                        allowOutsideClick: true,
+                        allowEscapeKey: true,
+                        //textClass: 'text-center text-success',
+                    });
+
+                </text>
+            }
+            else {
+
+                <text>
+                        if ($('.validation-summary-errors').length) {
+                            swal({
+                                html: true,
+                                title: "Error!",
+                                text: $('.validation-summary-errors').html(),
+                                type: "error",
+                                allowOutsideClick: true,
+                                textClass: 'text-left text-danger',
+                                allowEscapeKey: true,
+                            });
+                        }
+                </text>
+
+            }
+
+
+
+
+            $('#clickmewow').click(function() {
+                $('#radio1003').attr('checked', 'checked');
+            });
+
+
+            //initialize datepicker
+            $('.date-picker').datepicker({
+                rtl: App.isRTL(),
+                autoclose: true
+            });
+            $('.date-picker .form-control').change(function() {
+                //form3.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+            });
+
+
+            //$("#PersonLimitPercent").TouchSpin({
+            //    min: 0,
+            //    max: 100,
+            //    step: 0.1,
+            //    decimals: 2,
+            //    boostat: 5,
+            //    maxboostedstep: 10,
+            //    postfix: '%'
+            //});
+
+
+            //$("#PersonLimitPercent").TouchSpin({
+            //    min: 0,
+            //    max: 100,
+            //    stepinterval:1,
+            //    prefix: '%'
+            //});
+            @*@if (ViewBag.Hidden != null && ((bool)ViewBag.Hidden))
+        {
+               @:$(".menu-toggler.sidebar-toggler").trigger("click");
+               @:alert('T');
+        }*@
+
+        });
+
+        var showMessage = function (message, heading) {
+            $.notific8(message, {
+                life: 5000,
+                heading: heading,
+                theme: 'teal',
+                sticky: true,
+                horizontalEdge: 'bottom',
+                verticalEdge: 'right',
+                zindex: 1500
+            });
+        };
+
+        function setPersonAreaCodeCoutry(dll) {
+            if (dll.val().length !== 0)
+            {
+                $("#Person_AreaCodeCoutry").val(dll.val());
+            }
+        }
+        
+        function companyPersonelEkle(id) {
+            $(location).attr("href", "/People/Edit?companyId=" + id);
+        }
+        function companyCardPrint() {
+
+            var sectionToPrint = $(".sectionToPrint")[0].outerHTML;
+            $("body").empty();
+            $("head").empty();
+            $("head").append($('<link rel="stylesheet" type="text/css" />').attr('href', '/Content/global/plugins/bootstrap/css/bootstrap.min.css'));
+            $("body").html(sectionToPrint);
+            $(".sectionToPrintIgnore").remove();
+            $(".companyTable table").each(function () {
+                $(this).css({
+                    "font-family": "'Trebuchet MS', Arial, Helvetica, sans-serif",
+                    "border-collapse": "collapse",
+                    "width": "100%"
+                });
+            });
+
+            $(".companyTable td, .companyTable th").each(function () {
+                $(this).css({
+                    "border": "1px solid #ddd",
+                    "padding": "8px"
+                });
+            });
+
+            $(".companyTable th").each(function () {
+                $(this).css({
+                    "padding-top": "12px",
+                    "padding-bottom": "12px",
+                    "text-align": "center"
+                });
+            });
+
+            setTimeout(function () {      
+
+                window.print();
+
+            },1500);
+
+            //window.print();
+        }
+
+
+    </script>
+
+    <script>
+
+        var slugify = function (text) {
+            var trMap = {
+                'çÇ': 'C',
+                'ğĞ': 'G',
+                'şŞ': 'S',
+                'üÜ': 'U',
+                'ıİ': 'I',
+                'öÖ': 'O'
+            };
+            for (var key in trMap) {
+                text = text.replace(new RegExp('[' + key + ']', 'g'), trMap[key]);
+            }
+            return text;/*.replace(/[^-a-zA-Z0-9\s]+/ig, '');*/ // remove non-alphanumeric chars
+                //.replace(/\s/gi, "-") // convert spaces to dashes
+                //.replace(/[-]+/gi, "-"); // trim repeated dashes
+                
+
+        }
+
+
+        $(document).ready(function () {
+            // $("").inputmask("99-9999999");  //static mask
+            // $("").inputmask({ "mask": "(999) 999-9999" }); //specifying options
+            // $("").inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax
+
+
+            /*input[type="text"]:not(.mask_date2):not(.company-web-site) {
+            text-transform: uppercase !important;
+        }*/
+
+
+      
+
+
+
+
+            $('.mask_alpha,input[type="text"]:not(.mask_date2,.mask_tckno,.mask_tax,.mask_iban):not(.company-web-site):not(.mask_name_day):not(.transform_none):not(.mask_number_field)').each(function () {
+                var selfInput = $(this);
+                //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode2
+                selfInput.keypress(function (evt) {
+                    var charCode = (evt.which) ? evt.which : event.keyCode
+
+                    //alert(charCode);
+                    //Bu şartımız ile harf girildiği takdirde true olarak geri dönüş sağlıyoruz. 
+                    //Türkçe karakter desteği için ascii kod şartları aşağıya eklenmiştir.
+                    if ((charCode <= 93 && charCode >= 65) || (charCode <= 122 && charCode >= 97)
+
+                        || charCode == 8
+                        || charCode == 350
+                        || charCode == 351
+                        || charCode == 304
+                        || charCode == 286
+                        || charCode == 287
+                        || charCode == 231
+                        || charCode == 199
+                        || charCode == 305
+                        || charCode == 32
+                        || charCode == 44
+                        || charCode == 214
+                        || charCode == 246
+                        || charCode == 220
+                        || charCode == 252
+
+                    ) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
+
+
+        
+
+            $("textarea,input[type='text']:not(.email_address,.mask_tckno,.mask_tax,.mask_iban,mask_number_field):not(input[type='email']):not(.mask_date2):not(.mask_name_day):not(.company-web-site)").each(function () {
+                var selfInput = $(this);
+                selfInput.keyup(function () {
+                    selfInput.val(slugify(selfInput.val()).toUpperCase());
+                })
+            });
+
+            $(".email_address,input[type='email'],.company-web-site").each(function () {
+                var selfInput = $(this);
+                selfInput.keyup(function () {
+                    selfInput.val(slugify(selfInput.val()).toLowerCase());
+                })
+            });
+
+            $(".mask_date2").inputmask("d.m.y", {
+                "placeholder": "dd.mm.yyyy"
+            }); //multi-char placeholder
+
+            $(".mask_name_day").inputmask("d.m", {
+                "placeholder": "dd.mm"
+            });          
+            
+
+            $(".mask_phone").inputmask("mask", {
+                "mask": "(999) 999-9999"
+            }); //specifying fn & options
+
+            $(".mask_phone2").inputmask("mask", {
+                "mask": "+[9999] (999) 999-9999",
+                "placeholder": "+0000 (000) 000-0000"
+            }); //specifying fn & options
+
+            
+            $(".mask_tckno").inputmask("mask", {
+                "mask": "99999999999"
+            }); //specifying fn & options
+
+            $(".mask_tax").inputmask("mask", {
+                "mask": "9999999999"
+            }); //specifying fn & options
+
+
+            $(".mask_interphone").inputmask({
+                "mask": "9",
+                "repeat": 5,
+                "greedy": false
+            }); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+
+            $(".mask_account_no").inputmask({
+                "mask": "9",
+                "repeat": 20,
+                "greedy": false
+            }); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+
+            $(".mask_number_field").inputmask({
+                "mask": "9",
+                "repeat": 20,
+                "greedy": false
+            }); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+            //$(".mask_alpha").inputmask({
+            //    "mask": "a",
+            //    "repeat": 50,
+            //    "greedy": false
+            //}); // ~ mask "9" or mask "99" or ... mask "9999999999"
+
+
+
+            $(".mask_iban").inputmask({ mask: "aa 99 9999 9999 9999 9999 9999 99" }); //specifying fn & options
+
+            //$(".mask_date2").inputmask("99/99/9999", { "placeholder": "dd/mm/yyyy" });
+        });
+
+        //http://www.mobzystems.com/blog/setting-up-jquery-unobtrusive-validation/
+
+        $(document).ready(function () {
+            $("form").on("submit", function (event) {
+                debugger;
+                var dynamicFormHasErrors = false;
+                var dynamicFormHasErrorMessages = "";
+
+
+                $(".custom_validation_logistics").each(function () {
+                    //
+                    var self = $(this);
+                    if (self.val().length !== 0) {
+
+                        if ($.trim($(self).closest(".form-group").find("#ImportCode").val()).length == 0) {
+                            dynamicFormHasErrorMessages += "<li>" + self.find("option:selected").text() + " için ImportCode Giriniz</li>";
+                            $(self).closest(".form-group").find("#ImportCode").removeClass("dynamic-input-validation-error").addClass("dynamic-input-validation-error");
+                        }
+                        if ($.trim($(self).closest(".form-group").find("#ExportCode").val()).length == 0) {
+                            dynamicFormHasErrorMessages += "<li>" + self.find("option:selected").text() + " için ExportCode Giriniz</li>";
+                            $(self).closest(".form-group").find("#ExportCode").removeClass("dynamic-input-validation-error").addClass("dynamic-input-validation-error");
+
+                        }                    
+                    }
+
+                });
+
+                //
+
+                $(".required_length_tckn").each(function () {
+                    debugger;
+                    var self = $(this);
+                    var unmaskedvalue = $(self).inputmask("unmaskedvalue");
+                    if (unmaskedvalue.length !== 11 && unmaskedvalue.length !== 0) {
+                        dynamicFormHasErrorMessages += "<li>" + $(self).val() + " TC Kimlik Eksik Girildi</li>";
+                        $(self).removeClass("dynamic-input-validation-error")
+                            .addClass("dynamic-input-validation-error");
+                    } else {
+                        $(self).removeClass("dynamic-input-validation-error");
+                    }
+
+                });
+
+                $(".required_length_taxno").each(function () {
+                    var self = $(this);
+                    var unmaskedvalue = $(self).inputmask("unmaskedvalue");
+                    if (unmaskedvalue.length !== 10 && unmaskedvalue.length !== 0) {
+                        dynamicFormHasErrorMessages += "<li>" + $(self).val() + " Vergi No Eksik Girildi</li>";
+                        $(self).removeClass("dynamic-input-validation-error")
+                            .addClass("dynamic-input-validation-error");
+                    } else {
+                        $(self).removeClass("dynamic-input-validation-error");
+                    }
+
+                });
+
+                $(".required_length_phone").each(function () {
+                    var self = $(this);
+                    var unmaskedvalue = $(self).inputmask("unmaskedvalue");
+                    if (unmaskedvalue.length !== 10 && unmaskedvalue.length !== 0) {
+                        dynamicFormHasErrorMessages += "<li>" + $(self).val() + " Telefonu Eksik Girildi</li>";
+                        $(self).removeClass("dynamic-input-validation-error")
+                            .addClass("dynamic-input-validation-error");
+                    } else {
+                        $(self).removeClass("dynamic-input-validation-error");
+                    }
+
+                });
+           
+
+
+                if ($("#CompanyTypeName").length !== 0 && $.trim($("#CompanyTypeName").val()) == "") {
+
+                    dynamicFormHasErrorMessages += "<li>Şirket Tipini Seçiniz</li>";
+
+                    $("#tree_companytype").closest(".panel")
+                        .removeClass("dynamic-input-validation-error")
+                        .addClass("dynamic-input-validation-error");
+
+                    $("#CompanyRootTypeId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error")
+                        .addClass("dynamic-input-validation-error");
+                    dynamicFormHasErrors = true;
+                } else {
+                    $("#tree_companytype").closest(".panel")
+                        .removeClass("dynamic-input-validation-error");
+
+                    $("#CompanyRootTypeId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error");
+                }
+
+                debugger;
+                if ($("#TempReasonWhyPassiveTermId").length !== 0 && $.trim($("#IsPassive").val()) == "true" && $.trim($("#TempReasonWhyPassiveTermId").val()) == "") {
+                    debugger;
+                    dynamicFormHasErrorMessages += "<li>Pasif Yapma Sebebi Giriniz</li>";
+
+                    $("#TempReasonWhyPassiveTermId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error")
+                        .addClass("dynamic-input-validation-error");
+                    dynamicFormHasErrors = true;
+                } else {
+                    $("#TempReasonWhyPassiveTermId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error");
+                }
+
+
+                if ($("#ReasonWhyPassiveId").length !== 0 && $.trim($("#IsPassive").val()) == "true" && $.trim($("#ReasonWhyPassiveId").val()) == "") {
+                    debugger;
+                    dynamicFormHasErrorMessages += "<li>Pasif Yapma Sebebi Giriniz</li>";
+
+                    $("#ReasonWhyPassiveId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error")
+                        .addClass("dynamic-input-validation-error");
+                    dynamicFormHasErrors = true;
+                } else {
+                    $("#ReasonWhyPassiveId").closest("div").find("span.select2-container")
+                        .removeClass("dynamic-input-validation-error");
+                }
+
+                if (dynamicFormHasErrors || dynamicFormHasErrorMessages.length !== 0) {
+
+                    swal({
+                        html: true,
+                        title: "Error!",
+                        text: "<ul>" + dynamicFormHasErrorMessages + "</ul>",
+                        type: "error",
+                        allowOutsideClick: true,
+                        textClass: 'text-left text-danger',
+                        allowEscapeKey: true,
+                    });
+
+                    return false;
+                }
+
+
+                var dynamicFieldErrors = [];
+                debugger;
+                $("[data-dynamic-field-required='1']").each(function () {
+
+                    if ($.trim($(this).val()) == "") {
+                        $(this).closest(".form-group")
+                            .find(".dynamic-field-validation-valid")
+                            .addClass("dynamic-field-validation-error")
+                            .removeClass("dynamic-field-validation-valid");
+                        $(this).addClass("dynamic-input-validation-error");
+                        dynamicFieldErrors.push($.trim($(this).closest(".form-group").find(".dynamic-field-validation-error").text()));
+                    }
+                });
+
+                if (dynamicFieldErrors.length > 0) {
+                    event.preventDefault();
+                    var dynamicFieldErrorList = "<ul>";
+                    $.each(dynamicFieldErrors, function () {
+                        dynamicFieldErrorList += "<li>" + this + "</li>";
+                    });
+                    dynamicFieldErrorList += "</ul>";
+                    swal({
+                        html: true,
+                        title: "Error!",
+                        text: dynamicFieldErrorList,
+                        type: "error",
+                        allowOutsideClick: true,
+                        textClass: 'text-left text-danger',
+                        allowEscapeKey: true,
+                    });
+                }
+
+            });
+        });
+
+    </script>
+
+    @RenderSection("afterGlobalScripts", required: false)
+
+</body>
+</html>
+

@@ -1,0 +1,398 @@
+﻿@model IEnumerable<FollowMe.Web.Models.ViewModels.DynamicFormFieldViewModel>
+
+@{
+    ViewBag.Title = "DynamicFormFields";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_dynamicformfields"> DynamicFormFields </a>
+        </h4>
+    </div>
+    <div id="collapse_dynamicformfields" class="panel-collapse in">
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="TaxonomyId" class="col-md-2 control-label">CompanyTypeId:</label>
+                    <div class="col-md-4">
+                        <input type="text" name="TermId" class="form-control" id="TermId" value="@ViewBag.CompanyTypeId" form="form1" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="TaxonomyId" class="col-md-2 control-label">CompanyTypePath:</label>
+                    <div class="col-md-4">
+                        <input type="text" name="CompanyTypeName" class="form-control" id="CompanyTypeName" value="@ViewBag.CompanyTypeName" form="form1" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="TaxonomyId" class="col-md-2 control-label">Form Name:</label>
+                    <div class="col-md-4">
+                        <input type="text" name="FormName" class="form-control" id="FormName" value="@(Model != null && Model.Any() ? Model.First().DynamicFormField.FormName : string.Empty )" form="form1" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="TaxonomyId" class="col-md-2 control-label"></label>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="jstree">
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+            <form method="post" id="form1" class="form-horizontal outer-repeater">
+                <div data-repeater-list="group-formfield">
+                    @if (Model.Any())
+                    {
+                        foreach (var formfield in Model)
+                        {
+                            <div data-repeater-item>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.Action("DynamicFormFieldTemplate", new { field = formfield})
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+
+                        <div data-repeater-item>
+                            <div class="form-group">
+                                <div class="col-md-12 ">
+                                    @Html.Action("DynamicFormFieldTemplate")
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button class="btn btn-default" type="button" data-repeater-create>Add</button>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary" id="form_submit" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section afterGlobalScripts {
+
+    <script>
+
+
+        $('.outer-repeater').repeater({
+            // (Optional)
+            // start with an empty list of repeaters. Set your first (and only)
+            // "data-repeater-item" with style="display:none;" and pass the
+            // following configuration flag
+            initEmpty: false,
+            // (Optional)
+            // "defaultValues" sets the values of added items.  The keys of
+            // defaultValues refer to the value of the input's name attribute.
+            // If a default value is not specified for an input, then it will
+            // have its value cleared.
+            defaultValues: {
+                //'text-input': 'foo'
+            },
+            // (Optional)
+            // "show" is called just after an item is added.  The item is hidden
+            // at this point.  If a show callback is not given the item will
+            // have $(this).show() called on it.
+            show: function () {
+                $(this).slideDown();
+                $(this).find('.mask_phone').inputmask("mask", {
+                    "mask": "(999) 999-9999"
+                });
+
+
+                $(this).find("[data-repeater-item]").not(":first").remove();
+                
+
+                $(this).find(".select2").select2({
+                    placeholder: 'Please Select',
+                    width: null
+                });
+                event.stopPropagation();
+            },
+            // (Optional)
+            // "hide" is called when a user clicks on a data-repeater-delete
+            // element.  The item is still visible.  "hide" is passed a function
+            // as its first argument which will properly remove the item.
+            // "hide" allows for a confirmation step, to send a delete request
+            // to the server, etc.  If a hide callback is not given the item
+            // will be deleted.
+            hide: function (deleteElement) {
+                if (confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+                event.stopPropagation();
+            },
+            // (Optional)
+            // You can use this if you need to manually re-index the list
+            // for example if you are using a drag and drop library to reorder
+            // list items.
+            ready: function (setIndexes) {
+                //$dragAndDrop.on('drop', setIndexes);
+            },
+            // (Optional)
+            // Removes the delete button from the first list item,
+            // defaults to false.
+            isFirstItemUndeletable: false,
+            repeaters: [{
+                // (Required)
+                // Specify the jQuery selector for this nested repeater
+                selector: '.inner-repeater',
+                show: function () {
+
+                    $(this).slideDown();
+                    $(this).find('.mask_phone').inputmask("mask", {
+                        "mask": "(999) 999-9999"
+                    });
+
+                    $(this).find(".select2").select2({
+                        placeholder: 'Please Select',
+                        width: null
+                    });
+                    event.stopPropagation();
+                },
+                hide: function (deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                    event.stopPropagation();
+                }
+            }]
+        });
+
+
+        function btnShowSubFields(btn) {
+
+            //console.log($(btn).closest(".form-group").next().find('#Label').val());
+
+
+            $(btn).closest(".parent-panel").find(".panel-collapse").collapse("toggle");
+
+
+
+            //if ($(btn).closest(".form-group").next().find('#Label').val() == "") {
+            //    $(btn).closest(".form-group").next().find('div.form-group').not(':first,:last').remove();
+            //}
+
+            //$(btn).closest(".form-group").next().slideToggle(1000);
+        }
+
+
+
+    @if (ViewBag.SaveFail != null)
+    {
+        if (ViewBag.SaveFail)
+        {
+            @:swal("Error!", "Save Fail!", "error");
+        }
+        else
+        {
+            @:swal("Success.", "Saved Successfully.", "success");
+        }
+    }
+
+
+    </script>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+
+            $("#form_submit").click(function (event) {
+
+
+                if ($("#TermId").val().length !== 0) {
+
+
+                    //$parent = $("#jstree").jstree("get_selected")[0] * 1;
+                } else {
+                    event.preventDefault(); // cancel default behavior
+                     swal("Error!", "Please Select Company Type.", "error");
+                    return;
+                }
+
+
+
+
+            });
+        });
+
+
+        //var postOptionTermForm = function () {
+        //    var $TaxonomyId = $("#TermId").val();
+        //    if ($TaxonomyId.length !== 0) {
+        //        $(location).attr("href", "/Company/DynamicFormFields?termId=" + $TaxonomyId);
+        //    }
+        //}
+        //$dropDownListTaxonomyId = $("#TermId");
+
+        //$dropDownListTaxonomyId.change(function () {
+        //    postOptionTermForm();
+        //});
+
+
+        var ajaxTreeFillCompanyTypeTree = function (selector, url) {
+            var tmp = $(selector).jstree(true);
+            if (tmp) {
+                tmp.destroy();
+            }
+            $(selector).jstree({
+                'plugins': ['search', 'checkbox', 'wholerow'],
+                'core': {
+                    "multiple": false,
+                    'data': {
+                        'url': function (node) {
+                            return url;
+                        },
+                        'data': function (node) {
+                            //console.log(node);
+
+                            return { 'parent': node.id };
+                        }
+                    },
+                    'animation': false,
+                    //'expand_selected_onload': true,
+                    'themes': {
+                        'icons': false,
+                    }
+                },
+                'search': {
+                    'show_only_matches': true,
+                    'show_only_matches_children': true
+                },
+                'checkbox': {
+                    'keep_selected_style': false,
+                    'three_state': false,
+                    'cascade': ''
+                }
+            }).bind('ready.jstree', function (event, data) {
+                //data.instance._open_to('node_4');
+
+                //$('#someTree').jstree('select_node', 'someNodeId');
+
+            });
+
+            //$(selector).jstree("open_all");
+
+        };
+
+
+        setTimeout(function() {
+
+                ajaxTreeFillCompanyTypeTree('#jstree', '@Url.Action("JSTreeDataV2", "Terms")?taxonomy=' +@((int)FollowMe.Web.Controllers.Utils.TaxonomyType.CompanyType) +'&companyId=00000000-0000-0000-0000-000000000000');
+
+
+            @*$("#jstree").jstree("select_node", @(ViewBag.CompanyType != null ? Html.Raw("'#" + ViewBag.CompanyType.ToString()+"'") : Html.Raw(string.Empty)));*@
+
+
+        }, 1000);
+
+
+
+
+        $('#jstree').on('changed.jstree', function (e, data) {
+
+            if ($("#jstree").jstree("get_selected").length !== 0) {
+
+                $(location).attr("href", "/Company/DynamicFormFields?termId=" + $("#jstree").jstree("get_selected")[0] + "&termName=" + $('#jstree').jstree().get_path($("#jstree").jstree("get_selected")[0], ' > '));
+            }
+        });
+
+
+
+
+
+
+    </script>
+
+}
+
+
+
+@*@if (formfield.ChildDynamicFormFields.Any())
+    {
+        <div class="form-group" style="display:none">
+            <div class="panel panel-primary">
+                <div class="panel-body well well-sm" style="margin-bottom: 0px;">
+                    <div class="inner-repeater">
+                        <div data-repeater-list="group-formsubfield">
+                            @foreach (var subformfield in formfield.ChildDynamicFormFields)
+                            {
+                                <div data-repeater-item>
+                                    @Html.Action("DynamicFormFieldTemplate", new { field = subformfield })
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <button class="btn btn-default" type="button" data-repeater-create>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group" style="display:none">
+            <div class="panel panel-primary">
+                <div class="panel-body well well-sm" style="margin-bottom: 0px;">
+                    <div class="inner-repeater">
+                        <div data-repeater-list="group-formsubfield">
+                            <div data-repeater-item>
+                                @Html.Action("DynamicFormFieldTemplate")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <button class="btn btn-default" type="button" data-repeater-create>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }*@
+
+@*else
+    {
+        <div data-repeater-item>
+            @Html.Action("DynamicFormFieldTemplate")
+            <div class="form-group" style="display:none">
+                <div class="panel panel-primary">
+                    <div class="panel-body well well-sm" style="margin-bottom: 0px;">
+                        <div class="inner-repeater">
+                            <div data-repeater-list="group-formsubfield">
+                                <div data-repeater-item>
+                                    @Html.Action("DynamicFormFieldTemplate")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <button class="btn btn-default" type="button" data-repeater-create>Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@

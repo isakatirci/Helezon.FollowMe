@@ -1,0 +1,94 @@
+﻿@using FollowMe.Web.Controllers
+@model List<FollowMe.Web.Models.PersonnelEducation>
+@{
+
+    var educations = new List<FollowMe.Web.Models.PersonnelEducation>();
+    var education1 = new FollowMe.Web.Models.PersonnelEducation();
+    educations.Add(education1);
+
+
+    if (Model != null && Model.Any())
+    {
+        educations = Model;
+    }
+
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_educations"> Educations @ViewBag.Now  </a>
+        </h4>
+    </div>
+    <div id="collapse_educations" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal repeater">
+                <div data-repeater-list="group-education">
+                    @{
+                        foreach (var education in educations)
+                        {
+                            <div data-repeater-item>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body well well-sm" style="margin-bottom: 0px;">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        @Html.Label("EducationLevelId", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            @Html.DropDownList("EducationLevelId", new SelectList(ViewBag.EducationLevels, "Id", "Name", education.EducationLevelId)
+                                                           , "Please Select"
+                                                           , htmlAttributes: new { @class = "form-control"})
+                                                            @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("StudiedSchoolName", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            @Html.TextBox("StudiedSchoolName", education.StudiedSchoolName
+                                                           , string.Empty, htmlAttributes: new { @class = "form-control mask_alpha" })
+                                                            @*@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.Label("EducationArea", htmlAttributes: new { @class = "control-label col-md-4" })
+                                                        <div class="col-md-8">
+                                                            @Html.TextBox("EducationArea", education.EducationArea
+                                                           , string.Empty, htmlAttributes: new { @class = "form-control mask_alpha" })
+                                                            @*@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            @Html.Hidden("EducationId", education.Id)
+                                                            @*@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger" type="button" data-repeater-delete>Delete</button>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                        }
+                    }
+
+
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="button" data-repeater-create>Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,718 @@
+﻿@{
+    var showNestableList = ViewBag.ShowNestableList != null && (bool)ViewBag.ShowNestableList;
+    var companyList = (List<FollowMe.Web.Models.Company>)ViewBag.CompanyList;
+    companyList.Add(new FollowMe.Web.Models.Company { Id = Guid.Empty.ToString(), Name = "Rehber" });
+
+
+}
+
+<style>
+
+
+    .modal-header, h4, .close {
+        background-color: #5cb85c;
+        color: white !important;
+        text-align: center;
+        font-size: 24px;
+    }
+    .modal-footer {
+        background-color: #f9f9f9;
+    }
+    .dd-handle {
+        background-color: #eef1f5;
+    }
+
+
+
+    /*.nestable-lists {
+        display: block;
+        clear: both;
+        padding: 30px 0;
+        width: 100%;
+        border: 0;
+        border-top: 2px solid #ddd;
+        border-bottom: 2px solid #ddd;
+    }*/
+
+    /*#nestable-menu {
+        padding: 0;
+        margin: 20px 0;
+    }*/
+
+    /*#nestable-output,
+    #nestable2-output {
+        width: 100%;
+        height: 7em;
+        font-size: 0.75em;
+        line-height: 1.333333em;
+        font-family: Consolas, monospace;
+        padding: 5px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }*/
+
+    /*#nestable_list_2 .dd-handle {
+        color: #fff;
+        border: 1px solid #999;
+        background: #bbb;
+        background: -webkit-linear-gradient(top, #bbb 0%, #999 100%);
+        background: -moz-linear-gradient(top, #bbb 0%, #999 100%);
+        background: linear-gradient(top, #bbb 0%, #999 100%);
+    }
+
+        #nestable_list_2 .dd-handle:hover {
+            background: #bbb;
+        }
+
+    #nestable_list_2 .dd-item > button:before {
+        color: #fff;
+    }*/
+
+    /*@@media only screen and (min-width: 700px) {
+
+        .dd {
+            float: left;
+            width: 48%;
+        }
+
+            .dd + .dd {
+                margin-left: 2%;
+            }
+    }
+
+    .dd-hover > .dd-handle {
+        background: #2ea8e5 !important;
+    }*/
+</style>
+
+@section afterGlobalStyles {
+    <link href="~/Content/global/plugins/jquery-nestable2/jquery.nestable.min.css" rel="stylesheet" />
+}
+
+<div class="portlet light portlet-fit portlet-form bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-bubble font-purple"></i>
+            <span class="caption-subject font-purple sbold uppercase"> Add New Item </span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group">
+                    @Html.Label("CompanyId", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            @Html.DropDownList("CompanyId", new SelectList(companyList, "Id", "Name"), optionLabel: "Please Select", htmlAttributes: new { @class = "form-control select2" })                           
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="TaxonomyId" class="col-md-3 control-label">Taxonomies:</label>
+                    <div class="col-md-4">
+                        @Html.DropDownList("TaxonomyId", null, optionLabel: "Please Select", htmlAttributes: new { @class = "form-control select2 " })
+                    </div>
+                </div>
+                @if (showNestableList)
+                {
+                    <div class="form-group">
+                        @*<label for="TaxonomyId" class="col-md-3 control-label"> Filter:</label>*@
+
+                        <div class="col-md-4 col-md-offset-3">
+                            @*<div class="input-group">
+                        <input type="text" id="search" class="form-control" />
+                        <span class="input-group-btn">
+                            <button id="clear" type="button" class="btn btn-danger">Clear</button>
+                        </span>
+                    </div>*@
+
+                            <div id="jstree">
+                            </div>
+                            @*<p>Selected items:</p>
+                    <ul id="output"></ul>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputItemName" class="col-md-3 control-label">Item Name:</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="inputItemName" placeholder="Item Name">
+                                <span class="input-group-btn">
+                                    <button id="buttonAddNewItem" class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>              
+                    <div class="form-group">
+                        <label class="control-label col-md-3 control-label">Drag and Drop</label>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="dragAndDropOnOff" onchange="javascript:dragAndDropOnOffChange(this)" class="make-switch" data-on-color="success" data-off-color="danger">               
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                <div class="col-md-4 col-lg-offset-3">
+
+                </div>
+            </div>*@
+
+                }
+            </div>
+            @*<div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Submit</button>
+                            <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Update Term</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editTermForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="editTermName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name" id="editTermName">
+                            <input type="hidden" id="editTermId" name="Id" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDoDragClass" class="col-sm-2 control-label">Draggable</label>
+                        <div class="col-sm-10">
+                            <select id="editDoDragClass" name="NoDragClass" class="form-control">
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editNoChildrenClass" class="col-sm-2 control-label">Has Child</label>
+                        <div class="col-sm-10">
+                            <select id="editNoChildrenClass" name="NoChildrenClass" class="form-control">
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
+                            </select>
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="Color">Color</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownList("Color", FollowMe.Web.Controllers.Utils.GetColorTypes(), htmlAttributes: new { @class = "form-control  select2", @id = "editItemColor" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        <label class="col-md-2 control-label">Wheel</label>
+                        <div class="col-md-10">
+                            <input type="text" id="wheel-demo" name="Color" class="form-control" data-control="wheel" value="#3598dc">
+                        </div>
+                    </div>*@       
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button type="button" onclick="javascript:postTermForm()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (showNestableList)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-bubble font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase"> New Nestable List </span>
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+                <div class="portlet-body ">
+                    <div class="dd" id="nestable_list_1">
+                        @Html.Raw(ViewBag.NewNestedListHtmlString)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-bubble font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase"> Taxonomy List </span>
+                    </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="dd" id="nestable_list_2">
+                        @Html.Raw(ViewBag.NestedListHtmlString)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+            <div class="col-md-12">
+                <h3>Serialised Output (per list)</h3>
+                <textarea id="nestable_list_1_output" class="form-control col-md-12 margin-bottom-10"></textarea>
+                <textarea id="nestable_list_2_output" class="form-control col-md-12 margin-bottom-10"></textarea>
+            </div>
+        </div>*@
+
+}
+
+
+
+
+
+@section afterGlobalScripts {
+
+    <script>
+        var postOptionTermForm = function () {
+            var $TaxonomyId = $("#TaxonomyId").val();
+            var $CompanyId = $("#CompanyId").val();
+            if ($CompanyId.length !== 0 && $TaxonomyId.length !== 0) {
+                $(location).attr("href", "/Terms/Taxonomies?companyId=" + $CompanyId + '&taxonomyId=' + $TaxonomyId);
+            }
+        }
+        $dropDownListCompanyId = $("#CompanyId");
+        $dropDownListTaxonomyId = $("#TaxonomyId");
+        $dropDownListCompanyId.change(function () {
+            postOptionTermForm();
+        });
+        $dropDownListTaxonomyId.change(function () {
+            postOptionTermForm();
+        });
+    </script>
+
+
+    @if (showNestableList)
+    {
+        <script src="~/Content/global/plugins/jquery-nestable2/jquery.nestable.js" type="text/javascript"></script>
+        @*<script src="~/Content/global/plugins/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>*@
+
+        @*<script src="//cdnjs.cloudflare.com/ajax/libs/nestable2/1.5.0/jquery.nestable.min.js"></script>*@
+        <script>
+
+
+
+            //function toogleDragAndDrop(button) {
+
+            //    console.log(button);
+            //    if (button.checked) {
+            //        $('#btnDrogleDragAndDrop').html('Enable Drag and Drop');
+            //        $('#btnDrogleDragAndDrop').toggleClass('btn-success btn-danger');
+            //    } else {
+            //        $('#btnDrogleDragAndDrop').html('Disable Drag and Drop');
+            //        $('#btnDrogleDragAndDrop').toggleClass('btn-danger btn-success');
+            //    }
+        
+            //}
+
+            function postTermForm() {
+
+
+                App.blockUI({
+                    boxed: true,
+                    message: 'Saving...'
+                });
+
+
+                $('#myModal1').modal("hide");                
+                //console.log($("#editTermForm").serialize());
+                var datastring = $("#editTermForm").serialize();
+                console.log(datastring);
+                $.ajax({
+                    type: "POST",
+                    url: "/Terms/TermUpdate",
+                    data: datastring            
+                }).done(function (data, status, jqXHR) {
+
+                    if (!!data && !!data.IsSuccess) {
+
+                        var $TaxonomyId = $("#TaxonomyId").val();
+                        var $CompanyId = $("#CompanyId").val();
+
+                        if ($CompanyId.length !== 0 && $TaxonomyId.length !== 0) {
+
+                            swal({
+                                title: "Success",
+                                text: "Term Saved.",
+                                type: "info",
+                                allowOutsideClick: false,
+                                showConfirmButton: true,
+                                showCancelButton: false
+                            },
+                                function (isConfirm) {
+
+                                    $(location).attr("href",
+                                        "/Terms/Taxonomies?companyId=" + $CompanyId + '&taxonomyId=' + $TaxonomyId);
+
+                                });
+                        } else {
+                            $(location).attr("href", "/Terms/Taxonomies");
+                        }
+
+
+                    } else {
+                        swal("Error!", "Term Didn't Save", "error");
+                    }
+
+                }).fail(function (jqXHR, status, err) {
+                    swal("Error!", "Didn't Saved!", "error");
+                }).always(function () {
+                    App.unblockUI();
+                });
+
+            }
+
+
+            function dragAndDropOnOffChange(chk) {
+                if (!chk.checked) {
+                    $(".dd-handle").css("background-color", "#eef1f5");
+
+                } else {
+                    $(".dd-handle").css("background-color", "#fafafa");
+                }
+            }
+
+         
+
+
+            $(document).ready(function () {
+
+             
+                //$('#wheel-demo').minicolors({
+                //    control: $(this).attr('data-control') || 'hue',
+                //    defaultValue: $(this).attr('data-defaultValue') || '',
+                //    inline: $(this).attr('data-inline') === 'true',
+                //    letterCase: $(this).attr('data-letterCase') || 'lowercase',
+                //    opacity: $(this).attr('data-opacity'),
+                //    position: $(this).attr('data-position') || 'bottom left',
+                //    change: function (hex, opacity) {
+                //        if (!hex) return;
+                //        if (opacity) hex += ', ' + opacity;
+                //        if (typeof console === 'object') {
+                //            console.log(hex);
+                //        }
+                //    },
+                //    theme: 'bootstrap'
+                //});
+
+    
+
+                var ajaxTreeFillTermTree = function(selector, url) {
+                    var tmp = $(selector).jstree(true);
+                    if (tmp) {
+                        tmp.destroy();
+                    }
+                    $(selector).jstree({
+                        'plugins': ['search', 'checkbox', 'wholerow'],
+                        'core': {
+                            "multiple": false,
+                            'data': {
+                                'url': function(node) {
+                                    return url;
+                                },
+                                'data': function(node) {
+                                    //console.log(node);
+
+                                    return { 'parent': node.id };
+                                }
+                            },
+                            'animation': false,
+                            //'expand_selected_onload': true,
+                            'themes': {
+                                'icons': false,
+                            }
+                        },
+                        'search': {
+                            'show_only_matches': true,
+                            'show_only_matches_children': true
+                        },
+                        'checkbox': {
+                            'keep_selected_style': false,
+                            'three_state': false,
+                            'cascade': ''
+                        }
+                    });
+                };
+
+                setTimeout(function() {
+
+                    var $TaxonomyId = $('#TaxonomyId');
+
+                    if ($TaxonomyId.val().length !== 0) {
+
+                        ajaxTreeFillTermTree('#jstree', '@Url.Action("JSTreeData", "Terms")?taxonomy=' +
+                                $TaxonomyId.val() +
+                                '&companyId=00000000-0000-0000-0000-000000000000');
+                        }
+
+                    },
+                    1000);
+
+
+                $('#search').on("keyup change",
+                    function() {
+                        $('#jstree').jstree(true).search($(this).val())
+                    });
+
+                $('#clear').click(function(e) {
+                    $('#search').val('').change().focus()
+                });
+
+                //$('#jstree').on('changed.jstree', function (e, data) {
+                //    var objects = data.instance.get_selected(true)
+                //    var leaves = $.grep(objects, function (o) { return data.instance.is_leaf(o) })
+                //    var list = $('#output')
+                //    list.empty()
+                //    $.each(leaves, function (i, o) {
+                //        $('<li/>').text(o.text).appendTo(list)
+                //    })
+                //});
+
+                var $blockMultiRefresh = true;
+
+                var refreshNestableList = function () {
+
+                    var $TaxonomyId = $("#TaxonomyId").val();
+                    var $CompanyId = $("#CompanyId").val();
+
+                    if ($CompanyId.length !== 0 && $TaxonomyId.length !== 0) {
+
+                        if ($blockMultiRefresh) {
+                            $blockMultiRefresh = false;
+                            App.blockUI({
+                                boxed: true,
+                                message: 'Saving...'
+                            });
+
+                            var jqXHR = $.ajax({
+                                type: "POST",
+                                url: "/Terms/Term_Taxonomy?companyId=" + $CompanyId + "&taxonomy=" + $TaxonomyId,
+                                data: {
+                                    nestableList: JSON.stringify($('#nestable_list_2').nestable('serialize'))
+                                }
+                            }).done(function (data, status, jqXHR) {
+                                console.log(data);
+                                if (data.IsSucceeded) {
+
+                                    swal({
+                                        title: "Success",
+                                        text: "Taxonomy Saved.",
+                                        type: "info",
+                                        allowOutsideClick: false,
+                                        showConfirmButton: true,
+                                        showCancelButton: false
+                                        //closeOnConfirm: false
+                                        //confirmButtonText: sa_confirmButtonText,
+                                        //cancelButtonText: sa_cancelButtonText,
+                                    },
+                                        function (isConfirm) {
+
+                                            //if (isConfirm){
+                                            //    swal(sa_popupTitleSuccess, sa_popupMessageSuccess, "success");
+                                            //} else {
+                                            //    swal(sa_popupTitleCancel, sa_popupMessageCancel, "error");
+                                            //}
+
+                                            //$(location).attr("href",
+                                            //    "/Terms/Taxonomies?companyId=" + $CompanyId + '&taxonomyId=' + $TaxonomyId);
+
+                                        });
+
+                                } else {
+                                    swal("Error!", data.Message, "error");
+                                }
+                            }).fail(function (jqXHR, status, err) {
+                                swal("Error!", "Could Not Be Saved!", "error");
+                            }).always(function () {
+                                $blockMultiRefresh = true;
+                                App.unblockUI();
+                            });
+
+                        }
+
+
+                        //swal("Success.", "", "success");
+                    } else {
+                        swal("Error!", "Please Select Company and Taxonomy!", "error");
+                        return;
+                    }
+
+                };         
+
+
+
+
+                $(".dd-item").click(function () {
+
+                    //alert($(this).data("id"));                
+
+
+                    if (!$('#dragAndDropOnOff').is(':checked')) {
+                        $('#editTermId').val($(this).data("id"));
+                        $('#editTermName').val($(this).data("name"));
+                        $('#editItemColor').val($(this).data("color"));
+                        $('#editDoDragClass').val($(this).data("nodrag"));
+                        $('#editNoChildrenClass').val($(this).data("nochildren"));       
+                        //$('#editParent').val($(this).data("parent"));    
+            
+                        $('#myModal1').modal();
+
+                        return false;
+
+                   
+                    }
+                });
+
+
+                $('#nestable_list_1').nestable({
+                    group: 1,
+                    //maxDepth: 1,
+                    callback: function (l, e) {
+                        // l is the main container
+                        // e is the element that was moved
+                        //alert('test1');
+                        refreshNestableList();
+                    },
+                    onDragStart: function (l, e) {
+                        // l is the main container
+                        // e is the element that was moved
+                        //data-nodrag
+
+                        if (!$('#dragAndDropOnOff').is(':checked')) {
+                            return false;
+                        }
+
+                        if ($(e).data("nodrag") == "1") {
+                            return false;
+                        }
+
+
+
+                    }
+                }).on('change', refreshNestableList);
+
+                // activate Nestable for list 2
+                $('#nestable_list_2').nestable({
+                    group: 1,
+                    callback: function(l, e) {
+                        // l is the main container
+                        // e is the element that was moved
+                        //alert('test2');
+                        refreshNestableList();
+                    },
+                    onDragStart: function(l, e) {
+                        // l is the main container
+                        // e is the element that was moved
+                        //debugger;
+                        //var nodrag = $(e).data('nodrag');
+                        //if (nodrag == "1") {
+                        //    return false;
+                        //}
+
+
+                        if (!$('#dragAndDropOnOff').is(':checked')) {
+
+                            return false;
+                        }
+
+                        if ($(e).data("nodrag") == "1") {
+                            return false;
+                        }
+                    }
+                }).on('change', refreshNestableList);;
+
+                $("#buttonAddNewItem").click(function() {
+
+                        var $TaxonomyId = $("#TaxonomyId").val();
+                        var $CompanyId = $("#CompanyId").val();
+                        var $inputItemName = $("#inputItemName").val();
+                        if ($CompanyId.length !== 0 && $TaxonomyId.length !== 0 && $inputItemName.length !== 0) {
+
+                            var $parent = 0;
+                            if ($("#jstree").jstree("get_selected").length !== 0) {
+                                $parent = $("#jstree").jstree("get_selected")[0] * 1;
+                            }
+
+                            $(location).attr("href",
+                                "/Terms/AddNewTerm?companyId=" +
+                                $CompanyId +
+                                '&taxonomyId=' +
+                                $TaxonomyId +
+                                '&termName=' +
+                                $inputItemName +
+                                '&termParent=' +
+                                $parent);
+
+                            @*$.ajax({
+                        type: "POST",
+                        url: "@Url.Action("AddNewTerm", "Terms")?companyId=" + $CompanyId,
+                        data: '{ Name: "' + $inputItemName + '" , TaxonomyId: "' + $TaxonomyId + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    }).done(function (data, status, jqXHR) {
+
+                        if (data.Id < 1) {
+                            swal("Error!", "Add New Item Failed", "error");
+                            return;
+                        }
+
+                        if ($("#nestable_list_2 > .dd-empty").length) {
+                            $("#nestable_list_2 > .dd-empty").remove();
+                        }
+
+                        if ($("#nestable_list_1 > ol").length) {
+                            $("#nestable_list_1 > ol").append("<li class=\"dd-item\" data-id=\"" + data.Id + "\" data-name=\"" + data.Name + "\"> <div class=\"dd-handle\"> " + data.Name + " </div></li>");
+                        } else {
+                            $("#nestable_list_1").append("<ol class=\"dd-list\"><li class=\"dd-item\" data-id=\"" + data.Id + "\" data-name=\"" + data.Name + "\"> <div class=\"dd-handle\"> " + data.Name + " </div></li></ol>");
+                        }
+
+                        $("#inputItemName").val('');
+                        swal("Success.", "Item Saved.", "success");
+                        //$('#nestable_list_1').nestable('add', newItem);
+                    }).fail(function (jqXHR, status, err) {
+                        swal("Error!", "Could Not Be Saved!", "error");
+                        });*@
+                        } else {
+                            swal("Error!", "Please Select Company or Taxonomy or Enter Item Name!", "error");
+                            return;
+                        }
+                    }
+                );
+
+
+                //var updateOutput = function (e) {
+                //    var list = e.length ? e : $(e.target),
+                //        output = list.data('output');
+                //    if (window.JSON) {
+                //        output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                //    }
+                //    else {
+                //        output.val('JSON browser support required for this demo.');
+                //    }
+                //};
+            });
+        </script>
+    }
+}

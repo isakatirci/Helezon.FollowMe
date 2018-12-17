@@ -1,0 +1,66 @@
+﻿@model FollowMe.Web.Models.TaxonomyViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle"
+               data-toggle="collapse"
+               data-parent="#accordion2"
+               href="#collapse_@Model.TaxonomyEnumName">@Model.TaxonomyName</a>
+        </h4>
+    </div>
+    <div id="collapse_@Model.TaxonomyEnumName"
+         class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-2"
+                                   for="@(Model.TaxonomyEnumName + "Name")">@Model.TaxonomyName</label>
+                            <div class="col-md-10">
+
+                                <textarea class="form-control" 
+                                          readonly  
+                                          id="@(Model.TaxonomyEnumName + "Name")" 
+                                          name="@(Model.TaxonomyEnumName+ "Name")" 
+                                          rows="4" 
+                                          cols="50">
+                                  @Model.TermNames
+                                </textarea>                            
+
+                                <input id="@(Model.TaxonomyEnumName + "Id")"
+                                       name="@(Model.TaxonomyEnumName + "Id")"
+                                       type="hidden"
+                                       value="@Model.TermIds">
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="@Model.TreeId" class="tree-demo"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <hr />
+            <div class="row">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-2"
+                               for="@(Model.TaxonomyEnumName + "Name")">@(Model.TaxonomyName + " Others")</label>
+                            <div class="col-md-6">
+                                <input id="@(Model.TaxonomyEnumName + "NameOthers")"
+                                       name="@(Model.TaxonomyEnumName+ "NameOthers")"
+                                       class="form-control"
+                                       type="text" />
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>

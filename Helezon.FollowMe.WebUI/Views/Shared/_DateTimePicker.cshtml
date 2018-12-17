@@ -1,0 +1,10 @@
+﻿@model FollowMe.Web.Models.DateTimePicker
+
+<div class="input-group date date-picker @Model.GroupClass" data-date-format="dd.mm.yyyy">
+    <input type="text" class="form-control" value="@Model.ElementValue" readonly name="@Model.ElementName">
+    <span class="input-group-btn">
+        <button class="btn default" type="button">
+            <i class="fa fa-calendar"></i>
+        </button>
+    </span>
+</div>

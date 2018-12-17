@@ -1,0 +1,149 @@
+﻿@{
+    var companyList = (List<FollowMe.Web.Models.Company>)ViewBag.CompanyList;
+    companyList.Add(new FollowMe.Web.Models.Company { Id = Guid.Empty, Name = "Default Rehber" });
+
+
+}
+
+
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Edit Taxonomies</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            @Html.Label("CompanyId", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    @Html.DropDownList("CompanyId", new SelectList(companyList, "Id", "Name"), optionLabel: "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                    <span class="input-group-btn">
+                                        <button class="btn blue ajax-demo" data-url="@Url.Action("Edit", "Company")" data-toggle="modal" type="button">
+                                            <i class="icon-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="TaxonomyId" class="col-md-3 control-label">Taxonomies:</label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("TaxonomyId", null, optionLabel: "Please Select", htmlAttributes: new { @class = "form-control select2 " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 col-md-offset-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div id="TermsTree" class="tree-demo"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                @*<button type="submit" class="btn green">Submit</button>
+                        <button type="button" class="btn grey-salsa btn-outline">Cancel</button>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+      
+
+@section afterGlobalScripts {
+
+
+    <script>
+
+        var ajaxTreeFillCompany = function(selector, url) {
+
+            var tmp = $(selector).jstree(true);
+            if (tmp) {
+                tmp.destroy();
+            }
+
+            $(selector).jstree({
+                'plugins': ['checkbox', 'wholerow'],
+                'core': {
+                    "multiple": true,
+                    "themes": {
+                        "responsive": false,
+                        'icons': false
+                    },
+                    'data': {
+                        'url': function(node) {
+                            return url;
+                        },
+                        'data': function(node) {
+                            return { 'parent': node.id };
+                        }
+                    }
+                },
+                'checkbox': {
+                    'keep_selected_style': false,
+                    'three_state': false,
+                    'cascade': ''
+                }
+            }).bind('ready.jstree',
+                function(e, data) {
+
+                    $('#' + 'TermsTree').jstree("open_all");
+
+
+                    //if ($('#CompanyTypeId').val().length !== 0) {
+
+                    //    var $types = $('#CompanyTypeId').val().split(',');
+
+                    //    for (var i = 0; i < $types.length; i++) {
+
+                    //        $('#' + 'TermsTree').jstree("select_node", '#' + $.trim($types[i]));
+                    //    }
+
+
+                    //}
+                });
+
+
+        };
+
+        function fillTermTree() {
+            if ($CompanyId.val().length !== 0 && $TaxonomyId.val().length !== 0) {
+
+                ajaxTreeFillCompany('#' + 'TermsTree',
+                    '@Url.Action("JSTreeData", "Terms")?taxonomy=@((int) FollowMe.Web.Controllers.Utils.TaxonomyType.CompanyType)' +
+                    '&companyId=' +
+                    $CompanyId.val() +
+                    '&termId=' +
+                    $TaxonomyId.val());
+
+            }
+        }
+
+        var $CompanyId = $('#CompanyId');
+        var $TaxonomyId = $('#TaxonomyId');
+        $CompanyId.change(function() {
+
+            fillTermTree();
+
+
+        });
+
+        $TaxonomyId.change(function() {
+
+            fillTermTree();
+
+
+        });
+
+    </script>
+
+}

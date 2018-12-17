@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "TaxonomyAssign";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-social-dribbble font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">Multiple Select</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-cloud-upload"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-wrench"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <form action="index.html" class="form-horizontal form-row-seperated">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Default</label>
+                            <div class="col-md-9">
+                                <select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]">
+                                    <option>Dallas Cowboys</option>
+                                    <option>New York Giants</option>
+                                    <option selected>Philadelphia Eagles</option>
+                                    <option selected>Washington Redskins</option>
+                                    <option>Chicago Bears</option>
+                                    <option>Detroit Lions</option>
+                                    <option>Green Bay Packers</option>
+                                    <option>Minnesota Vikings</option>
+                                    <option selected>Atlanta Falcons</option>
+                                    <option>Carolina Panthers</option>
+                                    <option>New Orleans Saints</option>
+                                    <option>Tampa Bay Buccaneers</option>
+                                    <option>Arizona Cardinals</option>
+                                    <option>St. Louis Rams</option>
+                                    <option>San Francisco 49ers</option>
+                                    <option>Seattle Seahawks</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <label class="control-label col-md-3">Grouped Options</label>
+                            <div class="col-md-9">
+                                <select multiple="multiple" class="multi-select" id="my_multi_select2" name="my_multi_select2[]">
+                                    <optgroup label="NFC EAST">
+                                        <option>Dallas Cowboys</option>
+                                        <option>New York Giants</option>
+                                        <option>Philadelphia Eagles</option>
+                                        <option>Washington Redskins</option>
+                                    </optgroup>
+                                    <optgroup label="NFC NORTH">
+                                        <option>Chicago Bears</option>
+                                        <option>Detroit Lions</option>
+                                        <option>Green Bay Packers</option>
+                                        <option>Minnesota Vikings</option>
+                                    </optgroup>
+                                    <optgroup label="NFC SOUTH">
+                                        <option>Atlanta Falcons</option>
+                                        <option>Carolina Panthers</option>
+                                        <option>New Orleans Saints</option>
+                                        <option>Tampa Bay Buccaneers</option>
+                                    </optgroup>
+                                    <optgroup label="NFC WEST">
+                                        <option>Arizona Cardinals</option>
+                                        <option>St. Louis Rams</option>
+                                        <option>San Francisco 49ers</option>
+                                        <option>Seattle Seahawks</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-check"></i> Submit
+                                </button>
+                                <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+                
+

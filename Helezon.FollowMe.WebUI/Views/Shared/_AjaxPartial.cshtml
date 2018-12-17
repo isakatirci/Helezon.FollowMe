@@ -1,0 +1,12 @@
+﻿@model  FollowMe.Web.Models.ViewModels.AjaxPartialViewModel
+<div class="input-group  @Model.dropDownListStyleClass">
+    @Html.DropDownList(Model.foreingKeyId, null, htmlAttributes: new { @class = "form-control" })
+    <span class="input-group-btn">
+        <button class="btn blue ajax-demo" data-url="@Url.Action("ForeingKeyId","Base",new { iframeUrl = Model.iframeUrl , modalTitle = Model.modalTitle })" data-toggle="modal" type="button">
+            <i class="icon-plus"></i>
+        </button>
+        <button class="btn green ajax-refresh" data-container="@Model.foreingKeyId" data-table-name="@Model.tableName" data-url="@Url.Action("DropDownListRefresh","Base")" type="button">
+            <i class="icon-refresh"></i>
+        </button>
+    </span>
+</div>
