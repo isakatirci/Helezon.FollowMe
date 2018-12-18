@@ -60,11 +60,145 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Company.cs" />
+    <Compile Include="Models\AddressGuide.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BankGuide.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Company.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyAddress.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyBank.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyTelephone.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyTerm.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FollowMeDbContext.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FollowMeDbContextFactory.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FollowMeModels1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IFollowMeDbContext.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JsonObject.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LogisticsCompany.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\AddressGuideMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\BankGuideMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\CompanyAddressMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\CompanyBankMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\CompanyMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\CompanyTelephoneMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\CompanyTermMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\FollowMeMapping1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\JsonObjectMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\LogisticsCompanyMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelAddressMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelBankMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelEducationMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelTelephoneMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelTermMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\SequenceMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\TermMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\TermRelationshipMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\TermTaxonomyMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelAddress.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelBank.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelEducation.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelTelephone.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelTerm.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sequence.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Term.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TermRelationship.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TermTaxonomy.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="EF.Reverse.POCO.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +206,19 @@
       <Project>{51901d12-4980-40d7-bc9f-03da365421ea}</Project>
       <Name>Repository.Pattern.Ef6</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\FollowMeModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FollowMeModels1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Mapping\FollowMeMapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FollowMeMapping1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

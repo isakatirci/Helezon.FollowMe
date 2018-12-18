@@ -1,7 +1,9 @@
 ﻿using FollowMe.Web.Models;
+using Helezon.FollowMe.Service;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-
+using Repository.Pattern.Ef6;
+using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,15 +18,15 @@ namespace FollowMe.Web.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        //public readonly ICompanyService CompanyService;
-        //public readonly IUnitOfWorkAsync UnitOfWorkAsync;
-        //private readonly DbContext _followMeDbContext;
-        //public BaseController()
-        //{
-        //    _followMeDbContext = new FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
-        //    UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
-        //    CompanyService = new CompanyService(new Repository<FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync));
-        //}
+        public readonly ICompanyService CompanyService;
+        public readonly IUnitOfWorkAsync UnitOfWorkAsync;
+        private readonly DbContext _followMeDbContext;
+        public BaseController()
+        {
+            _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
+            UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
+            CompanyService = new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync));
+        }
 
         public class ForeingKeyIdRefreshParametres
         {

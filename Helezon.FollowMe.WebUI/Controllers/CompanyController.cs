@@ -15,10 +15,10 @@ namespace FollowMe.Web.Controllers
     [Authorize]
     public class CompanyController : BaseController
     {
-        //public string Test()
-        //{
-        //    return CompanyService.CompaniesByCompanyRootTypeId(11).First().Name;
-        //}
+        public string Test()
+        {
+            return CompanyService.FistCompanyName();
+        }
         private static TaxonomyType[] TaxonomyTypeForCompany = new TaxonomyType[] {
                  TaxonomyType.ProductType
                , TaxonomyType.CompanyType     

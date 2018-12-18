@@ -1,9 +1,13 @@
 ﻿#region
-
+using System.Linq;
 using System.Collections.Generic;
 using Repository.Pattern.Repositories;
 using Service.Pattern;
 using Helezon.FollowMe.Entities;
+using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Core.Aspects.Postsharp.ValidationAspects;
+using Helezon.FollowMe.Service.ValidationRules.FluentValidation;
+using Helezon.FollowMe.Repository.Repositories;
 
 #endregion
 
@@ -14,9 +18,7 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public interface ICompanyService : IService<Company>
     {
-        //decimal CustomerOrderTotalByYear(string customerId, int year);
-        //IEnumerable<Customer> CustomersByCompany(string companyName);
-        //IEnumerable<CustomerOrder> GetCustomerOrder(string country);
+        string FistCompanyName();
     }
 
     /// <summary>
@@ -31,35 +33,10 @@ namespace Helezon.FollowMe.Service
         {
             _repository = repository;
         }
-
-        //public decimal CustomerOrderTotalByYear(string customerId, int year)
-        //{
-        //    // add business logic here
-        //    return _repository.GetCustomerOrderTotalByYear(customerId, year);
-        //}
-
-        //public IEnumerable<Customer> CustomersByCompany(string companyName)
-        //{
-        //    // add business logic here
-        //    return _repository.CustomersByCompany(companyName);
-        //}
-
-        //public IEnumerable<CustomerOrder> GetCustomerOrder(string country)
-        //{
-        //    // add business logic here
-        //    return _repository.GetCustomerOrder(country);
-        //}
-
-        //public override void Insert(Customer entity)
-        //{
-        //    // e.g. add business logic here before inserting
-        //    base.Insert(entity);
-        //}
-
-        //public override void Delete(object id)
-        //{
-        //    // e.g. add business logic here before deleting
-        //    base.Delete(id);
-        //}
+        [FluentValidationAspect(typeof(CompanyValidatior))]
+        public string FistCompanyName()
+        {
+            return _repository.FistCompanyName();
+        }
     }
 }
