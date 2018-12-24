@@ -1,7 +1,14 @@
 ﻿@{
     var showNestableList = ViewBag.ShowNestableList != null && (bool)ViewBag.ShowNestableList;
-    var companyList = (List<FollowMe.Web.Models.Company>)ViewBag.CompanyList;
-    companyList.Add(new FollowMe.Web.Models.Company { Id = Guid.Empty.ToString(), Name = "Rehber" });
+    var companyList = new List<FollowMe.Web.Models.Company>();
+    var empty = Guid.Empty.ToString();
+    companyList.Add(new FollowMe.Web.Models.Company { Id = empty, Name = "Rehber" });
+    companyList.Add(new FollowMe.Web.Models.Company { Id = empty.Remove(empty.Length - 1) + "1", Name = "Z Kod" });
+    companyList.Add(new FollowMe.Web.Models.Company { Id = empty.Remove(empty.Length - 1) + "2", Name = "Follow me" });
+    companyList.Add(new FollowMe.Web.Models.Company { Id = empty.Remove(empty.Length - 1) + "3", Name = "Cüzdan" });
+
+
+    // "Z Kod" , "Follow me" , "Cüzdan"
 
 
 }
@@ -139,7 +146,7 @@
                         <label for="inputItemName" class="col-md-3 control-label">Item Name:</label>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inputItemName" placeholder="Item Name">
+                                <input type="text" class="form-control transform_none" id="inputItemName" placeholder="Item Name">
                                 <span class="input-group-btn">
                                     <button id="buttonAddNewItem" class="btn btn-default" type="button">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -186,7 +193,7 @@
                     <div class="form-group">
                         <label for="editTermName" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Name" id="editTermName">
+                            <input type="text" class="form-control transform_none" name="Name" id="editTermName">
                             <input type="hidden" id="editTermId" name="Id" />
                         </div>
                     </div>
@@ -289,7 +296,7 @@
         var postOptionTermForm = function () {
             var $TaxonomyId = $("#TaxonomyId").val();
             var $CompanyId = $("#CompanyId").val();
-            if ($CompanyId.length !== 0 && $TaxonomyId.length !== 0) {
+            if ($CompanyId.length !== 0) {
                 $(location).attr("href", "/Terms/Taxonomies?companyId=" + $CompanyId + '&taxonomyId=' + $TaxonomyId);
             }
         }
@@ -457,14 +464,14 @@
                 };
 
                 setTimeout(function() {
-
+                    var companyId = "@(Request.QueryString["companyId"])";
                     var $TaxonomyId = $('#TaxonomyId');
 
                     if ($TaxonomyId.val().length !== 0) {
 
                         ajaxTreeFillTermTree('#jstree', '@Url.Action("JSTreeData", "Terms")?taxonomy=' +
                                 $TaxonomyId.val() +
-                                '&companyId=00000000-0000-0000-0000-000000000000');
+                            '&companyId=' + companyId);
                         }
 
                     },

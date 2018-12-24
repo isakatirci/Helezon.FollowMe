@@ -8,6 +8,8 @@ using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Core.Aspects.Postsharp.ValidationAspects;
 using Helezon.FollowMe.Service.ValidationRules.FluentValidation;
 using Helezon.FollowMe.Repository.Repositories;
+using Helezon.FollowMe.Core.Aspects.Postsharp.CacheAspects;
+using Helezon.FollowMe.Core.CrossCuttingConcerns.Caching.Microsoft;
 
 #endregion
 
@@ -34,9 +36,12 @@ namespace Helezon.FollowMe.Service
             _repository = repository;
         }
         [FluentValidationAspect(typeof(CompanyValidatior))]
+        [CacheAspect(typeof(MemoryCacheManager))]
         public string FistCompanyName()
         {
             return _repository.FistCompanyName();
         }
+
+
     }
 }

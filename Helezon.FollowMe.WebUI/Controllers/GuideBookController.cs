@@ -7,12 +7,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
+
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using static FollowMe.Web.Controllers.Utils;
 
-namespace FollowMe.Web.Controllers
+namespace FollowMe.Web.Controllers 
 {
     public class GuideBookController : BaseController
     {
@@ -285,12 +286,15 @@ namespace FollowMe.Web.Controllers
             ViewBag.CompanyFields = _companyFields.Except(jsonEnabled, new CompanyFieldComparer()).ToList();
 
             var tempJsonEnabled = jsonEnabled.Select(x => x.columnName.Trim()).ToList();
+          
             tempJsonEnabled.Insert(0, "Company.Id");
             tempJsonEnabled.Insert(1, "Company.Code");
             tempJsonEnabled.Insert(2, "Company.Name");
             tempJsonEnabled.Insert(3, "Company.IsPassive");
             tempJsonEnabled.Insert(4, "CompanyTelephone.Id AS CompanyTelephoneId");
             tempJsonEnabled.Insert(5, "CompanyAddress.Id AS CompanyAddressId");
+            tempJsonEnabled.Insert(6, "Company.ParentId");
+            tempJsonEnabled.Insert(7, "Company.AddressTypeId");
             var columns = string.Join(", ", tempJsonEnabled);
             var selectCommand = new System.Text.StringBuilder(561);
             selectCommand.AppendLine(@"SELECT ");
@@ -324,7 +328,7 @@ namespace FollowMe.Web.Controllers
                 if (temp.IsEmpty().Not())
                 {
                     selectCommand.AppendLine(@"WHERE Company.Id IN (##Id##)".Replace("##Id##", string.Join(", ", temp)));
-                    selectCommand.AppendLine(@"ORDER BY Company.CreatedOn DESC");
+                    selectCommand.AppendLine(@"ORDER BY ,Company.CreatedOn DESC");
 
                     var sql = selectCommand.ToString();
                     var table = AdoHelper.FillDataTable(sql);
@@ -341,26 +345,33 @@ namespace FollowMe.Web.Controllers
             }
 
             selectCommand.AppendLine(@"WHERE  1 = 1 ");
-            selectCommand.AppendLine(@"ORDER BY Company.CreatedOn DESC");
+            selectCommand.AppendLine(@"ORDER BY Company.ParentId ASC,Company.CreatedOn DESC");
 
             var companyTable = AdoHelper.FillDataTable(selectCommand.ToString());
             var tempCompanyIds = new HashSet<string>();
-            var tempRows = new HashSet<DataRow>();
+            var varNames = new Dictionary<string,Tuple<string,string>>();
+            var tempDeleteRows = new HashSet<DataRow>();
             foreach (DataRow row in companyTable.Rows)
             {
                 var companyId = row[0].ToString();
+                var companyName = row[2].ToString();
+                var companyCode = row[1].ToString();
                 if (!tempCompanyIds.Contains(companyId))
                 {
                     tempCompanyIds.Add(companyId);
+                    varNames.Add(companyId,Tuple.Create(companyCode,companyName));
                     continue;
                 }
-                tempRows.Add(row);
+                tempDeleteRows.Add(row);
             }
 
-            foreach (var row in tempRows)
+            foreach (var row in tempDeleteRows)
             {
                 companyTable.Rows.Remove(row);
-            }
+            }      
+
+            ViewBag.CompanyNames = varNames;
+          
 
             return PartialView(viewName: "_CompanyList", model: companyTable);
 

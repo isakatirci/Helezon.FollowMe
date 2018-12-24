@@ -74,8 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyImageService.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="FluentValidation\CompanyValidatior.cs" />
+    <Compile Include="PersonnelImageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

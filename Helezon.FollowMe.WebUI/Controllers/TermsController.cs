@@ -30,15 +30,33 @@ namespace FollowMe.Web.Controllers
         [HttpGet]
         public ActionResult Taxonomies(string companyId, int? taxonomyId)
         {
-            if (companyId.IsNullOrWhiteSpace() || !taxonomyId.HasValue)
+            ViewBag.NestedListHtmlString = "<div class=\"dd-empty\"></div>";
+            ViewBag.NewNestedListHtmlString = "<div class=\"dd-empty\"></div>";
+            ViewBag.ShowNestableList = false;
+
+            if (companyId.IsNullOrWhiteSpace())
             {
-                ViewBag.NestedListHtmlString = "<div class=\"dd-empty\"></div>";
-                ViewBag.NewNestedListHtmlString = "<div class=\"dd-empty\"></div>";
-                ViewBag.TaxonomyId = Utils.GetTaxonomyNames();
-                ViewBag.CompanyList = db.Company.ToList();
-                return View();
+                ViewBag.TaxonomyId = Enumerable.Empty<SelectListItem>();/* Utils.GetTaxonomyNames();*/
+                //ViewBag.CompanyList = db.Company.ToList();
+                return View(viewName: "Taxonomies");
+
             }
-            else
+
+            switch (companyId)
+            {
+                case "00000000-0000-0000-0000-000000000000":
+                    ViewBag.TaxonomyId = Utils.GetTaxonomyNames();
+                    break;
+                case "00000000-0000-0000-0000-000000000001":
+                    ViewBag.TaxonomyId = Utils.GetTaxonomyNamesZCode();
+                    break;
+                default:
+                    ViewBag.TaxonomyId = Enumerable.Empty<SelectListItem>();
+                    break;
+            }
+
+
+            if (taxonomyId.HasValue)
             {
                 var nestedList = (from tx in db.TermTaxonomy
                                   join te in db.Term
@@ -61,15 +79,10 @@ namespace FollowMe.Web.Controllers
 
                 ViewBag.NestedListHtmlString = !nestedList.Any() ? string.Empty : GenerateNestedListHtmlString(nestedList);
                 ViewBag.NewNestedListHtmlString = !newNestedList.Any() ? string.Empty : GenerateNewNestedListHtmlString(newNestedList);
-
-                ViewBag.TaxonomyId = Utils.GetTaxonomyNames(taxonomyId);
-                //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Name", companyId);
-                ViewBag.CompanyList = db.Company.ToList();
                 ViewBag.ShowNestableList = true;   
-                return View(viewName: "Taxonomies");
             }
-       
-        }     
+            return View(viewName: "Taxonomies");
+        }
 
         [HttpGet]
         public ActionResult TaxonomyAssign()

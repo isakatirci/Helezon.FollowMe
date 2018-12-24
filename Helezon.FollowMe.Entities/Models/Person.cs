@@ -48,6 +48,7 @@ namespace Helezon.FollowMe.Entities.Models
         public string NameDay { get; set; } // NameDay (length: 32)
         public string Interphone { get; set; } // Interphone (length: 32)
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
+        public int? PositionId { get; set; } // PositionId
 
         // Reverse navigation
 
@@ -63,6 +64,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child PersonnelEducations where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
+        /// <summary>
+        /// Child PersonnelImages where [PersonnelImage].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage.FK_PersonnelImage_Person
         /// <summary>
         /// Child PersonnelTelephones where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
         /// </summary>
@@ -86,6 +91,7 @@ namespace Helezon.FollowMe.Entities.Models
             PersonnelAddresses = new System.Collections.Generic.List<PersonnelAddress>();
             PersonnelBanks = new System.Collections.Generic.List<PersonnelBank>();
             PersonnelEducations = new System.Collections.Generic.List<PersonnelEducation>();
+            PersonnelImages = new System.Collections.Generic.List<PersonnelImage>();
             PersonnelTelephones = new System.Collections.Generic.List<PersonnelTelephone>();
             PersonnelTerms = new System.Collections.Generic.List<PersonnelTerm>();
             InitializePartial();

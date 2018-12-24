@@ -19,6 +19,12 @@
         .companyTable * {
             text-transform: uppercase !important;
         }
+
+        .companyTable td, .companyTable th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
     </style>
 }
 
@@ -68,8 +74,27 @@
                 <td>
                     <table>
                         <tr>
-                            <td rowspan="10" style="width:25%;min-width:25%">
-                                COMPANY LOGO
+                            <td rowspan="10" style="width:25%;min-width:25%;vertical-align:top!important">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                COMPANY LOGO
+                                                <a href="javascript:void(0);"
+                                                   onclick="location.href='@Html.Raw(Model.CompanyLogoUrl)'">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img style="width:250px;max-width:250px;height:300px;max-height:300px" src="@Model.ImageName" alt="@Model.Company.Name">
+                                            </td>
+                                        </tr>
+                                    </tbody>                                  
+                                </table>                               
                             </td>
                             <td rowspan="10">
                                 <table>
@@ -78,14 +103,12 @@
                                             <table>
                                                 <thead>
                                                     <tr>
-                                                        <th>AKTIF PASIF</th>
-                                                        <th>FIRMA NETWORK</th>
+                                                        <th>AKTIF/PASIF</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>@Html.Raw(Model.Company.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@Model.Company.AddressTypeName</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -101,7 +124,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.DisplayFor(x => x.Company.Code)&nbsp;@Html.DisplayFor(x => x.Company.Name)</td>
+                                                        <td>@Model.FirmaCodeName</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -163,48 +186,81 @@
                                     </tr>                              
                                 </table>
                             </td>
-                            <td rowspan="10" valign="top" style="width:25%;min-width:25%">
+                            <td rowspan="10" valign="top" style="width:25%;min-width:25%;vertical-align:top!important">
                                 <table>
                                     <tr>
-                                        <th>
-                                            <b>FIRMA NETWORK</b>
-                                        </th>
-                                    </tr>
-                                    @foreach (var item in Model.SubChildCompanyList)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <a href="@Url.Action(actionName: "CompanyCard", controllerName: "Company", routeValues: new { id = item.Item1 })">
-                                                    @item.Item2&nbsp;&minus;&nbsp;@item.Item3 &nbsp;
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <td >
 
-                                    }
-                                </table>
-                                <table>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        <b>FIRMA NETWORK</b>
+                                                        <a href="javascript:void(0);"
+                                                           onclick="location.href='@Html.Raw(string.Format("/Company/Edit?id={0}&operation=addsubchild", Model.Company.Id))'">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </a>
+
+                                                    </th>
+                                                </tr>
+                                                @foreach (var item in Model.SubChildCompanyList)
+                                                {
+                                                    <tr>
+                                                        <td @(Html.Raw(item.Item4.IsNullOrWhiteSpace().Not() ? "style=\"background-color:#ddd\"" : ""))>
+                                                            <a href="@Url.Action(actionName: "CompanyCard", controllerName: "Company", routeValues: new { id = item.Item1 })">
+                                                                @item.Item2&nbsp;&minus;&nbsp;@item.Item3 &nbsp;
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+                                                @{
+
+                                                    var resttds = 4 - Model.SubChildCompanyList.Count;
+                                                    if (resttds > 0)
+                                                    {
+                                                        for (int i = 0; i < resttds; i++)
+                                                        {
+                                                            <tr>
+                                                                <td>&nbsp;</td>
+                                                            </tr>
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                            </table>
+
+                                        </td>
+                                    </tr>
                                     <tr>
-                                        <th>
-                                            <b>COMPANY PERSONEL</b> <a href="javascript:void(0);"
-                                                                       onclick="javascript:companyPersonelEkle('@Model.Company.Id');">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </a>
-                                        </th>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        <b>COMPANY PERSONEL</b> <a href="javascript:void(0);"
+                                                                                   onclick="javascript:companyPersonelEkle('@Model.Company.Id');">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                                @foreach (var personnel in Model.PersonnelList)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <a href="@Url.Action(actionName: "PersonnelCard", controllerName: "Company", routeValues: new { id = personnel.PersonnelId, companyId = Model.Company.Id })">
+                                                                @personnel.Position&nbsp;&minus;&nbsp;@personnel.FirstName &nbsp; @personnel.LastName&nbsp;
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </td>
                                     </tr>
-                                    @foreach (var personnel in Model.PersonnelList)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <a href="@Url.Action(actionName: "PersonnelCard", controllerName: "Company", routeValues: new { id = personnel.PersonnelId, companyId = Model.Company.Id })">
-                                                    @personnel.Position&nbsp;&minus;&nbsp;@personnel.FirstName &nbsp; @personnel.LastName&nbsp;
-                                                </a>
-
-                                            </td>
-
-                                        </tr>
-                                    }
-                                </table>
-
+                                </table>                              
                             </td>
                         </tr>
                     </table>
@@ -256,7 +312,7 @@
 
                                             <text>
                                                 <tr>
-                                                    <td><b>ZIPCODE&nbsp;&amp;&nbsp;AREA</b></td>
+                                                    <td style="width:33%;max-width:33%"><b>ZIPCODE&nbsp;&amp;&nbsp;AREA</b></td>
                                                     <td>
                                                         @* mahalle/ilçe/şehir/ülke bilgileri yazacak zipcode/suburbarea/district/province/country*@
                                                         @Html.Raw(string.Format("{0}/{1}/{2}/{3}/{4}"

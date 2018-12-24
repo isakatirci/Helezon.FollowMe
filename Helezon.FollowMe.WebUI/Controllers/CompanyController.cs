@@ -126,18 +126,25 @@ namespace FollowMe.Web.Controllers
             ViewBag.BankNames = _bankNames.Value;
             ViewBag.ParentCompanyTypes = _parentCompanyTypes.Value;
             ViewBag.LogisticsCompanies = new List<LogisticsCompany> { new LogisticsCompany()};
-
+            ViewBag.Person_Position = new SelectList(db.Term
+                .Where(x => x.TaxonomyId == (int)TaxonomyType.Position).ToList(),"Id","Name");
 
             ViewBag.CountryList = _addressGuideCountries.Value;
 
-            var logistics = db.Company.Where(x => x.CompanyRootTypeId == (int)CompanyRootType.Others)
-                .Select(x=>new  {Id = x.Id ,Name = x.Name })
+            var logistics = (from c in db.Company
+                        join r in db.TermRelationship on c.Id equals r.CompanyId
+                        join t in db.Term on r.TermId equals t.Id
+                        where t.TaxonomyId == (int)TaxonomyType.CompanyType && !(t.IsPassive.HasValue && t.IsPassive.Value)
+                        && r.TermId == 13 && c.ParentId == null 
+                        select new { Id = c.Id, Name = c.Name })
                 .ToList().Select(x => new LogisticsCompany
                 {
                     LogisticsCompanyId = x.Id,
                     LogisticsCompanyName = x.Name
 
                 }).ToList();
+
+    
 
 
             //if (!logistics.Any())
@@ -168,7 +175,7 @@ namespace FollowMe.Web.Controllers
                     company.Person_Email = "test@test.com";
                     company.Person_GenderTypeId = 1;
                     company.Person_BirthDay = nullString;
-                    company.Person_Position = nullString;
+                    company.Person_Position = 0;
                 }
     
                 EntityTermServices termServicesCompany = new EntityTermServices(db, company.Id, company.Id);
@@ -249,12 +256,13 @@ namespace FollowMe.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Company company)
         {
+            var isAddingSubchild = company.ParentId.IsNullOrWhiteSpace().Not() && company.ParentId != Guid.Empty.ToString();
+
             using (DbContextTransaction transaction = db.Database.BeginTransaction())
             {
                 try
                 {
-
-                    var keys = Request.Form.Keys;
+                    //var keys = Request.Form.Keys;
                     Company existingCompany = null;
                     var isExistingCompany = false;
                     if (company.Id.IsNullOrWhiteSpace().Not() && company.Id != Guid.Empty.ToString())
@@ -266,6 +274,14 @@ namespace FollowMe.Web.Controllers
                         company.CreatedOn = existingCompany.CreatedOn;
                         company.CreatedBy = existingCompany.CreatedBy;
                         company.Code = existingCompany.Code;
+                        company.ParentId = existingCompany.ParentId;
+                        if (company.ParentId.IsNullOrWhiteSpace().Not() && company.ParentId != Guid.Empty.ToString())
+                        {
+                            if (company.AddressTypeId.HasValue && company.AddressTypeId == (int)AddressType.Merkez)
+                            {
+                                company.AddressTypeId = 0;
+                            }
+                        }
                         db.Entry(existingCompany).State = EntityState.Detached;
                         existingCompany = null;
                         isExistingCompany = true;
@@ -298,7 +314,7 @@ namespace FollowMe.Web.Controllers
                         company.ReasonWhyPassiveTermName = parts[1];
                     }
 
-                    if (company.Id.IsNullOrWhiteSpace() || company.Id.Equals(Guid.Empty))
+                    if (company.Id.IsNullOrWhiteSpace() || company.Id == Guid.Empty.ToString())
                     {
                         company.Id = Guid.NewGuid().ToString();
                         //company.CreatedAt = DateTime.Now;
@@ -333,6 +349,7 @@ namespace FollowMe.Web.Controllers
                         newPersonnel.BirthDay = company.Person_BirthDay.ToDateTime();
                         newPersonnel.CompanyId = company.Id;
                         newPersonnel.Interphone = company.Person_Interphone;
+                        newPersonnel.PositionId = company.Person_Position;
                         db.Entry<Person>(newPersonnel).State = EntityState.Added;
                         db.SaveChanges();
 
@@ -352,37 +369,37 @@ namespace FollowMe.Web.Controllers
                             db.SaveChanges();
                         }
 
-                        if (company.Person_Position.IsNullOrWhiteSpace().Not())
-                        {
-                            var personnelPosition = db.Term.FirstOrDefault(x => (x.CompanyId == company.Id || x.CompanyId == Guid.Empty.ToString())
-                                                && x.TaxonomyId == (int)TaxonomyType.Position
-                                                && x.Name.Contains(company.Person_Position));
+                        //if (company.Person_Position.IsNullOrWhiteSpace().Not())
+                        //{
+                        //    var personnelPosition = db.Term.FirstOrDefault(x => (x.CompanyId == company.Id || x.CompanyId == Guid.Empty.ToString())
+                        //                        && x.TaxonomyId == (int)TaxonomyType.Position
+                        //                        && x.Name.Contains(company.Person_Position));
 
-                            if (personnelPosition == null)
-                            {
-                                var newPositionTerm = new Term
-                                {
-                                    Name = company.Person_Position,
-                                    TaxonomyId = (int)TaxonomyType.Position,
-                                    CompanyId = newPersonnel.CompanyId,
-                                    CreatedOn = DateTime.UtcNow,
-                                    CreatedBy = User.Identity.GetUserId()
-                                };
-                                db.Term.Add(newPositionTerm);
-                                db.SaveChanges();
-                                db.TermRelationship.Add(new TermRelationship
-                                {
-                                    TermId = newPositionTerm.Id,
-                                    TaxonomyId = (int)TaxonomyType.Position,
-                                    EntityId = newPersonnel.Id,
-                                    CreatedOn = DateTime.UtcNow,
-                                    CreatedBy = User.Identity.GetUserId(),
-                                    CompanyId = newPersonnel.CompanyId
+                        //    if (personnelPosition == null)
+                        //    {
+                        //        var newPositionTerm = new Term
+                        //        {
+                        //            Name = company.Person_Position,
+                        //            TaxonomyId = (int)TaxonomyType.Position,
+                        //            CompanyId = newPersonnel.CompanyId,
+                        //            CreatedOn = DateTime.UtcNow,
+                        //            CreatedBy = User.Identity.GetUserId()
+                        //        };
+                        //        db.Term.Add(newPositionTerm);
+                        //        db.SaveChanges();
+                        //        db.TermRelationship.Add(new TermRelationship
+                        //        {
+                        //            TermId = newPositionTerm.Id,
+                        //            TaxonomyId = (int)TaxonomyType.Position,
+                        //            EntityId = newPersonnel.Id,
+                        //            CreatedOn = DateTime.UtcNow,
+                        //            CreatedBy = User.Identity.GetUserId(),
+                        //            CompanyId = newPersonnel.CompanyId
 
-                                });
-                                db.SaveChanges();
-                            }
-                        }
+                        //        });
+                        //        db.SaveChanges();
+                        //    }
+                        //}
 
                         if (!string.IsNullOrWhiteSpace(company.Person_Bank_AccountNo))
                         {
@@ -434,10 +451,10 @@ namespace FollowMe.Web.Controllers
                     //******************************************************************//
 
                     var telephoneList = FillTelefonListCompany(company.Id);
+                    db.CompanyTelephone.RemoveRange(db.CompanyTelephone.Where(x => x.CompanyId == company.Id));
 
                     if (telephoneList.Any())
                     {
-                        db.CompanyTelephone.RemoveRange(db.CompanyTelephone.Where(x => x.CompanyId == company.Id));
                         db.CompanyTelephone.AddRange(telephoneList);
                         ViewBag.Telephones = telephoneList;
                         db.SaveChanges();
@@ -468,13 +485,14 @@ namespace FollowMe.Web.Controllers
 
                     //*****************************************************************//
                     var addressList = FillAddressListCompany(company.Id);
+                    db.CompanyAddress.RemoveRange(db.CompanyAddress.Where(x => x.CompanyId == company.Id));
+
                     if (addressList.Any())
                     {
                         foreach (var item in addressList)
                         {
                             item.AddressType = company.AddressTypeId;
                         }
-                        db.CompanyAddress.RemoveRange(db.CompanyAddress.Where(x => x.CompanyId == company.Id));
                         db.CompanyAddress.AddRange(addressList);
                         ViewBag.Addresses = addressList;
                         db.SaveChanges();
@@ -483,18 +501,16 @@ namespace FollowMe.Web.Controllers
                     //*****************************************************************//  
 
                     var bankList = FillCompanyBankList(company.Id);
-
+                    var existingbanks = db.CompanyBank.Where(x => x.CompanyId == company.Id && !x.IsPassive).ToList();
+                    foreach (var item in existingbanks)
+                    {
+                        item.IsPassive = true;
+                        item.MakedPassiveBy = User.Identity.GetUserId();
+                        item.MakedPassiveOn = DateTime.UtcNow;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
                     if (bankList.Any())
                     {
-                        var existingbanks = db.CompanyBank.Where(x=>x.CompanyId == company.Id && !x.IsPassive).ToList();
-
-                        foreach (var item in existingbanks)
-                        {
-                            item.IsPassive = true;
-                            item.MakedPassiveBy = User.Identity.GetUserId();
-                            item.MakedPassiveOn = DateTime.UtcNow;
-                            db.Entry(item).State = EntityState.Modified;
-                        }
 
                         var dicExistingbanks = existingbanks.ToDictionary(x => x.Id);
 
@@ -560,7 +576,9 @@ namespace FollowMe.Web.Controllers
             ViewBag.ReasonWhyPassives = _reasonWhyPassives.Value;
             ViewBag.BankNames = _bankNames.Value;
             ViewBag.ParentCompanyTypes = _parentCompanyTypes.Value;
-    
+
+            ViewBag.Person_Position = new SelectList(db.Term
+           .Where(x => x.TaxonomyId == (int)TaxonomyType.Position).ToList(), "Id", "Name",company.Person_Position);
 
             if (ViewBag.Addresses == null)
             {
@@ -585,6 +603,10 @@ namespace FollowMe.Web.Controllers
 
             ViewBag.LogisticsCompanyList = logistics;
 
+            if (isAddingSubchild)
+            {
+                ViewBag.IsAddingNewSubchild = true;
+            }
 
             return View(company);
         }
@@ -644,6 +666,16 @@ namespace FollowMe.Web.Controllers
             return areaCode.Substring(plus).Trim();
 
         }
+
+        public string GetAddressInfo(int? addressId)
+        {
+            if (addressId.HasValue.Not())
+            {
+                return string.Empty;
+            }
+
+            return Utils.AddressTypeNames[Tuple.Create(EntityType.Company, (AddressType)addressId.Value)];
+        }
         public ActionResult CompanyCard(string id)
         {
             if (id.IsNullOrWhiteSpace())
@@ -656,56 +688,128 @@ namespace FollowMe.Web.Controllers
                 if (tempCopmany == null)
                     return RedirectToAction(actionName: "Index", controllerName: "GuideBook");
 
+             
+
                 tempCopmany.TempFoundingDate = MyDateTimeToString(tempCopmany.FoundingDate);
 
                 //db.TermRelationship.SingleOrDefault(TermRelationshipPredicates.Position(personnel.Id));
                 tempCopmany.AddressTypeName = tempCopmany.AddressTypeId.HasValue
                     && tempCopmany.AddressTypeId.Value > 0 ? Utils.AddressTypeNames
                     [Tuple.Create(EntityType.Company, (AddressType)tempCopmany.AddressTypeId)] : "";
-                var temp = new CompanyCardViewModel()
+                var viewmodel = new CompanyCardViewModel()
                 {
                     AddressList = tempCopmany.CompanyAddress.ToList(),
                     PersonnelList = tempCopmany.Person.Select(x => new CompanyCardPersonnelViewModel
                     {
                         FirstName = x.FirstName,
                         LastName = x.LastName,
-                        PersonnelId = x.Id
+                        PersonnelId = x.Id,
+                        PositionId =x.PositionId
                     }).ToList(),
                     //TelephoneList = tempCopmany.CompanyTelephone.ToList(),
-                    Company = tempCopmany,
-                    BankList = tempCopmany.CompanyBank.ToList(),
+                    Company = tempCopmany,                  
                     LogisticsCompanyList = tempCopmany.LogisticsCompany.Join(db.Company,
                           p => p.LogisticsCompanyId,
                           e => e.Id,
                           (p, e) => new LogisticsCompany { ImportCode = p.ImportCode,ExportCode = p.ExportCode,LogisticsCompanyName = e.Name  }).ToList()
                 };
 
-                var listOfChildCompany = db.Company.Where(x => x.ParentId == tempCopmany.Id).Select(x=>new {
-                    x.Id,
-                    x.Name,
-                    x.AddressTypeId
-                }).ToList();
+                viewmodel.BankList = db.CompanyBank.Where(x => x.CompanyId == tempCopmany.Id
+                && !(x.IsPassive)).ToList();
+                var parentCompanyName = string.Empty;
+                var parentCompanyCode = string.Empty;
+                var isSubChild = false;
+                if (tempCopmany.ParentId.IsNullOrWhiteSpace().Not())
+                {
+                    var tempParent = db.Company.FirstOrDefault(x => x.Id == tempCopmany.ParentId);
+                    if (tempParent != null)
+                    {
+                        parentCompanyCode = tempParent.Code.ToString();
+                        parentCompanyName = tempParent.Name;
+                        isSubChild = true;
+                    }
+                }
+
+           
+                viewmodel.ImageName = "/Content/Images/"+ CompanyImageService.GetCompanyImageName(tempCopmany.Id);
+                var CompanyLogoUrl = string.Format("/File/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                           , "/Company/CompanyCard?id=" + tempCopmany.Id
+                                           , (int)EntityType.Company
+                                           , tempCopmany.Id
+                                           , tempCopmany.Id);
+                viewmodel.FirmaCodeName = string.Format("{0} {1} {4} {2} {3}"
+                    , (isSubChild ? parentCompanyCode:"")
+                    , (isSubChild ? parentCompanyName : "")
+                    , (isSubChild ? "" : tempCopmany.Code.ToString())
+                    , tempCopmany.Name,
+                     isSubChild ?  GetAddressInfo(tempCopmany.AddressTypeId) :""
+                    );
+
+
+                var listOfChildCompany = new List<Tuple<string, string, int?>>();
+
+
+                if (isSubChild)
+                {
+
+                    listOfChildCompany = db.Company
+                        .Where(x => x.ParentId == tempCopmany.ParentId)
+                        .Select(x=>new { x.Id, x.Name, x.AddressTypeId })
+                        .Union(
+                        db.Company.Where(x => x.Id == tempCopmany.ParentId).Select(x => new { x.Id, x.Name, x.AddressTypeId })
+                        )
+                        .ToList()
+                        .Select(x => Tuple.Create(x.Id, x.Name, x.AddressTypeId))
+                          .OrderBy(x => x.Item3)
+                        .ToList();
+                        
+                }
+                else
+                {
+                    listOfChildCompany = db.Company
+                      .Where(x => x.ParentId == tempCopmany.Id)
+                       .Select(x => new { x.Id, x.Name, x.AddressTypeId })
+                          .Union(
+                        db.Company.Where(x => x.Id == tempCopmany.Id).Select(x => new { x.Id, x.Name, x.AddressTypeId })
+                        )
+                      .ToList()
+                      .Select(x => Tuple.Create(x.Id, x.Name, x.AddressTypeId))
+                      .OrderBy(x=>x.Item3)
+                      .ToList();
+                }
+
+
+
+
+
                 if (listOfChildCompany.Any())
                 {
-                    var childCompanyies = new List<Tuple<string,string, string>>();
+                    var childCompanyies = new List<Tuple<string,string, string,string>>();
                     foreach (var item in listOfChildCompany)
                     {
-                      var addressTypeName = item.AddressTypeId.HasValue
-                 && item.AddressTypeId.Value > 0 ? Utils.AddressTypeNames
-                 [Tuple.Create(EntityType.Company, (AddressType)item.AddressTypeId)] : string.Empty; 
+                      var addressTypeName = item.Item3.HasValue
+                 && item.Item3.Value > 0 ? Utils.AddressTypeNames
+                 [Tuple.Create(EntityType.Company, (AddressType)item.Item3)] : string.Empty;
 
-                        childCompanyies.Add(Tuple.Create(item.Id, addressTypeName,item.Name));
+                        var color = string.Empty;
+                        if (tempCopmany.Id == item.Item1)
+                        {
+                            color = "#ddd";
+                        }
+
+                        childCompanyies.Add(Tuple.Create(item.Item1, addressTypeName,item.Item2, color));
                     }
-                    temp.SubChildCompanyList.AddRange(childCompanyies);
+                    viewmodel.SubChildCompanyList.AddRange(childCompanyies);
                 }
 
-                if (!temp.AddressList.Any())
+                if (!viewmodel.AddressList.Any())
                 {
-                    temp.AddressList.Add(new CompanyAddress());
+                    viewmodel.AddressList.Add(new CompanyAddress());
                 }
-                temp.TelephoneList = db.CompanyTelephone.Where(x=>x.CompanyId == tempCopmany.Id).ToList();
+                viewmodel.TelephoneList = db.CompanyTelephone.Where(x => x.CompanyId == tempCopmany.Id 
+                && !(x.IsPassive.HasValue && x.IsPassive.Value)).ToList();
 
-                if (temp.TelephoneList.Any())
+                if (viewmodel.TelephoneList.Any())
                 {
                     //TelephoneType.CompanyFax), "Fax");
                     //TelephoneType.CompanyMobil), "Company Mobil");
@@ -713,7 +817,7 @@ namespace FollowMe.Web.Controllers
                     var listCompanyFax = new List<string>();
                     var listCompanyMobil = new List<string>();
                     var listCompanyOffice = new List<string>();
-                    foreach (var item in temp.TelephoneList)
+                    foreach (var item in viewmodel.TelephoneList)
                     {
                         var type = (TelephoneType)item.TelephoneTypeId;
                         switch (type)
@@ -743,12 +847,12 @@ namespace FollowMe.Web.Controllers
                         telephones.Add(tempList);
                     }
 
-                    temp.TelephoneListRotated = telephones;
+                    viewmodel.TelephoneListRotated = telephones;
                 }
 
-                if (temp.BankList.IsEmpty().Not())
+                if (viewmodel.BankList.IsEmpty().Not())
                 {
-                    foreach (var bank in temp.BankList)
+                    foreach (var bank in viewmodel.BankList)
                     {
                         bank.CurrencyTypeTermName = (db.Term.FirstOrDefault(x => x.Id == bank.CurrencyTypeTermId) ?? new Term()).Name;
                         bank.BankNameTermName = (db.Term.FirstOrDefault(x => x.Id == bank.BankNameTermId) ?? new Term()).Name;
@@ -757,32 +861,19 @@ namespace FollowMe.Web.Controllers
                 //var postions = db.TermRelationship
                 //    .Where(x=> x.CompanyId == tempCopmany.Id && x.TaxonomyId == (int)TaxonomyType.Position)
                 //    .ToList();
+                EntityTermServices termServices = new EntityTermServices(db, "", "");
 
-
-                var positions = (from r in db.TermRelationship
-                               join t in db.Term on r.TermId equals t.Id
-                               where (t.CompanyId == tempCopmany.Id ||t.CompanyId == Guid.Empty.ToString()) 
-                               && t.TaxonomyId == (int)TaxonomyType.Position 
-                               select new
-                               {
-                                   EntityId = r.EntityId,
-                                   TermName = t.Name
-                               }).ToList();
-
-                if (temp.PersonnelList.IsEmpty().Not() && positions.IsEmpty().Not())
+                if (viewmodel.PersonnelList.IsEmpty().Not())
                 {
-                    var postionDic = positions.ToLookup(x => x.EntityId);
-
-                    foreach (var item in temp.PersonnelList)
+                    foreach (var item in viewmodel.PersonnelList)
                     {
-                        if (postionDic.Contains(item.PersonnelId))
-                        {
-                            item.Position = postionDic[item.PersonnelId].First().TermName;
-                        }
+                        item.Position = termServices.GetTermByTermId(item.PositionId).Name;
                     }
                 }
 
-                return View(model: temp);
+            
+                viewmodel.CompanyLogoUrl = CompanyLogoUrl;
+                return View(model: viewmodel);
 
             }
         }
@@ -804,26 +895,20 @@ namespace FollowMe.Web.Controllers
             model.Hobby = string.Join(", ",termServices.GetTermListForHobby().Select(x => x.Name));
             model.Languages = string.Join(", ", termServices.GetTermListForLanguage().Select(x => x.Name));
             model.ComputerSkills = string.Join(", ",termServices.GetTermListForComputerSkills().Select(x => x.Name));
+            model.Position = termServices.GetTermByTermId(personnel.PositionId).Name;
 
 
-
-            var positions = (from r in db.TermRelationship
-                             join t in db.Term on r.TermId equals t.Id
-                             where (t.CompanyId == companyId || t.CompanyId == Guid.Empty.ToString())
-                             && t.TaxonomyId == (int)TaxonomyType.Position
-                             && r.EntityId == id
-                             select new
-                             {
-                                 TermName = t.Name
-                             }).FirstOrDefault();
-
-            if (positions != null)
-            {
-                model.Position = positions.TermName.SafeTrim();
-            }
-
+            model.ImageName = "/Content/Images/" + PersonnelImageService.GetPersonnelImageName(personnel.Id,personnel.CompanyId);
+            var PersonelPhotoUrl = string.Format("/File/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                       , "/Company/PersonnelCard%3Fid%3D" + personnel.Id+ "%26companyId=" + personnel.CompanyId
+                                       , (int)EntityType.Person
+                                       , personnel.Id
+                                       , personnel.CompanyId);
+            model.PersonelPhotoUrl = PersonelPhotoUrl;
             model.Personnel = personnel;
             model.Company = db.Company.Find(personnel.CompanyId);
+
+
             model.Company.TempFoundingDate = MyDateTimeToString(model.Company.FoundingDate);
 
             model.AddressList = db.PersonnelAddress.Where(x=>x.PersonnelId == personnel.Id).ToList();
@@ -843,7 +928,9 @@ namespace FollowMe.Web.Controllers
             //
             //                                             ).ToList();
 
-            model.Personnel.EducationList = db.PersonnelEducation.Where(x => x.PersonnelId == model.Personnel.Id).ToList();
+            model.Personnel.EducationList = db.PersonnelEducation.Where(x => x.PersonnelId == model.Personnel.Id
+               && !x.IsPassive
+            ).ToList();
 
             if (model.Personnel.EducationList.Any())
             {
@@ -853,9 +940,13 @@ namespace FollowMe.Web.Controllers
                 }
             }
 
-            model.TelephoneList = db.PersonnelTelephone.Where(x => x.PersonnelId == personnel.Id).ToList();
+            model.TelephoneList = db.PersonnelTelephone
+                .Where(x => x.PersonnelId == personnel.Id && x.CompanyId == personnel.CompanyId
+                 && !(x.IsPassive.HasValue && x.IsPassive.Value)
+                )
+                .ToList();
 
-            model.TelephoneList = db.PersonnelTelephone.Where(x => x.CompanyId == model.Personnel.Id).ToList();
+            //model.TelephoneList = db.PersonnelTelephone.Where(x => x.CompanyId == model.Personnel.Id).ToList();
 
             if (model.TelephoneList.Any())
             {
@@ -890,8 +981,8 @@ namespace FollowMe.Web.Controllers
                 {
                     var tempList = new List<string>();
                     tempList.Add(listPersonOffice.ElementAtOrDefault(i));
-                    tempList.Add(listPersonHome.ElementAtOrDefault(i));
                     tempList.Add(listPersonMobil.ElementAtOrDefault(i));
+                    tempList.Add(listPersonHome.ElementAtOrDefault(i));
                     telephones.Add(tempList);
                 }
 
@@ -900,7 +991,7 @@ namespace FollowMe.Web.Controllers
 
 
 
-            model.BankList = model.Personnel.PersonnelBank.ToList();
+            model.BankList = model.Personnel.PersonnelBank.Where(x=>!(x.IsPassive.HasValue && x.IsPassive.Value)).ToList();
 
             if (model.BankList.IsEmpty().Not())
             {

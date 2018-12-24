@@ -18,7 +18,6 @@ namespace FollowMe.Web.Controllers
 
         private static TaxonomyType[] TaxonomyTypeForPersonnel = new TaxonomyType[] {
                  TaxonomyType.Department
-               , TaxonomyType.Position
                , TaxonomyType.Authority
                , TaxonomyType.Region
                , TaxonomyType.Nationality
@@ -183,15 +182,14 @@ namespace FollowMe.Web.Controllers
         // GET: People/Edit/5
         public ActionResult Edit(string id, string companyId)
         {
-            ViewBag.Banks = new List<PersonnelBank> { new PersonnelBank() };
-
+            ViewBag.Banks = new List<PersonnelBank> { new PersonnelBank() };  
 
             Person personnel = db.Person.SingleOrDefault(x => x.Id == id && x.CompanyId == companyId);
             if (personnel != null)
             {
                 ViewBag.Educations = db.PersonnelEducation.Where(x => x.PersonnelId == personnel.Id).ToList();
                 ViewBag.TempCreatedAt = MyDateTimeToString(personnel.CreatedOn);
-                ViewBag.Telephones = db.PersonnelTelephone.Where(x => x.CompanyId == personnel.Id).ToList();
+                ViewBag.Telephones = db.PersonnelTelephone.Where(x => x.PersonnelId == personnel.Id && x.CompanyId == personnel.CompanyId).ToList();
                 personnel.BirthDayString = MyDateTimeToString(personnel.BirthDay);
                 personnel.CompanyName = (db.Company.FirstOrDefault(x=>x.Id == personnel.CompanyId)??new Company()).Name;
                 GetAllPersonnelTerms(personnel);
@@ -239,7 +237,11 @@ namespace FollowMe.Web.Controllers
             ViewBag.CompanyId = new SelectList(db.Company
                 , "Id", "Name", personnel != null ? personnel.CompanyId : companyId);
 
-            personnel = personnel ?? new Person();
+            personnel = personnel ?? new Person() { CompanyId = companyId,CompanyName = companyId
+                .IsNullOrWhiteSpace()
+                .Not() ? db.Company.First(x=>x.Id == companyId).Name : string.Empty };
+
+            ViewBag.PositionId = new SelectList(db.Term.Where(x => x.TaxonomyId == (int)TaxonomyType.Position), "Id", "Name", personnel.PositionId);
 
             SetJstreeScripts(personnel);
 
@@ -255,8 +257,17 @@ namespace FollowMe.Web.Controllers
                db.Term.Where(x => x.TaxonomyId == (int)TaxonomyType.ReasonWhyPassiveForPersonnel).ToList()
                , "Id", "Name", personnel.ReasonWhyPassiveId);
 
+
+            var temp1 = (from tx in db.TermTaxonomy
+                        join te in db.Term on tx.TermId equals te.Id
+                        where te.TaxonomyId == (int)TaxonomyType.BloodGroup
+                        orderby tx.Id
+                        select te).ToList();
+
+
+
             ViewBag.BloodGroupId = new SelectList(
-               db.Term.Where(x => x.TaxonomyId == (int)TaxonomyType.BloodGroup).ToList()
+               temp1
                , "Id", "Name", personnel.BloodGroupId);
 
             //ViewBag.EducationLevelId = new SelectList(
@@ -292,28 +303,35 @@ namespace FollowMe.Web.Controllers
                     db.SaveChanges();
 
                     //********************************************************************//
-                    var telephoneList = FillTelefonListPersonnel(person.Id);
+                    var telephoneList = FillTelefonListPersonnel(person.Id,person.CompanyId);
+
+                    db.PersonnelTelephone.RemoveRange(db.PersonnelTelephone.Where(x => x.CompanyId == person.CompanyId && x.PersonnelId == person.Id));
+
                     if (telephoneList.Any())
                     {
-                        db.PersonnelTelephone.RemoveRange(db.PersonnelTelephone.Where(x => x.CompanyId == person.CompanyId && x.PersonnelId == person.Id));
                         db.PersonnelTelephone.AddRange(telephoneList);
                         db.SaveChanges();
                     }
+               
                     //*****************************************************************//
                     var addressList = FillAddressListPersonnel(person.CompanyId, person.Id);
+
+                    db.PersonnelAddress.RemoveRange(db.PersonnelAddress
+                       .Where(x => x.CompanyId == person.CompanyId && x.PersonnelId == person.Id));
+
                     if (addressList.IsEmpty().Not())
                     {
-                        db.PersonnelAddress.RemoveRange(db.PersonnelAddress
-                            .Where(x => x.CompanyId == person.CompanyId && x.PersonnelId == person.Id));
+                   
                         db.PersonnelAddress.AddRange(addressList);
                         db.SaveChanges();
                     }
                     //******************************************************************//
                     var bankList = FillPersonnelBankList(person.CompanyId, person.Id);
+                    db.PersonnelBank.RemoveRange(db.PersonnelBank.Where(x => x.CompanyId == person.CompanyId
+                                                                 && x.PersonnelId == person.Id));
                     if (bankList.Any())
                     {
-                        db.PersonnelBank.RemoveRange(db.PersonnelBank.Where(x => x.CompanyId == person.CompanyId
-                                                                     && x.PersonnelId == person.Id));
+                    
                         db.PersonnelBank.AddRange(bankList);
                         db.SaveChanges();
                     }
@@ -338,17 +356,22 @@ namespace FollowMe.Web.Controllers
                         i++;
                     }
 
+
+
+                    var existingEducations = db.PersonnelEducation.Where(x => x.PersonnelId == person.Id && !x.IsPassive).ToList();
+
+                    foreach (var item in existingEducations)
+                    {
+                        item.IsPassive = true;
+                        item.MakedPassiveBy = User.Identity.GetUserId();
+                        item.MakedPassiveOn = DateTime.UtcNow;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+
+
                     if (educationList.Any())
                     {
-                        var existingEducations = db.PersonnelEducation.Where(x => x.PersonnelId == person.Id && !x.IsPassive).ToList();
-
-                        foreach (var item in existingEducations)
-                        {
-                            item.IsPassive = true;
-                            item.MakedPassiveBy = User.Identity.GetUserId();
-                            item.MakedPassiveOn = DateTime.UtcNow;
-                            db.Entry(item).State = EntityState.Modified;
-                        }
+                
 
                         var dicExistingEducations = existingEducations.ToDictionary(x => x.Id);
 
@@ -395,6 +418,8 @@ namespace FollowMe.Web.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.PositionId = new SelectList(db.Term.Where(x => x.TaxonomyId == (int)TaxonomyType.Position), "Id", "Name", person.PositionId);
+
                     ViewBag.CompanyId = new SelectList(db.Company, "Id", "Name", person.CompanyId);
                     ViewBag.RelationshipStatusId = new SelectList(
          db.Term.Where(x => x.TaxonomyId == (int)TaxonomyType.RelationshipStatus).ToList()

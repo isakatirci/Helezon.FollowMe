@@ -109,7 +109,11 @@
             font-weight: bolder !important
         }
 
-        input[type="text"]:not(.mask_date2):not(.mask_alpha):not(.company-web-site):not(.mask_name_day):not(.transform_none), textarea {
+        input[type="text"]:not(.mask_date2,.mask_alpha,.company-web-site,.mask_name_day,.transform_none), textarea {
+            text-transform: uppercase !important;
+        }
+
+        .mask_iban {
             text-transform: uppercase !important;
         }
 
@@ -340,32 +344,9 @@
                         $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
                     }
                 });
-            }
-        }
 
-
-
-
-
-        function getSwiftNos(d) {
-            debugger;
-
-            var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
-            var $BankName = d.closest(".row").find("#BankName");
-            var $SwiftNo = d.closest(".row").find("#SwiftNo");
-            var $BankProvince = d.closest(".row").find("#Province");
-            var $BankDistrict = d.closest(".row").find("#District");
-
-            if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
-
-                //$BankProvince.empty();
-                //$BankDistrict.empty();
-                //$BranchNameCode.empty();
-                $SwiftNo.empty();
-
-                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val() }, function (data) {
                     if (data.length != 0) {
-                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
 
                         $.each(data, function () {
                             $SwiftNo.append('<option>' + this + '</option>');
@@ -377,6 +358,41 @@
                 });
             }
         }
+
+
+
+
+
+        //function getSwiftNos(d) {
+        //    debugger;
+
+        //    var $BranchNameCode = d.closest(".row").find("#BranchNameCode");
+        //    var $BankName = d.closest(".row").find("#BankName");
+        //    var $SwiftNo = d.closest(".row").find("#SwiftNo");
+        //    var $BankProvince = d.closest(".row").find("#Province");
+        //    var $BankDistrict = d.closest(".row").find("#District");
+
+        //    if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
+
+        //        //$BankProvince.empty();
+        //        //$BankDistrict.empty();
+        //        //$BranchNameCode.empty();
+        //        $SwiftNo.empty();
+
+        //        $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+        //            if (data.length != 0) {
+        //                $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+
+        //                $.each(data, function () {
+        //                    $SwiftNo.append('<option>' + this + '</option>');
+        //                });
+        //            }
+        //            else {
+        //                $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+        //            }
+        //        });
+        //    }
+        //}
 
 
         function getPersonBankProvinces(d) {
@@ -470,29 +486,9 @@
                         $BranchNameCode.append('<option value="">' + 'Please Select' + '</option>');
                     }
                 });
-            }
-        }
 
-
-        function getPersonBankBSwiftNos(d) {
-            debugger;
-
-            var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
-            var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
-            var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
-            var $BankName = d.closest(".row").find("#Person_Bank_Name");
-            var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
-
-            if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
-
-                //$BankProvince.empty();
-                //$BankDistrict.empty();
-                //$BranchNameCode.empty();
-                $SwiftNo.empty();
-
-                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+                $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val() }, function (data) {
                     if (data.length != 0) {
-                        $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
 
                         $.each(data, function () {
                             $SwiftNo.append('<option>' + this + '</option>');
@@ -502,8 +498,42 @@
                         $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
                     }
                 });
+
+
             }
         }
+
+
+        //function getPersonBankBSwiftNos(d) {
+        //    debugger;
+
+        //    var $BranchNameCode = d.closest(".row").find("#Person_Bank_BranchNameCode");
+        //    var $BankProvince = d.closest(".row").find("#Person_Bank_Province");
+        //    var $BankDistrict = d.closest(".row").find("#Person_Bank_District");
+        //    var $BankName = d.closest(".row").find("#Person_Bank_Name");
+        //    var $SwiftNo = d.closest(".row").find("#Person_Bank_SwiftNo");
+
+        //    if ($BankName.val().length !== 0 && $BranchNameCode.val().length !== 0) {
+
+        //        //$BankProvince.empty();
+        //        //$BankDistrict.empty();
+        //        //$BranchNameCode.empty();
+        //        $SwiftNo.empty();
+
+        //        $.getJSON(getSwiftNosURL, { termId: $BankName.val(), province: $BankProvince.val(), district: $BankDistrict.val(), branchNameCode: $BranchNameCode.val() }, function (data) {
+        //            if (data.length != 0) {
+        //                $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+
+        //                $.each(data, function () {
+        //                    $SwiftNo.append('<option>' + this + '</option>');
+        //                });
+        //            }
+        //            else {
+        //                $SwiftNo.append('<option value="">' + 'Please Select' + '</option>');
+        //            }
+        //        });
+        //    }
+        //}
 
 
 
@@ -747,7 +777,9 @@
                         "greedy": false
                     }); // ~ mask "9" or mask "99" or ... mask "9999999999"
 
-                    $(this).find(".mask_iban").inputmask({ mask: "aa 99 9999 9999 9999 9999 9999 99" }); //specifying fn & options
+                    $(this).find(".mask_iban").off('keyup');
+                    $(this).find(".mask_iban").inputmask({ mask: "AA 99 9999 9999 9999 9999 9999 99" }); //specifying fn & options
+              
 
                     $(this).find(".mask_account_no").inputmask({
                         "mask": "9",
@@ -1074,8 +1106,8 @@
 
 
 
-
-            $('.mask_alpha,input[type="text"]:not(.mask_date2,.mask_tckno,.mask_tax,.mask_iban):not(.company-web-site):not(.mask_name_day):not(.transform_none):not(.mask_number_field)').each(function () {
+            //input[type="text"]
+            $('.mask_alpha,input[type="text"]:not(.mask_date2,.mask_tckno,.mask_tax,.mask_iban,.company-web-site,.mask_name_day,.transform_none,.mask_number_field)').each(function () {
                 var selfInput = $(this);
                 //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode2
                 selfInput.keypress(function (evt) {
@@ -1118,6 +1150,16 @@
                     selfInput.val(slugify(selfInput.val()).toUpperCase());
                 })
             });
+
+
+
+            $(this).find(".mask_iban").each(function () {
+                var selfInput = $(this);
+                selfInput.blur(function () {
+                    selfInput.val(slugify(selfInput.val()).toUpperCase());
+                });
+            });
+
 
             $(".email_address,input[type='email'],.company-web-site").each(function () {
                 var selfInput = $(this);

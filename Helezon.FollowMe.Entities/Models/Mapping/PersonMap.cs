@@ -56,6 +56,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.NameDay).HasColumnName(@"NameDay").HasColumnType("nvarchar").IsOptional().HasMaxLength(32);
             Property(x => x.Interphone).HasColumnName(@"Interphone").HasColumnType("nvarchar").IsOptional().HasMaxLength(32);
             Property(x => x.ReasonWhyPassiveId).HasColumnName(@"ReasonWhyPassiveId").HasColumnType("int").IsOptional();
+            Property(x => x.PositionId).HasColumnName(@"PositionId").HasColumnType("int").IsOptional();
 
             // Foreign keys
             HasRequired(a => a.Company).WithMany(b => b.People).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Person_Company

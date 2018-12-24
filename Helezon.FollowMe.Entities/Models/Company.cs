@@ -59,6 +59,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<CompanyBank> CompanyBanks { get; set; } // CompanyBank.FK_CompanyBank_Company
         /// <summary>
+        /// Child CompanyImages where [CompanyImage].[CompanyId] point to this entity (FK_CompanyImage_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<CompanyImage> CompanyImages { get; set; } // CompanyImage.FK_CompanyImage_Company
+        /// <summary>
         /// Child CompanyTelephones where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
@@ -79,6 +83,7 @@ namespace Helezon.FollowMe.Entities.Models
         {
             CompanyAddresses = new System.Collections.Generic.List<CompanyAddress>();
             CompanyBanks = new System.Collections.Generic.List<CompanyBank>();
+            CompanyImages = new System.Collections.Generic.List<CompanyImage>();
             CompanyTelephones = new System.Collections.Generic.List<CompanyTelephone>();
             CompanyTerms = new System.Collections.Generic.List<CompanyTerm>();
             LogisticsCompanies = new System.Collections.Generic.List<LogisticsCompany>();

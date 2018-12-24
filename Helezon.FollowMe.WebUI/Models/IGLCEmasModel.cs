@@ -24,14 +24,17 @@ namespace FollowMe.Web.Models
         System.Data.Entity.DbSet<Company> Company { get; set; } // Company
         System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
         System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
+        System.Data.Entity.DbSet<CompanyImage> CompanyImage { get; set; } // CompanyImage
         System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
+        System.Data.Entity.DbSet<Error> Error { get; set; } // Error
         System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
         System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
         System.Data.Entity.DbSet<Person> Person { get; set; } // Person
         System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress
         System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank
         System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation
+        System.Data.Entity.DbSet<PersonnelImage> PersonnelImage { get; set; } // PersonnelImage
         System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
         System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
         System.Data.Entity.DbSet<Sequence> Sequence { get; set; } // Sequence

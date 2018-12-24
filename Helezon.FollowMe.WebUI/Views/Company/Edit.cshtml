@@ -62,14 +62,21 @@
 										   type="hidden"
 										   value="@Model.Id">
 								}
-								else {
+								else
+								{
 
-									
-											<input id="ParentId"
+
+									<input id="ParentId"
 										   name="ParentId"
 										   class="form-control"
 										   type="hidden"
 										   value="@Model.Id">
+
+									<input id="Id"
+										   name="Id"
+										   class="form-control"
+										   type="hidden"
+										   value="00000000-0000-0000-0000-000000000000">
 								}
 
 
@@ -86,7 +93,7 @@
 									   value="@Model.CompanyTypesTaxonomyViewModel.TermNames">
 
 
-								@if (isCenterAddress && !addingNewChild)
+								@*if (isCenterAddress && !addingNewChild)
 								{
 									<div class="form-group">
 										<div class="col-md-4 col-md-offset-2">
@@ -97,7 +104,7 @@
 											</button>
 										</div>
 									</div>
-								}
+								}*@
 
 
 								@if (!idIsEmpty && !addingNewChild)
@@ -121,11 +128,11 @@
 								<div class="form-group">
 									@Html.Label("AddressTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
 									<div class="col-md-4">
-										@Html.DropDownList("AddressTypeId", Utils.GetAddressTypes(Model.AddressTypeId, EntityType.Company,addingNewChild)
-									   , optionLabel: "Please Select"
-									   , htmlAttributes: new { @class = "form-control select2"
-										   //, onchange = "javascript:hideParentCompamy($(this))"
-									   })
+										@Html.DropDownList("AddressTypeId", Utils.GetAddressTypes(Model.AddressTypeId, EntityType.Company, addingNewChild)
+	, optionLabel: "Please Select"
+	, htmlAttributes: new { @class = "form-control select2"
+		//, onchange = "javascript:hideParentCompamy($(this))"
+	})
 									</div>
 								</div>
 
@@ -134,7 +141,7 @@
 
 
 
-								@if (!idIsEmpty && !addingNewChild)
+								@if (!idIsEmpty || addingNewChild)
 								{
 									<input type="hidden" value="@Model.CompanyRootTypeId" id="CompanyRootTypeId" name="CompanyRootTypeId" />
 
@@ -149,20 +156,25 @@
 								{
 
 									<div class="form-group">
-										@Html.LabelFor(model => model.CompanyRootTypeId, "CompanyRootTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+										@Html.LabelFor(model => model.CompanyRootTypeId, "Company Root Type", htmlAttributes: new { @class = "control-label col-md-2" })
+
 										<div class="col-md-4">
-											@Html.DropDownListFor(x => x.CompanyRootTypeId, (List<SelectListItem>)ViewBag.ParentCompanyTypes, optionLabel: "Please Select"
-										   , htmlAttributes: new { @class = "form-control  select2" })
-											@Html.ValidationMessageFor(model => model.CompanyRootTypeId, "", new { @class = "text-danger" })
+											@Html.DropDownListFor(x => x.CompanyRootTypeId
+									   , (List<SelectListItem>)ViewBag.ParentCompanyTypes
+									   , optionLabel: "Please Select"
+									   , htmlAttributes: new { @class = "form-control  select2" })
+
+											@Html.ValidationMessageFor(model => model.CompanyRootTypeId
+									   , ""
+									   , new { @class = "text-danger" })
+
 										</div>
 									</div>
 								}
 
 
 
-
-
-								<div class="form-group">
+								<div class="form-group @(addingNewChild?"hidden":"") ">
 									<div class="col-md-4 col-md-offset-2">
 										<div class="panel panel-default">
 											<div class="panel-body">
@@ -173,31 +185,20 @@
 								</div>
 
 
-								@{
-
-									var dichtmlAttributesCode = new Dictionary<string, object>();
-									if (!idIsEmpty)
-									{
-										dichtmlAttributesCode.Add("disabled", "disabled");
-										//@disabled = "@disabled"
-									}
-									dichtmlAttributesCode.Add("class", "form-control");
-
-								}
 
 								@if (!idIsEmpty)
 								{
-									<div class="form-group">
+									<div class="form-group @(addingNewChild?"hidden":"")" >
 										@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
 										<div class="col-md-4">
 											@Html.TextBoxFor(model => model.Code, "", htmlAttributes: new { @class = "form-control ", @readonly = "readonly" })
 										</div>
 									</div>
 								}
-								else
+								else 
 								{
 
-									<div class="form-group">
+									<div class="form-group"  >
 										@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
 										<div class="col-md-4">
 											@Html.TextBoxFor(model => model.Code, "", htmlAttributes: new { @class = "form-control mask_number_field" })
@@ -210,7 +211,7 @@
 
 								@*şirket adı*@
 								<div class="form-group">
-									@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+									@Html.LabelFor(model => model.Name, (addingNewChild ? "Subname" : "Name"), htmlAttributes: new { @class = "control-label col-md-2" })
 									<div class="col-md-4">
 										@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control transform_none" } })
 										@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -413,10 +414,21 @@
 												<div class="form-group">
 													@Html.Label("Person_Position", "Position", htmlAttributes: new { @class = "control-label col-md-4" })
 													<div class="col-md-8">
+														
+															@Html.DropDownList("Person_Position"
+														   , null
+														   , "Please Select", htmlAttributes: new { @class = "form-control select2" })
+														
+													</div>
+												</div>
+
+												@*<div class="form-group">
+													@Html.Label("Person_Position", "Position", htmlAttributes: new { @class = "control-label col-md-4" })
+													<div class="col-md-8">
 														@Html.TextBoxFor(x => x.Person_Position, htmlAttributes: new { @class = "form-control " })
 														@Html.ValidationMessageFor(model => model.Person_Position, "", new { @class = "text-danger" })
 													</div>
-												</div>
+												</div>*@
 
 												@*<div class="form-group">
 			@Html.Label("AreaCode", "Area Code", htmlAttributes: new { @class = "control-label col-md-4" })
@@ -527,7 +539,7 @@
 												<div class="form-group">
 													@Html.LabelFor(x => x.Person_Bank_BranchNameCode, "Branch Name and Code", htmlAttributes: new { @class = "control-label col-md-4" })
 													<div class="col-md-8">
-														@Html.DropDownListFor(x => x.Person_Bank_BranchNameCode, new SelectList(ViewBag.PersonBankBranchNameCodeList ?? new List<string>(), @Model.Person_Bank_BranchName + " - " + @Model.Person_Bank_BranchCode), "Please Select", new { @class = "form-control select2", @onchange = "javascript:getPersonBankBSwiftNos($(this))" })
+														@Html.DropDownListFor(x => x.Person_Bank_BranchNameCode, new SelectList(ViewBag.PersonBankBranchNameCodeList ?? new List<string>(), @Model.Person_Bank_BranchName + " - " + @Model.Person_Bank_BranchCode), "Please Select", new { @class = "form-control select2" })
 														@*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
 													</div>
 												</div>

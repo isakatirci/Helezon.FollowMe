@@ -33,14 +33,14 @@
                                         <div class="dd" id="company_disabled_field_list">
                                             @if (ViewBag.CompanyFields.Count != 0)
                                             {
-                                            <ol class="dd-list">
-                                                @foreach (var item in ViewBag.CompanyFields)
-                                                {
-                                                    <li class="dd-item" data-ordinal-position="@((int)@item.ordinalPosition)" data-column-name="@item.columnName" data-column-display-name="@item.columnDisplayName">
-                                                        <div class="dd-handle"> @item.columnDisplayName </div>
-                                                    </li>
-                                                }
-                                            </ol>
+                                                <ol class="dd-list">
+                                                    @foreach (var item in ViewBag.CompanyFields)
+                                                    {
+                                                        <li class="dd-item" data-ordinal-position="@((int)@item.ordinalPosition)" data-column-name="@item.columnName" data-column-display-name="@item.columnDisplayName">
+                                                            <div class="dd-handle"> @item.columnDisplayName </div>
+                                                        </li>
+                                                    }
+                                                </ol>
                                             }
                                             @*else
                                                 {
@@ -99,6 +99,34 @@
     </div>
 </div>
 
+@functions {
+
+    public string GetParentInfo(string parentId)
+    {
+        if (ViewBag.CompanyNames == null)
+        {
+            return string.Empty;
+        }
+
+        if (ViewBag.CompanyNames.ContainsKey(parentId))
+        {
+            return ViewBag.CompanyNames[parentId].Item1 + " " + ViewBag.CompanyNames[parentId].Item2;
+        }
+
+        return string.Empty;
+    }
+
+    public string GetAddressInfo(string addressId)
+    {
+        if (string.IsNullOrWhiteSpace(addressId))
+        {
+            return string.Empty;
+        }
+
+        return Utils.AddressTypeNames[Tuple.Create(EntityType.Company, (AddressType)int.Parse(addressId))];
+    }
+}
+
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -114,18 +142,18 @@
                 @*<div class="table-responsive">*@
                 <table class="table table-striped table-bordered table-hover order-column" id="sample_3">
                     <thead>
-                        <tr>                        
+                        <tr>
                             @if (Model != null)
                             {
-                            <th>
-                                <span>Is Passive</span>
-                            </th>
+                                <th>
+                                    <span>Is Passive</span>
+                                </th>
                                 <th>
                                     <span>Code&nbsp;-&nbsp;Name</span>
                                 </th>
-                                if (Model.Columns.Count > 5)
+                                if (Model.Columns.Count > 7)
                                 {
-                                    for (int i = 6; i < Model.Columns.Count; i++)
+                                    for (int i = 8; i < Model.Columns.Count; i++)
                                     {
                                         <th>
                                             @Model.Columns[i].ColumnName
@@ -140,18 +168,19 @@
                         {
                             for (int i = 0; i < Model.Rows.Count; i++)
                             {
-                                <tr id="row_@i">    
+                                <tr id="row_@i">
                                     <td>
                                         @(bool.Parse(Model.Rows[i][3].ToString()) ? "Pasif" : "Aktif")
+                                       @{ var parentInfo = GetParentInfo(Model.Rows[i][6].ToString()); }
                                     </td>
                                     <td>
                                         <a href="@Url.Action(actionName:"CompanyCard",controllerName:"Company", routeValues: new { id = @Model.Rows[i][0].ToString() })">
-                                            @Model.Rows[i][1].ToString()&nbsp;-&nbsp;@Model.Rows[i][2].ToString()
+                                           @(parentInfo != string.Empty ? parentInfo + " " + GetAddressInfo(Model.Rows[i][7].ToString())+" ":"")@(parentInfo == string.Empty ? Model.Rows[i][1].ToString():string.Empty)&nbsp;@Model.Rows[i][2].ToString()
                                         </a>
                                     </td>
-                                    @if (Model.Columns.Count > 5)
+                                    @if (Model.Columns.Count > 7)
                                     {
-                                        for (int j = 6; j < Model.Columns.Count; j++)
+                                        for (int j = 8; j < Model.Columns.Count; j++)
                                         {
                                             <td>
                                                 @Model.Rows[i][j].ToString()

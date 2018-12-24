@@ -176,6 +176,10 @@ namespace FollowMe.Web.Models
         [Display(Name = "Reason why passive ID")]
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
 
+        [Column(@"PositionId", Order = 28, TypeName = "int")]
+        [Display(Name = "Position ID")]
+        public int? PositionId { get; set; } // PositionId
+
         // Reverse navigation
 
         /// <summary>

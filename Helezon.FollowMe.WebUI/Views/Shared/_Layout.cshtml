@@ -20,7 +20,7 @@
 
     .companyTable td, .companyTable th {
         border: 1px solid #ddd;
-        padding: 8px;
+        padding: 5px;
     }
     /*.companyTable tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -29,8 +29,8 @@
     background-color: #ddd;
     }*/
     .companyTable th {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         text-align: center;
         /*background-color: #4CAF50;*/
         /*color: white;*/
@@ -66,8 +66,8 @@
                 <!-- END THEME PANEL -->
                 <!-- BEGIN PAGE BAR -->
                 @*@{
-                    Html.RenderPartial("_PageBar");
-                }*@
+            Html.RenderPartial("_PageBar");
+        }*@
                 <!-- END PAGE BAR -->
                 <!-- BEGIN PAGE TITLE-->
                 <h1 class="page-title">
@@ -77,6 +77,8 @@
                     @*<small>blank page layout</small>*@
                     <small>  @ViewBag.Action </small>
                 </h1>
+                @Html.Partial("_Alert")
+
                 <!-- END PAGE TITLE-->
                 <!-- END PAGE HEADER-->
                 @RenderBody()

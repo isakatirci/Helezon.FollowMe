@@ -26,14 +26,17 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<Company> Companies { get; set; } // Company
         public System.Data.Entity.DbSet<CompanyAddress> CompanyAddresses { get; set; } // CompanyAddress
         public System.Data.Entity.DbSet<CompanyBank> CompanyBanks { get; set; } // CompanyBank
+        public System.Data.Entity.DbSet<CompanyImage> CompanyImages { get; set; } // CompanyImage
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm
+        public System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
         public System.Data.Entity.DbSet<JsonObject> JsonObjects { get; set; } // JsonObject
         public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompanies { get; set; } // LogisticsCompany
         public System.Data.Entity.DbSet<Person> People { get; set; } // Person
         public System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddresses { get; set; } // PersonnelAddress
         public System.Data.Entity.DbSet<PersonnelBank> PersonnelBanks { get; set; } // PersonnelBank
         public System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation
+        public System.Data.Entity.DbSet<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage
         public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephones { get; set; } // PersonnelTelephone
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm
         public System.Data.Entity.DbSet<Sequence> Sequences { get; set; } // Sequence
@@ -100,14 +103,17 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyMap());
             modelBuilder.Configurations.Add(new CompanyAddressMap());
             modelBuilder.Configurations.Add(new CompanyBankMap());
+            modelBuilder.Configurations.Add(new CompanyImageMap());
             modelBuilder.Configurations.Add(new CompanyTelephoneMap());
             modelBuilder.Configurations.Add(new CompanyTermMap());
+            modelBuilder.Configurations.Add(new ErrorMap());
             modelBuilder.Configurations.Add(new JsonObjectMap());
             modelBuilder.Configurations.Add(new LogisticsCompanyMap());
             modelBuilder.Configurations.Add(new PersonMap());
             modelBuilder.Configurations.Add(new PersonnelAddressMap());
             modelBuilder.Configurations.Add(new PersonnelBankMap());
             modelBuilder.Configurations.Add(new PersonnelEducationMap());
+            modelBuilder.Configurations.Add(new PersonnelImageMap());
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap());
             modelBuilder.Configurations.Add(new PersonnelTermMap());
             modelBuilder.Configurations.Add(new SequenceMap());
@@ -125,14 +131,17 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyMap(schema));
             modelBuilder.Configurations.Add(new CompanyAddressMap(schema));
             modelBuilder.Configurations.Add(new CompanyBankMap(schema));
+            modelBuilder.Configurations.Add(new CompanyImageMap(schema));
             modelBuilder.Configurations.Add(new CompanyTelephoneMap(schema));
             modelBuilder.Configurations.Add(new CompanyTermMap(schema));
+            modelBuilder.Configurations.Add(new ErrorMap(schema));
             modelBuilder.Configurations.Add(new JsonObjectMap(schema));
             modelBuilder.Configurations.Add(new LogisticsCompanyMap(schema));
             modelBuilder.Configurations.Add(new PersonMap(schema));
             modelBuilder.Configurations.Add(new PersonnelAddressMap(schema));
             modelBuilder.Configurations.Add(new PersonnelBankMap(schema));
             modelBuilder.Configurations.Add(new PersonnelEducationMap(schema));
+            modelBuilder.Configurations.Add(new PersonnelImageMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTermMap(schema));
             modelBuilder.Configurations.Add(new SequenceMap(schema));

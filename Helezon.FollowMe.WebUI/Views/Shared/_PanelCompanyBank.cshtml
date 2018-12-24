@@ -81,7 +81,7 @@
                                                             @Html.DropDownList("BranchNameCode", new SelectList(bank.BranchNameCodeList 
                                                            ?? new List<string>(), bank.BranchName + " - " + bank.BranchCode), "Please Select"
                                                            , new { @class = "form-control select2"
-                                                           , @onchange = "javascript:getSwiftNos($(this))" })
+                                                          })
                                                             @*@Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })*@
                                                         </div>
                                                     </div>

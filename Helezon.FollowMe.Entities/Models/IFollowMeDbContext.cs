@@ -24,14 +24,17 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<Company> Companies { get; set; } // Company
         System.Data.Entity.DbSet<CompanyAddress> CompanyAddresses { get; set; } // CompanyAddress
         System.Data.Entity.DbSet<CompanyBank> CompanyBanks { get; set; } // CompanyBank
+        System.Data.Entity.DbSet<CompanyImage> CompanyImages { get; set; } // CompanyImage
         System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone
         System.Data.Entity.DbSet<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm
+        System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
         System.Data.Entity.DbSet<JsonObject> JsonObjects { get; set; } // JsonObject
         System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompanies { get; set; } // LogisticsCompany
         System.Data.Entity.DbSet<Person> People { get; set; } // Person
         System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddresses { get; set; } // PersonnelAddress
         System.Data.Entity.DbSet<PersonnelBank> PersonnelBanks { get; set; } // PersonnelBank
         System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation
+        System.Data.Entity.DbSet<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage
         System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephones { get; set; } // PersonnelTelephone
         System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm
         System.Data.Entity.DbSet<Sequence> Sequences { get; set; } // Sequence

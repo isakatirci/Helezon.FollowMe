@@ -1,8 +1,8 @@
 ﻿@model FollowMe.Web.Models.ViewModels.PersonnelCardViewModel
 @using FollowMe.Web.Controllers;
 @{
-    ViewBag.Title = "Card";
-    ViewBag.Action = "Card";
+    ViewBag.Title = "";
+    ViewBag.Action = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @functions{
@@ -13,11 +13,17 @@
     }
 }
 
+
 @section afterGlobalStyles {
 
     <style>
         .companyTable * {
             text-transform: uppercase !important;
+        }
+
+        .companyTable td, .companyTable th {
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 }
@@ -30,7 +36,7 @@
                     <div class="btn-group btn-group-justified">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default">Rehber</button>
-                        </div>                    
+                        </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default">Z Code</button>
                         </div>
@@ -66,8 +72,27 @@
                 <td>
                     <table>
                         <tr>
-                            <td rowspan="10" style="width:25%;min-width:25%">
-                                COMPANY LOGO
+                            <td rowspan="10" style="width:25%;min-width:25%;vertical-align:top">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                PERSONNEL PHOTO
+                                                <a href="javascript:void(0);"
+                                                   onclick="location.href='@Html.Raw(Model.PersonelPhotoUrl)'">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img style="width:250px;max-width:250px;height:300px;max-height:300px" src="@Model.ImageName" alt="@Model.Company.Name">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </td>
                             <td rowspan="10">
                                 <table>
@@ -99,7 +124,15 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.DisplayFor(x => x.Company.Code)&nbsp;@Html.DisplayFor(x => x.Company.Name)</td>
+                                                        <td>
+
+                                                            <a href="javascript:void(0);"
+                                                               onclick="location.href='@Html.Raw(string.Format("/Company/CompanyCard?id={0}", Model.Personnel.CompanyId))'">
+                                                                @Html.DisplayFor(x => x.Company.Code)&nbsp;@Html.DisplayFor(x => x.Company.Name)
+
+                                                            </a>
+
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -138,7 +171,7 @@
                                                 </tbody>
                                             </table>
                                         </td>
-                                    </tr>                           
+                                    </tr>
                                     <tr>
                                         <td>
                                             <table>
@@ -160,7 +193,7 @@
                                             </table>
                                         </td>
                                     </tr>
-                                                       
+
                                 </table>
                             </td>
                             <td rowspan="10" style="width:25%;min-width:25%;vertical-align:top">
@@ -203,11 +236,13 @@
                                                 <td>
                                                     <table>
                                                         <tr><td><b>BIREYSEL E-MAIL ADRESI</b></td></tr>
-                                                        <tr><td>
-    <a style="text-transform:lowercase!important" href="mailto:@Model.Personnel.Email">@Model.Personnel.PersonnelEmail</a>
+                                                        <tr>
+                                                            <td>
+                                                                <a style="text-transform:lowercase!important" href="mailto:@Model.Personnel.Email">@Model.Personnel.PersonnelEmail</a>
 
 
-</td></tr>
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                                 <td>
@@ -235,7 +270,7 @@
                                             </tr>
                                         </table>
 
-                                       
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -314,7 +349,7 @@
                                                 <tr>
                                                     <th>EGITIM OGRETIM</th>
                                                     <th>OKUL ISMI</th>
-                                                    <th>BULUNDUGU YER</th>                                               
+                                                    <th>BULUNDUGU YER</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -323,7 +358,7 @@
                                                     <tr>
                                                         <td>@education.EducationLevelName</td>
                                                         <td>@education.StudiedSchoolName</td>
-                                                        <td>@education.EducationArea</td>                                                       
+                                                        <td>@education.EducationArea</td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -526,7 +561,7 @@
 
                 </td>
             </tr>
-      
+
         </tbody>
     </table>
 </div>

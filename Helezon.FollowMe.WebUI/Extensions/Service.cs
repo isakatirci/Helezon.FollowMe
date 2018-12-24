@@ -22,8 +22,12 @@ namespace FollowMe.Web.Controllers
         {
             var list= (from r in _db.TermRelationship
                     join t in _db.Term on r.TermId equals t.Id
-                    where r.EntityId == _entityId && r.CompanyId == _companyId && r.TaxonomyId == taxonomy
-                    select t).ToList();
+                    where r.EntityId == _entityId 
+                    && r.CompanyId == _companyId 
+                    && r.TaxonomyId == taxonomy 
+                    && !(r.IsPassive.HasValue && r.IsPassive.Value)
+                    && !(t.IsPassive.HasValue && t.IsPassive.Value)
+                       select t).ToList();
 
             if (list.IsEmpty())           
                 list.Add(new Term { TaxonomyId = taxonomy });            
@@ -54,6 +58,8 @@ namespace FollowMe.Web.Controllers
             return (from r in _db.TermRelationship
                     join t in _db.Term on r.TermId equals t.Id
                     where r.EntityId == _entityId && r.CompanyId == _companyId && r.TaxonomyId == taxonomy
+                    && !(r.IsPassive.HasValue && r.IsPassive.Value)
+                    && !(t.IsPassive.HasValue && t.IsPassive.Value)
                     select t).FirstOrDefault()?? NullTerm;
         }
 
@@ -64,6 +70,7 @@ namespace FollowMe.Web.Controllers
             
             return (from t in _db.Term
                     where t.Id == termId
+                    && !(t.IsPassive.HasValue && t.IsPassive.Value)
                     select t).FirstOrDefault() ?? NullTerm;
         }
 

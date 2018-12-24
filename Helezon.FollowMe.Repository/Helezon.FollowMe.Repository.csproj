@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CompanyImageRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\PersonnelImageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Helezon.FollowMe.Entities\Helezon.FollowMe.Entities.csproj">

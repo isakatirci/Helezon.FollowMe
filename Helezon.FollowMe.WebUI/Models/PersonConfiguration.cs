@@ -49,6 +49,7 @@ namespace FollowMe.Web.Models
             Property(x => x.NameDay).IsOptional();
             Property(x => x.Interphone).IsOptional();
             Property(x => x.ReasonWhyPassiveId).IsOptional();
+            Property(x => x.PositionId).IsOptional();
 
             InitializePartial();
         }

@@ -9,13 +9,14 @@ namespace FollowMe.Web.Models.ViewModels
     {
         public Person Personnel { get; set; }
         public string Position { get; set; }
+        public string PersonelPhotoUrl { get; set; }
+        public string ImageName { get; set; }
         public Company Company { get; set; }
         public List<PersonnelAddress> AddressList { get; set; }
         public List<PersonnelTelephone> TelephoneList { get; set; }
         public List<PersonnelBank> BankList { get; set; }
         public List<LogisticsCompany> LogisticsCompanyList { get; set; }
-        public List<List<string>> TelephoneListRotated { get; set; }
-
+        public List<List<string>> TelephoneListRotated { get; set; }       
         public string Hobby { get; set; }
         public string Languages { get; set; }
         public string ComputerSkills { get; set; }

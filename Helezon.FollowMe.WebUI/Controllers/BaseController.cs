@@ -18,14 +18,60 @@ namespace FollowMe.Web.Controllers
     [Authorize]
     public class BaseController : Controller
     {
+        public string Title { set { ViewBag.Title = value; } }
+        public string Keywords { set { ViewBag.Keywords = value; } }
+        public string Description { set { ViewBag.Description = value; } }
+
+        public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
+        public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (TempData["Success"] != null) ViewData["Success"] = TempData["Success"];
+            if (TempData["Failure"] != null) ViewData["Failure"] = TempData["Failure"];
+
+            base.OnActionExecuting(filterContext);
+        }
+        protected ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "GuideBook");
+        }
+        public class MyAjaxResponse
+        {
+            public string Success { get; set; }
+            public string Failure { get; set; }
+            public object Data { get; set; }
+        }
         public readonly ICompanyService CompanyService;
+        public readonly ICompanyImageService CompanyImageService;
+        public readonly IPersonnelImageService PersonnelImageService;
         public readonly IUnitOfWorkAsync UnitOfWorkAsync;
         private readonly DbContext _followMeDbContext;
+        private static bool runinitializeonce = true;
         public BaseController()
         {
-            _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
-            UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
-            CompanyService = new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync));
+         
+                _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
+                UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
+                CompanyService
+                    = new CompanyService(
+                        new Repository<Helezon.FollowMe.Entities.Models.Company>(
+                            _followMeDbContext, UnitOfWorkAsync));
+            
+                CompanyImageService
+                 = new CompanyImageService(
+                     new Repository<Helezon.FollowMe.Entities.Models.CompanyImage>(
+                         _followMeDbContext, UnitOfWorkAsync));
+
+              PersonnelImageService
+                = new PersonnelImageService(
+                    new Repository<Helezon.FollowMe.Entities.Models.PersonnelImage>(
+                        _followMeDbContext, UnitOfWorkAsync));
+                runinitializeonce = false;            
         }
 
         public class ForeingKeyIdRefreshParametres
@@ -173,7 +219,7 @@ namespace FollowMe.Web.Controllers
         }
 
 
-        public List<PersonnelTelephone> FillTelefonListPersonnel(string companyId)
+        public List<PersonnelTelephone> FillTelefonListPersonnel(string personnelId,string companyId)
         {
             var telephones = new List<PersonnelTelephone>();
             var i = 0;
@@ -189,6 +235,7 @@ namespace FollowMe.Web.Controllers
                 telephone.AreaCode = areaCode.IsNullOrWhiteSpace() ? "Türkiye (+90)" : areaCode;
                 telephone.TelephoneTypeId = int.Parse(telephoneType ?? "0");
                 telephone.CompanyId = companyId;
+                telephone.PersonnelId = personnelId;
                 telephones.Add(telephone);
                 i++;
             }
@@ -611,20 +658,21 @@ namespace FollowMe.Web.Controllers
 
 
         [HttpGet]
-        public JsonResult GetSwiftNos(string termId, string province, string district, string branchNameCode)
+        public JsonResult GetSwiftNos(string termId, string province, string district)
         {
             var termParts = termId.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
             if (termParts.IsEmpty().Not())
             {
                 var id = int.Parse(termParts[0].Trim());
-                var branchParts = branchNameCode.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-                if (branchParts.IsEmpty().Not() && branchParts.Length > 1)
-                {
-                    var name = branchParts[0].Trim();
-                    var code = branchParts[1].Trim();
-                    var branchNameCodes = db.BankGuide.Where(x => x.TermId == id && x.BranchName == name && x.BranchCode == code).Select(x => x.SwiftNo).Distinct().ToList();
-                    return Json(branchNameCodes, JsonRequestBehavior.AllowGet);
-                }
+                //var branchParts = branchNameCode.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                //if (branchParts.IsEmpty().Not() && branchParts.Length > 1)
+                //{
+                //    var name = branchParts[0].Trim();
+                //    var code = branchParts[1].Trim();
+
+                //}
+                var branchNameCodes = db.BankGuide.Where(x => x.TermId == id).Select(x => x.SwiftNo).Distinct().ToList();
+                return Json(branchNameCodes, JsonRequestBehavior.AllowGet);
 
             }
             return Json(new List<string>(), JsonRequestBehavior.AllowGet);

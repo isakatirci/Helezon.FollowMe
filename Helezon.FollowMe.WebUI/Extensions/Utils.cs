@@ -23,6 +23,7 @@ namespace FollowMe.Web.Controllers
 
         public static Dictionary<BloodGroup, string> BloodGroupNames = new Dictionary<BloodGroup, string>();        //
         public static Dictionary<TaxonomyType, string> TaxonomyNames = new Dictionary<TaxonomyType, string>();
+        public static Dictionary<TaxonomyType, string> TaxonomyNamesZCode = new Dictionary<TaxonomyType, string>();
         public static Dictionary<EntityType, string> ObjectTypeNames = new Dictionary<EntityType, string>();
         public static Dictionary<FormFieldType, string> FormFieldTypeNames = new Dictionary<FormFieldType, string>();        //
         public static Dictionary<GenderType, string> GenderTypeNames = new Dictionary<GenderType, string>();
@@ -136,24 +137,36 @@ namespace FollowMe.Web.Controllers
             BloodGroupNames.Add(BloodGroup.ORhPozitif, "O Rh Pozitif");
             BloodGroupNames.Add(BloodGroup.ORhNegatif, "O Rh Negatif");
 
+            /*rehber taksonomiden iptal edilecekler. 
+             * "departman", 
+             * "region", 
+             * "sektor",
+             * authority", 
+             * "company category",
+             * "person category",
+             * "social media",
+             * "nationality", 
+             * "job experience",
+             * "product type"      
+             */
 
-            TaxonomyNames.Add(TaxonomyType.Department, "Department");
+            //TaxonomyNames.Add(TaxonomyType.Department, "Department");
             TaxonomyNames.Add(TaxonomyType.Position, "Position");
-            TaxonomyNames.Add(TaxonomyType.Region, "Region");
-            TaxonomyNames.Add(TaxonomyType.Sector, "Sector");
-            TaxonomyNames.Add(TaxonomyType.Authority, "Authority");
+            //TaxonomyNames.Add(TaxonomyType.Region, "Region");
+            //TaxonomyNames.Add(TaxonomyType.Sector, "Sector");
+            //TaxonomyNames.Add(TaxonomyType.Authority, "Authority");
             TaxonomyNames.Add(TaxonomyType.CurrencyType, "Currency Type");
 
-            TaxonomyNames.Add(TaxonomyType.CompanyCategory, "Company Category");
+            //TaxonomyNames.Add(TaxonomyType.CompanyCategory, "Company Category");
             TaxonomyNames.Add(TaxonomyType.CompanyType, "Company Type");
-            TaxonomyNames.Add(TaxonomyType.PersonCategory, "Person Category");
-            TaxonomyNames.Add(TaxonomyType.SocialMedia, "Social Media");
-            TaxonomyNames.Add(TaxonomyType.Nationality, "Nationality");
-            TaxonomyNames.Add(TaxonomyType.JobExperience, "Job Experience");
+            //TaxonomyNames.Add(TaxonomyType.PersonCategory, "Person Category");
+            //TaxonomyNames.Add(TaxonomyType.SocialMedia, "Social Media");
+            //TaxonomyNames.Add(TaxonomyType.Nationality, "Nationality");
+            //TaxonomyNames.Add(TaxonomyType.JobExperience, "Job Experience");
             TaxonomyNames.Add(TaxonomyType.Religion, "Religion");
             TaxonomyNames.Add(TaxonomyType.ReleaseReason, "Release Reason");
             TaxonomyNames.Add(TaxonomyType.Hobby, "Hobby");
-            TaxonomyNames.Add(TaxonomyType.ProductType, "Product Type");
+            //TaxonomyNames.Add(TaxonomyType.ProductType, "Product Type");
             TaxonomyNames.Add(TaxonomyType.BankName, "Bank Name");
             TaxonomyNames.Add(TaxonomyType.ReasonWhyPassive, "Reason Why Passive");
             TaxonomyNames.Add(TaxonomyType.ReasonWhyPassiveForPersonnel, "Why Passive Personnel");
@@ -162,6 +175,21 @@ namespace FollowMe.Web.Controllers
             TaxonomyNames.Add(TaxonomyType.EducationLevel, "Education Level");
             TaxonomyNames.Add(TaxonomyType.ComputerSkills, "Computer Skills");
             TaxonomyNames.Add(TaxonomyType.BloodGroup, "Blood Group");
+
+            TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileri, "İplik Kategorileri");
+            TaxonomyNamesZCode.Add(TaxonomyType.KumasKategorileri, "Kumaş Kategorileri");
+
+
+
+            TaxonomyNamesZCode.Add(TaxonomyType.IplikNo, "İplik No");
+            TaxonomyNamesZCode.Add(TaxonomyType.ElyafCinsiveKalitesi, "Elyaf Cinsi ve Katitesi");
+            TaxonomyNamesZCode.Add(TaxonomyType.ElyafOrani, "Elyaf Oranı");
+            //TaxonomyNamesZCode.Add(TaxonomyType.ElyafKalitesi, "Elyaf Kalitesi");
+            TaxonomyNamesZCode.Add(TaxonomyType.UretimTeknolojisi, "Üretim Teknolojisi");
+            TaxonomyNamesZCode.Add(TaxonomyType.IplikRengi, "İplik Rengi");
+            TaxonomyNamesZCode.Add(TaxonomyType.PantoneRenkKodu, "Pantone Renk Kodu");
+            //
+            //
 
             /*
             
@@ -577,6 +605,8 @@ namespace FollowMe.Web.Controllers
         private static readonly Lazy<IEnumerable<SelectListItem>> taxonomyNames 
             =  new Lazy<IEnumerable<SelectListItem>>(() => FillTaxonomyNames());
 
+        private static readonly Lazy<IEnumerable<SelectListItem>> taxonomyNamesZCode
+           = new Lazy<IEnumerable<SelectListItem>>(() => FillTaxonomyNamesZCode());
         private static IEnumerable<SelectListItem> FillTaxonomyNames()
         {
           return TaxonomyNames.Select(x => new SelectListItem()
@@ -593,6 +623,31 @@ namespace FollowMe.Web.Controllers
             var value = taxonomyType.HasValue ? taxonomyType.ToString() : string.Empty;
             foreach (var item in list)            
                 item.Selected = item.Value == value;
+
+            list = list.OrderBy(x => x.Text).ToList();
+
+            return list;
+        }
+
+        private static IEnumerable<SelectListItem> FillTaxonomyNamesZCode()
+        {
+            return TaxonomyNamesZCode.Select(x => new SelectListItem()
+            {
+                Value = ((int)x.Key).ToString(),
+                Text = x.Value,
+                //Selected = taxonomyType.HasValue && x.Key == type
+            });
+        }
+
+        public static IEnumerable<SelectListItem> GetTaxonomyNamesZCode(int? taxonomyType = null)
+        {
+            var list = taxonomyNamesZCode.Value;
+            var value = taxonomyType.HasValue ? taxonomyType.ToString() : string.Empty;
+            foreach (var item in list)
+                item.Selected = item.Value == value;
+
+            list = list.OrderBy(x => x.Text).ToList();
+
             return list;
         }
 
@@ -975,7 +1030,15 @@ namespace FollowMe.Web
         EducationLevel,
         ComputerSkills,
         ReasonWhyPassiveForPersonnel,
-
+        IplikKategorileri,
+        KumasKategorileri,
+        IplikNo,
+        ElyafCinsiveKalitesi,
+        ElyafOrani,
+        ElyafKalitesi,
+        UretimTeknolojisi,
+        IplikRengi,
+        PantoneRenkKodu
         //CompanySubType,
     }
 

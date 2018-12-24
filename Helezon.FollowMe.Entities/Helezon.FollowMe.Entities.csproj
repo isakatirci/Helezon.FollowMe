@@ -75,10 +75,16 @@
     <Compile Include="Models\CompanyBank.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyImage.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CompanyTelephone.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyTerm.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Error.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FollowMeDbContext.cs">
@@ -113,6 +119,9 @@
     <Compile Include="Models\Mapping\CompanyBankMap.cs">
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mapping\CompanyImageMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Mapping\CompanyMap.cs">
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
@@ -120,6 +129,9 @@
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mapping\CompanyTermMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\ErrorMap.cs">
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mapping\FollowMeMapping1.cs">
@@ -143,6 +155,9 @@
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mapping\PersonnelEducationMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\PersonnelImageMap.cs">
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mapping\PersonnelTelephoneMap.cs">
@@ -173,6 +188,9 @@
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonnelEducation.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelImage.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonnelTelephone.cs">

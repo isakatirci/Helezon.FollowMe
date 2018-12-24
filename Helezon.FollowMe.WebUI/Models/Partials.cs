@@ -92,9 +92,7 @@ namespace FollowMe.Web.Models
         public string Person_BirthDay { get; set; }
 
         [NotMapped]
-        [StringLength(150)]
-        [Display(Name = "Person Position")]
-        public string Person_Position { get; set; }
+        public int Person_Position { get; set; }
 
         [NotMapped]
         [StringLength(150)]
