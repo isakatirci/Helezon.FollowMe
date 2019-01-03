@@ -1,0 +1,103 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.FileControllerIndexViewModel
+@{
+    ViewBag.Title = "";
+}
+
+
+<!-- blueimp File Upload & Gallery styles -->
+@section afterGlobalStyles{
+
+    @Styles.Render("~/Content/jQuery-File-Upload")
+
+}
+
+
+
+
+@Html.Partial("_Files")
+
+@section afterGlobalScripts{
+
+    <script>
+        var $form = null;
+        $(function () {
+
+            $form = $('#fileupload').fileupload({
+                dataType: 'json'
+            });
+
+        });
+        $('#fileupload').addClass('fileupload-processing');
+
+
+
+
+    </script>
+
+    <script>
+
+
+        function setFeatured(btn) {
+            var self = $(btn);
+            self.closest("tr").closest("table").find("tr").removeAttr("style");
+            self.closest("tr").css({ "background-color": "#3598dc6e" });
+
+            setFeaturedPicture(self.data("filename"), self.data("entitytype"));
+        }
+
+        function setFeaturedPicture(fileName, entityType) {
+            var data = {};
+            data.fileName = fileName;
+            data.entityType = entityType;
+            $.ajax({
+                type: "Post",
+                //url: window.getBaseUrl() + uri,
+                url: "/FileUpload/SetFeaturedPicture",
+                data: JSON.parse(JSON.stringify(data)),
+                dataType: "json"
+            })
+                .done(function (response) {
+
+                    swal({
+                        html: true,
+                        title: "Result",
+                        text: "<ul><li><div>" + response.SuccessMessage + " " + response.ErrorMessage + "</div></li></ul>",
+                        type: "info",
+                        allowOutsideClick: true,
+                        allowEscapeKey: true,
+                        textClass: 'text-left text-info',
+                    });
+
+                })
+                .error(function (err) { console.error(err); alert("İşlem Başarısız Oldu"); });
+        }
+
+
+    </script>
+
+
+    <script>
+
+       //string entitytype, string entityid,string companyid
+        var entitytype = "@Model.Entitytype";
+        var entityid = "@Model.EntityId";
+        var companyid = "@Model.CompanyId";
+        var getFileUrl = "/FileUpload/GetFileList?entitytype=" + entitytype + "&entityid=" + entityid + "&companyid=" + companyid;
+        $.ajax({
+            type: 'GET',
+            url: getFileUrl,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $('#fileupload').fileupload('option', 'done').call($('#fileupload'), $.Event('done'), { result: { files: data.files } })
+                $('#fileupload').removeClass('fileupload-processing');
+            }
+
+    }
+
+    );
+    </script>
+
+    @Scripts.Render("~/bundles/Blueimp-Gallerry2")
+
+}

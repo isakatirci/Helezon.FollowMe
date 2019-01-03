@@ -110,56 +110,32 @@ namespace FollowMe.Web.Models
         [Display(Name = "Reason why passive ID")]
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
 
-        [Column(@"ReasonWhyPassiveTermName", Order = 16, TypeName = "nvarchar")]
-        [MaxLength(500)]
-        [StringLength(500)]
-        [Display(Name = "Reason why passive term name")]
-        public string ReasonWhyPassiveTermName { get; set; } // ReasonWhyPassiveTermName (length: 500)
-
-        [Column(@"PersonLimit", Order = 17, TypeName = "int")]
-        [Display(Name = "Person limit")]
-        public int? PersonLimit { get; set; } // PersonLimit
-
-        [Column(@"PersonLimitPercent", Order = 18, TypeName = "int")]
-        [Display(Name = "Person limit percent")]
-        public int? PersonLimitPercent { get; set; } // PersonLimitPercent
-
-        [Column(@"ServiceStartDate", Order = 19, TypeName = "datetime2")]
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Service start date")]
-        public System.DateTime? ServiceStartDate { get; set; } // ServiceStartDate
-
-        [Column(@"ServiceEndDate", Order = 20, TypeName = "datetime2")]
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Service end date")]
-        public System.DateTime? ServiceEndDate { get; set; } // ServiceEndDate
-
-        [Column(@"AddressTypeId", Order = 21, TypeName = "int")]
+        [Column(@"AddressTypeId", Order = 16, TypeName = "int")]
         [Display(Name = "Address type ID")]
         public int? AddressTypeId { get; set; } // AddressTypeId
 
-        [Column(@"IsPassive", Order = 22, TypeName = "bit")]
+        [Column(@"IsPassive", Order = 17, TypeName = "bit")]
         [Required]
         [Display(Name = "Is passive")]
         public bool IsPassive { get; set; } // IsPassive
 
-        [Column(@"CreatedOn", Order = 23, TypeName = "datetime2")]
+        [Column(@"CreatedOn", Order = 18, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Created on")]
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
 
-        [Column(@"CreatedBy", Order = 24, TypeName = "nvarchar")]
+        [Column(@"CreatedBy", Order = 19, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        [Column(@"ChangedOn", Order = 25, TypeName = "datetime2")]
+        [Column(@"ChangedOn", Order = 20, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Changed on")]
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
 
-        [Column(@"ChangedBy", Order = 26, TypeName = "nvarchar")]
+        [Column(@"ChangedBy", Order = 21, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Changed by")]
@@ -175,6 +151,10 @@ namespace FollowMe.Web.Models
         /// Child CompanyBank where [CompanyBank].[CompanyId] point to this entity (FK_CompanyBank_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<CompanyBank> CompanyBank { get; set; } // CompanyBank.FK_CompanyBank_Company
+        /// <summary>
+        /// Child CompanyPicture where [CompanyPicture].[CompanyId] point to this entity (FK_CompanyImage_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture.FK_CompanyImage_Company
         /// <summary>
         /// Child CompanyTelephone where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
         /// </summary>
@@ -196,6 +176,7 @@ namespace FollowMe.Web.Models
         {
             CompanyAddress = new System.Collections.Generic.HashSet<CompanyAddress>();
             CompanyBank = new System.Collections.Generic.HashSet<CompanyBank>();
+            CompanyPicture = new System.Collections.Generic.HashSet<CompanyPicture>();
             CompanyTelephone = new System.Collections.Generic.HashSet<CompanyTelephone>();
             CompanyTerm = new System.Collections.Generic.HashSet<CompanyTerm>();
             LogisticsCompany = new System.Collections.Generic.HashSet<LogisticsCompany>();

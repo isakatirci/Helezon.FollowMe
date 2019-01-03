@@ -22,14 +22,14 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class CompanyTerm: Entity
     {
         public int Id { get; set; } // Id (Primary key)
-        public int TaxonomyId { get; set; } // TaxonomyId
         public int TermId { get; set; } // TermId
         public string CompanyId { get; set; } // CompanyId (length: 128)
-        public bool? IsPassive { get; set; } // IsPassive
+        public int TaxonomyId { get; set; } // TaxonomyId
+        public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? PassiveOn { get; set; } // PassiveOn
-        public string PassiveBy { get; set; } // PassiveBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Foreign keys
 

@@ -333,7 +333,7 @@ namespace FollowMe.Web.Controllers
                          {
                              id = te.TermId.ToString(),
                              text = te.Name,
-                             parent = te.Parent == 0 ? "#" : te.Parent.ToString(),
+                             parent = te.Parent.HasValue && te.Parent == 0 ? "#" : te.Parent.ToString(),
                              state = new { disabled = te.Disabled }
                          }).ToList();
 

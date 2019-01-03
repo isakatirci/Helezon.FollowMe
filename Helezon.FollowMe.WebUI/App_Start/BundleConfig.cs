@@ -25,6 +25,46 @@ namespace Helezon.FollowMe.WebUI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+
+
+
+            StyleBundle styleBundle1 = new StyleBundle("~/Content/jQuery-File-Upload");
+            styleBundle1.Include(
+                  "~/Content/global/plugins/fancybox/source/jquery.fancybox.css"
+                , "~/Content/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css"
+                , "~/Content/global/plugins/jquery-file-upload/css/jquery.fileupload.css"
+                , "~/Content/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css");
+            bundles.Add(styleBundle1);
+
+
+            ScriptBundle scriptBndl = new ScriptBundle("~/bundles/Blueimp-Gallerry2");
+
+            scriptBndl.Include(
+                                "~/Content/global/plugins/fancybox/source/jquery.fancybox.pack.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/vendor/load-image.min.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js"
+                              , "~/Content/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"
+                              , "~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js");
+                              
+
+
+            //Add the bundle into BundleCollection
+            bundles.Add(scriptBndl);
+
+            BundleTable.EnableOptimizations = true;
+
+
         }
     }
 }

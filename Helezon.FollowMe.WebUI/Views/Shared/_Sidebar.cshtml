@@ -97,14 +97,16 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="javascript:;" class="nav-link ">
-                            <i class="icon-basket"></i>
+                    <li class="nav-item   @(actionName.Equals("Index",StringComparison.OrdinalIgnoreCase) && controllerName.Equals("ZetaCodeNormalIplik",StringComparison.OrdinalIgnoreCase) ? "active open" : string.Empty)">
+                        <a href="@Url.Action("Index", "ZetaCodeNormalIplik",new { id = string.Empty})" class="nav-link ">
+                            <i class="icon-settings"></i>
+
                             <span class="title">
                                 Z Code
+
                             </span>
                         </a>
-                    </li>
+                    </li>                 
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link ">
                             <i class="icon-user"></i>

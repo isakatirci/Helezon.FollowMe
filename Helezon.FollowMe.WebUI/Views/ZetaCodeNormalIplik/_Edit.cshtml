@@ -1,0 +1,235 @@
+﻿@model  Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeNormalIplikVm
+@{ 
+    var update = string.Equals(Model.Operation, "update", StringComparison.InvariantCultureIgnoreCase);
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Group #1 </a>
+        </h4>
+    </div>
+    <div id="collapse_1" class="panel-collapse in">
+        <div class="panel-body">
+
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+                    @if (update)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.IsPassive, new { SelectName = "ZetaCodeNormalIplikDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
+                                    @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.IsPassive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.ZetaCode
+                                , new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.ZetaCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious
+                            , new { htmlAttributes = new { @class = "form-control transform_none" } })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Master, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.Master, new { SelectName = "ZetaCodeNormalIplikDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
+                                @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Master, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <input type="text" name="ZetaCodeNormalIplikDto.IplikKategosiId" id="ZetaCodeNormalIplikDto_IplikKategosiId" class="form-control" value="@Model.ZetaCodeNormalIplikDto.IplikKategosiId" />
+                                    <br />
+                                    <div id="treeIplikKategosiId">
+                                    </div>
+                                </div>
+                            </div>
+                            @*@Html.EditorFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiId, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                  
+                     <div class="form-group">
+                            @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                            </div>
+                     </div>
+                    
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("ZetaCodeNormalIplikDto.SirketId"
+                           , Model.Collections.Sirketler, "Please Select"
+                           , htmlAttributes: new { @class = "form-control select2", @onchange = "getBlueCompanyData($(this))" })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.SirketId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Ulke,"Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("ZetaCodeNormalIplikDto.Ulke"
+                           , Model.Collections.Ulkeler
+                           , htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Ulke, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@*<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2"> Group #2 </a>
+        </h4>
+    </div>
+    <div id="collapse_2" class="panel-collapse collapse">
+        <div class="panel-body" style="height:200px; overflow-y:auto;">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2"> Group #2 </a>
+        </h4>
+    </div>
+    <div id="collapse_2" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.UretimTeknolojisiId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("ZetaCodeNormalIplikDto.UretimTeknolojisiId"
+                           , Model.Collections.UretimTeknolojileri,"Please Select"
+                           , htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.UretimTeknolojisiId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("ZetaCodeNormalIplikDto.PantoneId", Model.Collections.PantoneRenkleri
+                           , "Please Select"
+                           , htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.PantoneId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ZetaCodeNormalIplikDto.Renkid"
+                           , Model.Collections.Renkler, "Please Select"
+                           , htmlAttributes: new { @class = "form-control select2",@onchange="setHtmlColorCode($(this))" })
+                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Renkid, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.RafyeriTurkiyeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                    <input type="text" 
+                                           name="ZetaCodeNormalIplikDto.RafyeriTurkiyeId" 
+                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
+                                           class="form-control" 
+                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriTurkiyeId" />
+                                    <br />
+                                    <div id="treeRafyeriTurkiyeId">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.RafyeriYunanistanId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                    <input type="text" 
+                                           name="ZetaCodeNormalIplikDto.RafyeriYunanistanId" 
+                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanId" 
+                                           class="form-control" 
+                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriYunanistanId" />
+                                    <br />
+                                    <div id="treeRafyeriYunanistanId">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

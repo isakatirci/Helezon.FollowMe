@@ -30,6 +30,7 @@ namespace FollowMe.Web.Models.ViewModels
         public List<Tuple<string, string, string,string>> SubChildCompanyList { get; set; }
    
         public string CompanyLogoUrl { get; set; }
+        public string EditCompanyLogoUrl { get; internal set; }
     }
 
     public class CompanyCardPersonnelViewModel

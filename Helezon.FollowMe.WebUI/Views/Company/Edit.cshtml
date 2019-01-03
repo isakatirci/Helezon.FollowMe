@@ -959,7 +959,7 @@
 			// Dropdown list change event.
 
 
-			@Html.Partial("_TaxonomyScript", new FollowMe.Web.Models.TaxonomyViewModel (TaxonomyType.ProductType) {TermList = Model.ProductType})
+			@*@Html.Partial("_TaxonomyScript", new FollowMe.Web.Models.TaxonomyViewModel (TaxonomyType.ProductType) {TermList = Model.ProductType})*@
 			@Html.Partial("_TaxonomyScript", new FollowMe.Web.Models.TaxonomyViewModel (TaxonomyType.Sector) { TermList = Model.Sector})
 
 			ajaxTreeFill('#tree_producttype', $bpc3ct7w + '?taxonomy=' + $2nc3qg5a + '&companyId=' + $("#Id").val());

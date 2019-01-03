@@ -44,11 +44,6 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.IsWebsiteAvailable).HasColumnName(@"IsWebsiteAvailable").HasColumnType("bit").IsOptional();
             Property(x => x.Website).HasColumnName(@"Website").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.ReasonWhyPassiveId).HasColumnName(@"ReasonWhyPassiveId").HasColumnType("int").IsOptional();
-            Property(x => x.ReasonWhyPassiveTermName).HasColumnName(@"ReasonWhyPassiveTermName").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.PersonLimit).HasColumnName(@"PersonLimit").HasColumnType("int").IsOptional();
-            Property(x => x.PersonLimitPercent).HasColumnName(@"PersonLimitPercent").HasColumnType("int").IsOptional();
-            Property(x => x.ServiceStartDate).HasColumnName(@"ServiceStartDate").HasColumnType("datetime2").IsOptional();
-            Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("datetime2").IsOptional();
             Property(x => x.AddressTypeId).HasColumnName(@"AddressTypeId").HasColumnType("int").IsOptional();
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();

@@ -43,7 +43,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
 
             // Foreign keys
-            HasOptional(a => a.Person).WithMany(b => b.PersonnelTelephones).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelTelephone_Person
+            HasOptional(a => a.Person).WithMany(b => b.PersonnelTelephone).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelTelephone_Person
             InitializePartial();
         }
         partial void InitializePartial();

@@ -1,6 +1,7 @@
 ﻿using Repository.Pattern.Repositories;
 using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -8,7 +9,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
-using TrackableEntities;
+//using TrackableEntities;
 
 namespace Repository.Pattern.Ef6
 {
@@ -16,15 +17,15 @@ namespace Repository.Pattern.Ef6
     {
         private readonly DbContext _context;
         protected DbTransaction Transaction;
-        protected Dictionary<string, dynamic> Repositories;
+        protected ConcurrentDictionary<string, dynamic> Repositories;
 
         public UnitOfWork(DbContext context)
         {
             _context = context;
-            Repositories = new Dictionary<string, dynamic>();
+            Repositories = new ConcurrentDictionary<string, dynamic>();
         }
 
-        public virtual IRepository<TEntity> Repository<TEntity>() where TEntity : class, ITrackable
+        public virtual IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             //if (ServiceLocator.IsLocationProviderSet)
             //{
@@ -52,7 +53,7 @@ namespace Repository.Pattern.Ef6
             return _context.SaveChangesAsync(cancellationToken);
         }
 
-        public virtual IRepositoryAsync<TEntity> RepositoryAsync<TEntity>() where TEntity : class, ITrackable
+        public virtual IRepositoryAsync<TEntity> RepositoryAsync<TEntity>() where TEntity : class
         {
             //if (ServiceLocator.IsLocationProviderSet)
             //{
@@ -61,7 +62,7 @@ namespace Repository.Pattern.Ef6
 
             if (Repositories == null)
             {
-                Repositories = new Dictionary<string, dynamic>();
+                Repositories = new ConcurrentDictionary<string, dynamic>();
             }
 
             var type = typeof(TEntity).Name;
@@ -73,7 +74,7 @@ namespace Repository.Pattern.Ef6
 
             var repositoryType = typeof(Repository<>);
 
-            Repositories.Add(type, Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context, this));
+            Repositories.TryAdd(type, Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context, this));
 
             return Repositories[type];
         }
@@ -93,9 +94,9 @@ namespace Repository.Pattern.Ef6
             return await _context.Database.ExecuteSqlCommandAsync(sql, cancellationToken, parameters);
         }
 
-        public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
+        public virtual void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-            var objectContext = ((IObjectContextAdapter) _context).ObjectContext;
+            var objectContext = ((IObjectContextAdapter)_context).ObjectContext;
             if (objectContext.Connection.State != ConnectionState.Open)
             {
                 objectContext.Connection.Open();

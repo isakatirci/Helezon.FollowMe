@@ -23,14 +23,14 @@ namespace Helezon.FollowMe.Entities.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public int TaxonomyId { get; set; } // TaxonomyId
-        public int TermId { get; set; } // TermId
-        public string PersonnelId { get; set; } // PersonnelId (length: 128)
+        public int Name { get; set; } // Name
         public string CompanyId { get; set; } // CompanyId (length: 128)
-        public bool? IsPassive { get; set; } // IsPassive
+        public string PersonnelId { get; set; } // PersonnelId (length: 128)
+        public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? PassiveOn { get; set; } // PassiveOn
-        public string PassiveBy { get; set; } // PassiveBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Foreign keys
 
@@ -40,7 +40,7 @@ namespace Helezon.FollowMe.Entities.Models
         public virtual Person Person { get; set; } // FK_PersonnelTerm_Person
 
         /// <summary>
-        /// Parent Term pointed by [PersonnelTerm].([TermId]) (FK_PersonnelTerm_Term)
+        /// Parent Term pointed by [PersonnelTerm].([Name]) (FK_PersonnelTerm_Term)
         /// </summary>
         public virtual Term Term { get; set; } // FK_PersonnelTerm_Term
 

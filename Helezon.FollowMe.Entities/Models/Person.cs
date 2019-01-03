@@ -53,29 +53,29 @@ namespace Helezon.FollowMe.Entities.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child PersonnelAddresses where [PersonnelAddress].[PersonnelId] point to this entity (FK_PersonnelAddress_Person)
+        /// Child PersonnelAddress where [PersonnelAddress].[PersonnelId] point to this entity (FK_PersonnelAddress_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelAddress> PersonnelAddresses { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
         /// <summary>
-        /// Child PersonnelBanks where [PersonnelBank].[PersonnelId] point to this entity (FK_PersonnelBank_Person)
+        /// Child PersonnelBank where [PersonnelBank].[PersonnelId] point to this entity (FK_PersonnelBank_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelBank> PersonnelBanks { get; set; } // PersonnelBank.FK_PersonnelBank_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank.FK_PersonnelBank_Person
         /// <summary>
-        /// Child PersonnelEducations where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
+        /// Child PersonnelEducation where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
         /// <summary>
-        /// Child PersonnelImages where [PersonnelImage].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
+        /// Child PersonnelPicture where [PersonnelPicture].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage.FK_PersonnelImage_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
         /// <summary>
-        /// Child PersonnelTelephones where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
+        /// Child PersonnelTelephone where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTelephone> PersonnelTelephones { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
         /// <summary>
-        /// Child PersonnelTerms where [PersonnelTerm].[PersonnelId] point to this entity (FK_PersonnelTerm_Person)
+        /// Child PersonnelTerm where [PersonnelTerm].[PersonnelId] point to this entity (FK_PersonnelTerm_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
+        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
 
         // Foreign keys
 
@@ -88,12 +88,12 @@ namespace Helezon.FollowMe.Entities.Models
         {
             IsAuthorized = false;
             GenderTypeId = 0;
-            PersonnelAddresses = new System.Collections.Generic.List<PersonnelAddress>();
-            PersonnelBanks = new System.Collections.Generic.List<PersonnelBank>();
-            PersonnelEducations = new System.Collections.Generic.List<PersonnelEducation>();
-            PersonnelImages = new System.Collections.Generic.List<PersonnelImage>();
-            PersonnelTelephones = new System.Collections.Generic.List<PersonnelTelephone>();
-            PersonnelTerms = new System.Collections.Generic.List<PersonnelTerm>();
+            PersonnelAddress = new System.Collections.Generic.List<PersonnelAddress>();
+            PersonnelBank = new System.Collections.Generic.List<PersonnelBank>();
+            PersonnelEducation = new System.Collections.Generic.List<PersonnelEducation>();
+            PersonnelPicture = new System.Collections.Generic.List<PersonnelPicture>();
+            PersonnelTelephone = new System.Collections.Generic.List<PersonnelTelephone>();
+            PersonnelTerm = new System.Collections.Generic.List<PersonnelTerm>();
             InitializePartial();
         }
 

@@ -40,11 +40,6 @@ namespace FollowMe.Web.Models
             Property(x => x.IsWebsiteAvailable).IsOptional();
             Property(x => x.Website).IsOptional();
             Property(x => x.ReasonWhyPassiveId).IsOptional();
-            Property(x => x.ReasonWhyPassiveTermName).IsOptional();
-            Property(x => x.PersonLimit).IsOptional();
-            Property(x => x.PersonLimitPercent).IsOptional();
-            Property(x => x.ServiceStartDate).IsOptional();
-            Property(x => x.ServiceEndDate).IsOptional();
             Property(x => x.AddressTypeId).IsOptional();
             Property(x => x.CreatedOn).IsOptional();
             Property(x => x.CreatedBy).IsOptional();

@@ -30,26 +30,27 @@ namespace FollowMe.Web.Models
         [Display(Name = "Id")]
         public int Id { get; set; } // Id (Primary key)
 
-        [Column(@"TaxonomyId", Order = 2, TypeName = "int")]
-        [Required]
-        [Display(Name = "Taxonomy ID")]
-        public int TaxonomyId { get; set; } // TaxonomyId
-
-        [Column(@"TermId", Order = 3, TypeName = "int")]
+        [Column(@"TermId", Order = 2, TypeName = "int")]
         [Required]
         [Display(Name = "Term ID")]
         public int TermId { get; set; } // TermId
 
-        [Column(@"CompanyId", Order = 4, TypeName = "nvarchar")]
+        [Column(@"CompanyId", Order = 3, TypeName = "nvarchar")]
         [Required(AllowEmptyStrings = true)]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Company ID")]
         public string CompanyId { get; set; } // CompanyId (length: 128)
 
+        [Column(@"TaxonomyId", Order = 4, TypeName = "int")]
+        [Required]
+        [Display(Name = "Taxonomy ID")]
+        public int TaxonomyId { get; set; } // TaxonomyId
+
         [Column(@"IsPassive", Order = 5, TypeName = "bit")]
+        [Required]
         [Display(Name = "Is passive")]
-        public bool? IsPassive { get; set; } // IsPassive
+        public bool IsPassive { get; set; } // IsPassive
 
         [Column(@"CreatedOn", Order = 6, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
@@ -62,16 +63,16 @@ namespace FollowMe.Web.Models
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        [Column(@"PassiveOn", Order = 8, TypeName = "datetime2")]
+        [Column(@"ChangedOn", Order = 8, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
-        [Display(Name = "Passive on")]
-        public System.DateTime? PassiveOn { get; set; } // PassiveOn
+        [Display(Name = "Changed on")]
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
 
-        [Column(@"PassiveBy", Order = 9, TypeName = "nvarchar")]
+        [Column(@"ChangedBy", Order = 9, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
-        [Display(Name = "Passive by")]
-        public string PassiveBy { get; set; } // PassiveBy (length: 128)
+        [Display(Name = "Changed by")]
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Foreign keys
 

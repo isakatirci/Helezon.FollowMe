@@ -38,20 +38,20 @@ namespace Helezon.FollowMe.Entities.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child CompanyTerms where [CompanyTerm].[TermId] point to this entity (FK_CompanyTerm_Term)
+        /// Child CompanyTerm where [CompanyTerm].[TermId] point to this entity (FK_CompanyTerm_Term)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm.FK_CompanyTerm_Term
+        public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
         /// <summary>
-        /// Child PersonnelTerms where [PersonnelTerm].[TermId] point to this entity (FK_PersonnelTerm_Term)
+        /// Child PersonnelTerm where [PersonnelTerm].[Name] point to this entity (FK_PersonnelTerm_Term)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
+        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
 
         public Term()
         {
             NoChildrenClass = false;
             NoDragClass = false;
-            CompanyTerms = new System.Collections.Generic.List<CompanyTerm>();
-            PersonnelTerms = new System.Collections.Generic.List<PersonnelTerm>();
+            CompanyTerm = new System.Collections.Generic.List<CompanyTerm>();
+            PersonnelTerm = new System.Collections.Generic.List<PersonnelTerm>();
             InitializePartial();
         }
 

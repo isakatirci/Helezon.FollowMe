@@ -19,28 +19,35 @@ namespace Helezon.FollowMe.Entities.Models
 
     public partial interface IFollowMeDbContext : System.IDisposable
     {
-        System.Data.Entity.DbSet<AddressGuide> AddressGuides { get; set; } // AddressGuide
-        System.Data.Entity.DbSet<BankGuide> BankGuides { get; set; } // BankGuide
-        System.Data.Entity.DbSet<Company> Companies { get; set; } // Company
-        System.Data.Entity.DbSet<CompanyAddress> CompanyAddresses { get; set; } // CompanyAddress
-        System.Data.Entity.DbSet<CompanyBank> CompanyBanks { get; set; } // CompanyBank
-        System.Data.Entity.DbSet<CompanyImage> CompanyImages { get; set; } // CompanyImage
-        System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone
-        System.Data.Entity.DbSet<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm
-        System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
-        System.Data.Entity.DbSet<JsonObject> JsonObjects { get; set; } // JsonObject
-        System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompanies { get; set; } // LogisticsCompany
-        System.Data.Entity.DbSet<Person> People { get; set; } // Person
-        System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddresses { get; set; } // PersonnelAddress
-        System.Data.Entity.DbSet<PersonnelBank> PersonnelBanks { get; set; } // PersonnelBank
-        System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation
-        System.Data.Entity.DbSet<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage
-        System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephones { get; set; } // PersonnelTelephone
-        System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm
-        System.Data.Entity.DbSet<Sequence> Sequences { get; set; } // Sequence
-        System.Data.Entity.DbSet<Term> Terms { get; set; } // Term
-        System.Data.Entity.DbSet<TermRelationship> TermRelationships { get; set; } // TermRelationship
-        System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomies { get; set; } // TermTaxonomy
+        System.Data.Entity.DbSet<AddressGuide> AddressGuide { get; set; } // AddressGuide
+        System.Data.Entity.DbSet<BankGuide> BankGuide { get; set; } // BankGuide
+        System.Data.Entity.DbSet<Company> Company { get; set; } // Company
+        System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
+        System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
+        System.Data.Entity.DbSet<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture
+        System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
+        System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
+        System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
+        System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
+        System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
+        System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
+        System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
+        System.Data.Entity.DbSet<Person> Person { get; set; } // Person
+        System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress
+        System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank
+        System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation
+        System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
+        System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
+        System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
+        System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
+        System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo
+        System.Data.Entity.DbSet<Term> Term { get; set; } // Term
+        System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
+        System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
+        System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();

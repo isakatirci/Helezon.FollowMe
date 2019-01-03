@@ -13,12 +13,10 @@ using static FollowMe.Web.Controllers.Utils;
 namespace FollowMe.Web.Controllers
 {
     [Authorize]
-    public class CompanyController : BaseController
+    public partial class CompanyController : BaseController
     {
-        public string Test()
-        {
-            return CompanyService.FistCompanyName();
-        }
+
+      
         private static TaxonomyType[] TaxonomyTypeForCompany = new TaxonomyType[] {
                  TaxonomyType.ProductType
                , TaxonomyType.CompanyType     
@@ -63,10 +61,10 @@ namespace FollowMe.Web.Controllers
             {
                 case CompanyRootType.None:
                     return 0;
-                case CompanyRootType.Red:
+                case CompanyRootType.Red://Alıcıları Müşterisi
                     all = Enumerable.Range(1210, 8789);
                     break;
-                case CompanyRootType.Blue:
+                case CompanyRootType.Blue://Satıcıları Toptancılar
                     all = Enumerable.Range(112, 1097);
                     break;
                 case CompanyRootType.Zetaa:
@@ -181,11 +179,12 @@ namespace FollowMe.Web.Controllers
                 EntityTermServices termServicesCompany = new EntityTermServices(db, company.Id, company.Id);
                 company.CompanyRootTypeName = termServicesCompany.GetTermByTermId(company.CompanyRootTypeId).Name;
                 company.CompanyTypes = termServicesCompany.GetTermListForCompanyType();
-                company.ProductType = termServicesCompany.GetTermListForProductType();
+                //company.ProductType = termServicesCompany.GetTermListForProductType();
                 company.CompanyTypesTaxonomyViewModel = new TaxonomyViewModel(TaxonomyType.CompanyType) { TermList = company.CompanyTypes };
 
                 if (company.ReasonWhyPassiveId.HasValue && company.ReasonWhyPassiveId.Value > 0)
                 {
+                    company.ReasonWhyPassiveTermName = termServicesCompany.GetTermByTermId(company.ReasonWhyPassiveId).Name;
                     company.TempReasonWhyPassiveTermId = company.ReasonWhyPassiveId.Value + "|" + company.ReasonWhyPassiveTermName;
                 }
                 
@@ -256,7 +255,8 @@ namespace FollowMe.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Company company)
         {
-            var isAddingSubchild = company.ParentId.IsNullOrWhiteSpace().Not() && company.ParentId != Guid.Empty.ToString();
+            var isAddingSubchild = company.ParentId.IsNullOrWhiteSpace().Not() 
+                                      && string.Compare(company.ParentId, Guid.Empty.ToString(), StringComparison.OrdinalIgnoreCase) != 0;
 
             using (DbContextTransaction transaction = db.Database.BeginTransaction())
             {
@@ -265,7 +265,7 @@ namespace FollowMe.Web.Controllers
                     //var keys = Request.Form.Keys;
                     Company existingCompany = null;
                     var isExistingCompany = false;
-                    if (company.Id.IsNullOrWhiteSpace().Not() && company.Id != Guid.Empty.ToString())
+                    if (company.Id.IsNullOrWhiteSpace().Not() && string.Compare(company.Id, Guid.Empty.ToString(), StringComparison.OrdinalIgnoreCase) != 0)
                         existingCompany = db.Company.SingleOrDefault(x => x.Id == company.Id);
 
 
@@ -275,7 +275,7 @@ namespace FollowMe.Web.Controllers
                         company.CreatedBy = existingCompany.CreatedBy;
                         company.Code = existingCompany.Code;
                         company.ParentId = existingCompany.ParentId;
-                        if (company.ParentId.IsNullOrWhiteSpace().Not() && company.ParentId != Guid.Empty.ToString())
+                        if (company.ParentId.IsNullOrWhiteSpace().Not() && string.Compare(company.ParentId, Guid.Empty.ToString(), StringComparison.OrdinalIgnoreCase) != 0)
                         {
                             if (company.AddressTypeId.HasValue && company.AddressTypeId == (int)AddressType.Merkez)
                             {
@@ -288,10 +288,9 @@ namespace FollowMe.Web.Controllers
                     }
                     else
                     {
-                        if (Request["ParentId"] == null)
+                        if (string.IsNullOrWhiteSpace(Request["ParentId"]) || string.Compare(Request["ParentId"], Guid.Empty.ToString(), StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             company.Code = FindCode(company.Code, (CompanyRootType)company.CompanyRootTypeId);
-
                         }
                         else
                         {
@@ -299,8 +298,20 @@ namespace FollowMe.Web.Controllers
                             //company.Code = 0;
                         }
                         company.CreatedBy = User.Identity.GetUserId();
-                        company.CreatedOn = DateTime.UtcNow;
-                    }           
+                        company.CreatedOn = DateTime.UtcNow;                      
+
+                    }
+
+
+                    if (!isExistingCompany && isAddingSubchild)
+                    {
+                        var grandparent = db.Company.FirstOrDefault(x => x.Id == company.ParentId);
+                        if (grandparent != null && !string.IsNullOrWhiteSpace(grandparent.ParentId) && string.Compare(grandparent.ParentId, Guid.Empty.ToString(), StringComparison.OrdinalIgnoreCase) != 0)
+                        {
+                            company.ParentId = grandparent.ParentId;
+                        }
+                    }
+
 
 
                     company.FoundingDate = MyConvertToDateTime(company.TempFoundingDate);
@@ -730,13 +741,21 @@ namespace FollowMe.Web.Controllers
                     }
                 }
 
-           
-                viewmodel.ImageName = "/Content/Images/"+ CompanyImageService.GetCompanyImageName(tempCopmany.Id);
-                var CompanyLogoUrl = string.Format("/File/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
-                                           , "/Company/CompanyCard?id=" + tempCopmany.Id
+
+                viewmodel.ImageName = GetCompanyPictureService().GetCompanyPictureName(tempCopmany.Id);
+                var CompanyLogoUrl =string.Format("/FileUpload/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                           , System.Web.HttpUtility.UrlEncode("/Company/CompanyCard?id=" + tempCopmany.Id)
                                            , (int)EntityType.Company
                                            , tempCopmany.Id
                                            , tempCopmany.Id);
+
+                var editCompanyLogoUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                      , System.Web.HttpUtility.UrlEncode("/Company/CompanyCard?id=" + tempCopmany.Id)
+                                      , (int)EntityType.Company
+                                      , tempCopmany.Id
+                                      , tempCopmany.Id);
+
+
                 viewmodel.FirmaCodeName = string.Format("{0} {1} {4} {2} {3}"
                     , (isSubChild ? parentCompanyCode:"")
                     , (isSubChild ? parentCompanyName : "")
@@ -873,6 +892,7 @@ namespace FollowMe.Web.Controllers
 
             
                 viewmodel.CompanyLogoUrl = CompanyLogoUrl;
+                viewmodel.EditCompanyLogoUrl = editCompanyLogoUrl;
                 return View(model: viewmodel);
 
             }
@@ -898,15 +918,28 @@ namespace FollowMe.Web.Controllers
             model.Position = termServices.GetTermByTermId(personnel.PositionId).Name;
 
 
-            model.ImageName = "/Content/Images/" + PersonnelImageService.GetPersonnelImageName(personnel.Id,personnel.CompanyId);
-            var PersonelPhotoUrl = string.Format("/File/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+            model.ImageName = GetPersonnelPictureService().GetPersonnelPictureName(personnel.Id,personnel.CompanyId);
+            var PersonelPhotoUrl = string.Format("/FileUpload/Index?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
                                        , "/Company/PersonnelCard%3Fid%3D" + personnel.Id+ "%26companyId=" + personnel.CompanyId
                                        , (int)EntityType.Person
                                        , personnel.Id
                                        , personnel.CompanyId);
+
+            var editPersonelPhotoUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                    , "/Company/PersonnelCard%3Fid%3D" + personnel.Id + "%26companyId=" + personnel.CompanyId
+                                    , (int)EntityType.Person
+                                    , personnel.Id
+                                    , personnel.CompanyId);
+
+            model.EditPersonelLogoUrl = editPersonelPhotoUrl;
+
             model.PersonelPhotoUrl = PersonelPhotoUrl;
             model.Personnel = personnel;
             model.Company = db.Company.Find(personnel.CompanyId);
+
+            model.Company.AddressTypeName = model.Company.AddressTypeId.HasValue
+                && model.Company.AddressTypeId.Value > 0 ? Utils.AddressTypeNames
+                [Tuple.Create(EntityType.Company, (AddressType)model.Company.AddressTypeId)] : "";
 
 
             model.Company.TempFoundingDate = MyDateTimeToString(model.Company.FoundingDate);

@@ -38,7 +38,11 @@ namespace FollowMe.Web.Models
         public string AddressTypeName { get; set; }
 
         [NotMapped]
-        public List<Term> ProductType { get; set; }
+        [Display(Name = "ReasonWhyPassiveTermName")]
+        public string ReasonWhyPassiveTermName { get; set; }
+
+        
+
         [NotMapped]
         public List<Term> Sector { get; set; }
         [NotMapped]

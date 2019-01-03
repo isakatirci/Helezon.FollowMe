@@ -27,23 +27,29 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<Company> Company { get; set; }
         public System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; }
         public System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; }
-        public System.Data.Entity.DbSet<CompanyImage> CompanyImage { get; set; }
+        public System.Data.Entity.DbSet<CompanyPicture> CompanyPicture { get; set; }
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; }
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; }
         public System.Data.Entity.DbSet<Error> Error { get; set; }
+        public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; }
         public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; }
         public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; }
+        public System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; }
         public System.Data.Entity.DbSet<Person> Person { get; set; }
         public System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; }
         public System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; }
         public System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; }
-        public System.Data.Entity.DbSet<PersonnelImage> PersonnelImage { get; set; }
+        public System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; }
         public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; }
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; }
+        public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; }
+        public System.Data.Entity.DbSet<Renk> Renk { get; set; }
         public System.Data.Entity.DbSet<Sequence> Sequence { get; set; }
         public System.Data.Entity.DbSet<Term> Term { get; set; }
         public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; }
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; }
+        public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; }
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; }
 
         public FakeGLCEmasModel()
         {
@@ -56,23 +62,29 @@ namespace FollowMe.Web.Models
             Company = new FakeDbSet<Company>("Id");
             CompanyAddress = new FakeDbSet<CompanyAddress>("Id");
             CompanyBank = new FakeDbSet<CompanyBank>("Id");
-            CompanyImage = new FakeDbSet<CompanyImage>("Id");
+            CompanyPicture = new FakeDbSet<CompanyPicture>("Id");
             CompanyTelephone = new FakeDbSet<CompanyTelephone>("Id");
             CompanyTerm = new FakeDbSet<CompanyTerm>("Id");
             Error = new FakeDbSet<Error>("Id");
+            IplikNo = new FakeDbSet<IplikNo>("Id");
             JsonObject = new FakeDbSet<JsonObject>("Id");
             LogisticsCompany = new FakeDbSet<LogisticsCompany>("Id");
+            PantoneRenk = new FakeDbSet<PantoneRenk>("Id");
             Person = new FakeDbSet<Person>("Id");
             PersonnelAddress = new FakeDbSet<PersonnelAddress>("Id");
             PersonnelBank = new FakeDbSet<PersonnelBank>("Id");
             PersonnelEducation = new FakeDbSet<PersonnelEducation>("Id");
-            PersonnelImage = new FakeDbSet<PersonnelImage>("Id");
+            PersonnelPicture = new FakeDbSet<PersonnelPicture>("Id");
             PersonnelTelephone = new FakeDbSet<PersonnelTelephone>("Id");
             PersonnelTerm = new FakeDbSet<PersonnelTerm>("Id");
+            RafBilgisi = new FakeDbSet<RafBilgisi>("Id");
+            Renk = new FakeDbSet<Renk>("Id");
             Sequence = new FakeDbSet<Sequence>("Id");
             Term = new FakeDbSet<Term>("Id");
             TermRelationship = new FakeDbSet<TermRelationship>("Id");
             TermTaxonomy = new FakeDbSet<TermTaxonomy>("Id");
+            ZetaCodeFanteziIplik = new FakeDbSet<ZetaCodeFanteziIplik>("Id");
+            ZetaCodeNormalIplik = new FakeDbSet<ZetaCodeNormalIplik>("Id");
 
             InitializePartial();
         }

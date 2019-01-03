@@ -21,28 +21,35 @@ namespace Helezon.FollowMe.Entities.Models
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public partial class FollowMeDbContext : System.Data.Entity.DbContext, IFollowMeDbContext
     {
-        public System.Data.Entity.DbSet<AddressGuide> AddressGuides { get; set; } // AddressGuide
-        public System.Data.Entity.DbSet<BankGuide> BankGuides { get; set; } // BankGuide
-        public System.Data.Entity.DbSet<Company> Companies { get; set; } // Company
-        public System.Data.Entity.DbSet<CompanyAddress> CompanyAddresses { get; set; } // CompanyAddress
-        public System.Data.Entity.DbSet<CompanyBank> CompanyBanks { get; set; } // CompanyBank
-        public System.Data.Entity.DbSet<CompanyImage> CompanyImages { get; set; } // CompanyImage
-        public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone
-        public System.Data.Entity.DbSet<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm
-        public System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
-        public System.Data.Entity.DbSet<JsonObject> JsonObjects { get; set; } // JsonObject
-        public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompanies { get; set; } // LogisticsCompany
-        public System.Data.Entity.DbSet<Person> People { get; set; } // Person
-        public System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddresses { get; set; } // PersonnelAddress
-        public System.Data.Entity.DbSet<PersonnelBank> PersonnelBanks { get; set; } // PersonnelBank
-        public System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducations { get; set; } // PersonnelEducation
-        public System.Data.Entity.DbSet<PersonnelImage> PersonnelImages { get; set; } // PersonnelImage
-        public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephones { get; set; } // PersonnelTelephone
-        public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerms { get; set; } // PersonnelTerm
-        public System.Data.Entity.DbSet<Sequence> Sequences { get; set; } // Sequence
-        public System.Data.Entity.DbSet<Term> Terms { get; set; } // Term
-        public System.Data.Entity.DbSet<TermRelationship> TermRelationships { get; set; } // TermRelationship
-        public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomies { get; set; } // TermTaxonomy
+        public System.Data.Entity.DbSet<AddressGuide> AddressGuide { get; set; } // AddressGuide
+        public System.Data.Entity.DbSet<BankGuide> BankGuide { get; set; } // BankGuide
+        public System.Data.Entity.DbSet<Company> Company { get; set; } // Company
+        public System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
+        public System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
+        public System.Data.Entity.DbSet<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture
+        public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
+        public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
+        public System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
+        public System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
+        public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
+        public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
+        public System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
+        public System.Data.Entity.DbSet<Person> Person { get; set; } // Person
+        public System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress
+        public System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank
+        public System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation
+        public System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
+        public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
+        public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
+        public System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
+        public System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo
+        public System.Data.Entity.DbSet<Term> Term { get; set; } // Term
+        public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
+        public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
+        public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
 
         static FollowMeDbContext()
         {
@@ -103,23 +110,30 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyMap());
             modelBuilder.Configurations.Add(new CompanyAddressMap());
             modelBuilder.Configurations.Add(new CompanyBankMap());
-            modelBuilder.Configurations.Add(new CompanyImageMap());
+            modelBuilder.Configurations.Add(new CompanyPictureMap());
             modelBuilder.Configurations.Add(new CompanyTelephoneMap());
             modelBuilder.Configurations.Add(new CompanyTermMap());
             modelBuilder.Configurations.Add(new ErrorMap());
+            modelBuilder.Configurations.Add(new IplikNoMap());
+            modelBuilder.Configurations.Add(new IplikNoGuideMap());
             modelBuilder.Configurations.Add(new JsonObjectMap());
             modelBuilder.Configurations.Add(new LogisticsCompanyMap());
+            modelBuilder.Configurations.Add(new PantoneRenkMap());
             modelBuilder.Configurations.Add(new PersonMap());
             modelBuilder.Configurations.Add(new PersonnelAddressMap());
             modelBuilder.Configurations.Add(new PersonnelBankMap());
             modelBuilder.Configurations.Add(new PersonnelEducationMap());
-            modelBuilder.Configurations.Add(new PersonnelImageMap());
+            modelBuilder.Configurations.Add(new PersonnelPictureMap());
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap());
             modelBuilder.Configurations.Add(new PersonnelTermMap());
-            modelBuilder.Configurations.Add(new SequenceMap());
+            modelBuilder.Configurations.Add(new RafBilgisiMap());
+            modelBuilder.Configurations.Add(new RenkMap());
+            modelBuilder.Configurations.Add(new SequenceBlueSiparisNoMap());
             modelBuilder.Configurations.Add(new TermMap());
             modelBuilder.Configurations.Add(new TermRelationshipMap());
             modelBuilder.Configurations.Add(new TermTaxonomyMap());
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -131,23 +145,30 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyMap(schema));
             modelBuilder.Configurations.Add(new CompanyAddressMap(schema));
             modelBuilder.Configurations.Add(new CompanyBankMap(schema));
-            modelBuilder.Configurations.Add(new CompanyImageMap(schema));
+            modelBuilder.Configurations.Add(new CompanyPictureMap(schema));
             modelBuilder.Configurations.Add(new CompanyTelephoneMap(schema));
             modelBuilder.Configurations.Add(new CompanyTermMap(schema));
             modelBuilder.Configurations.Add(new ErrorMap(schema));
+            modelBuilder.Configurations.Add(new IplikNoMap(schema));
+            modelBuilder.Configurations.Add(new IplikNoGuideMap(schema));
             modelBuilder.Configurations.Add(new JsonObjectMap(schema));
             modelBuilder.Configurations.Add(new LogisticsCompanyMap(schema));
+            modelBuilder.Configurations.Add(new PantoneRenkMap(schema));
             modelBuilder.Configurations.Add(new PersonMap(schema));
             modelBuilder.Configurations.Add(new PersonnelAddressMap(schema));
             modelBuilder.Configurations.Add(new PersonnelBankMap(schema));
             modelBuilder.Configurations.Add(new PersonnelEducationMap(schema));
-            modelBuilder.Configurations.Add(new PersonnelImageMap(schema));
+            modelBuilder.Configurations.Add(new PersonnelPictureMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTermMap(schema));
-            modelBuilder.Configurations.Add(new SequenceMap(schema));
+            modelBuilder.Configurations.Add(new RafBilgisiMap(schema));
+            modelBuilder.Configurations.Add(new RenkMap(schema));
+            modelBuilder.Configurations.Add(new SequenceBlueSiparisNoMap(schema));
             modelBuilder.Configurations.Add(new TermMap(schema));
             modelBuilder.Configurations.Add(new TermRelationshipMap(schema));
             modelBuilder.Configurations.Add(new TermTaxonomyMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap(schema));
             OnCreateModelPartial(modelBuilder, schema);
             return modelBuilder;
         }

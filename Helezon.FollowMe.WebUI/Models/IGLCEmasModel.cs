@@ -24,23 +24,29 @@ namespace FollowMe.Web.Models
         System.Data.Entity.DbSet<Company> Company { get; set; } // Company
         System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
         System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
-        System.Data.Entity.DbSet<CompanyImage> CompanyImage { get; set; } // CompanyImage
+        System.Data.Entity.DbSet<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture
         System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
         System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
         System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
+        System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
         System.Data.Entity.DbSet<Person> Person { get; set; } // Person
         System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress
         System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank
         System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation
-        System.Data.Entity.DbSet<PersonnelImage> PersonnelImage { get; set; } // PersonnelImage
+        System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
         System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
         System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
+        System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
         System.Data.Entity.DbSet<Sequence> Sequence { get; set; } // Sequence
         System.Data.Entity.DbSet<Term> Term { get; set; } // Term
         System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
+        System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();

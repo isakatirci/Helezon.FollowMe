@@ -77,9 +77,9 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                PERSONNEL PHOTO
+                                                PERSONNEL PHOTO                                            
                                                 <a href="javascript:void(0);"
-                                                   onclick="location.href='@Html.Raw(Model.PersonelPhotoUrl)'">
+                                                   onclick="location.href='@Html.Raw(Model.EditPersonelLogoUrl)'">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </th>
@@ -108,7 +108,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>@Html.Raw(Model.Personnel.IsPassive.HasValue && Model.Personnel.IsPassive.Value ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>MERKEZ</td>
+                                                        <td>@Model.Company.AddressTypeName</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

@@ -1,0 +1,77 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.FileControllerIndexViewModel
+
+@section afterGlobalStyles{
+
+    @Styles.Render("~/Content/jQuery-File-Upload")
+
+}
+
+<div class="page-fixed-main-content">
+    <!-- BEGIN PAGE BASE CONTENT -->
+    @Html.Partial("_Files")
+</div>
+
+@section afterGlobalScripts{
+
+    <script>
+
+
+        function setFeatured(btn) {
+            var self = $(btn);
+            self.closest("tr").closest("table").find("tr").removeAttr("style");
+            self.closest("tr").css({ "background-color": "#3598dc6e" });
+
+            setFeaturedPicture(self.data("filename"), self.data("entitytype"));
+        }
+
+        function setFeaturedPicture(fileName, entityType) {
+            var data = {};
+            data.fileName = fileName;
+            data.entityType = entityType;
+            $.ajax({
+                type: "Post",
+                //url: window.getBaseUrl() + uri,
+                url: "/FileUpload/SetFeaturedPicture",
+                data: JSON.parse(JSON.stringify(data)),
+                dataType: "json"
+            })
+                .done(function (response) {
+
+                    swal({
+                        html: true,
+                        title: "Result",
+                        text: "<ul><li><div>" + response.SuccessMessage + " " + response.ErrorMessage + "</div></li></ul>",
+                        type: "info",
+                        allowOutsideClick: true,
+                        allowEscapeKey: true,
+                        textClass: 'text-left text-info',
+                    });
+
+                })
+                .error(function (err) { alert("İşlem Başarısız Oldu"); });
+        }
+
+
+    </script>
+
+    @Scripts.Render("~/bundles/Blueimp-Gallerry2")
+
+    @*<script src="~/Content/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/vendor/load-image.min.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
+
+    *@
+    <script src="~/Content/pages/scripts/form-fileupload.js" type="text/javascript"></script>
+
+}

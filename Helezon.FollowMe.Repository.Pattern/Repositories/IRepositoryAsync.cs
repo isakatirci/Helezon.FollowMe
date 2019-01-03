@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using TrackableEntities;
+//using TrackableEntities;
 
 namespace Repository.Pattern.Repositories
 {
-    public interface IRepositoryAsync<TEntity> : IRepository<TEntity> where TEntity : class, ITrackable
+    public interface IRepositoryAsync<TEntity> : IRepository<TEntity> where TEntity : class
     {
         Task<TEntity> FindAsync(params object[] keyValues);
         Task<TEntity> FindAsync(CancellationToken cancellationToken, params object[] keyValues);

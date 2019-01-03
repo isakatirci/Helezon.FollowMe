@@ -27,23 +27,29 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<Company> Company { get; set; } // Company
         public System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
         public System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
-        public System.Data.Entity.DbSet<CompanyImage> CompanyImage { get; set; } // CompanyImage
+        public System.Data.Entity.DbSet<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         public System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
         public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
         public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
+        public System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
         public System.Data.Entity.DbSet<Person> Person { get; set; } // Person
         public System.Data.Entity.DbSet<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress
         public System.Data.Entity.DbSet<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank
         public System.Data.Entity.DbSet<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation
-        public System.Data.Entity.DbSet<PersonnelImage> PersonnelImage { get; set; } // PersonnelImage
+        public System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
         public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
+        public System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
         public System.Data.Entity.DbSet<Sequence> Sequence { get; set; } // Sequence
         public System.Data.Entity.DbSet<Term> Term { get; set; } // Term
         public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
+        public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
 
         static GLCEmasModel()
         {
@@ -104,23 +110,29 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new CompanyConfiguration());
             modelBuilder.Configurations.Add(new CompanyAddressConfiguration());
             modelBuilder.Configurations.Add(new CompanyBankConfiguration());
-            modelBuilder.Configurations.Add(new CompanyImageConfiguration());
+            modelBuilder.Configurations.Add(new CompanyPictureConfiguration());
             modelBuilder.Configurations.Add(new CompanyTelephoneConfiguration());
             modelBuilder.Configurations.Add(new CompanyTermConfiguration());
             modelBuilder.Configurations.Add(new ErrorConfiguration());
+            modelBuilder.Configurations.Add(new IplikNoConfiguration());
             modelBuilder.Configurations.Add(new JsonObjectConfiguration());
             modelBuilder.Configurations.Add(new LogisticsCompanyConfiguration());
+            modelBuilder.Configurations.Add(new PantoneRenkConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new PersonnelAddressConfiguration());
             modelBuilder.Configurations.Add(new PersonnelBankConfiguration());
             modelBuilder.Configurations.Add(new PersonnelEducationConfiguration());
-            modelBuilder.Configurations.Add(new PersonnelImageConfiguration());
+            modelBuilder.Configurations.Add(new PersonnelPictureConfiguration());
             modelBuilder.Configurations.Add(new PersonnelTelephoneConfiguration());
             modelBuilder.Configurations.Add(new PersonnelTermConfiguration());
+            modelBuilder.Configurations.Add(new RafBilgisiConfiguration());
+            modelBuilder.Configurations.Add(new RenkConfiguration());
             modelBuilder.Configurations.Add(new SequenceConfiguration());
             modelBuilder.Configurations.Add(new TermConfiguration());
             modelBuilder.Configurations.Add(new TermRelationshipConfiguration());
             modelBuilder.Configurations.Add(new TermTaxonomyConfiguration());
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikConfiguration());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -132,23 +144,29 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new CompanyConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyAddressConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyBankConfiguration(schema));
-            modelBuilder.Configurations.Add(new CompanyImageConfiguration(schema));
+            modelBuilder.Configurations.Add(new CompanyPictureConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyTelephoneConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyTermConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikNoConfiguration(schema));
             modelBuilder.Configurations.Add(new JsonObjectConfiguration(schema));
             modelBuilder.Configurations.Add(new LogisticsCompanyConfiguration(schema));
+            modelBuilder.Configurations.Add(new PantoneRenkConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonnelAddressConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonnelBankConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonnelEducationConfiguration(schema));
-            modelBuilder.Configurations.Add(new PersonnelImageConfiguration(schema));
+            modelBuilder.Configurations.Add(new PersonnelPictureConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonnelTelephoneConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonnelTermConfiguration(schema));
+            modelBuilder.Configurations.Add(new RafBilgisiConfiguration(schema));
+            modelBuilder.Configurations.Add(new RenkConfiguration(schema));
             modelBuilder.Configurations.Add(new SequenceConfiguration(schema));
             modelBuilder.Configurations.Add(new TermConfiguration(schema));
             modelBuilder.Configurations.Add(new TermRelationshipConfiguration(schema));
             modelBuilder.Configurations.Add(new TermTaxonomyConfiguration(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikConfiguration(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikConfiguration(schema));
             OnCreateModelPartial(modelBuilder, schema);
             return modelBuilder;
         }

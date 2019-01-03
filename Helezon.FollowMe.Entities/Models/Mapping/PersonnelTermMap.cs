@@ -31,18 +31,18 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.TaxonomyId).HasColumnName(@"TaxonomyId").HasColumnType("int").IsRequired();
-            Property(x => x.TermId).HasColumnName(@"TermId").HasColumnType("int").IsRequired();
-            Property(x => x.PersonnelId).HasColumnName(@"PersonnelId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("int").IsRequired();
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
-            Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsOptional();
+            Property(x => x.PersonnelId).HasColumnName(@"PersonnelId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.PassiveOn).HasColumnName(@"PassiveOn").HasColumnType("datetime2").IsOptional();
-            Property(x => x.PassiveBy).HasColumnName(@"PassiveBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
+            Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
 
             // Foreign keys
-            HasRequired(a => a.Person).WithMany(b => b.PersonnelTerms).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelTerm_Person
-            HasRequired(a => a.Term).WithMany(b => b.PersonnelTerms).HasForeignKey(c => c.TermId).WillCascadeOnDelete(false); // FK_PersonnelTerm_Term
+            HasRequired(a => a.Person).WithMany(b => b.PersonnelTerm).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelTerm_Person
+            HasRequired(a => a.Term).WithMany(b => b.PersonnelTerm).HasForeignKey(c => c.Name).WillCascadeOnDelete(false); // FK_PersonnelTerm_Term
             InitializePartial();
         }
         partial void InitializePartial();

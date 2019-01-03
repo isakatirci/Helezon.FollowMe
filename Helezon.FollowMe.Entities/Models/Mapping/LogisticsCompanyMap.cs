@@ -36,7 +36,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.LogisticsCompanyId).HasColumnName(@"LogisticsCompanyId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
 
             // Foreign keys
-            HasRequired(a => a.Company).WithMany(b => b.LogisticsCompanies).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_LogisticsCompany_Company
+            HasRequired(a => a.Company).WithMany(b => b.LogisticsCompany).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_LogisticsCompany_Company
             InitializePartial();
         }
         partial void InitializePartial();

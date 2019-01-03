@@ -20,6 +20,7 @@ namespace FollowMe.Web.Models.ViewModels
         public string Hobby { get; set; }
         public string Languages { get; set; }
         public string ComputerSkills { get; set; }
+        public string EditPersonelLogoUrl { get; internal set; }
 
         public PersonnelCardViewModel()
         {

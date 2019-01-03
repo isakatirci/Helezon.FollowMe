@@ -8,33 +8,57 @@ using System.Threading.Tasks;
 
 namespace Helezon.FollowMe.Repository.Repositories
 {
-    public static class CompanyImageRepository
+    public static class CompanyPictureRepository
     {
-        private static readonly Lazy<CompanyImage>
-            lazyTerm = new Lazy<CompanyImage>(() => new CompanyImage()
-            {
-                Id = 0,
-                Name = "noimage.png",
-                IsPassive = true,
-                CreatedOn = DateTime.MinValue,
-                CreatedBy = Guid.Empty.ToString(),
-                CompanyId = string.Empty
-            });
+        //private static readonly Lazy<CompanyPicture>
+        //    lazyTerm = new Lazy<CompanyPicture>(() => new CompanyPicture()
+        //    {
+        //        Id = 0,
+        //        Name = "noimage.png",
+        //        IsPassive = true,
+        //        CreatedOn = DateTime.MinValue,
+        //        CreatedBy = Guid.Empty.ToString(),
+        //        CompanyId = string.Empty
+        //    });
 
-        public static CompanyImage NullCompanyImage { get { return lazyTerm.Value; } }
-        public static CompanyImage GetCompanyImageByCompanyId(this IRepositoryAsync<CompanyImage> repository, string companyId)
+        //public static CompanyPicture NullCompanyPicture { get { return lazyTerm.Value; } }
+        //public static CompanyPicture GetCompanyPictureByCompanyId(this IRepositoryAsync<CompanyPicture> repository, string companyId)
+        //{
+        //    return repository
+        //        .Queryable()
+        //        .FirstOrDefault(x => x.CompanyId == companyId) ?? NullCompanyPicture;
+        //}
+        public static string GetCompanyPictureName(this IRepositoryAsync<CompanyPicture> repository, string companyId)
         {
             return repository
                 .Queryable()
-                .FirstOrDefault(x => x.CompanyId == companyId) ?? NullCompanyImage;
-        }
-        public static string GetCompanyImageName(this IRepositoryAsync<CompanyImage> repository, string companyId)
-        {
-            return repository
-                .Queryable()
-                .Where(x => x.CompanyId == companyId)
+                .Where(x => x.CompanyId == companyId && x.IsFeatured && !x.IsPassive)
                 .Select(x => x.Name)
-                .FirstOrDefault() ?? "noimage.png";
+                .FirstOrDefault();
+        }
+
+
+        public static CompanyPicture GetByPictureName(this IRepositoryAsync<CompanyPicture> repository, string pictureName)
+        {
+            return repository
+                    .Queryable()
+                    .SingleOrDefault(x => x.Name == pictureName && !x.IsPassive);
+        }
+
+        public static List<CompanyPicture> GetAllByFeatured(this IRepositoryAsync<CompanyPicture> repository, string companyId)
+        {
+            return repository
+                .Queryable()
+                .Where(x => x.IsFeatured && x.CompanyId == companyId && !x.IsPassive)
+                .ToList();
+        }
+
+        public static List<CompanyPicture> GetAll(this IRepositoryAsync<CompanyPicture> repository, string companyId)
+        {
+            return repository
+                .Queryable()
+                .Where(x => x.CompanyId == companyId && !x.IsPassive)
+                .ToList();
         }
         //
     }

@@ -50,7 +50,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
 
             // Foreign keys
-            HasRequired(a => a.Person).WithMany(b => b.PersonnelBanks).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelBank_Person
+            HasRequired(a => a.Person).WithMany(b => b.PersonnelBank).HasForeignKey(c => c.PersonnelId).WillCascadeOnDelete(false); // FK_PersonnelBank_Person
             InitializePartial();
         }
         partial void InitializePartial();

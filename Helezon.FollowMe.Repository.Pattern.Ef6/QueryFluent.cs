@@ -4,11 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Repository.Pattern.Repositories;
-using TrackableEntities;
 
 namespace Repository.Pattern.Ef6
 {
-    public sealed class QueryFluent<TEntity> : IQueryFluent<TEntity> where TEntity : class, ITrackable
+    public sealed class QueryFluent<TEntity> : IQueryFluent<TEntity> where TEntity : class
     {
         private readonly Expression<Func<TEntity, bool>> _expression;
         private readonly List<Expression<Func<TEntity, object>>> _includes;

@@ -13,52 +13,42 @@ namespace Helezon.FollowMe.Service
     /// <summary>
     ///     Add any custom business logic (methods) here
     /// </summary>
-    public interface IPersonnelImageService : IService<PersonnelImage>
+    public interface IPersonnelPictureService : IService<PersonnelPicture>
     {
-        void InsertOrUpdate(PersonnelImage entity);
-        PersonnelImage GetPersonnelImageByPersonnelId(string personnelId, string companyId);
-        string GetPersonnelImageName(string personnelId, string companyId);
+        string GetPersonnelPictureName(string personnelId, string companyId);
+        void SetFeaturedPicture(string picturename);
+        void DeleteByImageName(string imageName);
+        List<PersonnelPicture> GetAllByPersonnelId(string personnelId, string companyId);
     }
 
     /// <summary>
     ///     All methods that are exposed from Repository in Service are overridable to add business logic,
     ///     business logic should be in the Service layer and not in repository for separation of concerns.
     /// </summary>
-    public class PersonnelImageService : Service<PersonnelImage>, IPersonnelImageService
+    public class PersonnelPictureService : Service<PersonnelPicture>, IPersonnelPictureService
     {
-        private readonly IRepositoryAsync<PersonnelImage> _repository;
-        public PersonnelImageService(IRepositoryAsync<PersonnelImage> repository) : base(repository)
+        private readonly IRepositoryAsync<PersonnelPicture> _repository;
+        public PersonnelPictureService(IRepositoryAsync<PersonnelPicture> repository) : base(repository)
         {
             _repository = repository;
         }
 
-        public void InsertOrUpdate(PersonnelImage entity)
+
+        public string GetPersonnelPictureName(string personnelId,string companyId)
         {
-            if (entity.Id > 0)
-            {
-                Update(entity);
-            }
-            else
-            {
-                Insert(entity);
-            }
-        }
-        public PersonnelImage GetPersonnelImageByPersonnelId(string personnelId,string companyId)
-        {
-            return _repository.GetPersonnelImageByPersonnelId(personnelId,companyId);
-        }
-        
-        public string GetPersonnelImageName(string personnelId,string companyId)
-        {
-            return _repository.GetPersonnelImageName(personnelId, companyId);
+            var pitureName = _repository.GetPersonnelPictureName(personnelId, companyId);
+            if (string.IsNullOrWhiteSpace(pitureName))
+                return "/Files/Uploaded/images/noimage.png";
+
+            return "/Files/Uploaded/images/" + pitureName + "250x300.jpg";
         }
 
-        public override void Update(PersonnelImage entity)
+        public override void Update(PersonnelPicture entity)
         {
             base.Update(entity);
         }
 
-        public override void Insert(PersonnelImage entity)
+        public override void Insert(PersonnelPicture entity)
         {
             // e.g. add business logic here before inserting
             base.Insert(entity);
@@ -68,6 +58,44 @@ namespace Helezon.FollowMe.Service
         {
             // e.g. add business logic here before deleting
             base.Delete(id);
+        }
+        public List<PersonnelPicture> GetAllByPersonnelId(string personnelId, string companyId)
+        {
+            return _repository.GetAll(personnelId,companyId);
+        }
+
+        public void DeleteByImageName(string imageName)
+        {
+            var deletingImage = _repository.GetByPictureName(imageName);
+            if (deletingImage != null && !deletingImage.IsPassive)
+            {
+                deletingImage.IsPassive = true;
+                this.Update(deletingImage);
+            }
+        }
+
+        private void ResetAllFeaturedPicture(string personnelId,string companyId)
+        {
+            var featuredPictures = _repository.GetAllByFeatured(personnelId,companyId);
+            if (featuredPictures != null)
+            {
+                foreach (var picture in featuredPictures)
+                {
+                    picture.IsFeatured = false;
+                    this.Update(picture);
+                }
+            }
+        }
+
+        public void SetFeaturedPicture(string pictureName)
+        {
+            var picture = _repository.GetByPictureName(pictureName);
+            if (picture != null && !picture.IsFeatured)
+            {
+                ResetAllFeaturedPicture(picture.PersonnelId, picture.CompanyId);
+                picture.IsFeatured = true;
+                this.Update(picture);
+            }
         }
     }
 }

@@ -195,6 +195,10 @@ namespace FollowMe.Web.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
         /// <summary>
+        /// Child PersonnelPicture where [PersonnelPicture].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
+        /// <summary>
         /// Child PersonnelTelephone where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
@@ -217,6 +221,7 @@ namespace FollowMe.Web.Models
             PersonnelAddress = new System.Collections.Generic.HashSet<PersonnelAddress>();
             PersonnelBank = new System.Collections.Generic.HashSet<PersonnelBank>();
             PersonnelEducation = new System.Collections.Generic.HashSet<PersonnelEducation>();
+            PersonnelPicture = new System.Collections.Generic.HashSet<PersonnelPicture>();
             PersonnelTelephone = new System.Collections.Generic.HashSet<PersonnelTelephone>();
             PersonnelTerm = new System.Collections.Generic.HashSet<PersonnelTerm>();
             InitializePartial();

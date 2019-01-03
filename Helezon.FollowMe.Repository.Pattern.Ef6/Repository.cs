@@ -8,12 +8,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using TrackableEntities;
-using TrackableEntities.EF6;
 
 namespace Repository.Pattern.Ef6
 {
-    public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : class, ITrackable
+    public class Repository<TEntity> : IRepositoryAsync<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
         protected readonly DbSet<TEntity> Set;
@@ -38,17 +36,7 @@ namespace Repository.Pattern.Ef6
 
         public virtual void Insert(TEntity entity, bool traverseGraph = true)
         {
-            entity.TrackingState = TrackingState.Added;
-
-            if (traverseGraph)
-                Context.ApplyChanges(entity);
-            else
-                Context.Entry(entity).State = EntityState.Added;
-        }
-
-        public void ApplyChanges(TEntity entity)
-        {
-            Context.ApplyChanges(entity);
+            Context.Entry(entity).State = EntityState.Added;
         }
 
         public virtual void InsertRange(IEnumerable<TEntity> entities, bool traverseGraph = true)
@@ -59,17 +47,9 @@ namespace Repository.Pattern.Ef6
             }
         }
 
-        [Obsolete("InsertGraphRange has been deprecated. Instead call Insert to set TrackingState on enttites in a graph.")]
-        public virtual void InsertGraphRange(IEnumerable<TEntity> entities) => InsertRange(entities);
-
         public virtual void Update(TEntity entity, bool traverseGraph = true)
         {
-            entity.TrackingState = TrackingState.Modified;
-
-            if (traverseGraph)
-                Context.ApplyChanges(entity);
-            else
-                Context.Entry(entity).State = EntityState.Modified;
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(params object[] keyValues)
@@ -80,8 +60,7 @@ namespace Repository.Pattern.Ef6
 
         public virtual void Delete(TEntity entity)
         {
-            entity.TrackingState = TrackingState.Deleted;
-            Context.ApplyChanges(entity);
+            Context.Entry(entity).State = EntityState.Deleted;
         }
 
         public virtual void Delete(object id)
@@ -98,7 +77,7 @@ namespace Repository.Pattern.Ef6
 
         public IQueryable<TEntity> Queryable() => Set;
 
-        public IRepository<T> GetRepository<T>() where T : class, ITrackable => UnitOfWork.Repository<T>();
+        public IRepository<T> GetRepository<T>() where T : class => UnitOfWork.Repository<T>();
 
         public virtual async Task<TEntity> FindAsync(params object[] keyValues) => await Set.FindAsync(keyValues);
 
@@ -119,8 +98,8 @@ namespace Repository.Pattern.Ef6
                 return false;
             }
 
-            entity.TrackingState = TrackingState.Deleted;
-            Context.ApplyChanges(entity);
+            Context.Entry(entity).State = EntityState.Deleted;
+
             return true;
         }
 
@@ -170,12 +149,6 @@ namespace Repository.Pattern.Ef6
             int? pageSize = null)
         {
             return await Select(filter, orderBy, includes, page, pageSize).ToListAsync();
-        }
-
-        [Obsolete("InsertOrUpdateGraph has been deprecated.  Instead set TrackingState to Added or Modified and call ApplyChanges.")]
-        public virtual void InsertOrUpdateGraph(TEntity entity)
-        {
-            ApplyChanges(entity);
         }
     }
 }

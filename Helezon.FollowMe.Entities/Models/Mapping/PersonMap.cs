@@ -59,7 +59,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.PositionId).HasColumnName(@"PositionId").HasColumnType("int").IsOptional();
 
             // Foreign keys
-            HasRequired(a => a.Company).WithMany(b => b.People).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Person_Company
+            HasRequired(a => a.Company).WithMany(b => b.Person).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Person_Company
             InitializePartial();
         }
         partial void InitializePartial();

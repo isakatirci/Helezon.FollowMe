@@ -181,13 +181,17 @@ namespace FollowMe.Web.Controllers
 
 
 
-            TaxonomyNamesZCode.Add(TaxonomyType.IplikNo, "İplik No");
-            TaxonomyNamesZCode.Add(TaxonomyType.ElyafCinsiveKalitesi, "Elyaf Cinsi ve Katitesi");
-            TaxonomyNamesZCode.Add(TaxonomyType.ElyafOrani, "Elyaf Oranı");
+            //TaxonomyNamesZCode.Add(TaxonomyType.IplikNo, "İplik No");
+            TaxonomyNamesZCode.Add(TaxonomyType.ElyafCinsiveKalitesi, "Elyaf Cinsi ve Kalitesi");
+            //TaxonomyNamesZCode.Add(TaxonomyType.ElyafOrani, "Elyaf Oranı");
             //TaxonomyNamesZCode.Add(TaxonomyType.ElyafKalitesi, "Elyaf Kalitesi");
             TaxonomyNamesZCode.Add(TaxonomyType.UretimTeknolojisi, "Üretim Teknolojisi");
             TaxonomyNamesZCode.Add(TaxonomyType.IplikRengi, "İplik Rengi");
             TaxonomyNamesZCode.Add(TaxonomyType.PantoneRenkKodu, "Pantone Renk Kodu");
+            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikTurkiye, "Raf Yeri İplik Türkiye");
+            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikYunanistan, "Raf Yeri İplik Yunanistan");
+
+
             //
             //
 
@@ -1038,9 +1042,10 @@ namespace FollowMe.Web
         ElyafKalitesi,
         UretimTeknolojisi,
         IplikRengi,
-        PantoneRenkKodu
+        PantoneRenkKodu,
+        RafYeriIplikTurkiye,
+        RafYeriIplikYunanistan,
         //CompanySubType,
     }
-
 
 }

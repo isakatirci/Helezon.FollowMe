@@ -28,11 +28,10 @@ namespace FollowMe.Web.Models
 
         public PersonnelTermConfiguration(string schema)
         {
-            Property(x => x.IsPassive).IsOptional();
             Property(x => x.CreatedOn).IsOptional();
             Property(x => x.CreatedBy).IsOptional();
-            Property(x => x.PassiveOn).IsOptional();
-            Property(x => x.PassiveBy).IsOptional();
+            Property(x => x.ChangedOn).IsOptional();
+            Property(x => x.ChangedBy).IsOptional();
 
             InitializePartial();
         }

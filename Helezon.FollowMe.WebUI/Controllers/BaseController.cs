@@ -46,64 +46,37 @@ namespace FollowMe.Web.Controllers
             public string Failure { get; set; }
             public object Data { get; set; }
         }
-        public readonly ICompanyService CompanyService;
-        public readonly ICompanyImageService CompanyImageService;
-        public readonly IPersonnelImageService PersonnelImageService;
-        public readonly IUnitOfWorkAsync UnitOfWorkAsync;
-        private readonly DbContext _followMeDbContext;
-        private static bool runinitializeonce = true;
-        public BaseController()
-        {
-         
-                _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
-                UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
-                CompanyService
-                    = new CompanyService(
-                        new Repository<Helezon.FollowMe.Entities.Models.Company>(
-                            _followMeDbContext, UnitOfWorkAsync));
-            
-                CompanyImageService
-                 = new CompanyImageService(
-                     new Repository<Helezon.FollowMe.Entities.Models.CompanyImage>(
-                         _followMeDbContext, UnitOfWorkAsync));
 
-              PersonnelImageService
-                = new PersonnelImageService(
-                    new Repository<Helezon.FollowMe.Entities.Models.PersonnelImage>(
-                        _followMeDbContext, UnitOfWorkAsync));
-                runinitializeonce = false;            
-        }
+        //Helezon.FollowMe.Entities.Models.FollowMeDbContext _followMeDbContext 
+        private static readonly DbContext _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
+        public static readonly IUnitOfWorkAsync UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
 
+        private static Lazy<ICompanyService> CompanyService = new Lazy<ICompanyService>(
+            () => new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync)));
+        private static Lazy<ICompanyPictureService> CompanyPictureService = new Lazy<ICompanyPictureService>(
+            () => new CompanyPictureService(new Repository<Helezon.FollowMe.Entities.Models.CompanyPicture>(_followMeDbContext, UnitOfWorkAsync)));
+        private static Lazy<IPersonnelPictureService> PersonnelPictureService = new Lazy<IPersonnelPictureService>(
+            () => new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync)));
+        private static Lazy<IZetaCodeNormalIplikService> ZetaCodeNormalIplikService = new Lazy<IZetaCodeNormalIplikService>(
+            () => new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync)));
+        private static Lazy<ITermService> TermService = new Lazy<ITermService>(
+            () => new TermService(new Repository<Helezon.FollowMe.Entities.Models.Term>(_followMeDbContext, UnitOfWorkAsync)));
+        private static Lazy<IIplikNoService> IplikNoService = new Lazy<IIplikNoService>(
+            () => new IplikNoService(new Repository<Helezon.FollowMe.Entities.Models.IplikNo>(_followMeDbContext, UnitOfWorkAsync)));
+        public static ITermService GetTermService() { return TermService.Value; }
+        public static ICompanyService GetCompanyService() { return CompanyService.Value; }
+        public static ICompanyPictureService GetCompanyPictureService() { return CompanyPictureService.Value; }
+        public static IPersonnelPictureService GetPersonnelPictureService() { return PersonnelPictureService.Value; }
+        public static IZetaCodeNormalIplikService GetZetaCodeNormalIplikService() { return ZetaCodeNormalIplikService.Value; }
+        public static IIplikNoService GetIplikNoService() { return IplikNoService.Value; }
+
+        
         public class ForeingKeyIdRefreshParametres
         {
             public string tableName { get; set; }
             public string valueField { get; set; }
             public string textField { get; set; }
         }  
-
-        //public List<Email> FillEmailList(string companyId, string entityId, EntityType entityType)
-        //{
-
-        //    var emails = new List<Email>();
-        //    var i = 0;
-        //    while (true)
-        //    {
-        //        var emailAdres = Request["group-email[" + i + "][EmailAdress]"];
-
-        //        if (string.IsNullOrWhiteSpace(emailAdres))
-        //            break;
-
-        //        var email = new Email();
-        //        email.EmailAdress = emailAdres;
-        //        email.CompanyId = companyId;
-        //        email.EntityId = entityId;
-        //        email.EntityType = (int)entityType;
-        //        email.CreatedAt = DateTime.Now;
-        //        emails.Add(email);
-        //        i++;
-        //    }
-        //    return emails;
-        //}
 
         protected List<Tuple<int, int>> GetListNewTerms(TaxonomyType[] taxonomyTypes,string companyId)
         {         

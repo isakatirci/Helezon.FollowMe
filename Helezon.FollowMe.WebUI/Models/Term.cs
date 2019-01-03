@@ -100,7 +100,7 @@ namespace FollowMe.Web.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
         /// <summary>
-        /// Child PersonnelTerm where [PersonnelTerm].[TermId] point to this entity (FK_PersonnelTerm_Term)
+        /// Child PersonnelTerm where [PersonnelTerm].[Name] point to this entity (FK_PersonnelTerm_Term)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
 

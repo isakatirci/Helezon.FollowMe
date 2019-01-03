@@ -35,28 +35,29 @@ namespace FollowMe.Web.Models
         [Display(Name = "Taxonomy ID")]
         public int TaxonomyId { get; set; } // TaxonomyId
 
-        [Column(@"TermId", Order = 3, TypeName = "int")]
+        [Column(@"Name", Order = 3, TypeName = "int")]
         [Required]
-        [Display(Name = "Term ID")]
-        public int TermId { get; set; } // TermId
+        [Display(Name = "Name")]
+        public int Name { get; set; } // Name
 
-        [Column(@"PersonnelId", Order = 4, TypeName = "nvarchar")]
-        [Required(AllowEmptyStrings = true)]
-        [MaxLength(128)]
-        [StringLength(128)]
-        [Display(Name = "Personnel ID")]
-        public string PersonnelId { get; set; } // PersonnelId (length: 128)
-
-        [Column(@"CompanyId", Order = 5, TypeName = "nvarchar")]
+        [Column(@"CompanyId", Order = 4, TypeName = "nvarchar")]
         [Required(AllowEmptyStrings = true)]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Company ID")]
         public string CompanyId { get; set; } // CompanyId (length: 128)
 
+        [Column(@"PersonnelId", Order = 5, TypeName = "nvarchar")]
+        [Required(AllowEmptyStrings = true)]
+        [MaxLength(128)]
+        [StringLength(128)]
+        [Display(Name = "Personnel ID")]
+        public string PersonnelId { get; set; } // PersonnelId (length: 128)
+
         [Column(@"IsPassive", Order = 6, TypeName = "bit")]
+        [Required]
         [Display(Name = "Is passive")]
-        public bool? IsPassive { get; set; } // IsPassive
+        public bool IsPassive { get; set; } // IsPassive
 
         [Column(@"CreatedOn", Order = 7, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
@@ -69,28 +70,28 @@ namespace FollowMe.Web.Models
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        [Column(@"PassiveOn", Order = 9, TypeName = "datetime2")]
+        [Column(@"ChangedOn", Order = 9, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
-        [Display(Name = "Passive on")]
-        public System.DateTime? PassiveOn { get; set; } // PassiveOn
+        [Display(Name = "Changed on")]
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
 
-        [Column(@"PassiveBy", Order = 10, TypeName = "nvarchar")]
+        [Column(@"ChangedBy", Order = 10, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
-        [Display(Name = "Passive by")]
-        public string PassiveBy { get; set; } // PassiveBy (length: 128)
+        [Display(Name = "Changed by")]
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Foreign keys
+
+        /// <summary>
+        /// Parent Term pointed by [PersonnelTerm].([Name]) (FK_PersonnelTerm_Term)
+        /// </summary>
+        [ForeignKey("Name")] public virtual Term Term { get; set; } // FK_PersonnelTerm_Term
 
         /// <summary>
         /// Parent Person pointed by [PersonnelTerm].([PersonnelId]) (FK_PersonnelTerm_Person)
         /// </summary>
         [ForeignKey("PersonnelId")] public virtual Person Person { get; set; } // FK_PersonnelTerm_Person
-
-        /// <summary>
-        /// Parent Term pointed by [PersonnelTerm].([TermId]) (FK_PersonnelTerm_Term)
-        /// </summary>
-        [ForeignKey("TermId")] public virtual Term Term { get; set; } // FK_PersonnelTerm_Term
 
         public PersonnelTerm()
         {

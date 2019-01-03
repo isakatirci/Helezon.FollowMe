@@ -36,11 +36,6 @@ namespace Helezon.FollowMe.Entities.Models
         public bool? IsWebsiteAvailable { get; set; } // IsWebsiteAvailable
         public string Website { get; set; } // Website (length: 500)
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
-        public string ReasonWhyPassiveTermName { get; set; } // ReasonWhyPassiveTermName (length: 500)
-        public int? PersonLimit { get; set; } // PersonLimit
-        public int? PersonLimitPercent { get; set; } // PersonLimitPercent
-        public System.DateTime? ServiceStartDate { get; set; } // ServiceStartDate
-        public System.DateTime? ServiceEndDate { get; set; } // ServiceEndDate
         public int? AddressTypeId { get; set; } // AddressTypeId
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
@@ -51,43 +46,48 @@ namespace Helezon.FollowMe.Entities.Models
         // Reverse navigation
 
         /// <summary>
-        /// Child CompanyAddresses where [CompanyAddress].[CompanyId] point to this entity (FK_CompanyAddress_Company)
+        /// Child CompanyAddress where [CompanyAddress].[CompanyId] point to this entity (FK_CompanyAddress_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyAddress> CompanyAddresses { get; set; } // CompanyAddress.FK_CompanyAddress_Company
+        public virtual System.Collections.Generic.ICollection<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress.FK_CompanyAddress_Company
         /// <summary>
-        /// Child CompanyBanks where [CompanyBank].[CompanyId] point to this entity (FK_CompanyBank_Company)
+        /// Child CompanyBank where [CompanyBank].[CompanyId] point to this entity (FK_CompanyBank_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyBank> CompanyBanks { get; set; } // CompanyBank.FK_CompanyBank_Company
+        public virtual System.Collections.Generic.ICollection<CompanyBank> CompanyBank { get; set; } // CompanyBank.FK_CompanyBank_Company
         /// <summary>
-        /// Child CompanyImages where [CompanyImage].[CompanyId] point to this entity (FK_CompanyImage_Company)
+        /// Child CompanyPicture where [CompanyPicture].[CompanyId] point to this entity (FK_CompanyImage_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyImage> CompanyImages { get; set; } // CompanyImage.FK_CompanyImage_Company
+        public virtual System.Collections.Generic.ICollection<CompanyPicture> CompanyPicture { get; set; } // CompanyPicture.FK_CompanyImage_Company
         /// <summary>
-        /// Child CompanyTelephones where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
+        /// Child CompanyTelephone where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTelephone> CompanyTelephones { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
+        public virtual System.Collections.Generic.ICollection<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
         /// <summary>
-        /// Child CompanyTerms where [CompanyTerm].[CompanyId] point to this entity (FK_CompanyTerm_Company)
+        /// Child CompanyTerm where [CompanyTerm].[CompanyId] point to this entity (FK_CompanyTerm_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerms { get; set; } // CompanyTerm.FK_CompanyTerm_Company
+        public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Company
         /// <summary>
-        /// Child LogisticsCompanies where [LogisticsCompany].[CompanyId] point to this entity (FK_LogisticsCompany_Company)
+        /// Child LogisticsCompany where [LogisticsCompany].[CompanyId] point to this entity (FK_LogisticsCompany_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<LogisticsCompany> LogisticsCompanies { get; set; } // LogisticsCompany.FK_LogisticsCompany_Company
+        public virtual System.Collections.Generic.ICollection<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany.FK_LogisticsCompany_Company
         /// <summary>
-        /// Child People where [Person].[CompanyId] point to this entity (FK_Person_Company)
+        /// Child Person where [Person].[CompanyId] point to this entity (FK_Person_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<Person> People { get; set; } // Person.FK_Person_Company
+        public virtual System.Collections.Generic.ICollection<Person> Person { get; set; } // Person.FK_Person_Company
+        /// <summary>
+        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
 
         public Company()
         {
-            CompanyAddresses = new System.Collections.Generic.List<CompanyAddress>();
-            CompanyBanks = new System.Collections.Generic.List<CompanyBank>();
-            CompanyImages = new System.Collections.Generic.List<CompanyImage>();
-            CompanyTelephones = new System.Collections.Generic.List<CompanyTelephone>();
-            CompanyTerms = new System.Collections.Generic.List<CompanyTerm>();
-            LogisticsCompanies = new System.Collections.Generic.List<LogisticsCompany>();
-            People = new System.Collections.Generic.List<Person>();
+            CompanyAddress = new System.Collections.Generic.List<CompanyAddress>();
+            CompanyBank = new System.Collections.Generic.List<CompanyBank>();
+            CompanyPicture = new System.Collections.Generic.List<CompanyPicture>();
+            CompanyTelephone = new System.Collections.Generic.List<CompanyTelephone>();
+            CompanyTerm = new System.Collections.Generic.List<CompanyTerm>();
+            LogisticsCompany = new System.Collections.Generic.List<LogisticsCompany>();
+            Person = new System.Collections.Generic.List<Person>();
+            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }
 

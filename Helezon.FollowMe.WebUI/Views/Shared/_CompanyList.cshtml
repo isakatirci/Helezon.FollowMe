@@ -122,8 +122,13 @@
         {
             return string.Empty;
         }
+        var key = Tuple.Create(EntityType.Company, (AddressType)int.Parse(addressId));
+        if (Utils.AddressTypeNames.ContainsKey(key))
+        {
+            return Utils.AddressTypeNames[key];
+        }
+        return string.Empty;
 
-        return Utils.AddressTypeNames[Tuple.Create(EntityType.Company, (AddressType)int.Parse(addressId))];
     }
 }
 

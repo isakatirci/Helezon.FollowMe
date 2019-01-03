@@ -1,0 +1,162 @@
+﻿@model FollowMe.Web.Models.ZetaCodeNormalIplik
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ZetaCodeNormalIplik</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PantoneRengi.PantoneKodu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PantoneRengi.PantoneKodu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Renk.HtmlKod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Renk.HtmlKod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Master)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZetaCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZetaCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IplikKategosiId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IplikKategosiId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SirketId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SirketId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ulke)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ulke)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlueUrunKodIsmi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlueUrunKodIsmi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlueKod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlueKod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlueSiparisNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlueSiparisNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UretimTeknolojisiId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UretimTeknolojisiId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RafyeriTurkiyeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RafyeriTurkiyeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RafyeriYunanistanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RafyeriYunanistanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPassive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPassive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
