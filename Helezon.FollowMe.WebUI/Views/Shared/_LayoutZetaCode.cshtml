@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section afterGlobalStyles {
+    @RenderSection("afterGlobalStyles", required: false)
+
+}
+
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown">
+                Go To The Page&nbsp;
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" id="menu">
+                <li><a href="~/ZetaCodeNormalIplik/Create">Normal İplik</a></li>
+                <li><a href="~/ZetaCodeFantaziIplik/Create">Fantazi İplik</a></li>
+                <li><a href="~/ZetaCodeKumasOrmeDokuma/Create">Kumaş Örme Dokuma</a></li>
+                <li><a href="~/ZetaCodeKumasFantazi/Create">Kumaş Fantazi</a></li>
+                <li><a href="~/ZetaCodeAksesuar/Create">Aksesuar</a></li>
+                <li><a href="~/ZetaCodeHazirGiyim/Create">Hazır Giyim</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @RenderBody()
+    </div>
+</div>
+
+
+
+@section afterGlobalScripts {
+    @RenderSection("afterGlobalScripts", required: false)
+
+}
+
+@section beforeGlobalScripts {
+
+    @RenderSection("beforeGlobalScripts", required: false)
+
+}

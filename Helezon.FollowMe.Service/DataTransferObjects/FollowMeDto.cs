@@ -36,7 +36,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
 
     // AddressGuide
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class AddressGuideDto
+    public partial class AddressGuideDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string Country { get; set; } // Country
@@ -48,11 +48,18 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string Town { get; set; } // Town
         public int? CountryId { get; set; } // CountryId
         public int? Priority { get; set; } // Priority
+
+        public AddressGuideDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // BankGuide
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class BankGuideDto
+    public partial class BankGuideDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -68,11 +75,18 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        public BankGuideDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // Company
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyDto
+    public partial class CompanyDto
     {
         public string Id { get; set; } // Id (Primary key) (length: 128)
         public string ParentId { get; set; } // ParentId (length: 128)
@@ -101,35 +115,35 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child CompanyAddress where [CompanyAddress].[CompanyId] point to this entity (FK_CompanyAddress_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyAddressDto> CompanyAddress { get; set; } // CompanyAddress.FK_CompanyAddress_Company
+        public System.Collections.Generic.ICollection<CompanyAddressDto> CompanyAddress { get; set; } // CompanyAddress.FK_CompanyAddress_Company
         /// <summary>
         /// Child CompanyBank where [CompanyBank].[CompanyId] point to this entity (FK_CompanyBank_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyBankDto> CompanyBank { get; set; } // CompanyBank.FK_CompanyBank_Company
+        public System.Collections.Generic.ICollection<CompanyBankDto> CompanyBank { get; set; } // CompanyBank.FK_CompanyBank_Company
         /// <summary>
         /// Child CompanyPicture where [CompanyPicture].[CompanyId] point to this entity (FK_CompanyImage_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyPictureDto> CompanyPicture { get; set; } // CompanyPicture.FK_CompanyImage_Company
+        public System.Collections.Generic.ICollection<CompanyPictureDto> CompanyPicture { get; set; } // CompanyPicture.FK_CompanyImage_Company
         /// <summary>
         /// Child CompanyTelephone where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTelephoneDto> CompanyTelephone { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
+        public System.Collections.Generic.ICollection<CompanyTelephoneDto> CompanyTelephone { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
         /// <summary>
         /// Child CompanyTerm where [CompanyTerm].[CompanyId] point to this entity (FK_CompanyTerm_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Company
+        public System.Collections.Generic.ICollection<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Company
         /// <summary>
         /// Child LogisticsCompany where [LogisticsCompany].[CompanyId] point to this entity (FK_LogisticsCompany_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<LogisticsCompanyDto> LogisticsCompany { get; set; } // LogisticsCompany.FK_LogisticsCompany_Company
+        public System.Collections.Generic.ICollection<LogisticsCompanyDto> LogisticsCompany { get; set; } // LogisticsCompany.FK_LogisticsCompany_Company
         /// <summary>
         /// Child Person where [Person].[CompanyId] point to this entity (FK_Person_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonDto> Person { get; set; } // Person.FK_Person_Company
+        public System.Collections.Generic.ICollection<PersonDto> Person { get; set; } // Person.FK_Person_Company
         /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
+        public System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
 
         public CompanyDto()
         {
@@ -141,12 +155,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             LogisticsCompany = new System.Collections.Generic.List<LogisticsCompanyDto>();
             Person = new System.Collections.Generic.List<PersonDto>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // CompanyAddress
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyAddressDto
+    public partial class CompanyAddressDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -170,12 +187,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [CompanyAddress].([CompanyId]) (FK_CompanyAddress_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_CompanyAddress_Company
+        public CompanyDto Company { get; set; } // FK_CompanyAddress_Company
+
+        public CompanyAddressDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // CompanyBank
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyBankDto
+    public partial class CompanyBankDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -203,18 +227,21 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [CompanyBank].([CompanyId]) (FK_CompanyBank_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_CompanyBank_Company
+        public CompanyDto Company { get; set; } // FK_CompanyBank_Company
 
         public CompanyBankDto()
         {
             BankNameTermId = 0;
             CurrencyTypeTermId = 0;
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // CompanyPicture
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyPictureDto
+    public partial class CompanyPictureDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -230,12 +257,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [CompanyPicture].([CompanyId]) (FK_CompanyImage_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_CompanyImage_Company
+        public CompanyDto Company { get; set; } // FK_CompanyImage_Company
+
+        public CompanyPictureDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // CompanyTelephone
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyTelephoneDto
+    public partial class CompanyTelephoneDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -254,12 +288,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [CompanyTelephone].([CompanyId]) (FK_CompanyTelephone_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_CompanyTelephone_Company
+        public CompanyDto Company { get; set; } // FK_CompanyTelephone_Company
+
+        public CompanyTelephoneDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // CompanyTerm
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class CompanyTermDto
+    public partial class CompanyTermDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int TermId { get; set; } // TermId
@@ -276,17 +317,24 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [CompanyTerm].([CompanyId]) (FK_CompanyTerm_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_CompanyTerm_Company
+        public CompanyDto Company { get; set; } // FK_CompanyTerm_Company
 
         /// <summary>
         /// Parent Term pointed by [CompanyTerm].([TermId]) (FK_CompanyTerm_Term)
         /// </summary>
-        public virtual TermDto Term { get; set; } // FK_CompanyTerm_Term
+        public TermDto Term { get; set; } // FK_CompanyTerm_Term
+
+        public CompanyTermDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // Error
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class ErrorDto
+    public partial class ErrorDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string UserId { get; set; } // UserId (length: 128)
@@ -299,11 +347,18 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string HttpReferer { get; set; } // HttpReferer (length: 500)
         public string PathAndQuery { get; set; } // PathAndQuery (length: 500)
         public bool IsPassive { get; set; } // IsPassive
+
+        public ErrorDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // IplikNo
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class IplikNoDto
+    public partial class IplikNoDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
@@ -312,7 +367,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string Dny { get; set; } // DNY (length: 10)
         public string Fl { get; set; } // FL (length: 10)
         public string Ea { get; set; } // EA (length: 10)
-        public string ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi (length: 10)
+        public int? ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi
         public int? ElyafOrani { get; set; } // ElyafOrani
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
@@ -325,12 +380,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent ZetaCodeNormalIplik pointed by [IplikNo].([ZetaCodeNormalIplikId]) (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
-        public virtual ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikNo_ZetaCodeNormaliplik
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikNo_ZetaCodeNormaliplik
+
+        public IplikNoDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // IplikNoGuide
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class IplikNoGuideDto
+    public partial class IplikNoGuideDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string Ne { get; set; } // NE (length: 10)
@@ -338,21 +400,35 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string Dny { get; set; } // DNY (length: 10)
         public string Fl { get; set; } // FL (length: 10)
         public string Ea { get; set; } // EA (length: 10)
+
+        public IplikNoGuideDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // JsonObject
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class JsonObjectDto
+    public partial class JsonObjectDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string Json { get; set; } // Json
         public int JsonTypeId { get; set; } // JsonTypeId
         public string CompanyId { get; set; } // CompanyId (length: 128)
+
+        public JsonObjectDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // LogisticsCompany
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class LogisticsCompanyDto
+    public partial class LogisticsCompanyDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -365,17 +441,20 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Company pointed by [LogisticsCompany].([CompanyId]) (FK_LogisticsCompany_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_LogisticsCompany_Company
+        public CompanyDto Company { get; set; } // FK_LogisticsCompany_Company
 
         public LogisticsCompanyDto()
         {
             LogisticsCompanyId = "00000000-0000-0000-0000-000000000000";
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // PantoneRenk
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PantoneRenkDto
+    public partial class PantoneRenkDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string PantoneKodu { get; set; } // PantoneKodu (length: 200)
@@ -386,17 +465,20 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[PantoneId] point to this entity (FK_ZetaCodeNormaliplik_PantoneRengi)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_PantoneRengi
+        public System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_PantoneRengi
 
         public PantoneRenkDto()
         {
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // Person
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonDto
+    public partial class PersonDto
     {
         public string Id { get; set; } // Id (Primary key) (length: 128)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -432,34 +514,34 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child PersonnelAddress where [PersonnelAddress].[PersonnelId] point to this entity (FK_PersonnelAddress_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelAddressDto> PersonnelAddress { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
+        public System.Collections.Generic.ICollection<PersonnelAddressDto> PersonnelAddress { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
         /// <summary>
         /// Child PersonnelBank where [PersonnelBank].[PersonnelId] point to this entity (FK_PersonnelBank_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelBankDto> PersonnelBank { get; set; } // PersonnelBank.FK_PersonnelBank_Person
+        public System.Collections.Generic.ICollection<PersonnelBankDto> PersonnelBank { get; set; } // PersonnelBank.FK_PersonnelBank_Person
         /// <summary>
         /// Child PersonnelEducation where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelEducationDto> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
+        public System.Collections.Generic.ICollection<PersonnelEducationDto> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
         /// <summary>
         /// Child PersonnelPicture where [PersonnelPicture].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelPictureDto> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
+        public System.Collections.Generic.ICollection<PersonnelPictureDto> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
         /// <summary>
         /// Child PersonnelTelephone where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTelephoneDto> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
+        public System.Collections.Generic.ICollection<PersonnelTelephoneDto> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
         /// <summary>
         /// Child PersonnelTerm where [PersonnelTerm].[PersonnelId] point to this entity (FK_PersonnelTerm_Person)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
+        public System.Collections.Generic.ICollection<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
 
         // Foreign keys
 
         /// <summary>
         /// Parent Company pointed by [Person].([CompanyId]) (FK_Person_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_Person_Company
+        public CompanyDto Company { get; set; } // FK_Person_Company
 
         public PersonDto()
         {
@@ -471,12 +553,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             PersonnelPicture = new System.Collections.Generic.List<PersonnelPictureDto>();
             PersonnelTelephone = new System.Collections.Generic.List<PersonnelTelephoneDto>();
             PersonnelTerm = new System.Collections.Generic.List<PersonnelTermDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // PersonnelAddress
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelAddressDto
+    public partial class PersonnelAddressDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -501,12 +586,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelAddress].([PersonnelId]) (FK_PersonnelAddress_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelAddress_Person
+        public PersonDto Person { get; set; } // FK_PersonnelAddress_Person
+
+        public PersonnelAddressDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // PersonnelBank
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelBankDto
+    public partial class PersonnelBankDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -533,18 +625,21 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelBank].([PersonnelId]) (FK_PersonnelBank_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelBank_Person
+        public PersonDto Person { get; set; } // FK_PersonnelBank_Person
 
         public PersonnelBankDto()
         {
             BankNameTermId = 0;
             CurrencyTypeTermId = 0;
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // PersonnelEducation
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelEducationDto
+    public partial class PersonnelEducationDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string PersonnelId { get; set; } // PersonnelId (length: 128)
@@ -564,17 +659,20 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelEducation].([PersonnelId]) (FK_PersonnelEducation_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelEducation_Person
+        public PersonDto Person { get; set; } // FK_PersonnelEducation_Person
 
         public PersonnelEducationDto()
         {
             StudiedSchoolName = "0";
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // PersonnelPicture
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelPictureDto
+    public partial class PersonnelPictureDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 200)
@@ -591,12 +689,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelPicture].([PersonnelId]) (FK_PersonnelImage_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelImage_Person
+        public PersonDto Person { get; set; } // FK_PersonnelImage_Person
+
+        public PersonnelPictureDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // PersonnelTelephone
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelTelephoneDto
+    public partial class PersonnelTelephoneDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
@@ -616,12 +721,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelTelephone].([PersonnelId]) (FK_PersonnelTelephone_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelTelephone_Person
+        public PersonDto Person { get; set; } // FK_PersonnelTelephone_Person
+
+        public PersonnelTelephoneDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // PersonnelTerm
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class PersonnelTermDto
+    public partial class PersonnelTermDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int TaxonomyId { get; set; } // TaxonomyId
@@ -639,26 +751,40 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Parent Person pointed by [PersonnelTerm].([PersonnelId]) (FK_PersonnelTerm_Person)
         /// </summary>
-        public virtual PersonDto Person { get; set; } // FK_PersonnelTerm_Person
+        public PersonDto Person { get; set; } // FK_PersonnelTerm_Person
 
         /// <summary>
         /// Parent Term pointed by [PersonnelTerm].([Name]) (FK_PersonnelTerm_Term)
         /// </summary>
-        public virtual TermDto Term { get; set; } // FK_PersonnelTerm_Term
+        public TermDto Term { get; set; } // FK_PersonnelTerm_Term
+
+        public PersonnelTermDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // RafBilgisi
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class RafBilgisiDto
+    public partial class RafBilgisiDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int? DilId { get; set; } // DilId
         public string RafBilgisi_ { get; set; } // RafBilgisi (length: 100)
+
+        public RafBilgisiDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // Renk
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class RenkDto
+    public partial class RenkDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string HtmlKod { get; set; } // HtmlKod (length: 50)
@@ -671,28 +797,38 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[Renkid] point to this entity (FK_ZetaCodeNormaliplik_Renk)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Renk
+        public System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Renk
 
         public RenkDto()
         {
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // SequenceBlueSiparisNo
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class SequenceBlueSiparisNoDto
+    public partial class SequenceBlueSiparisNoDto
     {
         public int Id { get; set; } // Id (Primary key)
         public string BlueCompanyId { get; set; } // BlueCompanyId (length: 128)
         public int SiparisNo { get; set; } // SiparisNo
         public System.DateTime CreatedOn { get; set; } // CreatedOn
         public string Description { get; set; } // Description (length: 250)
+
+        public SequenceBlueSiparisNoDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // Term
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class TermDto
+    public partial class TermDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int TaxonomyId { get; set; } // TaxonomyId
@@ -713,11 +849,11 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child CompanyTerm where [CompanyTerm].[TermId] point to this entity (FK_CompanyTerm_Term)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
+        public System.Collections.Generic.ICollection<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
         /// <summary>
         /// Child PersonnelTerm where [PersonnelTerm].[Name] point to this entity (FK_PersonnelTerm_Term)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
+        public System.Collections.Generic.ICollection<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
 
         public TermDto()
         {
@@ -725,12 +861,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             NoDragClass = false;
             CompanyTerm = new System.Collections.Generic.List<CompanyTermDto>();
             PersonnelTerm = new System.Collections.Generic.List<PersonnelTermDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     // TermRelationship
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class TermRelationshipDto
+    public partial class TermRelationshipDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int TermId { get; set; } // TermId
@@ -742,11 +881,18 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        public TermRelationshipDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // TermTaxonomy
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class TermTaxonomyDto
+    public partial class TermTaxonomyDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int? TermId { get; set; } // TermId
@@ -759,26 +905,40 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        public TermTaxonomyDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // ZetaCodeFanteziIplik
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class ZetaCodeFanteziIplikDto
+    public partial class ZetaCodeFanteziIplikDto
     {
         public int Id { get; set; } // Id (Primary key)
+
+        public ZetaCodeFanteziIplikDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
     }
 
     // ZetaCodeNormalIplik
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class ZetaCodeNormalIplikDto
+    public partial class ZetaCodeNormalIplikDto
     {
         public int Id { get; set; } // Id (Primary key)
         public bool Master { get; set; } // Master
-        public int? ZetaCode { get; set; } // ZetaCode
+        public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
-        public string IplikKategosiId { get; set; } // IplikKategosiId (length: 200)
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
         public string SirketId { get; set; } // SirketId (length: 128)
-        public string Ulke { get; set; } // Ulke (length: 200)
+        public int? Ulke { get; set; } // Ulke
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
         public int BlueKod { get; set; } // BlueKod
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
@@ -798,29 +958,32 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// <summary>
         /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<IplikNoDto> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
+        public System.Collections.Generic.ICollection<IplikNoDto> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
 
         // Foreign keys
 
         /// <summary>
         /// Parent Company pointed by [ZetaCodeNormalIplik].([SirketId]) (FK_ZetaCodeNormaliplik_Company)
         /// </summary>
-        public virtual CompanyDto Company { get; set; } // FK_ZetaCodeNormaliplik_Company
+        public CompanyDto Company { get; set; } // FK_ZetaCodeNormaliplik_Company
 
         /// <summary>
         /// Parent PantoneRenk pointed by [ZetaCodeNormalIplik].([PantoneId]) (FK_ZetaCodeNormaliplik_PantoneRengi)
         /// </summary>
-        public virtual PantoneRenkDto PantoneRenk { get; set; } // FK_ZetaCodeNormaliplik_PantoneRengi
+        public PantoneRenkDto PantoneRenk { get; set; } // FK_ZetaCodeNormaliplik_PantoneRengi
 
         /// <summary>
         /// Parent Renk pointed by [ZetaCodeNormalIplik].([Renkid]) (FK_ZetaCodeNormaliplik_Renk)
         /// </summary>
-        public virtual RenkDto Renk { get; set; } // FK_ZetaCodeNormaliplik_Renk
+        public RenkDto Renk { get; set; } // FK_ZetaCodeNormaliplik_Renk
 
         public ZetaCodeNormalIplikDto()
         {
             IplikNo = new System.Collections.Generic.List<IplikNoDto>();
+            InitializePartial();
         }
+
+        partial void InitializePartial();
     }
 
     #endregion

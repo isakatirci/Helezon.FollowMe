@@ -176,7 +176,9 @@ namespace FollowMe.Web.Controllers
             TaxonomyNames.Add(TaxonomyType.ComputerSkills, "Computer Skills");
             TaxonomyNames.Add(TaxonomyType.BloodGroup, "Blood Group");
 
-            TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileri, "İplik Kategorileri");
+            TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileriNormal, "İplik Kategorileri Normal");
+            TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileriFantazi, "İplik Kategorileri Fantazi");
+
             TaxonomyNamesZCode.Add(TaxonomyType.KumasKategorileri, "Kumaş Kategorileri");
 
 
@@ -188,8 +190,8 @@ namespace FollowMe.Web.Controllers
             TaxonomyNamesZCode.Add(TaxonomyType.UretimTeknolojisi, "Üretim Teknolojisi");
             TaxonomyNamesZCode.Add(TaxonomyType.IplikRengi, "İplik Rengi");
             TaxonomyNamesZCode.Add(TaxonomyType.PantoneRenkKodu, "Pantone Renk Kodu");
-            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikTurkiye, "Raf Yeri İplik Türkiye");
-            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikYunanistan, "Raf Yeri İplik Yunanistan");
+            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikTurkiye, "Raf Yeri Türkiye");
+            TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikYunanistan, "Raf Yeri Yunanistan");
 
 
             //
@@ -964,7 +966,8 @@ namespace FollowMe.Web
     {
         None,
         Person,
-        Company
+        Company,
+        ZetaCodeNormalIplik
     }
 
     public enum GenderType
@@ -1034,7 +1037,7 @@ namespace FollowMe.Web
         EducationLevel,
         ComputerSkills,
         ReasonWhyPassiveForPersonnel,
-        IplikKategorileri,
+        IplikKategorileriNormal,
         KumasKategorileri,
         IplikNo,
         ElyafCinsiveKalitesi,
@@ -1045,6 +1048,7 @@ namespace FollowMe.Web
         PantoneRenkKodu,
         RafYeriIplikTurkiye,
         RafYeriIplikYunanistan,
+        IplikKategorileriFantazi,
         //CompanySubType,
     }
 

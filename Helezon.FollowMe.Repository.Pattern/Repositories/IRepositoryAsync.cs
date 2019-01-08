@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Repository.Pattern.UnitOfWork;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 //using TrackableEntities;
@@ -13,5 +14,7 @@ namespace Repository.Pattern.Repositories
         Task<bool> DeleteAsync(CancellationToken cancellationToken, params object[] keyValues);
         Task<IEnumerable<TEntity>> SelectQueryAsync(string query, params object[] parameters);
         Task<IEnumerable<TEntity>> SelectQueryAsync(string query, CancellationToken cancellationToken, params object[] parameters);
+        IRepositoryAsync<T> GetRepositoryAsync<T>() where T : class;
+        IUnitOfWorkAsync UnitOfWorkAsync();
     }
 }

@@ -73,7 +73,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
 
         [HttpPost]
-        public JsonResult Upload(FileControllerIndexViewModel model)
+        public ActionResult Upload(FileControllerIndexViewModel model)
         {
             var resultList = new List<ViewDataUploadFilesResult>();
 
@@ -90,7 +90,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             else
             {
                 SaveImages(resultList, model);
-                return Json(files);
+                 return Json(files);
             }
         }
 
@@ -124,6 +124,18 @@ namespace Helezon.FollowMe.WebUI.Controllers
                             CompanyId = model.CompanyId,
                             Name = Path.GetFileNameWithoutExtension(filename),
                             Extension= Path.GetExtension(filename),
+                            //Id = model.ImageId.AsInt(),
+                            CreatedOn = DateTime.UtcNow,
+                            CreatedBy = User.Identity.GetUserId()
+                        });
+                        break;
+                    case EntityType.ZetaCodeNormalIplik:
+                        GetZetaCodeNormalIplikPictureService().Insert(new Entities.Models.ZetaCodeNormalIplikPicture
+                        {
+                            CompanyId = model.CompanyId,
+                            ZetaCodeNormalIplikId = model.EntityId.AsInt(),
+                            Name = Path.GetFileNameWithoutExtension(filename),
+                            Extension = Path.GetExtension(filename),
                             //Id = model.ImageId.AsInt(),
                             CreatedOn = DateTime.UtcNow,
                             CreatedBy = User.Identity.GetUserId()
@@ -168,6 +180,22 @@ namespace Helezon.FollowMe.WebUI.Controllers
                     if (companyPictures != null)
                     {
                         foreach (var picture in companyPictures)
+                        {
+                            var temp = Path.Combine(fullPath, picture.Name + picture.Extension);
+                            if (System.IO.File.Exists(temp))
+                            {
+                                FileInfo file = new FileInfo(temp);
+                                int SizeInt = unchecked((int)file.Length);
+                                r.Add(UploadResult(file.Name, SizeInt, file.FullName, entitytype));
+                            }
+                        }
+                    }
+                    break;
+                case EntityType.ZetaCodeNormalIplik:
+                    var normalIplikPictures = GetZetaCodeNormalIplikPictureService().GetAllById(entityid.AsInt(), companyid);
+                    if (normalIplikPictures != null)
+                    {
+                        foreach (var picture in normalIplikPictures)
                         {
                             var temp = Path.Combine(fullPath, picture.Name + picture.Extension);
                             if (System.IO.File.Exists(temp))
@@ -253,6 +281,9 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 case EntityType.Company:
                     GetCompanyPictureService().DeleteByImageName(Path.GetFileNameWithoutExtension(file));
                     break;
+                case EntityType.ZetaCodeNormalIplik:
+                    GetZetaCodeNormalIplikPictureService().DeleteByImageName(Path.GetFileNameWithoutExtension(file));
+                    break;
                 default:
                     break;
             }        
@@ -278,6 +309,9 @@ namespace Helezon.FollowMe.WebUI.Controllers
                         break;
                     case EntityType.Company:
                         GetCompanyPictureService().SetFeaturedPicture(filename);
+                        break;
+                    case EntityType.ZetaCodeNormalIplik:
+                        GetZetaCodeNormalIplikPictureService().SetFeaturedPicture(filename);
                         break;
                     default:
                         break;

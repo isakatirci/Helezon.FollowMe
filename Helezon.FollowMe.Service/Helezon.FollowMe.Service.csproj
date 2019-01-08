@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="CompanyImageService - Copy.cs" />
     <Compile Include="CompanyImageService.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="DataTransferObjects\FollowMeDto.cs">
@@ -84,9 +85,11 @@
       <DependentUpon>FollowMeDto.tt</DependentUpon>
     </Compile>
     <Compile Include="DataTransferObjects\JsTreeDataDto.cs" />
+    <Compile Include="DataTransferObjects\Partials.cs" />
     <Compile Include="DataTransferObjects\ZetaCodeNormalIplikContainerDto.cs" />
     <Compile Include="FluentValidation\CompanyValidatior.cs" />
     <Compile Include="IplikNoService.cs" />
+    <Compile Include="OthersService.cs" />
     <Compile Include="TermService.cs" />
     <Compile Include="PersonnelImageService.cs" />
     <Compile Include="PersonnelTermService.cs" />

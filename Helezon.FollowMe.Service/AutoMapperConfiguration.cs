@@ -27,30 +27,54 @@ namespace Helezon.FollowMe.Service
                 .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore())
                 .ForMember(dest => dest.CompanyTerm, opt => opt.Ignore());
 
+                cfg.CreateMap<CompanyDto, CompanyDto>();
+                //.ForMember(dest => dest.CompanyAddress, opt => opt.Ignore())
+                //.ForMember(dest => dest.CompanyPicture, opt => opt.Ignore())
+                //.ForMember(dest => dest.CompanyBank, opt => opt.Ignore())
+                //.ForMember(dest => dest.CompanyTelephone, opt => opt.Ignore())
+                //.ForMember(dest => dest.LogisticsCompany, opt => opt.Ignore())
+                //.ForMember(dest => dest.Person, opt => opt.Ignore())
+                //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore())
+                //.ForMember(dest => dest.CompanyTerm, opt => opt.Ignore());
+
 
                 cfg.CreateMap<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>()
                 .ForMember(dest => dest.IplikNo, opt => opt.Ignore())
                 .ForMember(dest => dest.Renk, opt => opt.Ignore())
                 .ForMember(dest => dest.PantoneRenk, opt => opt.Ignore());
 
+                cfg.CreateMap<ZetaCodeNormalIplikDto, ZetaCodeNormalIplik>();
+                //.ForMember(dest => dest.IplikNo, opt => opt.Ignore())
+                //.ForMember(dest => dest.Renk, opt => opt.Ignore())
+                //.ForMember(dest => dest.PantoneRenk, opt => opt.Ignore());
+
 
                 cfg.CreateMap<PantoneRenk, PantoneRenkDto>()
-                 .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                cfg.CreateMap<PantoneRenkDto, PantoneRenk>();
+                //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+
 
                 cfg.CreateMap<Renk, RenkDto>()
                 .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                cfg.CreateMap<RenkDto, Renk>();
+                //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
 
                 cfg.CreateMap<Term, TermDto>()
                 .ForMember(dest => dest.CompanyTerm, opt => opt.Ignore())
                 .ForMember(dest => dest.PersonnelTerm, opt => opt.Ignore());
 
+                cfg.CreateMap<TermDto, Term>();
+                //.ForMember(dest => dest.CompanyTerm, opt => opt.Ignore())
+                //.ForMember(dest => dest.PersonnelTerm, opt => opt.Ignore());
 
                 cfg.CreateMap<IplikNo, IplikNoDto>()
                 .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
 
-
-                cfg.CreateMap<ZetaCodeNormalIplikDto, ZetaCodeNormalIplik>();            
                 cfg.CreateMap<IplikNoDto, IplikNo>();
+                //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+
+
 
             });
 

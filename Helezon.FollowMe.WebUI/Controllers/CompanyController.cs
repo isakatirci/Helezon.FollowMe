@@ -926,7 +926,7 @@ namespace FollowMe.Web.Controllers
                                        , personnel.CompanyId);
 
             var editPersonelPhotoUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
-                                    , "/Company/PersonnelCard%3Fid%3D" + personnel.Id + "%26companyId=" + personnel.CompanyId
+                                    , Url.Encode("/Company/PersonnelCard?Id=" + personnel.Id + "&companyId=" + personnel.CompanyId)
                                     , (int)EntityType.Person
                                     , personnel.Id
                                     , personnel.CompanyId);

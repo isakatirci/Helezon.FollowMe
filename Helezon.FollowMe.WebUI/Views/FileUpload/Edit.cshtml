@@ -1,6 +1,8 @@
 ﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.FileControllerIndexViewModel
 @{
     ViewBag.Title = "";
+    var returnUrl = HttpUtility.UrlDecode(Model.ReturnUrl);
+
 }
 
 
@@ -25,6 +27,9 @@
             $form = $('#fileupload').fileupload({
                 dataType: 'json'
             });
+                @*.bind('fileuploaddone', function (e, data) { $(location).attr("href", "@Html.Raw(returnUrl)"); })
+                .bind('fileuploadfail', function (e, data) { alert("İşlem Başarısız Oldu"); });*@
+                //.bind('fileuploadalways', function (e, data) { alert("fileuploadalways"); });
 
         });
         $('#fileupload').addClass('fileupload-processing');
@@ -82,6 +87,7 @@
         var entitytype = "@Model.Entitytype";
         var entityid = "@Model.EntityId";
         var companyid = "@Model.CompanyId";
+
         var getFileUrl = "/FileUpload/GetFileList?entitytype=" + entitytype + "&entityid=" + entityid + "&companyid=" + companyid;
         $.ajax({
             type: 'GET',

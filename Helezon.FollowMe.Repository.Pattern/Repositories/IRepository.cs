@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,5 +21,6 @@ namespace Repository.Pattern.Repositories
         IQueryFluent<TEntity> Query();
         IQueryable<TEntity> Queryable();
         IRepository<T> GetRepository<T>() where T : class;
+        //IUnitOfWork IUnitOfWork();
     }
 }

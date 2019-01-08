@@ -4,11 +4,13 @@
     ViewBag.Title = "";
 }
 
+<style type="text/css">
 
+    .dataTables_scrollBody {
+        height: 800px !important;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 
 <div class="row">
@@ -17,8 +19,8 @@
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption font-green">
-                    <i class="icon-settings font-red"></i>
-                    <span class="caption-subject bold uppercase">Both Scrollbars</span>
+                    @*<i class="icon-settings font-red"></i>
+                    <span class="caption-subject bold uppercase"></span>*@
                 </div>
                 <div class="tools"> </div>
             </div>
@@ -27,7 +29,7 @@
                 <table class="table table-striped table-bordered table-hover order-column" id="sample_3">
                     <thead>
                         <tr>
-
+                            <th></th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.PantoneRenk.PantoneKodu)
                             </th>
@@ -37,52 +39,39 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.Master)
                             </th>
-                            <th>
+                            <th>                               
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.ZetaCode)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiId)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiName)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.SirketId)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.Company.Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.Ulke)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.UlkeAdi)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.BlueKod)
+                                Blue Cod Name
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.UretimTeknolojisiId)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.UretimTeknolojisiName)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.RafyeriTurkiyeId)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.RafyeriTurkiyeName)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.RafyeriYunanistanId)
+                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.RafyeriYunanistanName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.IsPassive)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.CreatedOn)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.CreatedBy)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.ChangedOn)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ZetaCodeNormalIplikDto.ChangedBy)
-                            </th>
-                            <th></th>
+                            </th>         
                         </tr>
                     </thead>
 
@@ -90,68 +79,58 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @item.ZetaCodeNormalIplikDto.PantoneRenk.PantoneKodu -
-                                    @item.ZetaCodeNormalIplikDto.PantoneRenk.PantoneRengi
-                                </td>
-                                <td>
-                                    @item.ZetaCodeNormalIplikDto.Renk.Ad (
-                                    @item.ZetaCodeNormalIplikDto.Renk.HtmlKod -  @item.ZetaCodeNormalIplikDto.Renk.IplikRenkKodu
-                                    )
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Master)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.ZetaCode)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.IplikKategosiId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.SirketId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Ulke)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.BlueUrunKodIsmi)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.BlueKod)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.BlueSiparisNo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.UretimTeknolojisiId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.RafyeriTurkiyeId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.RafyeriYunanistanId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.IsPassive)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.CreatedOn)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.CreatedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.ChangedOn)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.ChangedBy)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ZetaCodeNormalIplikDto.Id })
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ZetaCodeNormalIplikDto.Id , companyId = item.ZetaCodeNormalIplikDto.SirketId })
+                            </td>
+                            <td>
+                                @(item.ZetaCodeNormalIplikDto.PantoneRenk?.PantoneKodu) -
+                                @(item.ZetaCodeNormalIplikDto.PantoneRenk?.PantoneRengi)
+                            </td>
+                            <td>
+                                @(item.ZetaCodeNormalIplikDto.Renk?.Ad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Master)
+                            </td>
+                            <td>
+
+                                <a href="@Url.Action(actionName:"ZetaCodeNormalIplikCard",controllerName:"ZetaCodeNormalIplik", routeValues: new { id = item.ZetaCodeNormalIplikDto.Id , companyId = item.ZetaCodeNormalIplikDto.SirketId })">
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.ZetaCodeFormat)
+                                </a>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.IplikKategosiName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Company.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.UlkeAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.BlueUrunKodIsmi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Company.Code)&nbsp;@Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.Company.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.BlueSiparisNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.UretimTeknolojisiName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.RafyeriTurkiyeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.RafyeriYunanistanName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZetaCodeNormalIplikDto.IsPassive)
+                            </td>
+                        </tr>
                         }
 
 

@@ -1,6 +1,7 @@
 ﻿using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Repository.Repositories;
 using Helezon.FollowMe.Service.DataTransferObjects;
+using Repository.Pattern.Ef6;
 using Repository.Pattern.Repositories;
 using Service.Pattern;
 using System;
@@ -20,6 +21,8 @@ namespace Helezon.FollowMe.Service
     {
         List<JsTreeDataDto> GetJsTreeData(string companyId, int taxonomyId);
         List<TermDto> GetTermsByTaxonomyId(int taxonomyId);
+        string GetTermNameById(int? id);
+        TermDto GetTermById(int? id);
     }
 
     /// <summary>
@@ -84,32 +87,48 @@ namespace Helezon.FollowMe.Service
 
         //}
 
-
+        private readonly object obj1 = new object();
         public List<JsTreeDataDto> GetJsTreeData(string companyId, int taxonomyId)
         {
             // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+            lock (obj1)
+            {
+                var termTaxonomy = _repository.GetRepository<TermTaxonomy>().Queryable();
 
-            var termTaxonomy = _repository.GetRepository<TermTaxonomy>().Queryable();
+                var term = _repository.GetRepository<Term>().Queryable();
 
-            var term = _repository.GetRepository<Term>().Queryable();
+                var jsTreeDataDtos = (from tx in termTaxonomy
+                                      join te in term on tx.TermId equals te.Id
+                                      where tx.TaxonomyId == taxonomyId && te.TaxonomyId == taxonomyId && tx.CompanyId == companyId && te.CompanyId == companyId
+                                      select new JsTreeDataDto
+                                      {
+                                          id = te.Id.ToString(),
+                                          text = te.Name,
+                                          parent = tx.Parent.HasValue && tx.Parent == 0 ? "#" : tx.Parent.ToString(),
+                                          state = new { disabled = te.Disabled }
+                                      }).ToList();
 
-            var jsTreeDataDtos = (from tx in termTaxonomy
-                              join te in term on tx.TermId equals te.Id
-                              where tx.TaxonomyId == taxonomyId && te.TaxonomyId == taxonomyId && tx.CompanyId == companyId && te.CompanyId == companyId 
-                              select new JsTreeDataDto
-                              {
-                                  id = te.Id.ToString(),
-                                  text = te.Name,
-                                  parent = tx.Parent.HasValue && tx.Parent == 0 ? "#" : tx.Parent.ToString(),
-                                  state = new { disabled = te.Disabled }
-                              }).ToList();
-
-            return jsTreeDataDtos;
+                return jsTreeDataDtos;
+            }
+          
         }
 
         public List<TermDto> GetTermsByTaxonomyId(int taxonomyId)
         {
             return AutoMapperConfig.Mapper.Map<List<Term>,List<TermDto>>(_repository.Queryable().Where(x=>x.TaxonomyId == taxonomyId).ToList());
+        }
+
+        public TermDto GetTermById(int? id)
+        {
+            if (!id.HasValue)            
+                return new TermDto();            
+            return AutoMapperConfig.Mapper.Map<Term,TermDto>(_repository.Queryable().FirstOrDefault(x => x.Id == id));
+        }
+        public string GetTermNameById(int? id)
+        {
+            if (!id.HasValue)
+                return string.Empty;
+            return GetTermById(id).Name ?? string.Empty;
         }
     }
 }

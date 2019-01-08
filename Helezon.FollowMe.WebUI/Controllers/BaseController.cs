@@ -32,6 +32,20 @@ namespace FollowMe.Web.Controllers
 
             base.OnActionExecuting(filterContext);
         }
+
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    filterContext.ExceptionHandled = true;
+        //    //Log the error!!
+        //    _Logger.Error(filterContext.Exception);
+        //    //Redirect or return a view, but not both.
+        //    filterContext.Result = RedirectToAction("Index", "ErrorHandler");
+        //    // OR 
+        //    filterContext.Result = new ViewResult
+        //    {
+        //        ViewName = "~/Views/ErrorHandler/Index.cshtml"
+        //    };
+        //}
         protected ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -48,29 +62,64 @@ namespace FollowMe.Web.Controllers
         }
 
         //Helezon.FollowMe.Entities.Models.FollowMeDbContext _followMeDbContext 
-        private static readonly DbContext _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
-        public static readonly IUnitOfWorkAsync UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
+        //private static readonly DbContext _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
 
-        private static Lazy<ICompanyService> CompanyService = new Lazy<ICompanyService>(
-            () => new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync)));
-        private static Lazy<ICompanyPictureService> CompanyPictureService = new Lazy<ICompanyPictureService>(
-            () => new CompanyPictureService(new Repository<Helezon.FollowMe.Entities.Models.CompanyPicture>(_followMeDbContext, UnitOfWorkAsync)));
-        private static Lazy<IPersonnelPictureService> PersonnelPictureService = new Lazy<IPersonnelPictureService>(
-            () => new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync)));
-        private static Lazy<IZetaCodeNormalIplikService> ZetaCodeNormalIplikService = new Lazy<IZetaCodeNormalIplikService>(
-            () => new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync)));
-        private static Lazy<ITermService> TermService = new Lazy<ITermService>(
-            () => new TermService(new Repository<Helezon.FollowMe.Entities.Models.Term>(_followMeDbContext, UnitOfWorkAsync)));
-        private static Lazy<IIplikNoService> IplikNoService = new Lazy<IIplikNoService>(
-            () => new IplikNoService(new Repository<Helezon.FollowMe.Entities.Models.IplikNo>(_followMeDbContext, UnitOfWorkAsync)));
-        public static ITermService GetTermService() { return TermService.Value; }
-        public static ICompanyService GetCompanyService() { return CompanyService.Value; }
-        public static ICompanyPictureService GetCompanyPictureService() { return CompanyPictureService.Value; }
-        public static IPersonnelPictureService GetPersonnelPictureService() { return PersonnelPictureService.Value; }
-        public static IZetaCodeNormalIplikService GetZetaCodeNormalIplikService() { return ZetaCodeNormalIplikService.Value; }
-        public static IIplikNoService GetIplikNoService() { return IplikNoService.Value; }
-
+        //private static Lazy<ICompanyService> CompanyService = new Lazy<ICompanyService>(
+        //    () => new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync)));
+        //private static Lazy<ICompanyPictureService> CompanyPictureService = new Lazy<ICompanyPictureService>(
+        //    () => new CompanyPictureService(new Repository<Helezon.FollowMe.Entities.Models.CompanyPicture>(_followMeDbContext, UnitOfWorkAsync)));
+        //private static Lazy<IPersonnelPictureService> PersonnelPictureService = new Lazy<IPersonnelPictureService>(
+        //    () => new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync)));
+        //private static Lazy<IZetaCodeNormalIplikService> ZetaCodeNormalIplikService = new Lazy<IZetaCodeNormalIplikService>(
+        //    () => new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync)));
+        //private static Lazy<ITermService> TermService = new Lazy<ITermService>(
+        //    () => new TermService(new Repository<Helezon.FollowMe.Entities.Models.Term>(_followMeDbContext, UnitOfWorkAsync)));
+        //private static Lazy<IIplikNoService> IplikNoService = new Lazy<IIplikNoService>(
+        //    () => new IplikNoService(new Repository<Helezon.FollowMe.Entities.Models.IplikNo>(_followMeDbContext, UnitOfWorkAsync)));
+        public BaseController()
+        {
+             _followMeDbContext = new Helezon.FollowMe.Entities.Models.FollowMeDbContext("GLCEmasEntities");
+             UnitOfWorkAsync = new UnitOfWork(_followMeDbContext);
+        }
+        public DbContext _followMeDbContext;
+        public IUnitOfWorkAsync UnitOfWorkAsync;
+        public  ITermService GetTermService()
+        {
+            
+            return new TermService(new Repository<Helezon.FollowMe.Entities.Models.Term>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public  ICompanyService GetCompanyService()
+        {
+           
+            return new CompanyService(new Repository<Helezon.FollowMe.Entities.Models.Company>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public  ICompanyPictureService GetCompanyPictureService()
+        {
+           
+            return new CompanyPictureService(new Repository<Helezon.FollowMe.Entities.Models.CompanyPicture>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public IZetaCodeNormalIplikPictureService GetZetaCodeNormalIplikPictureService()
+        {
+            return new ZetaCodeNormalIplikPictureService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplikPicture>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public  IPersonnelPictureService GetPersonnelPictureService()
+        {       
+            return new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public  IZetaCodeNormalIplikService GetZetaCodeNormalIplikService()
+        {
         
+            return new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public  IIplikNoService GetIplikNoService()
+        {       
+            return new IplikNoService(new Repository<Helezon.FollowMe.Entities.Models.IplikNo>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public IOthersService GetOthersService()
+        {
+            return new OthersService();
+        }
+
         public class ForeingKeyIdRefreshParametres
         {
             public string tableName { get; set; }

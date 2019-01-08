@@ -23,11 +23,11 @@ namespace Helezon.FollowMe.Entities.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public bool Master { get; set; } // Master
-        public int? ZetaCode { get; set; } // ZetaCode
+        public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
-        public string IplikKategosiId { get; set; } // IplikKategosiId (length: 200)
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
         public string SirketId { get; set; } // SirketId (length: 128)
-        public string Ulke { get; set; } // Ulke (length: 200)
+        public int? Ulke { get; set; } // Ulke
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
         public int BlueKod { get; set; } // BlueKod
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
@@ -48,6 +48,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
+        /// <summary>
+        /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture.FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
 
         // Foreign keys
 
@@ -69,6 +73,7 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeNormalIplik()
         {
             IplikNo = new System.Collections.Generic.List<IplikNo>();
+            ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPicture>();
             InitializePartial();
         }
 

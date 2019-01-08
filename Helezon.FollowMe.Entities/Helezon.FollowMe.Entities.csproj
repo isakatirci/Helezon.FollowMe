@@ -199,6 +199,9 @@
     <Compile Include="Models\Mapping\ZetaCodeNormalIplikMap.cs">
       <DependentUpon>FollowMeMapping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mapping\ZetaCodeNormalIplikPictureMap.cs">
+      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PantoneRenk.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
@@ -245,6 +248,9 @@
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodeNormalIplik.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalIplikPicture.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

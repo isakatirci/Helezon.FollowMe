@@ -2,14 +2,17 @@
 
 @{
     ViewBag.Title = "";
-    var update = string.Equals(Model.Operation, "update", StringComparison.InvariantCultureIgnoreCase);
+    var update = Model != null && Model.ZetaCodeNormalIplikDto != null && Model.ZetaCodeNormalIplikDto.Id > 0;
+    Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
 }
 
 
-<form action="@(update ? "/ZetaCodeNormalIplik/Edit" : "/ZetaCodeNormalIplik/Create")" id="frmZetaCodeNormalIplik" method="post">
+<form action="/ZetaCodeNormalIplik/Edit" id="frmZetaCodeNormalIplik" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ZetaCodeNormalIplikDto.Id)
+    @Html.HiddenFor(model => model.ZetaCodeNormalIplikDto.ZetaCode)
+
     <div class="portlet box green">
         <div class="portlet-title">
             <div class="caption">
@@ -20,7 +23,161 @@
         </div>
         <div class="portlet-body">
             <div class="panel-group accordion" id="accordion1">
-                @Html.Partial("_Edit", model: Model, viewData: ViewData)
+
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Group #1 </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_1" class="panel-collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        <div class="form-body">
+                                            @if (update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <div class="checkbox">
+                                                            @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.IsPassive, new { SelectName = "ZetaCodeNormalIplikDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
+                                                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.IsPassive, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.ZetaCodeFormat
+                                                        , new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.ZetaCode, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious
+                                                    , new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.ZetaCodePrevious, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Master, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.Master, new { SelectName = "ZetaCodeNormalIplikDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Master, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            @if (!update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.DropDownList("ZetaCodeNormalIplikDto.SirketId"
+                                                       , Model.Collections.Sirketler, "Please Select"
+                                                       , htmlAttributes: new { @class = "form-control select2"})
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.SirketId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" name="ZetaCodeNormalIplikDto.SirketId" value="@Model.ZetaCodeNormalIplikDto.SirketId" />
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" readonly value="@(Model.ZetaCodeNormalIplikDto.Company.Code + " "+Model.ZetaCodeNormalIplikDto.Company.Name)" />
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            @if (update)
+                                            {
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+
+
+
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownList("ZetaCodeNormalIplikDto.Ulke"
+                                                   , Model.Collections.Ulkeler,"Please Select"
+                                                   , htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Ulke, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.IplikKategosiId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <input type="hidden"
+                                                                   name="ZetaCodeNormalIplikDto.IplikKategosiId"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiId"
+                                                                   value="@Model.ZetaCodeNormalIplikDto.IplikKategosiId" />
+                                                            <input type="text"
+                                                                   name="ZetaCodeNormalIplikDto.IplikKategosiName"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiName"
+                                                                   class="form-control"
+                                                                   value="@Model.ZetaCodeNormalIplikDto.IplikKategosiName" />
+                                                            <div id="treeIplikKategosiId"></div>
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-horizontal">
+                                        <div class="form-body" id="placeholderPartialIplikKategori">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -35,69 +192,107 @@
                                         <i class="fa fa-gift"></i> İplik No Repeating Form
                                     </div>
                                     <div class="tools">
-                                        <a href="javascript:;" class="collapse"> </a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-                                        <a href="javascript:;" class="reload"> </a>
-                                        <a href="javascript:;" class="remove"> </a>
+
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
                                     <div class="form-body">
                                         <div class="form-group">
                                             <div class="mt-repeater form-horizontal">
-                                                <h3 class="mt-repeater-title">İplik No</h3>
-                                                <div data-repeater-list="IplikNoDtos">
+                                                <div data-repeater-list="ZetaCodeNormalIplikDto.IplikNo">
                                                     @{
                                                         foreach (var iplikNo in Model.ZetaCodeNormalIplikDto.IplikNo)
                                                         {
                                                             <text>
-                                                                <div data-repeater-item class="mt-repeater-item">
-                                                                    <!-- jQuery Repeater Container -->
-                                                                    <div class="mt-repeater-input">
-                                                                        <div class="panel panel-default">
-                                                                            <div class="panel-body" style="height:200px; overflow-y:auto;">
-                                                                                <label class="control-label">Elyaf Cinsi Kalitesi</label>
-                                                                                <br />
-                                                                                <input type="text" name="ElyafCinsiKalitesi" id="ElyafCinsiKalitesi" class="form-control" value="@iplikNo.ElyafCinsiKalitesi" />
-                                                                                <div id="treeElyafCinsiKalitesi"></div>
+                                                                <div data-repeater-item>
+                                                                    <div class="mt-repeater-item">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                                                    <label class="control-label">Elyaf Cinsi Kalitesi</label>
+                                                                                    <input type="hidden"
+                                                                                           name="Id"
+                                                                                           value="@iplikNo.Id" />
+                                                                                    <input type="hidden"
+                                                                                           name="ElyafCinsiKalitesi"
+                                                                                           id="ElyafCinsiKalitesi"
+                                                                                           value="@iplikNo.ElyafCinsiKalitesi" />
+                                                                                    <br />
+                                                                                    <input type="text"
+                                                                                           name="ElyafCinsiKalitesiName"
+                                                                                           id="ElyafCinsiKalitesiName"
+                                                                                           class="form-control"
+                                                                                           readonly
+                                                                                           value="@iplikNo.ElyafCinsiKalitesiName" />
+                                                                                    <br />
+                                                                                    <div class="treeElyafCinsiKalitesi"></div>
+                                                                                </div>
                                                                             </div>
+                                                                            <div class="col-md-9 iplik_no_group">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-3">
+                                                                                        <label class="control-label">Üretim Teknolojisi</label>
+                                                                                        <br />
+                                                                                        @Html.DropDownList("ZetaCodeNormalIplikDto.UretimTeknolojisiId"
+                                                                                       , Model.Collections.UretimTeknolojileri,"Please Select"
+                                                                                       , htmlAttributes: new { @class = "form-control select2" })
+                                                                                        @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.UretimTeknolojisiId, "", new { @class = "text-danger" })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-3">
+                                                                                        <label class="control-label">İplik No</label>
+                                                                                        <br />
+                                                                                        <select id="Select1" onchange="javascript:setVisibleIplikNo($(this))" class="form-control">
+                                                                                            <option value="">Please Select</option>
+                                                                                            <option value="ne">NE</option>
+                                                                                            <option value="nm">NM</option>
+                                                                                            <option value="dny">DYN</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 ne_iplik_no" style="display: none;">
+                                                                                        <label class="control-label">NE</label>
+                                                                                        <br />
+                                                                                        @Html.Raw(Model.NE(iplikNo.Ne))
+                                                                                    </div>
+                                                                                    <div class="col-md-3 nm_iplik_no" style="display: none;">
+                                                                                        <label class="control-label">NM</label>
+                                                                                        <br />
+                                                                                        @Html.Raw(Model.NM(iplikNo.Nm))
+                                                                                    </div>
+                                                                                    <div class="col-md-3 dny_iplik_no" style="display: none;">
+                                                                                        <label class="control-label">DNY</label>
+                                                                                        <br />
+                                                                                        @Html.Raw(Model.DYN(iplikNo.Dny))
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    @*<div class="col-md-4">
+                                                                                <label class="control-label">FL</label>
+                                                                                <br />
+                                                                                @Html.Raw(Model.FL(iplikNo.Fl))
+                                                                            </div>*@
+                                                                                    <div class="col-md-4 ea_iplik_no" style="display: none;">
+                                                                                        <label class="control-label">EA</label>
+                                                                                        <br />
+                                                                                        @Html.Raw(Model.EA(iplikNo.Ea))
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label class="control-label">Eltaf Oranı</label>
+                                                                                        <br />
+                                                                                        @Html.Raw(Model.ElyafOrani(iplikNo.ElyafOrani))
+                                                                                    </div>
+                                                                                    <div class="col-md-2">
+                                                                                        <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                                                                                            <i class="fa fa-close"></i> Delete
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">NE</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Ne", Model.NE(iplikNo.Ne), "Please Select", htmlAttributes: new { @class = "form-control"})
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">NM</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Ne", Model.NM(iplikNo.Nm), "Please Select", htmlAttributes: new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">DNY</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Ne", Model.DYN(iplikNo.Dny), "Please Select", htmlAttributes: new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">FL</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Fl", Model.FL(iplikNo.Fl), "Please Select", htmlAttributes: new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">EA</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Ea", Model.EA(iplikNo.Ea), "Please Select", htmlAttributes: new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <label class="control-label">Eltaf Oranı</label>
-                                                                        <br />
-                                                                        @Html.DropDownList("Ne", Model.ElyafOrani(iplikNo.ElyafOrani), "Please Select", htmlAttributes: new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="mt-repeater-input">
-                                                                        <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
-                                                                            <i class="fa fa-close"></i> Delete
-                                                                        </a>
-                                                                    </div>
+
                                                                 </div>
                                                                 <hr />
                                                             </text>
@@ -119,13 +314,113 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_renkler"> Renk </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_renkler" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-horizontal form-bordered form-row-stripped">
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("ZetaCodeNormalIplikDto.PantoneId", Model.Collections.PantoneRenkleri
+                                           , "Please Select"
+                                           , htmlAttributes: new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.PantoneId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <div class="col-md-3">
+                                            @Html.Raw(Model.Renkler(Model.ZetaCodeNormalIplikDto.Renkid))
+                                            @Html.ValidationMessageFor(model => model.ZetaCodeNormalIplikDto.Renkid, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_rafyerleri"> Raf Yerleri </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_rafyerleri" class="panel-collapse collapse">
+                        <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-body">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.RafyeriTurkiyeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="ZetaCodeNormalIplikDto.RafyeriTurkiyeId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
+                                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriTurkiyeId" />
+                                                    <input type="text"
+                                                           name="ZetaCodeNormalIplikDto.RafyeriTurkiyeName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeName"
+                                                           readonly
+                                                           class="form-control"
+                                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriTurkiyeName" />
+                                                    <br />
+                                                    <div id="treeRafyeriTurkiyeId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ZetaCodeNormalIplikDto.RafyeriYunanistanId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="ZetaCodeNormalIplikDto.RafyeriYunanistanId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanId"
+                                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriYunanistanId" />
+                                                    <input type="text"
+                                                           name="ZetaCodeNormalIplikDto.RafyeriYunanistanName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanName"
+                                                           class="form-control"
+                                                           readonly
+                                                           value="@Model.ZetaCodeNormalIplikDto.RafyeriYunanistanName" />
+                                                    <br />
+                                                    <div id="treeRafyeriYunanistanId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="form-horizontal form-bordered form-row-stripped">
                             <div class="form-actions">
                                 <div class="row">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <button type="submit" onclick="validateSomeFields()" class="btn green">
+                                    <div class="col-md-2">
+                                        <button type="submit" onclick="validateSomeFields()" class="btn green btn-block">
                                             @*<i class="fa fa-pencil"></i>*@ Submit
                                         </button>
                                     </div>
@@ -141,34 +436,93 @@
 </form>
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section afterGlobalScripts {
 
+
+
     <script>
+
+        function doAsync(callback) {
+            setTimeout(function () { callback(); }, 2000);
+        }
+
+        function setVisibleIplikNo(dll) {
+            var self = $(dll);
+            if (self.val().length > 0) {
+                var iplikNo = self.val();
+                if (iplikNo === "ne") {
+                    self.closest(".row").find(".ne_iplik_no").show();
+                    self.closest(".row").find(".dny_iplik_no").hide();
+                    self.closest(".row").find(".nm_iplik_no").hide();
+                    self.closest(".iplik_no_group").find(".ea_iplik_no").hide();
+                    
+                } else if (iplikNo === "dny") {
+                    self.closest(".row").find(".ne_iplik_no").hide();
+                    self.closest(".row").find(".dny_iplik_no").show();
+                    self.closest(".row").find(".nm_iplik_no").hide();
+                    self.closest(".iplik_no_group").find(".ea_iplik_no").show();
+                } else if (iplikNo === "nm") {
+                    self.closest(".row").find(".ne_iplik_no").hide();
+                    self.closest(".row").find(".dny_iplik_no").hide();
+                    self.closest(".row").find(".nm_iplik_no").show();
+                    self.closest(".iplik_no_group").find(".ea_iplik_no").hide();
+                }              
+            } else {
+                self.closest(".row").find(".ne_iplik_no").hide();
+                self.closest(".row").find(".dny_iplik_no").hide();
+                self.closest(".row").find(".nm_iplik_no").hide();
+                self.closest(".iplik_no_group").find(".ea_iplik_no").hide();
+            }  
+        }
+
+        function elyafOraniCalculate() {
+
+        }
+
         $("#frmZetaCodeNormalIplik").submit(function (event) {
 
+            var elyafOrani = 0;
+
+            $(".mt-repeater .elyaf-orani").each(function () {
+                var self = this;
+                if ($(this).val().length > 0) {
+                    elyafOrani += parseInt($(this).val());
+                } else {
+                    alert("Elyaf Oranı Seçiniz");
+                    event.preventDefault();
+                    return;
+                }
+            });
+
+            if (elyafOrani != 100) {
+                alert("Elyaf Oranı %100 Olmalıdır");
+                event.preventDefault();
+            }
             //if (($("#ZetaCodeNormalIplikDto_BlueSiparisNo").val() * 1) < 1) {
             //    alert("Sipariş  No Oluşturulamadı");
             //    event.preventDefault();
             //}
-         
+
         });
 
-        function setHtmlColorCode(dll) {       
-            var htmlColorText = dll.find("option:selected").text();
+        function setHtmlColorCode(dll) {
+            var htmlColorText = dll.find("option:selected").val();
             if (htmlColorText.length > 0) {
                 dll.closest(".form-group").find("#renkidhtml").css('background-color', htmlColorText.split("|")[1]);
             }
-
-           
         }
+
+        //$("#repeater-button").click(function () {
+        //    $('.mt-repeater .select2-container').remove();
+        //    $(".mt-repeater .select2").select2({
+        //        placeholder: "Please Select",
+        //        width: null
+        //    });
+        //})
 
         var modulZetaCodeNormalIplikVm = (function () {
 
-            var ajaxTreeFillTermTree = function (selector, url, valueElement) {
+            var ajaxTreeFillTermTree = function (selector, url, valueElement, textElement,changedCallBackFunc) {
                 var tmp = $(selector).jstree(true);
                 if (tmp) {
                     tmp.destroy();
@@ -211,15 +565,26 @@
                         for (i = 0, j = data.selected.length; i < j; i++) {
                             var node = data.instance.get_node(data.selected[i]);
                             ids.push(node.id);
-                            //texts.push(node.text);
+                            texts.push(node.text);
                         }
-                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find(valueElement);
+                        var valueElyafCinsiKalitesi = $(selector).closest(".panel-body").find(valueElement);
+                        valueElyafCinsiKalitesi.empty();
+                        $(valueElyafCinsiKalitesi).val(ids.join(', '));
+
+                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find(textElement);
                         txtElyafCinsiKalitesi.empty();
+                        $(txtElyafCinsiKalitesi).val(texts.join(', '));
+
                         //$(txtElyafCinsiKalitesi).val(texts.join(', '));
-                        $(txtElyafCinsiKalitesi).val(ids.join(', '));
+
+
+                        if (typeof changedCallBackFunc !== 'undefined') {
+                            changedCallBackFunc();
+                        }
+
                         
 
-                });
+                    });
             };
 
 
@@ -227,18 +592,47 @@
                 $('.mt-repeater').each(function () {
                     $(this).repeater({
                         show: function () {
+
+                            var elyafOrani = 0;
+
+                            $(".mt-repeater .elyaf-orani").each(function () {
+                                var self = this;
+                                if ($(this).val().length > 0) {
+                                    elyafOrani += parseInt($(this).val());
+                                }
+                            });
+
+                            if (elyafOrani >= 100) {
+                                alert("Elyaf Oranı %100 Olmalıdır");                             
+                                $(this).remove();
+                                return;
+                            }
+
+
                             $(this).slideDown();
 
-                            ajaxTreeFillTermTreeRef($(this).find("#treeElyafCinsiKalitesi"), "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
+                            ajaxTreeFillTermTreeRef($(this).find(".treeElyafCinsiKalitesi"), "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
 
-                            //modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");            
+                            //modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
 
 
-                            //$('.date-picker').datepicker({
-                            //    rtl: App.isRTL(),
-                            //    orientation: "left",
-                            //    autoclose: true
-                            //});
+
+                            $('.mt-repeater .select2-container').remove();
+
+                            $(".mt-repeater .select2").each(function () {
+
+                                $(this).select2({
+                                    placeholder: "Please Select",
+                                    width: null
+                                });
+
+
+                            });
+
+
+
+                            //$('.mt-repeater .select2-container').css('width', '100%');
+
                         },
 
                         hide: function (deleteElement) {
@@ -325,65 +719,169 @@
         })();
 
 
+        function getPartialIplikKategoriForm(partialName) {
+            $.ajax({
+                url: "/ZetaCodeNormalIplik/GetIplikKategoriPartial",
+                type: "GET",
+                data: { partialName: partialName  }
+            })
+                .done(function (partialViewResult) {
+                    $("#placeholderPartialIplikKategori").empty();
+                    $("#placeholderPartialIplikKategori").html(partialViewResult);
+                });
+        }
 
+        function getDynamicForms() {
+
+            var self = $("#ZetaCodeNormalIplikDto_IplikKategosiName");
+            if (self.val().length > 0) {
+                var iplikKategosiId = $("#ZetaCodeNormalIplikDto_IplikKategosiId").val();
+                if (iplikKategosiId === "296" || iplikKategosiId === "316") {
+                    //FLAM
+                    getPartialIplikKategoriForm("flam");
+                } else if (iplikKategosiId === "294") {
+                    //DEGREDE IPLIK
+                    getPartialIplikKategoriForm("degrede"); 
+                }
+                else if (iplikKategosiId === "317" || iplikKategosiId === "295") {
+                    //KIRCILLI IPLIK
+                    getPartialIplikKategoriForm("kircili"); 
+                }
+                else if (iplikKategosiId === "309" || iplikKategosiId === "318") {
+                    //NOPELI IPLIK
+                    getPartialIplikKategoriForm("nopeli"); 
+                }
+                else if (iplikKategosiId === "314") {
+                    //SIM IPLIK
+                    getPartialIplikKategoriForm("sim"); 
+                }
+                else if (iplikKategosiId === "312" || iplikKategosiId === "319") {
+                    //KREP IPLIK
+                    getPartialIplikKategoriForm("krep"); 
+                }
+                else {
+
+                }
+                
+            }
+        }
 
     </script>
 
     <script>
 
-        function getBlueCompanyData(dll) {
+        //function getBlueCompanyData(dll) {
 
-            if (dll.val().length > 0) {
-                var jqXHR = $.ajax({
-                    type: "POST",
-                    url: "/ZetaCodeNormalIplik/GetBlueCompanyData",
-                    data: {
-                        "companyId": dll.val()                  
-                    }
-                }).done(function (response, status, jqXHR) {
-                    //console.log(data);
-                    //$('#Code').val(data);
-                    //$("#container").html(data);
-                    if (response.SuccessMessage.length !== 0) {                      
+        //    if (dll.val().length > 0) {
+        //        var jqXHR = $.ajax({
+        //            type: "POST",
+        //            url: "/ZetaCodeNormalIplik/GetBlueCompanyData",
+        //            data: {
+        //                "companyId": dll.val()
+        //            }
+        //        }).done(function (response, status, jqXHR) {
+        //            //console.log(data);
+        //            //$('#Code').val(data);
+        //            //$("#container").html(data);
+        //            if (response.SuccessMessage.length !== 0) {
 
-                        $("#ZetaCodeNormalIplikDto_BlueKod").val(response.Data.BlueCode);
-                        $("#ZetaCodeNormalIplikDto_BlueSiparisNo").val(response.Data.SiparisNo);
-                       
-                    } else {
-                        alert(response.ErrorMessage);
-                    }
-                    //console.log(typeof data);
-                    //console.log(data);
-                    //if (data.IsSucceeded) {
-                    //    swal("Success.", 'Taxonomy Saved.', "success");
-                    //} else {
-                    //    swal("Error!", data.Message, "error");
-                    //}
-                }).fail(function (jqXHR, status, err) {
-                    swal("Error!", err + '', "error");
-                }).always(function () {
-                    App.unblockUI();
-                });
-            }
+        //                $("#ZetaCodeNormalIplikDto_BlueKod").val(response.Data.BlueCode);
+        //                $("#ZetaCodeNormalIplikDto_BlueSiparisNo").val(response.Data.SiparisNo);
 
-        }
+        //            } else {
+        //                alert(response.ErrorMessage);
+        //            }
+        //            //console.log(typeof data);
+        //            //console.log(data);
+        //            //if (data.IsSucceeded) {
+        //            //    swal("Success.", 'Taxonomy Saved.', "success");
+        //            //} else {
+        //            //    swal("Error!", data.Message, "error");
+        //            //}
+        //        }).fail(function (jqXHR, status, err) {
+        //            swal("Error!", err + '', "error");
+        //        }).always(function () {
+        //            App.unblockUI();
+        //        });
+        //    }
+
+        //}
 
         $(document).ready(function () {
-            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategoriler","#ZetaCodeNormalIplikDto_IplikKategosiId");
-            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeUretimTeknolojisiId", "/ZetaCodeNormalIplik/JSTreeUretimTeknolojisi","#ZetaCodeNormalIplikDto_UretimTeknolojisiId");
-            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi", "#ElyafCinsiKalitesi");            
-            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId", "#ZetaCodeNormalIplikDto_RafyeriTurkiyeId");            
-            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId", "#ZetaCodeNormalIplikDto_RafyeriYunanistanId");            
+            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategoriler"
+                , "#ZetaCodeNormalIplikDto_IplikKategosiId", "#ZetaCodeNormalIplikDto_IplikKategosiName", getDynamicForms);
 
+            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeUretimTeknolojisiId", "/ZetaCodeNormalIplik/JSTreeUretimTeknolojisi"
+                , "#ZetaCodeNormalIplikDto_UretimTeknolojisiId", "#ZetaCodeNormalIplikDto_UretimTeknolojisiName");
 
+            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree(".treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi"
+                , "#ElyafCinsiKalitesi", "#ElyafCinsiKalitesiName");
+
+            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
+                , "#ZetaCodeNormalIplikDto_RafyeriTurkiyeId", "#ZetaCodeNormalIplikDto_RafyeriTurkiyeName");
+
+            modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
+                , "#ZetaCodeNormalIplikDto_RafyeriYunanistanId", "#ZetaCodeNormalIplikDto_RafyeriYunanistanName");
+
+            setHtmlColorCode($("#ZetaCodeNormalIplikDto_RenkIdFormat"));
             modulZetaCodeNormalIplikVm.repeater();
 
         });
     </script>
 
-
-
-
-
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+<!-- jQuery Repeater Container -->
+@*<div class="mt-repeater-input">
+        <div class="panel panel-default">
+            <div class="panel-body" style="height:200px; overflow-y:auto;">
+                <label class="control-label">Elyaf Cinsi Kalitesi</label>
+                <br />
+                <input type="text" name="ElyafCinsiKalitesi" id="ElyafCinsiKalitesi" class="form-control" value="@iplikNo.ElyafCinsiKalitesi" />
+                <div id="treeElyafCinsiKalitesi"></div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-repeater-input">
+        <div class="mt-repeater-item">
+            <div class="mt-repeater-input">
+                <label class="control-label">NE</label>
+                <br />
+                @Html.DropDownList("Ne", Model.NE(iplikNo.Ne), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+            <div class="mt-repeater-input">
+                <label class="control-label">NM</label>
+                <br />
+                @Html.DropDownList("Nm", Model.NM(iplikNo.Nm), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+            <div class="mt-repeater-input">
+                <label class="control-label">DNY</label>
+                <br />
+                @Html.DropDownList("Dny", Model.DYN(iplikNo.Dny), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+        </div>
+        <div class="mt-repeater-item">
+            <div class="mt-repeater-input">
+                <label class="control-label">FL</label>
+                <br />
+                @Html.DropDownList("Fl", Model.FL(iplikNo.Fl), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+            <div class="mt-repeater-input">
+                <label class="control-label">EA</label>
+                <br />
+                @Html.DropDownList("Ea", Model.EA(iplikNo.Ea), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+            <div class="mt-repeater-input">
+                <label class="control-label">Eltaf Oranı</label>
+                <br />
+                @Html.DropDownList("ElyafOrani", Model.ElyafOrani(iplikNo.ElyafOrani), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+            </div>
+            <div class="mt-repeater-input">
+                <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                    <i class="fa fa-close"></i> Delete
+                </a>
+            </div>
+        </div>
+    </div>*@

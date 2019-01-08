@@ -23,6 +23,14 @@ namespace Repository.Pattern.Ef6
             Context = context;
             Set = context.Set<TEntity>();
         }
+        public IRepositoryAsync<T> GetRepositoryAsync<T>() where T : class => UnitOfWork.RepositoryAsync<T>();
+        public IRepository<T> GetRepository<T>() where T : class => UnitOfWork.Repository<T>();
+
+        public IUnitOfWorkAsync UnitOfWorkAsync() => UnitOfWork;
+        //public IUnitOfWork IUnitOfWork()
+        //{
+        //    return (IUnitOfWork)UnitOfWork;
+        //}
 
         public virtual TEntity Find(params object[] keyValues)
         {
@@ -77,7 +85,6 @@ namespace Repository.Pattern.Ef6
 
         public IQueryable<TEntity> Queryable() => Set;
 
-        public IRepository<T> GetRepository<T>() where T : class => UnitOfWork.Repository<T>();
 
         public virtual async Task<TEntity> FindAsync(params object[] keyValues) => await Set.FindAsync(keyValues);
 
@@ -150,5 +157,7 @@ namespace Repository.Pattern.Ef6
         {
             return await Select(filter, orderBy, includes, page, pageSize).ToListAsync();
         }
+
+       
     }
 }

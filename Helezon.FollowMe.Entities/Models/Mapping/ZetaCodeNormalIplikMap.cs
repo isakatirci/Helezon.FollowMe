@@ -31,11 +31,11 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Master).HasColumnName(@"Master").HasColumnType("bit").IsRequired();
-            Property(x => x.ZetaCode).HasColumnName(@"ZetaCode").HasColumnType("int").IsOptional();
+            Property(x => x.ZetaCode).HasColumnName(@"ZetaCode").HasColumnType("int").IsRequired();
             Property(x => x.ZetaCodePrevious).HasColumnName(@"ZetaCodePrevious").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
-            Property(x => x.IplikKategosiId).HasColumnName(@"IplikKategosiId").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
+            Property(x => x.IplikKategosiId).HasColumnName(@"IplikKategosiId").HasColumnType("int").IsOptional();
             Property(x => x.SirketId).HasColumnName(@"SirketId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
-            Property(x => x.Ulke).HasColumnName(@"Ulke").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
+            Property(x => x.Ulke).HasColumnName(@"Ulke").HasColumnType("int").IsOptional();
             Property(x => x.BlueUrunKodIsmi).HasColumnName(@"BlueUrunKodIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
             Property(x => x.BlueKod).HasColumnName(@"BlueKod").HasColumnType("int").IsRequired();
             Property(x => x.BlueSiparisNo).HasColumnName(@"BlueSiparisNo").HasColumnType("int").IsRequired();

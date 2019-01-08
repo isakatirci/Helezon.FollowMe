@@ -36,7 +36,7 @@ namespace Helezon.FollowMe.Entities.Models.Mapping
             Property(x => x.Dny).HasColumnName(@"DNY").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Fl).HasColumnName(@"FL").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Ea).HasColumnName(@"EA").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.ElyafCinsiKalitesi).HasColumnName(@"ElyafCinsiKalitesi").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
+            Property(x => x.ElyafCinsiKalitesi).HasColumnName(@"ElyafCinsiKalitesi").HasColumnType("int").IsOptional();
             Property(x => x.ElyafOrani).HasColumnName(@"ElyafOrani").HasColumnType("int").IsOptional();
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();

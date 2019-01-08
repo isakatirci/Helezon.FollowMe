@@ -12,6 +12,8 @@ using Helezon.FollowMe.Core.Aspects.Postsharp.CacheAspects;
 using Helezon.FollowMe.Core.CrossCuttingConcerns.Caching.Microsoft;
 using System.Collections;
 using Helezon.FollowMe.Service.DataTransferObjects;
+using System.Linq.Expressions;
+using System;
 
 #endregion
 
@@ -23,7 +25,7 @@ namespace Helezon.FollowMe.Service
     public interface ICompanyService : IService<Company>
     {
         string FistCompanyName();
-        List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType);
+        List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType, string sirketId);
         CompanyDto GetCompanyById(string companyId);
         CompanyDto GetCompanyCodeById(string companyId);
     }
@@ -67,11 +69,24 @@ namespace Helezon.FollowMe.Service
             return AutoMapperConfig.Mapper.Map<Company, CompanyDto>(company);            
         }
 
-        public List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType)
+        public Expression<Func<Company, bool>> p1(int companyRootType, string sirketId)
         {
+            if (string.IsNullOrWhiteSpace(sirketId))
+
+            {
+                return x => x.CompanyRootTypeId == companyRootType && x.ParentId == null;
+            }
+            else
+            {
+                return x => x.Id == sirketId && x.CompanyRootTypeId == companyRootType && x.ParentId == null;
+            }
+        }
+        public List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType,string sirketId)
+        {
+
             return _repository
                      .Queryable()
-                     .Where(x=>x.CompanyRootTypeId == companyRootType && x.ParentId == null)
+                     .Where(p1(companyRootType,sirketId))
                      .Select(x => new CompanyDto { Id = x.Id, Name = x.Code + " " + x.Name })
                      .ToList();
         }

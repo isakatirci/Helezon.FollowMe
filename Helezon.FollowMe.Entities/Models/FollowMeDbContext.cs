@@ -50,6 +50,7 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
 
         static FollowMeDbContext()
         {
@@ -134,6 +135,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermTaxonomyMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -169,6 +171,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermTaxonomyMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap(schema));
             OnCreateModelPartial(modelBuilder, schema);
             return modelBuilder;
         }
