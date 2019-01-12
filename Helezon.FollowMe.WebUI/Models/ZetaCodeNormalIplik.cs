@@ -30,109 +30,180 @@ namespace FollowMe.Web.Models
         [Display(Name = "Id")]
         public int Id { get; set; } // Id (Primary key)
 
-        [Column(@"Master", Order = 2, TypeName = "bit")]
+        [Column(@"UrunIsmi", Order = 2, TypeName = "nvarchar")]
+        [MaxLength(800)]
+        [StringLength(800)]
+        [Display(Name = "Urun ismi")]
+        public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
+
+        [Column(@"Master", Order = 3, TypeName = "bit")]
         [Required]
         [Display(Name = "Master")]
         public bool Master { get; set; } // Master
 
-        [Column(@"ZetaCode", Order = 3, TypeName = "nvarchar")]
-        [MaxLength(250)]
-        [StringLength(250)]
+        [Column(@"ZetaCode", Order = 4, TypeName = "int")]
+        [Required]
         [Display(Name = "Zeta code")]
-        public string ZetaCode { get; set; } // ZetaCode (length: 250)
+        public int ZetaCode { get; set; } // ZetaCode
 
-        [Column(@"IplikKategosiId", Order = 4, TypeName = "nvarchar")]
+        [Column(@"ZetaCodePrevious", Order = 5, TypeName = "nvarchar")]
         [MaxLength(200)]
         [StringLength(200)]
-        [Display(Name = "Iplik kategosi ID")]
-        public string IplikKategosiId { get; set; } // IplikKategosiId (length: 200)
+        [Display(Name = "Zeta code previous")]
+        public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
 
-        [Column(@"SirketId", Order = 5, TypeName = "nvarchar")]
+        [Column(@"IplikKategosiId", Order = 6, TypeName = "int")]
+        [Display(Name = "Iplik kategosi ID")]
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
+
+        [Column(@"SirketId", Order = 7, TypeName = "nvarchar")]
         [Required(AllowEmptyStrings = true)]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Sirket ID")]
         public string SirketId { get; set; } // SirketId (length: 128)
 
-        [Column(@"Ulke", Order = 6, TypeName = "nvarchar")]
-        [MaxLength(200)]
-        [StringLength(200)]
+        [Column(@"Ulke", Order = 8, TypeName = "int")]
         [Display(Name = "Ulke")]
-        public string Ulke { get; set; } // Ulke (length: 200)
+        public int? Ulke { get; set; } // Ulke
 
-        [Column(@"BlueUrunKodIsmi", Order = 7, TypeName = "nvarchar")]
+        [Column(@"BlueUrunKodIsmi", Order = 9, TypeName = "nvarchar")]
         [MaxLength(200)]
         [StringLength(200)]
         [Display(Name = "Blue urun kod ismi")]
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
 
-        [Column(@"BlueKod", Order = 8, TypeName = "nchar")]
-        [Required(AllowEmptyStrings = true)]
-        [MaxLength(10)]
-        [StringLength(10)]
+        [Column(@"BlueKod", Order = 10, TypeName = "int")]
+        [Required]
         [Display(Name = "Blue kod")]
-        public string BlueKod { get; set; } // BlueKod (length: 10)
+        public int BlueKod { get; set; } // BlueKod
 
-        [Column(@"BlueSiparisNo", Order = 9, TypeName = "int")]
+        [Column(@"BlueSiparisNo", Order = 11, TypeName = "int")]
         [Required]
         [Display(Name = "Blue siparis no")]
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
 
-        [Column(@"UretimTeknolojisiId", Order = 10, TypeName = "nvarchar")]
-        [MaxLength(200)]
-        [StringLength(200)]
+        [Column(@"UretimTeknolojisiId", Order = 12, TypeName = "int")]
         [Display(Name = "Uretim teknolojisi ID")]
-        public string UretimTeknolojisiId { get; set; } // UretimTeknolojisiId (length: 200)
+        public int? UretimTeknolojisiId { get; set; } // UretimTeknolojisiId
 
-        [Column(@"PantoneId", Order = 11, TypeName = "int")]
+        [Column(@"PantoneId", Order = 13, TypeName = "int")]
         [Display(Name = "Pantone ID")]
         public int? PantoneId { get; set; } // PantoneId
 
-        [Column(@"Renkid", Order = 12, TypeName = "int")]
+        [Column(@"Renkid", Order = 14, TypeName = "int")]
         [Display(Name = "Renkid")]
         public int? Renkid { get; set; } // Renkid
 
-        [Column(@"RafyeriTurkiyeId", Order = 13, TypeName = "int")]
+        [Column(@"RafyeriTurkiyeId", Order = 15, TypeName = "int")]
         [Display(Name = "Rafyeri turkiye ID")]
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
 
-        [Column(@"RafyeriYunanistanId", Order = 14, TypeName = "int")]
+        [Column(@"RafyeriYunanistanId", Order = 16, TypeName = "int")]
         [Display(Name = "Rafyeri yunanistan ID")]
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
 
-        [Column(@"IsPassive", Order = 15, TypeName = "bit")]
+        [Column(@"IsPassive", Order = 17, TypeName = "bit")]
         [Required]
         [Display(Name = "Is passive")]
         public bool IsPassive { get; set; } // IsPassive
 
-        [Column(@"CreatedOn", Order = 16, TypeName = "datetime2")]
+        [Column(@"CreatedOn", Order = 18, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Created on")]
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
 
-        [Column(@"CreatedBy", Order = 17, TypeName = "nvarchar")]
+        [Column(@"CreatedBy", Order = 19, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        [Column(@"ChangedOn", Order = 18, TypeName = "datetime2")]
+        [Column(@"ChangedOn", Order = 20, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Changed on")]
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
 
-        [Column(@"ChangedBy", Order = 19, TypeName = "nvarchar")]
+        [Column(@"ChangedBy", Order = 21, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Changed by")]
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
+        [Column(@"IplikNoCinsi", Order = 22, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Iplik no cinsi")]
+        public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
+
+        [Column(@"NE", Order = 23, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Ne")]
+        public string Ne { get; set; } // NE (length: 10)
+
+        [Column(@"NM", Order = 24, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Nm")]
+        public string Nm { get; set; } // NM (length: 10)
+
+        [Column(@"DNY", Order = 25, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Dny")]
+        public string Dny { get; set; } // DNY (length: 10)
+
+        [Column(@"FL", Order = 26, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Fl")]
+        public string Fl { get; set; } // FL (length: 10)
+
+        [Column(@"EA", Order = 27, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Ea")]
+        public string Ea { get; set; } // EA (length: 10)
+
         // Reverse navigation
 
         /// <summary>
-        /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_iplikNo_ZetaCodeNormaliplik)
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].[ZetaCodeNormalIplikId] (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_iplikNo_ZetaCodeNormaliplik
+        public virtual IplikKategoriDegrede IplikKategoriDegrede { get; set; } // IplikKategoriDegrede.FK_IplikKategoriDegrede_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriFlam].[ZetaCodeNormalIplikId] (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriFlam IplikKategoriFlam { get; set; } // IplikKategoriFlam.FK_IplikKategoriFlam_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKircili].[ZetaCodeNormalIplikId] (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
+        /// </summary>
+        public virtual IplikKategoriKircili IplikKategoriKircili { get; set; } // IplikKategoriKircili.FK_IplikKategoriKircili_ZetaCodeNormalIplik1
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKrep].[ZetaCodeNormalIplikId] (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriKrep IplikKategoriKrep { get; set; } // IplikKategoriKrep.FK_IplikKategoriKrep_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriNopeli].[ZetaCodeNormalIplikId] (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriNopeli IplikKategoriNopeli { get; set; } // IplikKategoriNopeli.FK_IplikKategoriNopeli_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriSim].[ZetaCodeNormalIplikId] (FK_IplikKategoriSim_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriSim IplikKategoriSim { get; set; } // IplikKategoriSim.FK_IplikKategoriSim_ZetaCodeNormalIplik
+        /// <summary>
+        /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
+        /// <summary>
+        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture.FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
 
         // Foreign keys
 
@@ -146,9 +217,16 @@ namespace FollowMe.Web.Models
         /// </summary>
         [ForeignKey("Renkid")] public virtual Renk Renk { get; set; } // FK_ZetaCodeNormaliplik_Renk
 
+        /// <summary>
+        /// Parent Company pointed by [ZetaCodeNormalIplik].([SirketId]) (FK_ZetaCodeNormaliplik_Company)
+        /// </summary>
+        [ForeignKey("SirketId")] public virtual Company Company { get; set; } // FK_ZetaCodeNormaliplik_Company
+
         public ZetaCodeNormalIplik()
         {
             IplikNo = new System.Collections.Generic.HashSet<IplikNo>();
+            ZetaCodeNormalIplikPicture = new System.Collections.Generic.HashSet<ZetaCodeNormalIplikPicture>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.HashSet<ZetaCodeFanteziIplik>();
             InitializePartial();
         }
 

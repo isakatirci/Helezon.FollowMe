@@ -18,6 +18,7 @@ namespace Helezon.FollowMe.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //ModelBinders.Binders.Add(typeof(ZetaCodeNormalIplikVmBinder), new ZetaCodeNormalIplikVmBinder());
         }
         // last resort error logging
         // note: customErrors in web config specifies error page

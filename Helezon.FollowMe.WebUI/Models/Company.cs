@@ -171,6 +171,10 @@ namespace FollowMe.Web.Models
         /// Child Person where [Person].[CompanyId] point to this entity (FK_Person_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<Person> Person { get; set; } // Person.FK_Person_Company
+        /// <summary>
+        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
 
         public Company()
         {
@@ -181,6 +185,7 @@ namespace FollowMe.Web.Models
             CompanyTerm = new System.Collections.Generic.HashSet<CompanyTerm>();
             LogisticsCompany = new System.Collections.Generic.HashSet<LogisticsCompany>();
             Person = new System.Collections.Generic.HashSet<Person>();
+            ZetaCodeNormalIplik = new System.Collections.Generic.HashSet<ZetaCodeNormalIplik>();
             InitializePartial();
         }
 

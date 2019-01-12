@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 
 namespace Helezon.FollowMe.Service.DataTransferObjects
 {
+    public partial class ZetaCodeFanteziIplikDto
+    {
+        public TermDto IplikKategosi { get; set; }
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        partial void InitializePartial()
+        {
+            IplikKategosi = new TermDto();
+            RafyeriTurkiye = new TermDto();
+            RafyeriYunanistan = new TermDto();
+        }
+    }
     public partial class ZetaCodeNormalIplikDto
     {
         public string ZetaCodeFormat { get {
@@ -27,6 +39,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
                 _renkIdFormat = value;
             }
         }
+
+        //"iplik ürün ismi" şu bilgilerden oluşur: iplik no/kategori 2 - üretim teknolojisi/elyaf cinsi-kalitesi-parlaklığı/kategori 3. ekte tarifi
+        //not: parlaklık sadece üretim teknolojisinde polyesterin en alt yaprağında var
+        //tek veri girişi örnek: DNY 300 FL 096L - HAM TEKSTURE - %100 PES NORMAL YARIMAT
+        //2 veri girişi örnek : NE 30 - MELANGE RING - 65/35 POLYVISCON - FLAM
+        public TermDto UretimTeknolojisi { get; set; }
+        public TermDto IplikKategosi { get; set; }
+
+
         public string ZetaCodeNormalIplikSirketName { get; set; }
         public string IplikKategosiName { get; set; }
         public string RafyeriYunanistanName { get; set; }
@@ -35,6 +56,60 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string UretimTeknolojisiName { get; set; }
         public string PictureEditUrl { get; set; }
         public string PictureUrl { get; set; }
+
+    }
+
+    //IplikKategoriDegrede
+
+    public partial class IplikKategoriDegredeDto
+    {
+
+        //public string BoyamaProsesiFormat { get; set; } // BoyamaProsesi
+    }
+
+   // IplikKategoriFlam
+
+    public partial class IplikKategoriFlamDto
+    {
+        //public string FlamlarArasindakiMesafeFormat { get; set; } // FlamlarArasindakiMesafe
+        //public string FlamUzunluguFormat { get; set; } // FlamUzunlugu
+        //public string FlamYuksekligiFormat { get; set; } // FlamYuksekligi
+
+    }
+
+    // IplikKategoriKircili
+
+    public partial class IplikKategoriKirciliDto
+    {
+        //public string KircillarArasiMesafeFormat { get; set; } // KircillarArasiMesafe
+        //public string KircilUzunluguFormat { get; set; } // KircilUzunlugu
+        //public string KircilYuksekligiFormat { get; set; } // KircilYuksekligi
+
+    }
+
+    // IplikKategoriKrep
+
+    public partial class IplikKategoriKrepDto
+    {
+        //public string TurSayisiFormat { get; set; } // TurSayisi
+        //public string BukumYonuFormat { get; set; } // BukumYonu (length: 50)
+
+    }
+
+    // IplikKategoriNopeli
+
+    public partial class IplikKategoriNopeliDto
+    {
+        //public string NoktalarArasiMesafeFormat { get; set; } // NoktalarArasiMesafe
+        //public string NoktaUzunluguFormat { get; set; } // NoktaUzunlugu
+        //public string NoktaYuksekligiFormat { get; set; } // NoktaYuksekligi
+    }
+
+    // IplikKategoriSim
+
+    public partial class IplikKategoriSimDto
+    {
+       // public string SimKesimBoyutuFormat { get; set; } // SimKesimBoyutu
 
     }
 

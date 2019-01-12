@@ -1,13 +1,17 @@
-﻿
+﻿@model  Helezon.FollowMe.Service.DataTransferObjects.IplikKategoriSimDto
+
 <div class="form-group">
     <label class="control-label col-md-2" for="SimKesimBoyutu">
         Sim Kesim Boyutu:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="SimKesimBoyutu"
-               name="SimKesimBoyutu">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriSimDto.SimKesimBoyutuFormat", (IEnumerable<SelectListItem>)ViewBag.SimKesimBoyutu, new { @class = "form-control" })
+
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriSim_SimKesimBoyutu"
+        value="@Model.SimKesimBoyutu"
+        name="ZetaCodeNormalIplikDto.IplikKategoriSimDto.SimKesimBoyutuFormat">*@
     </div>
 </div>
 

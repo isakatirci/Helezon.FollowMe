@@ -1,23 +1,31 @@
-﻿
+﻿@model  Helezon.FollowMe.Service.DataTransferObjects.IplikKategoriKrepDto
+
 <div class="form-group">
     <label class="control-label col-md-2" for="TurSayisi">
         Tur Sayısı:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="TurSayisi"
-               name="TurSayisi">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKrepDto.TurSayisiFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.TurSayisi
+       , new { @class = "form-control select2" })
+
+        @*<input type="text"
+            class="form-control mask_number transform_none"
+            id="IplikKategoriKrep_TurSayisi"
+            value="@Model.TurSayisiFormat"
+            name="ZetaCodeNormalIplikDto.IplikKategoriKrepDto.TurSayisiFormat">*@
     </div>
 </div>
 <div class="form-group">
     <label class="control-label col-md-2" for="BukumYonu">
         Büküm Yönü:
     </label>
-    <div class="col-md-10">
-        <select class="form-control" name="BukumYonu" id="BukumYonu">
-            <option>S</option>
-            <option>Z</option>
+    <div class="col-md-6">
+        <select class="form-control "
+                name="ZetaCodeNormalIplikDto.IplikKategoriKrepDto.BukumYonu"
+                id="IplikKategoriKrep_BukumYonu">
+            <option @(Model?.BukumYonu == "S" ? "selected" : "")>S</option>
+            <option @(Model?.BukumYonu == "Z" ? "selected" : "")>Z</option>
         </select>
     </div>
 </div>

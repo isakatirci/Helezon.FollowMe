@@ -146,6 +146,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
+                                                            @Model.ZetaCodeNormalIplik.UrunIsmi
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -198,6 +199,10 @@
                                                         <tr>
                                                             <th>
                                                                 BLU SIP NO
+                                                                <a href="javascript:void(0);"
+                                                                   onclick="location.href='@Html.Raw("/ZetaCodeNormalIplik/Create?operation=masterbluesiparis")'">
+                                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                                </a>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -332,17 +337,16 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    @foreach (var iplik in Model.ZetaCodeNormalIplik.IplikNo)
-                                                    {
+                                                    
                                                         <text>
                                                             <th>IPLIK NUMARASI</th>
-                                                            <td>@iplik.Ne</td>
-                                                            <td>@iplik.Dny</td>
-                                                            <td>@iplik.Nm</td>
-                                                            <td>@iplik.Ea</td>
-                                                            <td>@iplik.Fl</td>
+                                                            <td>@Model.ZetaCodeNormalIplik.Ne</td>
+                                                            <td>@Model.ZetaCodeNormalIplik.Dny</td>
+                                                            <td>@Model.ZetaCodeNormalIplik.Nm</td>
+                                                            <td>@Model.ZetaCodeNormalIplik.Ea</td>
+                                                            <td>@Model.ZetaCodeNormalIplik.Fl</td>
                                                         </text>
-                                                    }
+                                                    
 
                                                 </tr>
                                             </tbody>

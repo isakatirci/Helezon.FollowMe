@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     // Company
@@ -74,6 +73,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<Person> Person { get; set; } // Person.FK_Person_Company
         /// <summary>
+        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[SirketId] point to this entity (FK_ZetaCodeFanteziIplik_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Company
+        /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
@@ -87,6 +90,7 @@ namespace Helezon.FollowMe.Entities.Models
             CompanyTerm = new System.Collections.Generic.List<CompanyTerm>();
             LogisticsCompany = new System.Collections.Generic.List<LogisticsCompany>();
             Person = new System.Collections.Generic.List<Person>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }

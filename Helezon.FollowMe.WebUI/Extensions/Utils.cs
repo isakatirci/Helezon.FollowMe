@@ -187,9 +187,9 @@ namespace FollowMe.Web.Controllers
             TaxonomyNamesZCode.Add(TaxonomyType.ElyafCinsiveKalitesi, "Elyaf Cinsi ve Kalitesi");
             //TaxonomyNamesZCode.Add(TaxonomyType.ElyafOrani, "Elyaf Oranı");
             //TaxonomyNamesZCode.Add(TaxonomyType.ElyafKalitesi, "Elyaf Kalitesi");
-            TaxonomyNamesZCode.Add(TaxonomyType.UretimTeknolojisi, "Üretim Teknolojisi");
-            TaxonomyNamesZCode.Add(TaxonomyType.IplikRengi, "İplik Rengi");
-            TaxonomyNamesZCode.Add(TaxonomyType.PantoneRenkKodu, "Pantone Renk Kodu");
+            TaxonomyNamesZCode.Add(TaxonomyType.UretimTeknolojisi, "İplik Üretim Teknolojisi");
+            //TaxonomyNamesZCode.Add(TaxonomyType.IplikRengi, "İplik Rengi");
+            //TaxonomyNamesZCode.Add(TaxonomyType.PantoneRenkKodu, "Pantone Renk Kodu");
             TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikTurkiye, "Raf Yeri Türkiye");
             TaxonomyNamesZCode.Add(TaxonomyType.RafYeriIplikYunanistan, "Raf Yeri Yunanistan");
 

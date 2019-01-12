@@ -106,10 +106,13 @@ namespace FollowMe.Web.Controllers
         {       
             return new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync));
         }
-        public  IZetaCodeNormalIplikService GetZetaCodeNormalIplikService()
-        {
-        
+        public ZetaCodeNormalIplikService GetZetaCodeNormalIplikService()
+        {        
             return new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public IFanteziIplikService GetFanteziIplikService()
+        {
+            return new FanteziIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeFanteziIplik>(_followMeDbContext, UnitOfWorkAsync));
         }
         public  IIplikNoService GetIplikNoService()
         {       

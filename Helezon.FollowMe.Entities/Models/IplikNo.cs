@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     // IplikNo
@@ -23,11 +22,6 @@ namespace Helezon.FollowMe.Entities.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
-        public string Ne { get; set; } // NE (length: 10)
-        public string Nm { get; set; } // NM (length: 10)
-        public string Dny { get; set; } // DNY (length: 10)
-        public string Fl { get; set; } // FL (length: 10)
-        public string Ea { get; set; } // EA (length: 10)
         public int? ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi
         public int? ElyafOrani { get; set; } // ElyafOrani
         public bool IsPassive { get; set; } // IsPassive

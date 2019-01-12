@@ -240,7 +240,7 @@
     <Compile Include="Controllers\TermsController.cs" />
     <Compile Include="Controllers\ZetaCodeAksesuarController.cs" />
     <Compile Include="Controllers\ZetaCodeController.cs" />
-    <Compile Include="Controllers\ZetaCodeFantaziIplikController.cs" />
+    <Compile Include="Controllers\ZetaCodeFanteziIplikController.cs" />
     <Compile Include="Controllers\ZetaCodeHazirGiyimController.cs" />
     <Compile Include="Controllers\ZetaCodeKumasFantaziController.cs" />
     <Compile Include="Controllers\ZetaCodeKumasOrmeDokumaController.cs" />
@@ -337,10 +337,52 @@
     <Compile Include="Models\IGLCEmasModel.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IplikKategoriDegrede.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriDegredeConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriFlam.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriFlamConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKircili.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKirciliConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKrep.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKrepConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriNopeli.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriNopeliConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriSim.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriSimConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IplikNo.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IplikNoConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikNoGuide.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikNoGuideConfiguration.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JobExperience.cs" />
@@ -468,10 +510,10 @@
     <Compile Include="Models\RenkConfiguration.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sequence.cs">
+    <Compile Include="Models\SequenceBlueSiparisNo.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SequenceConfiguration.cs">
+    <Compile Include="Models\SequenceBlueSiparisNoConfiguration.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SocialMedia.cs" />
@@ -506,6 +548,8 @@
     <Compile Include="Models\ViewModels\TaxonomyViewModel.cs" />
     <Compile Include="Models\ViewModels\TermTaxonomyView.cs" />
     <Compile Include="Models\ViewModels\TermViewModel.cs" />
+    <Compile Include="Models\ViewModels\ViewModelExtensions.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikVm.cs" />
     <Compile Include="Models\ZetaCodeFanteziIplik.cs">
@@ -520,6 +564,13 @@
     <Compile Include="Models\ZetaCodeNormalIplikConfiguration.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZetaCodeNormalIplikPicture.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalIplikPictureConfiguration.cs">
+      <DependentUpon>EmasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyModelBinders\ZetaCodeNormalIplikVmBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -6610,7 +6661,6 @@
     <Content Include="Views\Shared\_LayoutZetaCode.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\ZetaCodeNormalIplikCard.cshtml" />
     <Content Include="Views\ZetaCodeAksesuar\Create.cshtml" />
-    <Content Include="Views\ZetaCodeFantaziIplik\Create.cshtml" />
     <Content Include="Views\ZetaCodeHazirGiyim\Create.cshtml" />
     <Content Include="Views\ZetaCodeKumasFantazi\Create.cshtml" />
     <Content Include="Views\ZetaCodeKumasOrmeDokuma\Create.cshtml" />
@@ -6621,6 +6671,10 @@
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\kircili.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\nopeli.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\sim.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\Details.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\Edit.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\Index.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\Edit - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

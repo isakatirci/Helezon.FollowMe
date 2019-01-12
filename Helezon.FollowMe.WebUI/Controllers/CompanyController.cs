@@ -684,8 +684,13 @@ namespace FollowMe.Web.Controllers
             {
                 return string.Empty;
             }
+            var key = Tuple.Create(EntityType.Company, (AddressType)addressId.Value);
+            if (!Utils.AddressTypeNames.ContainsKey(key))
+            {
+                return string.Empty;
+            }
 
-            return Utils.AddressTypeNames[Tuple.Create(EntityType.Company, (AddressType)addressId.Value)];
+            return Utils.AddressTypeNames[key];
         }
         public ActionResult CompanyCard(string id)
         {

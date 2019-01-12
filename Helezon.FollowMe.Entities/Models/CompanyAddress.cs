@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     // CompanyAddress

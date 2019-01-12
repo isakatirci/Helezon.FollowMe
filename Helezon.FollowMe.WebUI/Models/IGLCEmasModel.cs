@@ -28,7 +28,14 @@ namespace FollowMe.Web.Models
         System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        System.Data.Entity.DbSet<IplikKategoriDegrede> IplikKategoriDegrede { get; set; } // IplikKategoriDegrede
+        System.Data.Entity.DbSet<IplikKategoriFlam> IplikKategoriFlam { get; set; } // IplikKategoriFlam
+        System.Data.Entity.DbSet<IplikKategoriKircili> IplikKategoriKircili { get; set; } // IplikKategoriKircili
+        System.Data.Entity.DbSet<IplikKategoriKrep> IplikKategoriKrep { get; set; } // IplikKategoriKrep
+        System.Data.Entity.DbSet<IplikKategoriNopeli> IplikKategoriNopeli { get; set; } // IplikKategoriNopeli
+        System.Data.Entity.DbSet<IplikKategoriSim> IplikKategoriSim { get; set; } // IplikKategoriSim
         System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
+        System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
         System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
         System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
         System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
@@ -41,12 +48,13 @@ namespace FollowMe.Web.Models
         System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
         System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
         System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
-        System.Data.Entity.DbSet<Sequence> Sequence { get; set; } // Sequence
+        System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo
         System.Data.Entity.DbSet<Term> Term { get; set; } // Term
         System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
+        System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();

@@ -1,13 +1,49 @@
-﻿
+﻿@model  Helezon.FollowMe.Service.DataTransferObjects.IplikKategoriDegredeDto
 <div class="form-group">
     <label class="control-label col-md-2" for="BoyamaProsesi">
         Boyama Prosesi:
     </label>
-    <div class="col-md-10">
+    <div class="col-md-6">
         <input type="text"
                class="form-control"
-               id="BoyamaProsesi"
-               name="BoyamaProsesi">
+               id="IplikKategoriDegrede_BoyamaProsesi"
+               value="@(Model?.BoyamaProsesi)"
+               name="ZetaCodeNormalIplikDto.IplikKategoriDegredeDto.BoyamaProsesiFormat">
+    </div>
+
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="FlamUzunlugu">
+        Boya Yönü:
+    </label>
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriDegredeDto.BoyaYonu"
+       , (IEnumerable<SelectListItem>)ViewBag.BoyaYonu,"Please Select"
+       , new { @class = "form-control select2" })
+
+        @*<input type="text"
+            class="form-control mask_number transform_none"
+            id="IplikKategoriFlam_FlamUzunlugu"
+            value="@Model.FlamUzunluguFormat"
+            name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat">*@
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="FlamUzunlugu">
+       Boya Tipi:
+    </label>
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriDegredeDto.BoyaTipi"
+       , (IEnumerable<SelectListItem>)ViewBag.BoyaTipi, "Please Select"
+       , new { @class = "form-control select2" })
+
+        @*<input type="text"
+            class="form-control mask_number transform_none"
+            id="IplikKategoriFlam_FlamUzunlugu"
+            value="@Model.FlamUzunluguFormat"
+            name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat">*@
     </div>
 </div>
 

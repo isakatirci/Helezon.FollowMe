@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     // ZetaCodeFanteziIplik
@@ -22,9 +21,41 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeFanteziIplik: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
+        public string SirketId { get; set; } // SirketId (length: 128)
+        public bool Master { get; set; } // Master
+        public int ZetaCode { get; set; } // ZetaCode
+        public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
+        public string Ea { get; set; } // EA (length: 10)
+        public int? Ulke { get; set; } // Ulke
+        public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
+        public int BlueKod { get; set; } // BlueKod
+        public int BlueSiparisNo { get; set; } // BlueSiparisNo
+        public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
+        public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Company pointed by [ZetaCodeFanteziIplik].([SirketId]) (FK_ZetaCodeFanteziIplik_Company)
+        /// </summary>
+        public virtual Company Company { get; set; } // FK_ZetaCodeFanteziIplik_Company
 
         public ZetaCodeFanteziIplik()
         {
+            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }
 

@@ -23,6 +23,8 @@ namespace Helezon.FollowMe.Service
         List<TermDto> GetTermsByTaxonomyId(int taxonomyId);
         string GetTermNameById(int? id);
         TermDto GetTermById(int? id);
+        TermDto GetParentTermById(int termId);
+        List<TermDto> GetAllParentsById(int termid);
     }
 
     /// <summary>
@@ -31,10 +33,13 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public class TermService : Service<Term>, ITermService
     {
-        private readonly IRepositoryAsync<Term> _repository;
+        private readonly IRepositoryAsync<Term> _repoTerm;
+        private readonly IRepositoryAsync<TermTaxonomy> _repoTermTaxonomy;
+
         public TermService(IRepositoryAsync<Term> repository) : base(repository)
         {
-            _repository = repository;
+            _repoTerm = repository;
+            _repoTermTaxonomy = _repoTerm.GetRepositoryAsync<TermTaxonomy>();
         }
 
         public override void Update(Term entity)
@@ -93,9 +98,9 @@ namespace Helezon.FollowMe.Service
             // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
             lock (obj1)
             {
-                var termTaxonomy = _repository.GetRepository<TermTaxonomy>().Queryable();
+                var termTaxonomy = _repoTerm.GetRepository<TermTaxonomy>().Queryable();
 
-                var term = _repository.GetRepository<Term>().Queryable();
+                var term = _repoTerm.GetRepository<Term>().Queryable();
 
                 var jsTreeDataDtos = (from tx in termTaxonomy
                                       join te in term on tx.TermId equals te.Id
@@ -115,20 +120,64 @@ namespace Helezon.FollowMe.Service
 
         public List<TermDto> GetTermsByTaxonomyId(int taxonomyId)
         {
-            return AutoMapperConfig.Mapper.Map<List<Term>,List<TermDto>>(_repository.Queryable().Where(x=>x.TaxonomyId == taxonomyId).ToList());
+            return AutoMapperConfig.Mapper.Map<List<Term>,List<TermDto>>(_repoTerm.Queryable().Where(x=>x.TaxonomyId == taxonomyId).ToList());
         }
 
         public TermDto GetTermById(int? id)
         {
             if (!id.HasValue)            
                 return new TermDto();            
-            return AutoMapperConfig.Mapper.Map<Term,TermDto>(_repository.Queryable().FirstOrDefault(x => x.Id == id));
+            return AutoMapperConfig.Mapper.Map<Term,TermDto>(_repoTerm.Queryable().FirstOrDefault(x => x.Id == id));
         }
         public string GetTermNameById(int? id)
         {
             if (!id.HasValue)
                 return string.Empty;
-            return GetTermById(id).Name ?? string.Empty;
+            return GetTermById(id)?.Name ?? string.Empty;
         }
+
+        public List<TermDto> GetAllParentsById(int termid)
+        {
+            var parents = new List<TermDto>();
+            var term = GetTermById(termid);
+            if (term == null)
+                return parents;
+            parents.Add(term);
+            while (true)
+            {
+                var parent = GetParentTermById(termid);
+                if (parent != null)
+                {
+                    parents.Add(parent);
+                    termid = parent.Id;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return parents;
+        }
+
+        public TermDto GetParentTermById(int termid)
+        {
+            var term = GetTermById(termid);
+            if (term != null)
+            {
+                var termTaxonomy = _repoTermTaxonomy.Queryable().FirstOrDefault(x => x.TermId == termid && x.TaxonomyId == x.TaxonomyId);
+                if (termTaxonomy != null)
+                {
+                    var parentTerm = GetTermById(termTaxonomy.Parent);
+                    if (parentTerm != null)
+                    {
+                        return parentTerm;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            return null;        }
     }
 }

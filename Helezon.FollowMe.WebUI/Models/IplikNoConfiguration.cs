@@ -28,12 +28,7 @@ namespace FollowMe.Web.Models
 
         public IplikNoConfiguration(string schema)
         {
-            Property(x => x.Ne).IsOptional();
-            Property(x => x.Nm).IsOptional().HasPrecision(5,2);
-            Property(x => x.Dny).IsOptional();
-            Property(x => x.Fl).IsOptional();
-            Property(x => x.Ea).IsOptional();
-            Property(x => x.ElyafCinsiKalitesi).IsOptional().IsFixedLength();
+            Property(x => x.ElyafCinsiKalitesi).IsOptional();
             Property(x => x.ElyafOrani).IsOptional();
             Property(x => x.CreatedOn).IsOptional();
             Property(x => x.CreatedBy).IsOptional();

@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     public partial interface IFollowMeDbContext : System.IDisposable
@@ -28,6 +27,12 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        System.Data.Entity.DbSet<IplikKategoriDegrede> IplikKategoriDegrede { get; set; } // IplikKategoriDegrede
+        System.Data.Entity.DbSet<IplikKategoriFlam> IplikKategoriFlam { get; set; } // IplikKategoriFlam
+        System.Data.Entity.DbSet<IplikKategoriKircili> IplikKategoriKircili { get; set; } // IplikKategoriKircili
+        System.Data.Entity.DbSet<IplikKategoriKrep> IplikKategoriKrep { get; set; } // IplikKategoriKrep
+        System.Data.Entity.DbSet<IplikKategoriNopeli> IplikKategoriNopeli { get; set; } // IplikKategoriNopeli
+        System.Data.Entity.DbSet<IplikKategoriSim> IplikKategoriSim { get; set; } // IplikKategoriSim
         System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
         System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
         System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject

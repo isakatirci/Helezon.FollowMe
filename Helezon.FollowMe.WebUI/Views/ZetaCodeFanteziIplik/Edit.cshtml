@@ -1,0 +1,522 @@
+﻿@model ZetaCodeFanteziIplikVm
+
+@using Helezon.FollowMe.WebUI.Models.ViewModels
+
+
+@{
+    ViewBag.Title = "";
+    var update = Model != null && Model.ZetaCodeFanteziIplikDto != null && Model.ZetaCodeFanteziIplikDto.Id > 0;
+
+}
+
+
+<form action="/ZetaCodeNormalIplik/Edit" id="frmZetaCodeNormalIplik" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ZetaCodeFanteziIplikDto.Id)
+    @Html.HiddenFor(model => model.ZetaCodeFanteziIplikDto.ZetaCode)
+
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Zeta Code Fanztezi İplik @(update ? "Edit Page" : "Create")
+            </div>
+            <div class="tools">
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="panel-group accordion" id="accordion1">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Group #1 </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_1" class="panel-collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        <div class="form-body">
+                                            @if (update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <div class="checkbox">
+                                                            @Html.EditorFor(model => model.ZetaCodeFanteziIplikDto.IsPassive, new { SelectName = "ZetaCodeFanteziIplikDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
+                                                            @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.IsPassive, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <input type="text"
+                                                               readonly
+                                                               class="form-control transform_none"
+                                                               id="ZetaCodeFanteziIplikDto_ZetaCode"
+                                                               value="@Model.ZetaCodeFanteziIplikDto.ZetaCodeFormat()" />
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ZetaCodeFanteziIplikDto.ZetaCodePrevious
+     , new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.ZetaCodePrevious, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.Master, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.ZetaCodeFanteziIplikDto.Master, new { SelectName = "ZetaCodeFanteziIplikDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.Master, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            @if (!update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.DropDownList("ZetaCodeFanteziIplikDto.SirketId"
+        , Model.Collections.Sirketler, "Please Select"
+        , htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.SirketId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" name="ZetaCodeFanteziIplikDto.SirketId" id="ZetaCodeNormalIplikDto_SirketId" value="@Model.ZetaCodeFanteziIplikDto.SirketId" />
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" readonly value="@(Model.ZetaCodeFanteziIplikDto.Company?.Code + " " + Model.ZetaCodeFanteziIplikDto.Company?.Name)" />
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            @if (update)
+                                            {
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.ZetaCodeFanteziIplikDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+
+
+
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownList("ZetaCodeFanteziIplikDto.Ulke"
+    , Model.Collections.Ulkeler, "Please Select"
+    , htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.Ulke, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="ZetaCodeFanteziIplikDto.IplikKategosiId"></label>
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <input type="hidden"
+                                                                   name="ZetaCodeFanteziIplikDto.IplikKategosiId"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiId"
+                                                                   value="@Model.ZetaCodeFanteziIplikDto.IplikKategosi.Id" />
+                                                            <input type="text"
+                                                                   name="ZetaCodeFanteziIplikDto.IplikKategosiName"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiName"
+                                                                   readonly
+                                                                   class="form-control"
+                                                                   value="@Model.ZetaCodeFanteziIplikDto.IplikKategosi.Name" />
+                                                            <br />
+                                                            <div id="treeIplikKategosiId"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_iplik_sec"> İPLİK SEÇ </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_iplik_sec" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="form-horizontal form-bordered form-row-stripped">
+                                    @{
+                                        var normalIplikCount = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count;
+                                    }
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="">Kaç İplikten Oluşuyor</label>
+                                        <div class="col-md-6">
+                                            <select id="">
+                                                <option value="">Please Select</option>
+                                                <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
+                                                <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
+                                                <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
+                                                <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
+                                                <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_rafyerleri"> Raf Yerleri </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_rafyerleri" class="panel-collapse collapse">
+                        <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-body">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="ZetaCodeNormalIplikDto_RafyeriTurkiyeId" class="control-label col-md-2"></label>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="ZetaCodeFanteziIplikDto.RafyeriTurkiyeId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
+                                                           value="@Model.ZetaCodeFanteziIplikDto.RafyeriTurkiye.Id" />
+                                                    <input type="text"
+                                                           name="ZetaCodeFanteziIplikDto.RafyeriTurkiyeName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeName"
+                                                           readonly
+                                                           class="form-control"
+                                                           value="@Model.ZetaCodeFanteziIplikDto.RafyeriTurkiye.Name" />
+                                                    <br />
+                                                    <div id="treeRafyeriTurkiyeId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ZetaCodeNormalIplikDto_RafyeriYunanistanId" class="control-label col-md-2"></label>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="ZetaCodeFanteziIplikDto.RafyeriYunanistanId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanId"
+                                                           value="@Model.ZetaCodeFanteziIplikDto.RafyeriYunanistan.Id" />
+                                                    <input type="text"
+                                                           name="ZetaCodeFanteziIplikDto.RafyeriYunanistanName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanName"
+                                                           class="form-control"
+                                                           readonly
+                                                           value="@Model.ZetaCodeFanteziIplikDto.RafyeriYunanistan.Name" />
+                                                    <br />
+                                                    <div id="treeRafyeriYunanistanId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button type="submit" onclick="validateSomeFields()" class="btn green btn-block">
+                                            @*<i class="fa fa-pencil"></i>*@ Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@section afterGlobalScripts {
+
+    <script>
+        function validateSomeFields() {
+
+        }
+
+        var modulFantezilIplikVm = (function () {
+
+            var ajaxTreeFillTermTree = function (selector, url, valueElement, textElement, changedCallBackFunc) {
+                var tmp = $(selector).jstree(true);
+                if (tmp) {
+                    tmp.destroy();
+                }
+                $(selector).jstree({
+                    'plugins': ['search', 'checkbox', 'wholerow'],
+                    'core': {
+                        "multiple": false,
+                        'data': {
+                            'url': function (node) {
+                                return url;
+                            }
+                            //,
+                            //'data': function (node) {
+                            //    //console.log(node);
+
+                            //    return { 'parent': node.id };
+                            //}
+                        },
+                        'animation': false,
+                        //'expand_selected_onload': true,
+                        'themes': {
+                            'icons': false,
+                        }
+                    },
+                    'search': {
+                        'show_only_matches': true,
+                        'show_only_matches_children': true
+                    },
+                    'checkbox': {
+                        'keep_selected_style': false,
+                        'three_state': false,
+                        'cascade': ''
+                    }
+                });
+
+                $(selector).on('changed.jstree',
+                    function (e, data) {
+                        var i, j, ids = [], texts = [];
+                        for (i = 0, j = data.selected.length; i < j; i++) {
+                            var node = data.instance.get_node(data.selected[i]);
+                            ids.push(node.id);
+                            texts.push(node.text);
+                        }
+                        debugger;
+                        var valueElyafCinsiKalitesi = $(selector).closest(".panel-body").find(valueElement);
+                        valueElyafCinsiKalitesi.empty();
+                        $(valueElyafCinsiKalitesi).val(ids.join(', '));
+
+                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find(textElement);
+                        txtElyafCinsiKalitesi.empty();
+                        $(txtElyafCinsiKalitesi).val(texts.join(', '));
+
+                        //$(txtElyafCinsiKalitesi).val(texts.join(', '));
+
+
+                        if (typeof changedCallBackFunc !== 'undefined') {
+                            changedCallBackFunc();
+                        }
+
+
+
+                    });
+            };
+
+
+            var repeater = function () {
+                $('.mt-repeater').each(function () {
+                    $(this).repeater({
+                        show: function () {
+
+                            var elyafOrani = 0;
+
+                            $(".mt-repeater .elyaf-orani").each(function () {
+                                var self = this;
+                                //console.log($(self).val());
+                                if ($(self).val() && $(self).val().length > 0) {
+                                    elyafOrani += parseInt($(self).val());
+                                }
+                            });
+
+                            if (elyafOrani >= 100) {
+                                alert("Elyaf Oranı %100 Olmalıdır");
+                                $(this).remove();
+                                return;
+                            }
+
+
+                            $(this).slideDown();
+
+                            ajaxTreeFillTermTreeRef($(this).find(".treeElyafCinsiKalitesi"), "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
+
+                            //modulFantezilIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
+
+
+
+                            $('.mt-repeater .select2-container').remove();
+
+                            $(".mt-repeater .select2").each(function () {
+
+                                $(this).select2({
+                                    placeholder: "Please Select",
+                                    width: null
+                                });
+
+
+                            });
+
+
+
+                            //$('.mt-repeater .select2-container').css('width', '100%');
+
+                        },
+
+                        hide: function (deleteElement) {
+                            if (confirm('Are you sure you want to delete this element?')) {
+                                $(this).slideUp(deleteElement);
+                            }
+                        },
+
+                        ready: function (setIndexes) {
+
+
+                        },
+                        isFirstItemUndeletable: false
+
+                    });
+                })
+            };
+
+            var ajaxTreeFillTermTreeRef = function (selector, url) {
+                var tmp = selector.jstree(true);
+                if (tmp) {
+                    tmp.destroy();
+                }
+                selector.jstree({
+                    'plugins': ['search', 'checkbox', 'wholerow'],
+                    'core': {
+                        "multiple": false,
+                        'data': {
+                            'url': function (node) {
+                                return url;
+                            },
+                            //'data': function (node) {
+                            //    //console.log(node);
+
+                            //    return { 'parent': node.id };
+                            //}
+                        },
+                        'animation': false,
+                        //'expand_selected_onload': true,
+                        'themes': {
+                            'icons': false,
+                        }
+                    },
+                    'search': {
+                        'show_only_matches': true,
+                        'show_only_matches_children': true
+                    },
+                    'checkbox': {
+                        'keep_selected_style': false,
+                        'three_state': false,
+                        'cascade': ''
+                    }
+                });
+
+                selector.on('changed.jstree',
+                    function (e, data) {
+                        var i, j, ids = [], texts = [];
+                        for (i = 0, j = data.selected.length; i < j; i++) {
+                            var node = data.instance.get_node(data.selected[i]);
+                            ids.push(node.id);
+                            texts.push(node.text);
+                        }
+                        debugger;
+                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find("#ElyafCinsiKalitesi");
+                        txtElyafCinsiKalitesi.empty();
+                        var txtElyafCinsiKalitesiName = $(selector).closest(".panel-body").find("#ElyafCinsiKalitesiName");
+                        txtElyafCinsiKalitesiName.empty();
+                        debugger;
+                        $(txtElyafCinsiKalitesiName).val(texts.join(', '));
+                        $(txtElyafCinsiKalitesi).val(ids.join(', '));
+
+
+                    });
+
+
+            };
+
+
+
+
+            return {
+
+                ajaxTreeFillTermTree: ajaxTreeFillTermTree,
+                ajaxTreeFillTermTreeRef: ajaxTreeFillTermTreeRef,
+                repeater: repeater
+            };
+
+        })();
+
+        $(document).ready(function () {
+
+            modulFantezilIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategorilerFantezi"
+                , "#ZetaCodeNormalIplikDto_IplikKategosiId", "#ZetaCodeNormalIplikDto_IplikKategosiName");
+
+
+            modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
+                , "#ZetaCodeNormalIplikDto_RafyeriTurkiyeId", "#ZetaCodeNormalIplikDto_RafyeriTurkiyeName");
+
+            modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
+                , "#ZetaCodeNormalIplikDto_RafyeriYunanistanId", "#ZetaCodeNormalIplikDto_RafyeriYunanistanName");
+
+
+        });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

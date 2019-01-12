@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
 
@@ -30,6 +29,12 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         public System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        public System.Data.Entity.DbSet<IplikKategoriDegrede> IplikKategoriDegrede { get; set; } // IplikKategoriDegrede
+        public System.Data.Entity.DbSet<IplikKategoriFlam> IplikKategoriFlam { get; set; } // IplikKategoriFlam
+        public System.Data.Entity.DbSet<IplikKategoriKircili> IplikKategoriKircili { get; set; } // IplikKategoriKircili
+        public System.Data.Entity.DbSet<IplikKategoriKrep> IplikKategoriKrep { get; set; } // IplikKategoriKrep
+        public System.Data.Entity.DbSet<IplikKategoriNopeli> IplikKategoriNopeli { get; set; } // IplikKategoriNopeli
+        public System.Data.Entity.DbSet<IplikKategoriSim> IplikKategoriSim { get; set; } // IplikKategoriSim
         public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
         public System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
         public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
@@ -115,6 +120,12 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyTelephoneMap());
             modelBuilder.Configurations.Add(new CompanyTermMap());
             modelBuilder.Configurations.Add(new ErrorMap());
+            modelBuilder.Configurations.Add(new IplikKategoriDegredeMap());
+            modelBuilder.Configurations.Add(new IplikKategoriFlamMap());
+            modelBuilder.Configurations.Add(new IplikKategoriKirciliMap());
+            modelBuilder.Configurations.Add(new IplikKategoriKrepMap());
+            modelBuilder.Configurations.Add(new IplikKategoriNopeliMap());
+            modelBuilder.Configurations.Add(new IplikKategoriSimMap());
             modelBuilder.Configurations.Add(new IplikNoMap());
             modelBuilder.Configurations.Add(new IplikNoGuideMap());
             modelBuilder.Configurations.Add(new JsonObjectMap());
@@ -151,6 +162,12 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new CompanyTelephoneMap(schema));
             modelBuilder.Configurations.Add(new CompanyTermMap(schema));
             modelBuilder.Configurations.Add(new ErrorMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriDegredeMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriFlamMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriKirciliMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriKrepMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriNopeliMap(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriSimMap(schema));
             modelBuilder.Configurations.Add(new IplikNoMap(schema));
             modelBuilder.Configurations.Add(new IplikNoGuideMap(schema));
             modelBuilder.Configurations.Add(new JsonObjectMap(schema));

@@ -31,7 +31,14 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; } // CompanyTelephone
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm
         public System.Data.Entity.DbSet<Error> Error { get; set; } // Error
+        public System.Data.Entity.DbSet<IplikKategoriDegrede> IplikKategoriDegrede { get; set; } // IplikKategoriDegrede
+        public System.Data.Entity.DbSet<IplikKategoriFlam> IplikKategoriFlam { get; set; } // IplikKategoriFlam
+        public System.Data.Entity.DbSet<IplikKategoriKircili> IplikKategoriKircili { get; set; } // IplikKategoriKircili
+        public System.Data.Entity.DbSet<IplikKategoriKrep> IplikKategoriKrep { get; set; } // IplikKategoriKrep
+        public System.Data.Entity.DbSet<IplikKategoriNopeli> IplikKategoriNopeli { get; set; } // IplikKategoriNopeli
+        public System.Data.Entity.DbSet<IplikKategoriSim> IplikKategoriSim { get; set; } // IplikKategoriSim
         public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; } // IplikNo
+        public System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; } // IplikNoGuide
         public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; } // JsonObject
         public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; } // LogisticsCompany
         public System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; } // PantoneRenk
@@ -44,12 +51,13 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
         public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
         public System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
-        public System.Data.Entity.DbSet<Sequence> Sequence { get; set; } // Sequence
+        public System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo
         public System.Data.Entity.DbSet<Term> Term { get; set; } // Term
         public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
 
         static GLCEmasModel()
         {
@@ -114,7 +122,14 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new CompanyTelephoneConfiguration());
             modelBuilder.Configurations.Add(new CompanyTermConfiguration());
             modelBuilder.Configurations.Add(new ErrorConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriDegredeConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriFlamConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriKirciliConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriKrepConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriNopeliConfiguration());
+            modelBuilder.Configurations.Add(new IplikKategoriSimConfiguration());
             modelBuilder.Configurations.Add(new IplikNoConfiguration());
+            modelBuilder.Configurations.Add(new IplikNoGuideConfiguration());
             modelBuilder.Configurations.Add(new JsonObjectConfiguration());
             modelBuilder.Configurations.Add(new LogisticsCompanyConfiguration());
             modelBuilder.Configurations.Add(new PantoneRenkConfiguration());
@@ -127,12 +142,13 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new PersonnelTermConfiguration());
             modelBuilder.Configurations.Add(new RafBilgisiConfiguration());
             modelBuilder.Configurations.Add(new RenkConfiguration());
-            modelBuilder.Configurations.Add(new SequenceConfiguration());
+            modelBuilder.Configurations.Add(new SequenceBlueSiparisNoConfiguration());
             modelBuilder.Configurations.Add(new TermConfiguration());
             modelBuilder.Configurations.Add(new TermRelationshipConfiguration());
             modelBuilder.Configurations.Add(new TermTaxonomyConfiguration());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikConfiguration());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikConfiguration());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -148,7 +164,14 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new CompanyTelephoneConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyTermConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriDegredeConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriFlamConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriKirciliConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriKrepConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriNopeliConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikKategoriSimConfiguration(schema));
             modelBuilder.Configurations.Add(new IplikNoConfiguration(schema));
+            modelBuilder.Configurations.Add(new IplikNoGuideConfiguration(schema));
             modelBuilder.Configurations.Add(new JsonObjectConfiguration(schema));
             modelBuilder.Configurations.Add(new LogisticsCompanyConfiguration(schema));
             modelBuilder.Configurations.Add(new PantoneRenkConfiguration(schema));
@@ -161,12 +184,13 @@ namespace FollowMe.Web.Models
             modelBuilder.Configurations.Add(new PersonnelTermConfiguration(schema));
             modelBuilder.Configurations.Add(new RafBilgisiConfiguration(schema));
             modelBuilder.Configurations.Add(new RenkConfiguration(schema));
-            modelBuilder.Configurations.Add(new SequenceConfiguration(schema));
+            modelBuilder.Configurations.Add(new SequenceBlueSiparisNoConfiguration(schema));
             modelBuilder.Configurations.Add(new TermConfiguration(schema));
             modelBuilder.Configurations.Add(new TermRelationshipConfiguration(schema));
             modelBuilder.Configurations.Add(new TermTaxonomyConfiguration(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikConfiguration(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikConfiguration(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureConfiguration(schema));
             OnCreateModelPartial(modelBuilder, schema);
             return modelBuilder;
         }

@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="DataTransferObjects\JsTreeDataDto.cs" />
     <Compile Include="DataTransferObjects\Partials.cs" />
-    <Compile Include="DataTransferObjects\ZetaCodeNormalIplikContainerDto.cs" />
     <Compile Include="FluentValidation\CompanyValidatior.cs" />
     <Compile Include="IplikNoService.cs" />
     <Compile Include="OthersService.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="PersonnelImageService.cs" />
     <Compile Include="PersonnelTermService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZetaCodeFanteziIplikService.cs" />
     <Compile Include="ZetaCodeNormalIplikService.cs" />
   </ItemGroup>
   <ItemGroup>

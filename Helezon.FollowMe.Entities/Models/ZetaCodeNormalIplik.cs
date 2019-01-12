@@ -14,7 +14,6 @@
 
 namespace Helezon.FollowMe.Entities.Models
 {
-    using FollowMe.Entities.Models.Mapping;
     using Repository.Pattern.Ef6;
 
     // ZetaCodeNormalIplik
@@ -22,6 +21,7 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeNormalIplik: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
         public bool Master { get; set; } // Master
         public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
@@ -41,13 +41,47 @@ namespace Helezon.FollowMe.Entities.Models
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
+        public string Ne { get; set; } // NE (length: 10)
+        public string Nm { get; set; } // NM (length: 10)
+        public string Dny { get; set; } // DNY (length: 10)
+        public string Fl { get; set; } // FL (length: 10)
+        public string Ea { get; set; } // EA (length: 10)
 
         // Reverse navigation
 
         /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].[ZetaCodeNormalIplikId] (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriDegrede IplikKategoriDegrede { get; set; } // IplikKategoriDegrede.FK_IplikKategoriDegrede_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriFlam].[ZetaCodeNormalIplikId] (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriFlam IplikKategoriFlam { get; set; } // IplikKategoriFlam.FK_IplikKategoriFlam_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKircili].[ZetaCodeNormalIplikId] (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
+        /// </summary>
+        public virtual IplikKategoriKircili IplikKategoriKircili { get; set; } // IplikKategoriKircili.FK_IplikKategoriKircili_ZetaCodeNormalIplik1
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKrep].[ZetaCodeNormalIplikId] (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriKrep IplikKategoriKrep { get; set; } // IplikKategoriKrep.FK_IplikKategoriKrep_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriNopeli].[ZetaCodeNormalIplikId] (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriNopeli IplikKategoriNopeli { get; set; } // IplikKategoriNopeli.FK_IplikKategoriNopeli_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriSim].[ZetaCodeNormalIplikId] (FK_IplikKategoriSim_ZetaCodeNormalIplik)
+        /// </summary>
+        public virtual IplikKategoriSim IplikKategoriSim { get; set; } // IplikKategoriSim.FK_IplikKategoriSim_ZetaCodeNormalIplik
+        /// <summary>
         /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
+        /// <summary>
+        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
         /// <summary>
         /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
         /// </summary>
@@ -74,6 +108,7 @@ namespace Helezon.FollowMe.Entities.Models
         {
             IplikNo = new System.Collections.Generic.List<IplikNo>();
             ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPicture>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();
         }
 

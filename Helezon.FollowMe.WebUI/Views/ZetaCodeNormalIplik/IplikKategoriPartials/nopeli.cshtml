@@ -1,25 +1,34 @@
-﻿
+﻿@model  Helezon.FollowMe.Service.DataTransferObjects.IplikKategoriNopeliDto
 
 <div class="form-group">
     <label class="control-label col-md-2" for="NoktalarArasiMesafe">
         İki Nokta Arasındaki Mesafe:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="NoktalarArasiMesafe"
-               name="NoktalarArasiMesafe">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktalarArasiMesafeFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Mesafe
+       , new { @class = "form-control select2" })
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriNopeli_NoktalarArasiMesafe"
+        value="@Model.NoktalarArasiMesafeFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktalarArasiMesafeFormat">*@
     </div>
 </div>
 <div class="form-group">
     <label class="control-label col-md-2" for="NoktaUzunlugu">
         Nokta Uzunluğu:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="NoktaUzunlugu"
-               name="NoktaUzunlugu">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaUzunluguFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
+       , new { @class = "form-control select2" })
+
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriNopeli_NoktaUzunlugu"
+        value="@Model.NoktaUzunluguFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaUzunluguFormat">*@
     </div>
 </div>
 
@@ -27,11 +36,15 @@
     <label class="control-label col-md-2" for="NoktaYuksekligi">
         Nokta Yüksekliği:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="NoktaYuksekligi"
-               name="NoktaYuksekligi">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaYuksekligiFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
+       , new { @class = "form-control select2" })
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriNopeli_NoktaYuksekligi"
+        value="@Model.NoktaYuksekligiFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaYuksekligiFormat">*@
     </div>
 </div>
 

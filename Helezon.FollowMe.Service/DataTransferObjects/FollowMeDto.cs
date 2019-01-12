@@ -141,6 +141,10 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// </summary>
         public System.Collections.Generic.ICollection<PersonDto> Person { get; set; } // Person.FK_Person_Company
         /// <summary>
+        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[SirketId] point to this entity (FK_ZetaCodeFanteziIplik_Company)
+        /// </summary>
+        public System.Collections.Generic.ICollection<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Company
+        /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
         /// </summary>
         public System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
@@ -154,6 +158,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             CompanyTerm = new System.Collections.Generic.List<CompanyTermDto>();
             LogisticsCompany = new System.Collections.Generic.List<LogisticsCompanyDto>();
             Person = new System.Collections.Generic.List<PersonDto>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             InitializePartial();
         }
@@ -356,17 +361,157 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         partial void InitializePartial();
     }
 
+    // IplikKategoriDegrede
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriDegredeDto
+    {
+        public int Id { get; set; } // Id
+        public string BoyamaProsesi { get; set; } // BoyamaProsesi (length: 200)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].([ZetaCodeNormalIplikId]) (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriDegrede_ZetaCodeNormalIplik
+
+        public IplikKategoriDegredeDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // IplikKategoriFlam
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriFlamDto
+    {
+        public int Id { get; set; } // Id
+        public string FlamlarArasindakiMesafe { get; set; } // FlamlarArasindakiMesafe (length: 10)
+        public string FlamUzunlugu { get; set; } // FlamUzunlugu (length: 10)
+        public string FlamYuksekligi { get; set; } // FlamYuksekligi (length: 10)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriFlam].([ZetaCodeNormalIplikId]) (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriFlam_ZetaCodeNormalIplik
+
+        public IplikKategoriFlamDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // IplikKategoriKircili
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriKirciliDto
+    {
+        public int Id { get; set; } // Id
+        public string KircillarArasiMesafe { get; set; } // KircillarArasiMesafe (length: 10)
+        public string KircilUzunlugu { get; set; } // KircilUzunlugu (length: 10)
+        public string KircilYuksekligi { get; set; } // KircilYuksekligi (length: 10)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriKircili].([ZetaCodeNormalIplikId]) (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriKircili_ZetaCodeNormalIplik1
+
+        public IplikKategoriKirciliDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // IplikKategoriKrep
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriKrepDto
+    {
+        public int Id { get; set; } // Id
+        public string TurSayisi { get; set; } // TurSayisi (length: 10)
+        public string BukumYonu { get; set; } // BukumYonu (length: 50)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriKrep].([ZetaCodeNormalIplikId]) (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriKrep_ZetaCodeNormalIplik
+
+        public IplikKategoriKrepDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // IplikKategoriNopeli
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriNopeliDto
+    {
+        public int Id { get; set; } // Id
+        public string NoktalarArasiMesafe { get; set; } // NoktalarArasiMesafe (length: 10)
+        public string NoktaUzunlugu { get; set; } // NoktaUzunlugu (length: 10)
+        public string NoktaYuksekligi { get; set; } // NoktaYuksekligi (length: 10)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriNopeli].([ZetaCodeNormalIplikId]) (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriNopeli_ZetaCodeNormalIplik
+
+        public IplikKategoriNopeliDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // IplikKategoriSim
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class IplikKategoriSimDto
+    {
+        public int Id { get; set; } // Id
+        public string SimKesimBoyutu { get; set; } // SimKesimBoyutu (length: 200)
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriSim].([ZetaCodeNormalIplikId]) (FK_IplikKategoriSim_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriSim_ZetaCodeNormalIplik
+
+        public IplikKategoriSimDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
     // IplikNo
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public partial class IplikNoDto
     {
         public int Id { get; set; } // Id (Primary key)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
-        public string Ne { get; set; } // NE (length: 10)
-        public string Nm { get; set; } // NM (length: 10)
-        public string Dny { get; set; } // DNY (length: 10)
-        public string Fl { get; set; } // FL (length: 10)
-        public string Ea { get; set; } // EA (length: 10)
         public int? ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi
         public int? ElyafOrani { get; set; } // ElyafOrani
         public bool IsPassive { get; set; } // IsPassive
@@ -919,9 +1064,41 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
     public partial class ZetaCodeFanteziIplikDto
     {
         public int Id { get; set; } // Id (Primary key)
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
+        public string SirketId { get; set; } // SirketId (length: 128)
+        public bool Master { get; set; } // Master
+        public int ZetaCode { get; set; } // ZetaCode
+        public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
+        public string Ea { get; set; } // EA (length: 10)
+        public int? Ulke { get; set; } // Ulke
+        public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
+        public int BlueKod { get; set; } // BlueKod
+        public int BlueSiparisNo { get; set; } // BlueSiparisNo
+        public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
+        public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public System.Collections.Generic.ICollection<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // Many to many mapping
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Company pointed by [ZetaCodeFanteziIplik].([SirketId]) (FK_ZetaCodeFanteziIplik_Company)
+        /// </summary>
+        public CompanyDto Company { get; set; } // FK_ZetaCodeFanteziIplik_Company
 
         public ZetaCodeFanteziIplikDto()
         {
+            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             InitializePartial();
         }
 
@@ -933,6 +1110,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
     public partial class ZetaCodeNormalIplikDto
     {
         public int Id { get; set; } // Id (Primary key)
+        public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
         public bool Master { get; set; } // Master
         public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
@@ -952,13 +1130,51 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
+        public string Ne { get; set; } // NE (length: 10)
+        public string Nm { get; set; } // NM (length: 10)
+        public string Dny { get; set; } // DNY (length: 10)
+        public string Fl { get; set; } // FL (length: 10)
+        public string Ea { get; set; } // EA (length: 10)
 
         // Reverse navigation
 
         /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriDegrede].[ZetaCodeNormalIplikId] (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
+        /// </summary>
+        public IplikKategoriDegredeDto IplikKategoriDegrede { get; set; } // IplikKategoriDegrede.FK_IplikKategoriDegrede_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriFlam].[ZetaCodeNormalIplikId] (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
+        /// </summary>
+        public IplikKategoriFlamDto IplikKategoriFlam { get; set; } // IplikKategoriFlam.FK_IplikKategoriFlam_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriKircili].[ZetaCodeNormalIplikId] (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
+        /// </summary>
+        public IplikKategoriKirciliDto IplikKategoriKircili { get; set; } // IplikKategoriKircili.FK_IplikKategoriKircili_ZetaCodeNormalIplik1
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriKrep].[ZetaCodeNormalIplikId] (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
+        /// </summary>
+        public IplikKategoriKrepDto IplikKategoriKrep { get; set; } // IplikKategoriKrep.FK_IplikKategoriKrep_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriNopeli].[ZetaCodeNormalIplikId] (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
+        /// </summary>
+        public IplikKategoriNopeliDto IplikKategoriNopeli { get; set; } // IplikKategoriNopeli.FK_IplikKategoriNopeli_ZetaCodeNormalIplik
+        /// <summary>
+        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriSim].[ZetaCodeNormalIplikId] (FK_IplikKategoriSim_ZetaCodeNormalIplik)
+        /// </summary>
+        public IplikKategoriSimDto IplikKategoriSim { get; set; } // IplikKategoriSim.FK_IplikKategoriSim_ZetaCodeNormalIplik
+        /// <summary>
         /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
         public System.Collections.Generic.ICollection<IplikNoDto> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
+        /// <summary>
+        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public System.Collections.Generic.ICollection<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
+        /// </summary>
+        public System.Collections.Generic.ICollection<ZetaCodeNormalIplikPictureDto> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture.FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
 
         // Foreign keys
 
@@ -980,6 +1196,37 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public ZetaCodeNormalIplikDto()
         {
             IplikNo = new System.Collections.Generic.List<IplikNoDto>();
+            ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPictureDto>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCodeNormalIplikPicture
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeNormalIplikPictureDto
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name (length: 200)
+        public string Extension { get; set; } // Extension (length: 50)
+        public bool IsFeatured { get; set; } // IsFeatured
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ZetaCodeNormalIplik pointed by [ZetaCodeNormalIplikPicture].([ZetaCodeNormalIplikId]) (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
+        /// </summary>
+        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
+
+        public ZetaCodeNormalIplikPictureDto()
+        {
             InitializePartial();
         }
 

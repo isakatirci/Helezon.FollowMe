@@ -57,7 +57,13 @@
     <Compile Include="Models\AddressGuide.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddressGuideMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BankGuide.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BankGuideMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Company.cs">
@@ -66,19 +72,40 @@
     <Compile Include="Models\CompanyAddress.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyAddressMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CompanyBank.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyBankMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyPicture.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyPictureMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CompanyTelephone.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyTelephoneMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyTerm.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyTermMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Error.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ErrorMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FollowMeDbContext.cs">
@@ -95,162 +122,166 @@
     <Compile Include="Models\IFollowMeDbContext.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IplikKategoriDegrede.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriDegredeMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriFlam.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriFlamMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKircili.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKirciliMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKrep.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriKrepMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriNopeli.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriNopeliMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriSim.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikKategoriSimMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IplikNo.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IplikNoGuide.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IplikNoGuideMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IplikNoMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JsonObject.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JsonObjectMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogisticsCompany.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mapping\AddressGuideMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\BankGuideMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyAddressMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyBankMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyPictureMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyTelephoneMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\CompanyTermMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\ErrorMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\FollowMeMapping1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\IplikNoGuideMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\IplikNoMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\JsonObjectMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\LogisticsCompanyMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PantoneRenkMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelAddressMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelBankMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelEducationMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelPictureMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelTelephoneMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\PersonnelTermMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\RafBilgisiMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\RenkMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\SequenceBlueSiparisNoMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\TermMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\TermRelationshipMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\TermTaxonomyMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\ZetaCodeFanteziIplikMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\ZetaCodeNormalIplikMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mapping\ZetaCodeNormalIplikPictureMap.cs">
-      <DependentUpon>FollowMeMapping.tt</DependentUpon>
+    <Compile Include="Models\LogisticsCompanyMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PantoneRenk.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PantoneRenkMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PersonnelAddress.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelAddressMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonnelBank.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonnelBankMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PersonnelEducation.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelEducationMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonnelPicture.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonnelPictureMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PersonnelTelephone.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonnelTelephoneMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonnelTerm.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonnelTermMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RafBilgisi.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RafBilgisiMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Renk.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RenkMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SequenceBlueSiparisNo.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SequenceBlueSiparisNoMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Term.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TermMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TermRelationship.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TermRelationshipMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TermTaxonomy.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TermTaxonomyMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZetaCodeFanteziIplik.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeFanteziIplikMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodeNormalIplik.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZetaCodeNormalIplikMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZetaCodeNormalIplikPicture.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalIplikPictureMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -272,13 +303,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FollowMeModels1.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Mapping\FollowMeMapping.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FollowMeMapping1.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Mapping\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -30,8 +30,97 @@ namespace FollowMe.Web.Models
         [Display(Name = "Id")]
         public int Id { get; set; } // Id (Primary key)
 
+        [Column(@"IplikKategosiId", Order = 2, TypeName = "int")]
+        [Display(Name = "Iplik kategosi ID")]
+        public int? IplikKategosiId { get; set; } // IplikKategosiId
+
+        [Column(@"Master", Order = 3, TypeName = "bit")]
+        [Required]
+        [Display(Name = "Master")]
+        public bool Master { get; set; } // Master
+
+        [Column(@"ZetaCode", Order = 4, TypeName = "int")]
+        [Required]
+        [Display(Name = "Zeta code")]
+        public int ZetaCode { get; set; } // ZetaCode
+
+        [Column(@"ZetaCodePrevious", Order = 5, TypeName = "nvarchar")]
+        [MaxLength(200)]
+        [StringLength(200)]
+        [Display(Name = "Zeta code previous")]
+        public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
+
+        [Column(@"EA", Order = 6, TypeName = "nvarchar")]
+        [MaxLength(10)]
+        [StringLength(10)]
+        [Display(Name = "Ea")]
+        public string Ea { get; set; } // EA (length: 10)
+
+        [Column(@"IsPassive", Order = 7, TypeName = "bit")]
+        [Required]
+        [Display(Name = "Is passive")]
+        public bool IsPassive { get; set; } // IsPassive
+
+        [Column(@"CreatedOn", Order = 8, TypeName = "datetime2")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Created on")]
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+
+        [Column(@"CreatedBy", Order = 9, TypeName = "nvarchar")]
+        [MaxLength(128)]
+        [StringLength(128)]
+        [Display(Name = "Created by")]
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+
+        [Column(@"ChangedOn", Order = 10, TypeName = "datetime2")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Changed on")]
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+
+        [Column(@"ChangedBy", Order = 11, TypeName = "nvarchar")]
+        [MaxLength(128)]
+        [StringLength(128)]
+        [Display(Name = "Changed by")]
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        [Column(@"Ulke", Order = 12, TypeName = "int")]
+        [Display(Name = "Ulke")]
+        public int? Ulke { get; set; } // Ulke
+
+        [Column(@"BlueUrunKodIsmi", Order = 13, TypeName = "nvarchar")]
+        [MaxLength(200)]
+        [StringLength(200)]
+        [Display(Name = "Blue urun kod ismi")]
+        public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
+
+        [Column(@"BlueKod", Order = 14, TypeName = "int")]
+        [Required]
+        [Display(Name = "Blue kod")]
+        public int BlueKod { get; set; } // BlueKod
+
+        [Column(@"BlueSiparisNo", Order = 15, TypeName = "int")]
+        [Required]
+        [Display(Name = "Blue siparis no")]
+        public int BlueSiparisNo { get; set; } // BlueSiparisNo
+
+        [Column(@"RafyeriTurkiyeId", Order = 16, TypeName = "int")]
+        [Display(Name = "Rafyeri turkiye ID")]
+        public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
+
+        [Column(@"RafyeriYunanistanId", Order = 17, TypeName = "int")]
+        [Display(Name = "Rafyeri yunanistan ID")]
+        public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
+
         public ZetaCodeFanteziIplik()
         {
+            ZetaCodeNormalIplik = new System.Collections.Generic.HashSet<ZetaCodeNormalIplik>();
             InitializePartial();
         }
 

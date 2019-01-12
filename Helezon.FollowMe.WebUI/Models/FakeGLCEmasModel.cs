@@ -31,7 +31,14 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<CompanyTelephone> CompanyTelephone { get; set; }
         public System.Data.Entity.DbSet<CompanyTerm> CompanyTerm { get; set; }
         public System.Data.Entity.DbSet<Error> Error { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriDegrede> IplikKategoriDegrede { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriFlam> IplikKategoriFlam { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriKircili> IplikKategoriKircili { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriKrep> IplikKategoriKrep { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriNopeli> IplikKategoriNopeli { get; set; }
+        public System.Data.Entity.DbSet<IplikKategoriSim> IplikKategoriSim { get; set; }
         public System.Data.Entity.DbSet<IplikNo> IplikNo { get; set; }
+        public System.Data.Entity.DbSet<IplikNoGuide> IplikNoGuide { get; set; }
         public System.Data.Entity.DbSet<JsonObject> JsonObject { get; set; }
         public System.Data.Entity.DbSet<LogisticsCompany> LogisticsCompany { get; set; }
         public System.Data.Entity.DbSet<PantoneRenk> PantoneRenk { get; set; }
@@ -44,12 +51,13 @@ namespace FollowMe.Web.Models
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; }
         public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; }
         public System.Data.Entity.DbSet<Renk> Renk { get; set; }
-        public System.Data.Entity.DbSet<Sequence> Sequence { get; set; }
+        public System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; }
         public System.Data.Entity.DbSet<Term> Term { get; set; }
         public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; }
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; }
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; }
         public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; }
+        public System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; }
 
         public FakeGLCEmasModel()
         {
@@ -66,7 +74,14 @@ namespace FollowMe.Web.Models
             CompanyTelephone = new FakeDbSet<CompanyTelephone>("Id");
             CompanyTerm = new FakeDbSet<CompanyTerm>("Id");
             Error = new FakeDbSet<Error>("Id");
+            IplikKategoriDegrede = new FakeDbSet<IplikKategoriDegrede>("ZetaCodeNormalIplikId");
+            IplikKategoriFlam = new FakeDbSet<IplikKategoriFlam>("ZetaCodeNormalIplikId");
+            IplikKategoriKircili = new FakeDbSet<IplikKategoriKircili>("ZetaCodeNormalIplikId");
+            IplikKategoriKrep = new FakeDbSet<IplikKategoriKrep>("ZetaCodeNormalIplikId");
+            IplikKategoriNopeli = new FakeDbSet<IplikKategoriNopeli>("ZetaCodeNormalIplikId");
+            IplikKategoriSim = new FakeDbSet<IplikKategoriSim>("ZetaCodeNormalIplikId");
             IplikNo = new FakeDbSet<IplikNo>("Id");
+            IplikNoGuide = new FakeDbSet<IplikNoGuide>("Id");
             JsonObject = new FakeDbSet<JsonObject>("Id");
             LogisticsCompany = new FakeDbSet<LogisticsCompany>("Id");
             PantoneRenk = new FakeDbSet<PantoneRenk>("Id");
@@ -79,12 +94,13 @@ namespace FollowMe.Web.Models
             PersonnelTerm = new FakeDbSet<PersonnelTerm>("Id");
             RafBilgisi = new FakeDbSet<RafBilgisi>("Id");
             Renk = new FakeDbSet<Renk>("Id");
-            Sequence = new FakeDbSet<Sequence>("Id");
+            SequenceBlueSiparisNo = new FakeDbSet<SequenceBlueSiparisNo>("Id");
             Term = new FakeDbSet<Term>("Id");
             TermRelationship = new FakeDbSet<TermRelationship>("Id");
             TermTaxonomy = new FakeDbSet<TermTaxonomy>("Id");
             ZetaCodeFanteziIplik = new FakeDbSet<ZetaCodeFanteziIplik>("Id");
             ZetaCodeNormalIplik = new FakeDbSet<ZetaCodeNormalIplik>("Id");
+            ZetaCodeNormalIplikPicture = new FakeDbSet<ZetaCodeNormalIplikPicture>("Id");
 
             InitializePartial();
         }

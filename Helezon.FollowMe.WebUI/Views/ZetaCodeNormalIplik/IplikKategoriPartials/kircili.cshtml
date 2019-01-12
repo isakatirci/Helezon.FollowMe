@@ -1,12 +1,29 @@
-﻿<div class="form-group">
+﻿@model  Helezon.FollowMe.Service.DataTransferObjects.IplikKategoriKirciliDto
+@{
+
+    /*
+
+     ViewBag.Mesafe = ne
+     ViewBag.Uzunluk = n
+     ViewBag.Yukseklik =
+
+     */
+
+}
+<div class="form-group">
     <label class="control-label col-md-2" for="KircillarArasiMesafe">
         İki Kırçıl Arasındaki Mesafe:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="KircillarArasiMesafe"
-               name="KircillarArasiMesafe">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircillarArasiMesafeFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Mesafe
+       , new { @class = "form-control select2" })
+
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriKircili_KircillarArasiMesafe"
+        value="@Model.KircillarArasiMesafeFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircillarArasiMesafeFormat">*@
     </div>
 </div>
 
@@ -14,11 +31,15 @@
     <label class="control-label col-md-2" for="KircilUzunlugu">
         Kırçıl Uzunluğu:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="KircilUzunlugu"
-               name="KircilUzunlugu">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilUzunluguFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
+       , new { @class = "form-control select2" })
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriKircili_KircilUzunlugu "
+        value="@Model.KircilUzunluguFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilUzunluguFormat">*@
     </div>
 </div>
 
@@ -26,11 +47,15 @@
     <label class="control-label col-md-2" for="KircilYuksekligi">
         Kırçıl Yüksekliği:
     </label>
-    <div class="col-md-10">
-        <input type="text"
-               class="form-control"
-               id="KircilYuksekligi"
-               name="KircilYuksekligi">
+    <div class="col-md-6">
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilYuksekligiFormat"
+       , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
+       , new { @class = "form-control select2" })
+        @*<input type="text"
+        class="form-control mask_number transform_none"
+        id="IplikKategoriKircili_KircilYuksekligi"
+        value="@Model.KircilYuksekligiFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilYuksekligiFormat">*@
     </div>
 </div>
 

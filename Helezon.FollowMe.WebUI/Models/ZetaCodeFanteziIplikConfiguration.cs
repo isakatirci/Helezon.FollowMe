@@ -28,6 +28,23 @@ namespace FollowMe.Web.Models
 
         public ZetaCodeFanteziIplikConfiguration(string schema)
         {
+            Property(x => x.IplikKategosiId).IsOptional();
+            Property(x => x.ZetaCodePrevious).IsOptional();
+            Property(x => x.Ea).IsOptional();
+            Property(x => x.CreatedOn).IsOptional();
+            Property(x => x.CreatedBy).IsOptional();
+            Property(x => x.ChangedOn).IsOptional();
+            Property(x => x.ChangedBy).IsOptional();
+            Property(x => x.Ulke).IsOptional();
+            Property(x => x.BlueUrunKodIsmi).IsOptional();
+            Property(x => x.RafyeriTurkiyeId).IsOptional();
+            Property(x => x.RafyeriYunanistanId).IsOptional();
+            HasMany(t => t.ZetaCodeNormalIplik).WithMany(t => t.ZetaCodeFanteziIplik).Map(m =>
+            {
+                m.ToTable("ZetaCodeNormalFantezi", "dbo");
+                m.MapLeftKey("FanzteziIplikId");
+                m.MapRightKey("NormalIplikId");
+            });
             InitializePartial();
         }
         partial void InitializePartial();

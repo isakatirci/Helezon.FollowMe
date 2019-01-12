@@ -35,58 +35,36 @@ namespace FollowMe.Web.Models
         [Display(Name = "Zeta code normal iplik ID")]
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
 
-        [Column(@"NE", Order = 3, TypeName = "int")]
-        [Display(Name = "Ne")]
-        public int? Ne { get; set; } // NE
-
-        [Column(@"NM", Order = 4, TypeName = "decimal")]
-        [Display(Name = "Nm")]
-        public decimal? Nm { get; set; } // NM
-
-        [Column(@"DNY", Order = 5, TypeName = "int")]
-        [Display(Name = "Dny")]
-        public int? Dny { get; set; } // DNY
-
-        [Column(@"FL", Order = 6, TypeName = "int")]
-        [Display(Name = "Fl")]
-        public int? Fl { get; set; } // FL
-
-        [Column(@"EA", Order = 7, TypeName = "int")]
-        [Display(Name = "Ea")]
-        public int? Ea { get; set; } // EA
-
-        [Column(@"ElyafCinsiKalitesi", Order = 8, TypeName = "nchar")]
-        [MaxLength(10)]
-        [StringLength(10)]
+        [Column(@"ElyafCinsiKalitesi", Order = 3, TypeName = "int")]
         [Display(Name = "Elyaf cinsi kalitesi")]
-        public string ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi (length: 10)
+        public int? ElyafCinsiKalitesi { get; set; } // ElyafCinsiKalitesi
 
-        [Column(@"ElyafOrani", Order = 9, TypeName = "int")]
+        [Column(@"ElyafOrani", Order = 4, TypeName = "int")]
         [Display(Name = "Elyaf orani")]
         public int? ElyafOrani { get; set; } // ElyafOrani
 
-        [Column(@"IsPassive", Order = 10, TypeName = "bit")]
+        [Column(@"IsPassive", Order = 5, TypeName = "bit")]
         [Required]
         [Display(Name = "Is passive")]
         public bool IsPassive { get; set; } // IsPassive
 
-        [Column(@"CreatedOn", Order = 11, TypeName = "datetime2")]
+        [Column(@"CreatedOn", Order = 6, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Created on")]
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
 
-        [Column(@"CreatedBy", Order = 12, TypeName = "nvarchar")]
+        [Column(@"CreatedBy", Order = 7, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        [Column(@"ChangedOn", Order = 13, TypeName = "datetime2")]
+        [Column(@"ChangedOn", Order = 8, TypeName = "datetime2")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Changed on")]
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
 
-        [Column(@"ChangedBy", Order = 14, TypeName = "nvarchar")]
+        [Column(@"ChangedBy", Order = 9, TypeName = "nvarchar")]
         [MaxLength(128)]
         [StringLength(128)]
         [Display(Name = "Changed by")]
@@ -95,9 +73,9 @@ namespace FollowMe.Web.Models
         // Foreign keys
 
         /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikNo].([ZetaCodeNormalIplikId]) (FK_iplikNo_ZetaCodeNormaliplik)
+        /// Parent ZetaCodeNormalIplik pointed by [IplikNo].([ZetaCodeNormalIplikId]) (FK_IplikNo_ZetaCodeNormaliplik)
         /// </summary>
-        [ForeignKey("ZetaCodeNormalIplikId")] public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_iplikNo_ZetaCodeNormaliplik
+        [ForeignKey("ZetaCodeNormalIplikId")] public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikNo_ZetaCodeNormaliplik
 
         public IplikNo()
         {

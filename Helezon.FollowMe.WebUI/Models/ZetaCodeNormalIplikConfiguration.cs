@@ -28,11 +28,11 @@ namespace FollowMe.Web.Models
 
         public ZetaCodeNormalIplikConfiguration(string schema)
         {
-            Property(x => x.ZetaCode).IsOptional();
+            Property(x => x.UrunIsmi).IsOptional();
+            Property(x => x.ZetaCodePrevious).IsOptional();
             Property(x => x.IplikKategosiId).IsOptional();
             Property(x => x.Ulke).IsOptional();
             Property(x => x.BlueUrunKodIsmi).IsOptional();
-            Property(x => x.BlueKod).IsFixedLength();
             Property(x => x.UretimTeknolojisiId).IsOptional();
             Property(x => x.PantoneId).IsOptional();
             Property(x => x.Renkid).IsOptional();
@@ -42,6 +42,12 @@ namespace FollowMe.Web.Models
             Property(x => x.CreatedBy).IsOptional();
             Property(x => x.ChangedOn).IsOptional();
             Property(x => x.ChangedBy).IsOptional();
+            Property(x => x.IplikNoCinsi).IsOptional();
+            Property(x => x.Ne).IsOptional();
+            Property(x => x.Nm).IsOptional();
+            Property(x => x.Dny).IsOptional();
+            Property(x => x.Fl).IsOptional();
+            Property(x => x.Ea).IsOptional();
 
             InitializePartial();
         }

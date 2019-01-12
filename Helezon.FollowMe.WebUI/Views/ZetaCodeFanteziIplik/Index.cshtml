@@ -1,0 +1,123 @@
+﻿@model IEnumerable<FollowMe.Web.Models.ZetaCodeFanteziIplik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IplikKategosiId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Master)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZetaCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZetaCodePrevious)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPassive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ulke)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlueUrunKodIsmi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlueKod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlueSiparisNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RafyeriTurkiyeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RafyeriYunanistanId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IplikKategosiId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Master)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZetaCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZetaCodePrevious)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPassive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ulke)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlueUrunKodIsmi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlueKod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlueSiparisNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RafyeriTurkiyeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RafyeriYunanistanId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

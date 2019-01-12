@@ -30,6 +30,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public IplikNoGuideMethod EA { get; set; }
         public GetSelectListWithId Renkler { get; set; }
         public ElyafOraniMethod ElyafOrani { get; set; }
+
     }
 
     public class ZetaCodeNormalIplikViewCollections
@@ -39,6 +40,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public SelectList PantoneRenkleri { get; set; }
         public SelectList UretimTeknolojileri { get; set; }
 
-        public SelectList IplikKategorileri { get; set; }
+        public SelectList IplikKategorileri { get; set; } 
     }
+
 }
