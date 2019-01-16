@@ -1,0 +1,27 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.GetNormalIplikRenklerVm
+
+
+
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <label>Pantone Renk</label>
+        <br />
+        <input type="text"
+               class="form-control"
+               readonly
+               value="@(Model.NormalIplikDto?.PantoneRenk?.PantoneKodu + " " + Model.NormalIplikDto?.PantoneRenk?.PantoneRengi) " />
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <label>Renk</label>
+        <br />
+        <input type="text"
+               class="form-control"
+               readonly
+               value="@(Model.NormalIplikDto?.Renk?.Ad + ", " + Model.NormalIplikDto?.Renk?.IplikRenkKodu) " />
+    </div>
+    <div class="col-md-2">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-default btn-block" style="background-color:@(Model.NormalIplikDto?.Renk?.HtmlKod)" id="">&nbsp;</button>
+    </div>

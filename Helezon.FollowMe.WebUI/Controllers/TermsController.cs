@@ -62,6 +62,7 @@ namespace FollowMe.Web.Controllers
                                   join te in db.Term
                                       on tx.TermId equals te.Id
                                   where tx.TaxonomyId == taxonomyId && tx.CompanyId == companyId && te.CompanyId == companyId
+                                  orderby tx.Id
                                   select new TermTaxonomyView
                                   {
                                       TermId = te.Id,
@@ -213,8 +214,11 @@ namespace FollowMe.Web.Controllers
                 {
                     var termTaxonomies = JsonToTermTaxonomy(nestableList, taxonomy);
                     db.TermTaxonomy.RemoveRange(db.TermTaxonomy.Where(x => x.TaxonomyId == taxonomy && x.CompanyId == companyId));
-                    termTaxonomies.ForEach(x => x.CompanyId = companyId);
-                    db.TermTaxonomy.AddRange(termTaxonomies);
+                    foreach (var item in termTaxonomies)
+                    {
+                        item.CompanyId = companyId;
+                        db.TermTaxonomy.Add(item);
+                    }                    
                     db.SaveChanges();
                     transaction.Commit();
                     return Json(new { IsSucceeded = true }, JsonRequestBehavior.AllowGet);

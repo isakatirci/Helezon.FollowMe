@@ -1,0 +1,563 @@
+﻿
+@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeKumasFantaziCardVm
+@using FollowMe.Web.Controllers;
+@{
+    ViewBag.Title = "";
+    ViewBag.Action = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section afterGlobalStyles {
+
+    <style>
+        .companyTable * {
+            text-transform: uppercase !important;
+        }
+
+        .companyTable td, .companyTable th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /*.companyTable th {
+            background-color: #FFBC00
+        }
+        .companyTable td {
+            background-color: #E2EFDE
+        }*/
+
+    </style>
+}
+
+<div class="companyTable sectionToPrint">
+    <table>
+        <tbody>
+            <tr class="sectionToPrintIgnore">
+                <td>
+
+                    <div class="btn-group btn-group-justified">
+                        @*<div class="btn-group">
+                                <button type="button" class="btn btn-default">Rehber</button>
+                            </div>*@
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">Z CODE</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">FIYAT TEKLIFLERI</button>
+
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">STOK</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" onclick="javascript:companyCardPrint();">YAZDIR</button>
+
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeKumasOrmeDokuma/Edit?id={0}&companyId={1}"
+                                                                         ,Model.ZetaCodeKumasFantaziDto.Id,Model.ZetaCodeKumasFantaziDto.CompanyId))'" class="btn btn-default">
+
+                                Edit
+
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td rowspan="10" style="width:25%;min-width:25%;vertical-align:top!important">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Z CODE PHOTO
+                                                <a href="javascript:void(0);"
+                                                   onclick="location.href='@Html.Raw(Model.PictureEditUrl)'">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img style="width:250px;max-width:250px;height:300px;max-height:300px"
+                                                     src="@Html.Raw(Model.PictureUrl)"
+                                                     alt="@Html.Raw(Model.ZetaCodeKumasFantaziDto.ZetaCodeFormatli)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td rowspan="10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>AKTIF/PASIF</th>
+                                                        <th>URUN KATEGORISI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Html.Raw(Model.ZetaCodeKumasFantaziDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>@(Model.ZetaCodeKumasFantaziDto.UrunKategorisi?.Name)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr><th>FIRMA CODENAME</th></tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@(Model.ZetaCodeKumasFantaziDto.Company?.Code + " " + Model.ZetaCodeKumasFantaziDto.Company?.Name)</td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Z-CODE NO</th>
+                                                        <th>URUN RENGI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Model.ZetaCodeKumasFantaziDto.ZetaCodeFormatli</td>
+                                                        <td>@(Model.ZetaCodeKumasFantaziDto.Renk)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>URUN KOMPOZISYONU</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            @Model.ZetaCodeKumasFantaziDto.UrunIsmi
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>EN CM</th>
+                                                        <th>GRAMAJ GR</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Model.ZetaCodeKumasFantaziDto.En</td>
+                                                        <td>@(Model.ZetaCodeKumasFantaziDto.Gramaj)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td rowspan="10" valign="top" style="width:25%;min-width:25%;vertical-align:top!important">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                BLU SIP NO
+                                                                <a href="javascript:void(0);"
+                                                                   onclick="location.href='@Html.Raw("/ZetaCodeNormalIplik/Create?operation=masterbluesiparis")'">
+                                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                                </a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>@Model.ZetaCodeKumasFantaziDto.BlueSiparisNo</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                URUN COLLECTION YERI
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
+                                                                            <td>@(Model.ZetaCodeKumasFantaziDto.RafyeriTurkiye?.Name)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>GR ASKI RAF NO</th>
+                                                                            <td>@(Model.ZetaCodeKumasFantaziDto.RafyeriYunanistan?.Name)</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a data-toggle="tab" href="#home">URUN BILGILERI</a></li>
+                        <li><a data-toggle="tab" href="#menu1">FOLLOW ME BLUE</a></li>
+                        <li><a data-toggle="tab" href="#menu2">FOLLOW ME RED</a></li>
+                        <li><a data-toggle="tab" href="#menu3">CUZDAN</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active" style="">
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td style="width:50%;max-width:50%;vertical-align:top">
+                                                    <table>
+                                                        @for (int i = 0; i < Model.ParentUrunKategoriler.Count; i++)
+                                                        {
+                                                            <tr>
+                                                                <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
+                                                                <td>@Model.ParentUrunKategoriler[i].Name</td>
+                                                            </tr>
+
+                                                        }
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
+                                                                        <td>@Model.ZetaCodeKumasFantaziDto.ZetaCodePrevious</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>URUN MENSEI</th>
+                                                                        <td>@(Model.ZetaCodeKumasFantaziDto.Ulke?.Name)</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>BLUE URUN KODU</th>
+                                                                        <td>@Model.ZetaCodeKumasFantaziDto.BlueUrunKodIsmi</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <th style="width:50%;max-width:50%">METRO TUL ORANI</th>
+                                                                        <td>&nbsp;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>METRE KG HESABI</th>
+                                                                        <td>&nbsp;</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%;max-width:50%">GORUNTU</th>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="10"></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>YAPILAN ISLEM ISMI</th>
+                                                    <th>DESEN KODU</th>
+                                                    <th>DESEN RENGI 1</th>
+                                                    <th>DESEN RENGI 2</th>
+                                                    <th>DESEN RENGI 3</th>
+                                                    <th>FIRE %</th>
+                                                    <th>FIYAT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>KUMAS RENK ISMI</th>
+                                                    <th>KUMAS RENK KODU</th>
+                                                    <th>KUMAS PANTONE NO</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">
+                                                        BOYAHANE DETAYLARI
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:60%;min-width:60%">YAPILAN ISLEM ISMI</th>
+                                                    <th>FIRE %</th>
+                                                    <th>FIYAT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="10">
+                                                        ORGU DETAYLARI
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>MAKINE MARKASI</th>
+                                                    <th>MODELI</th>
+                                                    <th>YIL</th>
+                                                    <th>PUS</th>
+                                                    <th>FAYN</th>
+                                                    <th>SISTEM</th>
+                                                    <th>IGNE SYS</th>
+                                                    <th>HAM CM</th>
+                                                    <th>HAM GR</th>
+                                                    <th>ELASTANE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>ORGU TIPI</th>
+                                                    <th>ORGU CESIDI</th>
+                                                    <th>ORGU KABILIYETI</th>
+                                                    <th>SARIM</th>
+                                                    <th>FIYAT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="7">IPLIK DETAYLARI</th>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Z CODE</th>
+                                                    <th>IPLIK ISMI</th>
+                                                    <th>KATEGORY 2</th>
+                                                    <th>RENK</th>
+                                                    <th>% KLLNM</th>
+                                                    <th>FIYAT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>1</th>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>2</th>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>3</th>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="menu1" class="tab-pane fade" style="">
+
+                        </div>
+                        <div id="menu2" class="tab-pane fade" style="">
+
+
+                        </div>
+                        <div id="menu3" class="tab-pane fade" style="">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+@*
+            <tr>
+            <td>PHONE NUMBER</td>
+            <td></td>
+        </tr>
+
+    <tr>
+        <td>FAX NUMBER</td>
+        <td></td>
+    </tr>
+
+*@

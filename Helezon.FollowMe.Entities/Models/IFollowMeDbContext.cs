@@ -52,6 +52,12 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
+        System.Data.Entity.DbSet<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi
+        System.Data.Entity.DbSet<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture
+        System.Data.Entity.DbSet<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine
+        System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma
+        System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture
         System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
         System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
 

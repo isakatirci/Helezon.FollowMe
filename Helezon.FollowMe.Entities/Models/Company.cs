@@ -77,6 +77,22 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Company
         /// <summary>
+        /// Child ZetaCodeKumasFantazi where [ZetaCodeKumasFantazi].[CompanyId] point to this entity (FK_ZetaCodeKumasFantazi_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi.FK_ZetaCodeKumasFantazi_Company
+        /// <summary>
+        /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[CompanyId] point to this entity (FK_ZetaCodeKumasFantaziPicture_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture.FK_ZetaCodeKumasFantaziPicture_Company
+        /// <summary>
+        /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[CompanyId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma.FK_ZetaCodeKumasOrmeDokuma_Company
+        /// <summary>
+        /// Child ZetaCodeKumasOrmeDokumaPicture where [ZetaCodeKumasOrmeDokumaPicture].[CompanyId] point to this entity (FK_ZetaCodeKumasOrmeDokumaPicture_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture.FK_ZetaCodeKumasOrmeDokumaPicture_Company
+        /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
@@ -91,6 +107,10 @@ namespace Helezon.FollowMe.Entities.Models
             LogisticsCompany = new System.Collections.Generic.List<LogisticsCompany>();
             Person = new System.Collections.Generic.List<Person>();
             ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
+            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantazi>();
+            ZetaCodeKumasFantaziPicture = new System.Collections.Generic.List<ZetaCodeKumasFantaziPicture>();
+            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
+            ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPicture>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }

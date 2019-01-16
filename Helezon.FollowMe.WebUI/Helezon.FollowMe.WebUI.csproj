@@ -542,6 +542,7 @@
     <Compile Include="Models\ViewModels\DateTimePicker.cs" />
     <Compile Include="Models\ViewModels\DynamicFormViewModel.cs" />
     <Compile Include="Models\ViewModels\FileControllerIndexViewModel.cs" />
+    <Compile Include="Models\ViewModels\GetNormalIplikRenklerVm.cs" />
     <Compile Include="Models\ViewModels\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\PersonnelCardViewModel.cs" />
@@ -549,7 +550,11 @@
     <Compile Include="Models\ViewModels\TermTaxonomyView.cs" />
     <Compile Include="Models\ViewModels\TermViewModel.cs" />
     <Compile Include="Models\ViewModels\ViewModelExtensions.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeKumasFantaziCardVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeKumasOrmeDokumaCardVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeKumasOrmeDokumaEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikVm.cs" />
     <Compile Include="Models\ZetaCodeFanteziIplik.cs">
@@ -5151,6 +5156,11 @@
     <Content Include="Content\global\scripts\datatable.min.js" />
     <Content Include="Content\iconzetas.png" />
     <Content Include="Content\Images\noimage.png" />
+    <Content Include="Content\ion.rangeSlider-master\css\ion.rangeSlider.css" />
+    <Content Include="Content\ion.rangeSlider-master\css\ion.rangeSlider.min.css" />
+    <Content Include="Content\ion.rangeSlider-master\js\ion.rangeSlider.js" />
+    <Content Include="Content\ion.rangeSlider-master\js\ion.rangeSlider.min.js" />
+    <Content Include="Content\ion.rangeSlider-master\_tmp\logo-ion-range-slider.png" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
@@ -5477,6 +5487,10 @@
     <Content Include="Content\logo.png" />
     <Content Include="Content\logo2.png" />
     <Content Include="Content\logo3.png" />
+    <Content Include="Content\noUiSlider\nouislider.css" />
+    <Content Include="Content\noUiSlider\nouislider.js" />
+    <Content Include="Content\noUiSlider\nouislider.min.css" />
+    <Content Include="Content\noUiSlider\nouislider.min.js" />
     <Content Include="Content\pages\copy\ui-nestable.js" />
     <Content Include="Content\pages\css\about.css" />
     <Content Include="Content\pages\css\about.min.css" />
@@ -6356,6 +6370,25 @@
     <Content Include="Content\pages\media\pages\Thumbs.db" />
     <Content Include="Models\EF.Reverse.POCO.Core.ttinclude" />
     <Content Include="Models\EF.Reverse.POCO.ttinclude" />
+    <Content Include="Content\ion.rangeSlider-master\.editorconfig" />
+    <Content Include="Content\ion.rangeSlider-master\.gitignore" />
+    <Content Include="Content\ion.rangeSlider-master\.npmignore" />
+    <Content Include="Content\ion.rangeSlider-master\bower.json" />
+    <Content Include="Content\ion.rangeSlider-master\CONTRIBUTING.md" />
+    <Content Include="Content\ion.rangeSlider-master\history.md" />
+    <Content Include="Content\ion.rangeSlider-master\index.md" />
+    <Content Include="Content\ion.rangeSlider-master\less\irs.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\big.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\flat.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\modern.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\round.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\sharp.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\skins\square.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\_base.less" />
+    <Content Include="Content\ion.rangeSlider-master\less\_mixins.less" />
+    <Content Include="Content\ion.rangeSlider-master\License.md" />
+    <Content Include="Content\ion.rangeSlider-master\package.json" />
+    <Content Include="Content\ion.rangeSlider-master\readme.md" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts.old\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts.old\jquery-3.3.1.js" />
@@ -6664,7 +6697,7 @@
     <Content Include="Views\ZetaCodeHazirGiyim\Create.cshtml" />
     <Content Include="Views\ZetaCodeKumasFantazi\Create.cshtml" />
     <Content Include="Views\ZetaCodeKumasOrmeDokuma\Create.cshtml" />
-    <Content Include="Views\ZetaCode\Index.cshtml" />
+    <Content Include="Views\ZetaCode\Create.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\flam.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\krep.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\IplikKategoriPartials\degrede.cshtml" />
@@ -6675,6 +6708,17 @@
     <Content Include="Views\ZetaCodeFanteziIplik\Edit.cshtml" />
     <Content Include="Views\ZetaCodeFanteziIplik\Index.cshtml" />
     <Content Include="Views\ZetaCodeFanteziIplik\Edit - Copy.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\_NormalIplikRenkler.cshtml" />
+    <Content Include="Views\ZetaCodeFanteziIplik\Card.cshtml" />
+    <Content Include="Views\Shared\_LayoutZetaCodeIndex.cshtml" />
+    <Content Include="Views\ZetaCodeKumasFantazi\Index.cshtml" />
+    <Content Include="Views\ZetaCodeKumasOrmeDokuma\Index.cshtml" />
+    <Content Include="Views\ZetaCodeHazirGiyim\Index.cshtml" />
+    <Content Include="Views\ZetaCodeAksesuar\Index.cshtml" />
+    <Content Include="Views\ZetaCode\Index.cshtml" />
+    <Content Include="Views\ZetaCodeKumasOrmeDokuma\Card.cshtml" />
+    <Content Include="Views\ZetaCodeKumasOrmeDokuma\Edit.cshtml" />
+    <Content Include="Views\ZetaCodeKumasFantazi\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

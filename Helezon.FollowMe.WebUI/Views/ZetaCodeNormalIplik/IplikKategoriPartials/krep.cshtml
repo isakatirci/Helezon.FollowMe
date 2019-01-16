@@ -5,15 +5,16 @@
         Tur Sayısı:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKrepDto.TurSayisiFormat"
+        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriKrep.Id", Model?.Id)
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKrep.TurSayisi"
        , (IEnumerable<SelectListItem>)ViewBag.TurSayisi
        , new { @class = "form-control select2" })
 
         @*<input type="text"
-            class="form-control mask_number transform_none"
-            id="IplikKategoriKrep_TurSayisi"
-            value="@Model.TurSayisiFormat"
-            name="ZetaCodeNormalIplikDto.IplikKategoriKrepDto.TurSayisiFormat">*@
+        class="form-control mask_number transform_none"
+        id="IplikKategoriKrep_TurSayisi"
+        value="@Model.TurSayisiFormat"
+        name="ZetaCodeNormalIplikDto.IplikKategoriKrep.TurSayisiFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -22,7 +23,7 @@
     </label>
     <div class="col-md-6">
         <select class="form-control "
-                name="ZetaCodeNormalIplikDto.IplikKategoriKrepDto.BukumYonu"
+                name="ZetaCodeNormalIplikDto.IplikKategoriKrep.BukumYonu"
                 id="IplikKategoriKrep_BukumYonu">
             <option @(Model?.BukumYonu == "S" ? "selected" : "")>S</option>
             <option @(Model?.BukumYonu == "Z" ? "selected" : "")>Z</option>

@@ -37,7 +37,7 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.ZetaCodePrevious).HasColumnName(@"ZetaCodePrevious").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
             Property(x => x.IplikKategosiId).HasColumnName(@"IplikKategosiId").HasColumnType("int").IsOptional();
             Property(x => x.SirketId).HasColumnName(@"SirketId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
-            Property(x => x.Ulke).HasColumnName(@"Ulke").HasColumnType("int").IsOptional();
+            Property(x => x.UlkeId).HasColumnName(@"UlkeId").HasColumnType("int").IsOptional();
             Property(x => x.BlueUrunKodIsmi).HasColumnName(@"BlueUrunKodIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
             Property(x => x.BlueKod).HasColumnName(@"BlueKod").HasColumnType("int").IsRequired();
             Property(x => x.BlueSiparisNo).HasColumnName(@"BlueSiparisNo").HasColumnType("int").IsRequired();

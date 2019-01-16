@@ -13,20 +13,24 @@
 
 <div class="row">
     <div class="col-md-2">
+
+
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown">
-                Go To The Page&nbsp;
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+                Go To Edit The Page&nbsp;
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu" id="menu">
-                <li><a href="~/ZetaCodeNormalIplik/Create">Normal İplik</a></li>
-                <li><a href="~/ZetaCodeFanteziIplik/Create">Fantazi İplik</a></li>
-                <li><a href="~/ZetaCodeKumasOrmeDokuma/Create">Kumaş Örme Dokuma</a></li>
-                <li><a href="~/ZetaCodeKumasFantazi/Create">Kumaş Fantazi</a></li>
-                <li><a href="~/ZetaCodeAksesuar/Create">Aksesuar</a></li>
-                <li><a href="~/ZetaCodeHazirGiyim/Create">Hazır Giyim</a></li>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeNormalIplik/Create">Normal İplik</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeFanteziIplik/Create">Fantazi İplik</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeKumasOrmeDokuma/Create">Kumaş Örme Dokuma</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeKumasFantazi/Create">Kumaş Fantazi</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeAksesuar/Create">Aksesuar</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeHazirGiyim/Create">Hazır Giyim</a></li>
             </ul>
-        </div>
+        </div>   
     </div>
 </div>
 <br />
@@ -40,7 +44,6 @@
 
 @section afterGlobalScripts {
     @RenderSection("afterGlobalScripts", required: false)
-
 }
 
 @section beforeGlobalScripts {

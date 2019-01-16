@@ -1,0 +1,493 @@
+﻿@using Helezon.FollowMe.WebUI.Models.ViewModels
+@model ZetaCodeKumasOrmeDokumaEditVm
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
+    var update = Model != null && Model.KumasOrmeDokumaDto != null && Model.KumasOrmeDokumaDto.Id > 0;
+}
+
+@section afterGlobalStyles
+    {
+
+    @*<link href="~/Content/global/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet" />*@
+
+    @*<link href="~/Content/global/plugins/nouislider/nouislider.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/global/plugins/nouislider/nouislider.pips.css" rel="stylesheet" type="text/css" />*@
+    @*<link href="~/Content/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/noUiSlider/nouislider.min.css" rel="stylesheet" />
+    <style>
+        .noUi-tooltip {
+            display: none;
+        }
+
+        .noUi-active .noUi-tooltip {
+            display: block;
+        }
+    </style>
+}
+
+<form action="/ZetaCodeFanteziIplik/Edit" id="frmZetaCodeFanteziIplik" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.KumasOrmeDokumaDto.Id)
+    @Html.HiddenFor(model => model.KumasOrmeDokumaDto.ZetaCode)
+
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Zeta Code Fantezi İplik @(update ? "Edit Page" : "Create")
+            </div>
+            <div class="tools">
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="panel-group accordion" id="accordion1">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Group #1 </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_1" class="panel-collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        <div class="form-body">
+                                            @if (update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <div class="checkbox">
+                                                            @Html.EditorFor(model => model.KumasOrmeDokumaDto.IsPassive, new { SelectName = "KumasOrmeDokumaDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
+                                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.IsPassive, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <input type="text"
+                                                               readonly
+                                                               class="form-control transform_none"
+                                                               id="ZetaCodeFanteziIplikDto_ZetaCode"
+                                                               value="@Model.KumasOrmeDokumaDto.ZetaCodeFormatli" />
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
+                                           , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
+                                                        , new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
+                                                         , "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.Master
+                                           , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.KumasOrmeDokumaDto.Master
+                                                   , new { SelectName = "KumasOrmeDokumaDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
+                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Master
+                                                   , "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            @if (!update)
+                                            {
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.CompanyId
+                                               , "Blue Cod Name"
+                                               , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.DropDownList("KumasOrmeDokumaDto.SirketId"
+                                                            , Model.Collections.Sirketler, "Please Select"
+                                                            , htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.CompanyId
+                                                   , "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" name="KumasOrmeDokumaDto.SirketId"
+                                                       id="ZetaCodeNormalIplikDto_SirketId"
+                                                       value="@Model.KumasOrmeDokumaDto.CompanyId" />
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.CompanyId
+                                               , "Blue Cod Name"
+                                               , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               readonly
+                                                               value="@(Model.KumasOrmeDokumaDto.Company?.Code + " " + Model.KumasOrmeDokumaDto.Company?.Name)" />
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            @if (update)
+                                            {
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            }
+
+
+
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownList("KumasOrmeDokumaDto.Ulke"
+    , Model.Collections.Ulkeler, "Please Select"
+    , htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Ulke, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            @*<div class="form-group">
+                                                                                            @Html.LabelFor(model => model.KumasOrmeDokumaDto.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                                            <div class="col-md-6">
+                                                                                                @Html.DropDownList("KumasOrmeDokumaDto.Ea"
+                                                , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
+                                                , htmlAttributes: new { @class = "form-control select2" })
+                                                                                                @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Ea, "", new { @class = "text-danger" })
+                                                                                            </div>
+                                                                                        </div>*@
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="KumasOrmeDokumaDto.IplikKategosiId">iplik Kategosi</label>
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <input type="hidden"
+                                                                   name="KumasOrmeDokumaDto.IplikKategosiId"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiId"
+                                                                   value="@(Model.KumasOrmeDokumaDto.UrunKategorisi?.Id)" />
+                                                            <input type="text"
+                                                                   name="KumasOrmeDokumaDto.IplikKategosiName"
+                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiName"
+                                                                   readonly
+                                                                   class="form-control"
+                                                                   value="@(Model.KumasOrmeDokumaDto.UrunKategorisi?.Name)" />
+                                                            <br />
+                                                            <div id="treeIplikKategosiId"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_makine_sec"> MAKİNE SEÇ </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_makine_sec" class="panel-collapse in">
+                        <div class="panel-body">
+                            <div class="form-horizontal form-bordered form-row-stripped">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Model Yılı:</label>
+                                        <div class="col-md-6">
+                                            <div id="range_makine_model_yili" class="noUi-danger"></div>
+                                            <div class="well margin-top-30">
+                                                @Html.TextBoxFor(x => x.KumasMakineDto.Pus, new { @id = "range_makine_model_yili_input", @readonly = "readonly", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Pus:</label>
+                                    <div class="col-md-6">
+                                        <div id="range_pus" class="noUi-danger"></div>
+                                        <div class="well margin-top-30">
+                                            @Html.TextBoxFor(x => x.KumasMakineDto.Pus, new { @id = "range_pus_input", @readonly = "readonly", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Fine:</label>
+                                    <div class="col-md-6">
+                                        <div id="range_fine" class="noUi-danger"></div>
+                                        <div class="well margin-top-30">
+                                            @Html.TextBoxFor(x => x.KumasMakineDto.Fine, new { @id = "range_fine_input", @readonly = "readonly", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Yedek Fine:</label>
+                                    <div class="col-md-6">
+                                        <div id="range_yedek_fine" class="noUi-danger"></div>
+                                        <div class="well margin-top-30">
+                                            @Html.TextBoxFor(x => x.KumasMakineDto.YedekFine, new { @id = "range_yedek_fine_input", @readonly = "readonly", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Sistem:</label>
+                                    <div class="col-md-6">
+                                        <div id="range_sistem" class="noUi-danger"></div>
+                                        <div class="well margin-top-30">
+                                            @Html.TextBoxFor(x => x.KumasMakineDto.Sistem, new { @id = "range_sistem_input", @readonly = "readonly", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">İğne Sayısı:</label>
+                                    <div class="col-md-6">
+                                        <div id="range_igne_sayisi" class="noUi-danger"></div>
+                                        <div class="well margin-top-30">
+                                            @Html.TextBoxFor(x => x.KumasMakineDto.IgneSayisi, new { @id = "range_igne_sayisi_input", @readonly = "readonly", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_rafyerleri"> Raf Yerleri </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_rafyerleri" class="panel-collapse collapse">
+                        <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-body">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="ZetaCodeNormalIplikDto_RafyeriTurkiyeId" class="control-label col-md-2"></label>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="KumasOrmeDokumaDto.RafyeriTurkiyeId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
+                                                           value="@(Model.KumasOrmeDokumaDto.RafyeriTurkiye?.Id)" />
+                                                    <input type="text"
+                                                           name="KumasOrmeDokumaDto.RafyeriTurkiyeName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeName"
+                                                           readonly
+                                                           class="form-control"
+                                                           value="@(Model.KumasOrmeDokumaDto.RafyeriTurkiye?.Name)" />
+                                                    <br />
+                                                    <div id="treeRafyeriTurkiyeId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ZetaCodeNormalIplikDto_RafyeriYunanistanId" class="control-label col-md-2"></label>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                                    <input type="hidden"
+                                                           name="KumasOrmeDokumaDto.RafyeriYunanistanId"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanId"
+                                                           value="@(Model.KumasOrmeDokumaDto.RafyeriYunanistan?.Id)" />
+                                                    <input type="text"
+                                                           name="KumasOrmeDokumaDto.RafyeriYunanistanName"
+                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanName"
+                                                           class="form-control"
+                                                           readonly
+                                                           value="@(Model.KumasOrmeDokumaDto.RafyeriYunanistan?.Name)" />
+                                                    <br />
+                                                    <div id="treeRafyeriYunanistanId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button type="submit" onclick="validateSomeFields()" class="btn green btn-block">
+                                            @*<i class="fa fa-pencil"></i>*@ Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section afterGlobalScripts
+{
+    @*<script src="~/Content/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Content/global/plugins/nouislider/wNumb.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/nouislider/nouislider.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Content/global/plugins/fuelux/js/spinner.min.js" type="text/javascript"></script>
+        <script src="~/Content/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>*@
+
+<script src="~/Content/noUiSlider/nouislider.min.js"></script>
+
+    <script>
+
+        function test(input) {
+
+        }
+
+        var ComponentsNoUiSliders = function () {
+
+            var myNoUiSlidersStater = function (id, inputText, min, max, step) {
+                var tooltipSlider = document.getElementById(id);
+
+                //** init the input
+                var inputNumber = document.getElementById(inputText);
+
+                var obj = {
+                    start: [min],
+                    connect: false,
+                    //behaviour: 'hover-snap',
+                    range: {
+                        'min': min,
+                        'max': max
+                    },
+                    step: step
+                };
+
+                //if (typeof format !== "undefined") {
+                //    obj.pips = {
+                //        format: format
+                //    };
+                //}
+
+                noUiSlider.create(tooltipSlider, obj);
+
+                var tipHandles = tooltipSlider.getElementsByClassName('noUi-handle'),
+                    tooltips = [];
+
+                // Add divs to the slider handles.
+                for (var i = 0; i < tipHandles.length; i++) {
+                    tooltips[i] = document.createElement('div');
+                    tipHandles[i].appendChild(tooltips[i]);
+
+                }
+
+                // Add a class for styling
+                tooltips[0].className += 'noUi-tooltip';
+                // Add additional markup
+                tooltips[0].innerHTML = '<strong>Value: </strong><span></span>';
+                // Replace the tooltip reference with the span we just added
+                tooltips[0] = tooltips[0].getElementsByTagName('span')[0];
+
+                // When the slider changes, write the value to the tooltips.
+                tooltipSlider.noUiSlider.on('update', function (values, handle) {
+                    //inputNumber[handle].value = values[handle];
+
+                    tooltips[handle].innerHTML = parseInt(values[handle]);
+                    inputNumber.value = parseInt(values[handle]);
+                });
+
+                //inputNumber.addEventListener('change', function () {
+                //    tooltipSlider.noUiSlider.set([null, this.value]);
+                //});
+
+                var handle = tooltipSlider.querySelector('.noUi-handle');
+
+                handle.addEventListener('keydown', function (e) {
+
+                    var value = Number(tooltipSlider.noUiSlider.get());
+
+                    if (e.which === 37) {
+                        tooltipSlider.noUiSlider.set(value - step);
+                    }
+
+                    if (e.which === 39) {
+                        tooltipSlider.noUiSlider.set(value + step);
+                    }
+                });
+            }
+
+            return {
+                //main function to initiate the module
+                init: function () {
+                    myNoUiSlidersStater("range_makine_model_yili", "range_makine_model_yili_input", 1970, 2050, 1);
+                    myNoUiSlidersStater("range_pus", "range_pus_input", 2, 60, 1);
+                    myNoUiSlidersStater("range_fine", "range_fine_input", 2, 90, 1);
+                    myNoUiSlidersStater("range_yedek_fine", "range_yedek_fine_input", 2, 90, 1);
+                    myNoUiSlidersStater("range_sistem", "range_sistem_input", 2, 135, 1);
+                    myNoUiSlidersStater("range_igne_sayisi", "range_igne_sayisi_input", 15, 16965, 1);
+                }
+
+            };
+
+        }();
+
+        jQuery(document).ready(function () {         
+
+            ComponentsNoUiSliders.init();
+            //$("#demo8_input").TouchSpin({
+            //    min: 0,
+            //    max: 100,
+            //    step: 10,
+            //    //decimals: 2,
+            //    //boostat: 5,
+            //    //maxboostedstep: 10,
+            //    //postfix: '%'
+            //});
+        });
+    </script>
+}

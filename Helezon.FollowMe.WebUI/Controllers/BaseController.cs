@@ -1,5 +1,6 @@
 ﻿using FollowMe.Web.Models;
 using Helezon.FollowMe.Service;
+using Helezon.FollowMe.WebUI.Code;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Repository.Pattern.Ef6;
@@ -7,6 +8,7 @@ using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -17,6 +19,7 @@ namespace FollowMe.Web.Controllers
 {
     [Authorize]
     public class BaseController : Controller
+
     {
         public string Title { set { ViewBag.Title = value; } }
         public string Keywords { set { ViewBag.Keywords = value; } }
@@ -32,6 +35,34 @@ namespace FollowMe.Web.Controllers
 
             base.OnActionExecuting(filterContext);
         }
+
+        protected bool HandleException(Action action)
+        {
+            try
+            {
+                action.Invoke();
+                return true;
+            }
+            catch (DbEntityValidationException e)
+            {
+                var newException = new FormattedDbEntityValidationException(e);
+                Failure = newException.Message;
+            }
+            catch (Exception ex)
+            {
+                var errors = new List<string>();
+                errors.Add(ex.Message);
+                while (ex.InnerException != null) {
+                    errors.Add(ex.Message);
+                    ex = ex.InnerException;
+                }
+
+
+                Failure = string.Join(", ",errors);
+            }
+            return false;
+        }
+
 
         //protected override void OnException(ExceptionContext filterContext)
         //{
@@ -102,11 +133,15 @@ namespace FollowMe.Web.Controllers
         {
             return new ZetaCodeNormalIplikPictureService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplikPicture>(_followMeDbContext, UnitOfWorkAsync));
         }
+        public IZetaCodeFanteziIplikPictureService GetZetaCodeFanteziIplikPictureService()
+        {
+            return new ZetaCodeFanteziIplikPictureService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeFanteziIplikPicture>(_followMeDbContext, UnitOfWorkAsync));
+        }
         public  IPersonnelPictureService GetPersonnelPictureService()
         {       
             return new PersonnelPictureService(new Repository<Helezon.FollowMe.Entities.Models.PersonnelPicture>(_followMeDbContext, UnitOfWorkAsync));
         }
-        public ZetaCodeNormalIplikService GetZetaCodeNormalIplikService()
+        public ZetaCodeNormalIplikService GetNormalIplikService()
         {        
             return new ZetaCodeNormalIplikService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeNormalIplik>(_followMeDbContext, UnitOfWorkAsync));
         }

@@ -24,17 +24,19 @@ namespace Helezon.FollowMe.Service
         List<RenkDto> GetRenkler(int dilId = 2);
         //int GetSiparisNoByCompanyCode(int code);
         ZetaCodeNormalIplikDto GetZetaCodeNormalIplikById(int id, string companyId, bool includeIplikNo = true);
-        List<ZetaCodeNormalIplikDto> GetAllZetaCodeNormalIplikler(int? id = null, string companyId = null);
+        List<ZetaCodeNormalIplikDto> GetAllNormalIplikler(int? id = null, string companyId = null,bool include = false);
         void GetSequenceBlueSiparisNo(SequenceBlueSiparisNo sequenceBlueSiparisNo);
         List<IplikNoGuideDto> GetIplikNoGuideByColumnName(string column);
         void InsertOrUpdate(ZetaCodeNormalIplikDto zetaCodeNormalIplikDto);
-        IplikKategoriSim GetIplikKategoriSimByZetaCodeNormalIplikId(int? normalIplikId);
-        IplikKategoriDegrede GetIplikKategoriDegredeByZetaCodeNormalIplikId(int? normalIplikId);
-        IplikKategoriKrep GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId);
-        IplikKategoriNopeli GetIplikKategoriNopeliByZetaCodeNormalIplikId(int? normalIplikId);
-        IplikKategoriKircili GetIplikKategoriKirciliByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriSimDto GetIplikKategoriSimByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriDegredeDto GetIplikKategoriDegredeByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriKrepDto GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriNopeliDto GetIplikKategoriNopeliByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriKirciliDto GetIplikKategoriKirciliByZetaCodeNormalIplikId(int? normalIplikId);
         ZetaCodeNormalIplikDto GetZetaCodeNormalIplikByMaster();
-        IplikKategoriFlam GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId);
+        IplikKategoriFlamDto GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId);
+        ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId);
+        List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null);
     }
 
     /// <summary>
@@ -46,11 +48,13 @@ namespace Helezon.FollowMe.Service
         private readonly IRepositoryAsync<ZetaCodeNormalIplik> _repository;
         private readonly ITermService _termService;
         private readonly IOthersService _othersService;
+        private readonly ICompanyService _companyService;
         public ZetaCodeNormalIplikService(IRepositoryAsync<ZetaCodeNormalIplik> repository) : base(repository)
         {
             _repository = repository;
              _termService = new TermService(_repository.GetRepositoryAsync<Term>());
             _othersService = new OthersService();
+            _companyService = new CompanyService(_repository.GetRepositoryAsync<Company>());
         }
 
         public List<RenkDto> GetRenkler(int dilId)
@@ -111,28 +115,91 @@ namespace Helezon.FollowMe.Service
                 return x => x.Id == id && x.SirketId == companyId;
             return null;
         }
-        public List<ZetaCodeNormalIplikDto> GetAllZetaCodeNormalIplikler(int? id = null, string companyId = null)
+
+        public ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId)
         {
-            var zetaCodeNormalIplikler = _repository.Query(QueryNormalIplik(id, companyId)).Include(x => x.PantoneRenk).Include(x => x.Renk).Include(x => x.IplikNo).Select().ToList();
+            var normalIplik = _repository.Query(x => x.Id == normalIplikId).Include(x => x.Renk).Include(x => x.PantoneRenk).Select(x => x).FirstOrDefault();
+            if (normalIplik == null)
+            {
+                return null;
+            }
+
+            var temp = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(normalIplik);
+            temp.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(normalIplik.Renk);
+            temp.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(normalIplik.PantoneRenk);
+
+            return temp;
+        }
+        public List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null)
+        {
+            IQueryFluent<ZetaCodeNormalIplik> query = null;
+
+            if (normalIplikId.HasValue)
+            {
+                query = _repository.Query(x => x.Id == normalIplikId.Value);
+            }
+            else
+            {
+                query = _repository.Query();
+            }
+
+            return query.Select(x => new ZetaCodeNormalIplikDto
+            {
+                Id = x.Id,
+                UrunIsmi = x.UrunIsmi,
+                ZetaCode = x.ZetaCode
+            }).ToList();
+        }
+
+
+        public List<ZetaCodeNormalIplikDto> GetAllNormalIplikler(int? id = null, string companyId = null, bool include = false)
+        {
+            var query = _repository.Query(QueryNormalIplik(id, companyId));
+
+            if (include)            
+                query = query.Include(x => x.PantoneRenk).Include(x => x.Renk).Include(x => x.IplikNo)
+                    .Include(x=>x.IplikKategoriFlam)
+                    .Include(x => x.IplikKategoriKircili)
+                    .Include(x => x.IplikKategoriKrep)
+                    .Include(x => x.IplikKategoriNopeli)
+                    .Include(x => x.IplikKategoriSim)
+                    .Include(x => x.IplikKategoriDegrede);
+            
+            var zetaCodeNormalIplikler = query.Select(x => x).ToList();
             var zetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
 
             foreach (var iplik in zetaCodeNormalIplikler)
             {
                 var iplikDto = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(iplik);
-                iplikDto.IplikNo = AutoMapperConfig.Mapper.Map<ICollection<IplikNo>, List<IplikNoDto>>(iplik.IplikNo);
-                iplikDto.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(iplik.PantoneRenk);
-                iplikDto.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(iplik.Renk);
-                if (iplikDto.IplikKategosiId.HasValue)                
-                    iplikDto.IplikKategosiName = _termService.GetTermNameById(iplik.IplikKategosiId);
-                iplikDto.Company= AutoMapperConfig.Mapper.Map<Company, CompanyDto>(iplik.Company);
-                if (iplikDto.Ulke.HasValue)                
-                    iplikDto.UlkeAdi = _othersService.GetCountryNameById(iplikDto.Ulke.Value.ToString());
-                if (iplikDto.UretimTeknolojisiId.HasValue)                
-                    iplikDto.UretimTeknolojisiName = _termService.GetTermNameById(iplikDto.UretimTeknolojisiId.Value);
-                if (iplikDto.RafyeriTurkiyeId.HasValue)
-                    iplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(iplikDto.RafyeriTurkiyeId.Value);
-                if (iplikDto.RafyeriYunanistanId.HasValue)
-                    iplikDto.RafyeriYunanistanName = _termService.GetTermNameById(iplikDto.RafyeriYunanistanId.Value);
+                if (include)
+                {
+                    iplikDto.IplikNo = AutoMapperConfig.Mapper.Map<ICollection<IplikNo>, List<IplikNoDto>>(iplik.IplikNo);
+                    iplikDto.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(iplik.PantoneRenk);
+                    iplikDto.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(iplik.Renk);
+
+                    iplikDto.IplikKategoriFlam = AutoMapperConfig.Mapper.Map<IplikKategoriFlam, IplikKategoriFlamDto>(iplik.IplikKategoriFlam);
+                    iplikDto.IplikKategoriKircili = AutoMapperConfig.Mapper.Map<IplikKategoriKircili, IplikKategoriKirciliDto>(iplik.IplikKategoriKircili);
+                    iplikDto.IplikKategoriKrep = AutoMapperConfig.Mapper.Map<IplikKategoriKrep, IplikKategoriKrepDto>(iplik.IplikKategoriKrep);
+                    iplikDto.IplikKategoriNopeli = AutoMapperConfig.Mapper.Map<IplikKategoriNopeli, IplikKategoriNopeliDto>(iplik.IplikKategoriNopeli);
+                    iplikDto.IplikKategoriSim = AutoMapperConfig.Mapper.Map<IplikKategoriSim, IplikKategoriSimDto>(iplik.IplikKategoriSim);
+                    iplikDto.IplikKategoriDegrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegrede, IplikKategoriDegredeDto>(iplik.IplikKategoriDegrede);
+
+
+                    if (iplikDto.IplikKategosiId.HasValue)
+                        iplikDto.IplikKategosiName = _termService.GetTermNameById(iplik.IplikKategosiId);
+                    iplikDto.Company = AutoMapperConfig.Mapper.Map<Company, CompanyDto>(iplik.Company);
+                    if (iplikDto.UlkeId.HasValue)
+                        iplikDto.Ulke = _othersService.GetCountryById(iplikDto.UlkeId.Value.ToString());
+                    //if (!string.IsNullOrWhiteSpace(iplikDto.SirketId))
+                    //    iplikDto.Company = _companyService.GetCompanyById(iplikDto.SirketId);
+                    if (iplikDto.UretimTeknolojisiId.HasValue)
+                        iplikDto.UretimTeknolojisiName = _termService.GetTermNameById(iplikDto.UretimTeknolojisiId.Value);
+                    if (iplikDto.RafyeriTurkiyeId.HasValue)
+                        iplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(iplikDto.RafyeriTurkiyeId.Value);
+                    if (iplikDto.RafyeriYunanistanId.HasValue)
+                        iplikDto.RafyeriYunanistanName = _termService.GetTermNameById(iplikDto.RafyeriYunanistanId.Value);
+
+                } 
                 zetaCodeNormalIplikDtos.Add(iplikDto);
             }            
 
@@ -190,6 +257,8 @@ namespace Helezon.FollowMe.Service
             //-(IplikKategorisiId, Parenti al) HAM 
             //- (üretim teknolojisi) AIRJET 
             //- (Elyaf Cinsi - Kalitesi - Parlaklık) 50/50 PAMUK ,SILK MAT-YARIMAT (IplikKategorisiId, Child ) KIRCILI
+
+
             if (!string.IsNullOrWhiteSpace(normalIplikDto.IplikNoCinsi))
             {
                 if (MyInvariantEquals(normalIplikDto.IplikNoCinsi,"DNY"))
@@ -276,9 +345,9 @@ namespace Helezon.FollowMe.Service
                 var repoNopeli = _repository.GetRepositoryAsync<IplikKategoriNopeli>();
 
 
-                
 
-                if (zetaCodeNormalIplik.IplikKategoriDegrede != null)
+
+                if (zetaCodeNormalIplikDto.IplikKategoriDegrede != null)
                 {
                     zetaCodeNormalIplik.IplikKategoriDegrede.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
                 }
@@ -443,52 +512,61 @@ namespace Helezon.FollowMe.Service
         //{
         //    return value.ToString("N", CultureInfo.InvariantCulture);
         //}
-  
-        public IplikKategoriSim GetIplikKategoriSimByZetaCodeNormalIplikId(int? normalIplikId)
+
+        //           iplikDto.IplikKategoriFlam = ;
+        //                    iplikDto.IplikKategoriKircili = 
+        //                    iplikDto.IplikKategoriKrep = 
+        //                    iplikDto.IplikKategoriNopeli = 
+        //                    iplikDto.IplikKategoriSim = AutoMapperConfig.Mapper.Map<IplikKategoriSim, IplikKategoriSimDto>(iplik.IplikKategoriSim);
+        //                    iplikDto.IplikKategoriDegrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegrede, IplikKategoriDegredeDto>(iplik.IplikKategoriDegrede);
+
+
+
+        public IplikKategoriSimDto GetIplikKategoriSimByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)
                 return null;
             var repoSim = _repository.GetRepositoryAsync<IplikKategoriSim>();
 
             var sim = repoSim.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return sim;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriSim, IplikKategoriSimDto>(sim); 
         }
-        public IplikKategoriDegrede GetIplikKategoriDegredeByZetaCodeNormalIplikId(int? normalIplikId)
+        public IplikKategoriDegredeDto GetIplikKategoriDegredeByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)
                 return null;
             var repoDegrede = _repository.GetRepositoryAsync<IplikKategoriDegrede>();
 
             var degrede = repoDegrede.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return degrede;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriDegrede, IplikKategoriDegredeDto>(degrede);
         }
-        public IplikKategoriKrep GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId)
+        public IplikKategoriKrepDto GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)
                 return null;
             var repoKrep = _repository.GetRepositoryAsync<IplikKategoriKrep>();
 
             var krep = repoKrep.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return krep;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriKrep, IplikKategoriKrepDto>(krep);
         }
 
-        public IplikKategoriNopeli GetIplikKategoriNopeliByZetaCodeNormalIplikId(int? normalIplikId)
+        public IplikKategoriNopeliDto GetIplikKategoriNopeliByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)
                 return null;
             var repoNopeli = _repository.GetRepositoryAsync<IplikKategoriNopeli>();
             var nopeli = repoNopeli.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return nopeli;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriNopeli, IplikKategoriNopeliDto>(nopeli);
         }
-        public IplikKategoriKircili GetIplikKategoriKirciliByZetaCodeNormalIplikId(int? normalIplikId)
+        public IplikKategoriKirciliDto GetIplikKategoriKirciliByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)
                 return null;
             var repoKircili = _repository.GetRepositoryAsync<IplikKategoriKircili>();
             var kircili = repoKircili.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return kircili;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriKircili, IplikKategoriKirciliDto>(kircili);
         }
-        public IplikKategoriFlam GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId)
+        public IplikKategoriFlamDto GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId)
         {
             if (!normalIplikId.HasValue)            
                 return null;
@@ -496,7 +574,7 @@ namespace Helezon.FollowMe.Service
             
             var repoFlam = _repository.GetRepositoryAsync<IplikKategoriFlam>();
             var flam = repoFlam.Queryable().FirstOrDefault(x => x.ZetaCodeNormalIplikId == normalIplikId);
-            return flam;
+            return AutoMapperConfig.Mapper.Map<IplikKategoriFlam, IplikKategoriFlamDto>(flam);
         }
 
         public ZetaCodeNormalIplikDto GetZetaCodeNormalIplikByMaster()

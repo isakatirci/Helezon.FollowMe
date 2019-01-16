@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -55,7 +57,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 if (string.Equals(operation, "masterbluesiparis", StringComparison.InvariantCulture))
                 {
-                    model.ZetaCodeNormalIplikDto = GetZetaCodeNormalIplikService().GetZetaCodeNormalIplikByMaster();
+                    model.ZetaCodeNormalIplikDto = GetNormalIplikService().GetZetaCodeNormalIplikByMaster();
                 }
             }         
             FillCollections(model);
@@ -63,7 +65,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
         public ActionResult Index()
         {
-            var list = GetZetaCodeNormalIplikService().GetAllZetaCodeNormalIplikler();
+            var list = GetNormalIplikService().GetAllNormalIplikler(include:true);
             //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
             var model = new List<ZetaCodeNormalIplikVm>();
             foreach (var item in list)
@@ -95,7 +97,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 ulke.Selected = true;
             }
             model.Collections.Ulkeler = temp;
-            model.Collections.PantoneRenkleri = new SelectList(GetZetaCodeNormalIplikService().GetPantoneRenkler(), "Id", "PantoneKodu", pantoneRenkId);
+            model.Collections.PantoneRenkleri = new SelectList(GetNormalIplikService().GetPantoneRenkler(), "Id", "PantoneKodu", pantoneRenkId);
             model.Renkler = new GetSelectListWithId(GetSelectListRenkler);
             model.Collections.UretimTeknolojileri = new SelectList(GetTermService().GetTermsByTaxonomyId(31), "Id", "Name", uretimTeknolojitermId);
             model.NE = new IplikNoGuideMethod(GetSelectListNE);
@@ -132,7 +134,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
         {
 
             //https://medium.com/@ulkutokmak/asp-net-mvc-html-helpers-484ae121e383
-            var renkler = GetZetaCodeNormalIplikService().GetRenkler(2).Select(x=> new SelectListItem {
+            var renkler = GetNormalIplikService().GetRenkler(2).Select(x=> new SelectListItem {
                 Value = string.Format("{0}|{1}",x.Id,x.HtmlKod??string.Empty),
                 Text= x.Ad            });
 
@@ -194,7 +196,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
         private string GetSelectListIplikNoGuide(string value, string columnName)
         {
-            var guide = GetZetaCodeNormalIplikService().GetIplikNoGuideByColumnName(columnName);
+            var guide = GetNormalIplikService().GetIplikNoGuideByColumnName(columnName);
             List<SelectListItem> temp  = null;
 
             if (string.Equals(columnName, "Ne", StringComparison.OrdinalIgnoreCase))
@@ -213,10 +215,10 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 temp = guide.Select(x => new SelectListItem() { Text = x.Fl.ToString(), Value = x.Fl.ToString() }).ToList();
             }
-            else if (string.Equals(columnName, "Ea", StringComparison.OrdinalIgnoreCase))
-            {
-                temp = guide.Select(x => new SelectListItem() { Text = x.Ea.ToString(), Value = x.Ea.ToString() }).ToList();
-            }
+            //else if (string.Equals(columnName, "Ea", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    temp = guide.Select(x => new SelectListItem() { Text = x.Ea.ToString(), Value = x.Ea.ToString() }).ToList();
+            //}
 
 
             //if (!string.IsNullOrWhiteSpace(value))
@@ -262,7 +264,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 var blueSequence = new Helezon.FollowMe.Entities.Models.SequenceBlueSiparisNo();
                 blueSequence.BlueCompanyId = companyId;
-                GetZetaCodeNormalIplikService().GetSequenceBlueSiparisNo(blueSequence);
+                GetNormalIplikService().GetSequenceBlueSiparisNo(blueSequence);
                 UnitOfWorkAsync.SaveChanges();
                 jsonResult.Data = new { BlueCode = company.Code, SiparisNo = blueSequence.SiparisNo };
                 jsonResult.SuccessMessage = "Sipariş No Hesaplandı";
@@ -319,7 +321,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ZetaCodeNormalIplikDto zetaCodeNormalIplik = GetZetaCodeNormalIplikService().GetZetaCodeNormalIplikById(id.Value, companyId);
+            ZetaCodeNormalIplikDto zetaCodeNormalIplik = GetNormalIplikService().GetZetaCodeNormalIplikById(id.Value, companyId);
             if (zetaCodeNormalIplik == null)
             {
                 return HttpNotFound();
@@ -328,7 +330,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.ZetaCodeNormalIplikDto = zetaCodeNormalIplik;
             FillCollections(model
                 ,sirketId: zetaCodeNormalIplik.SirketId
-                ,ulkeId:zetaCodeNormalIplik.Ulke
+                ,ulkeId:zetaCodeNormalIplik.UlkeId
                 ,pantoneRenkId: zetaCodeNormalIplik.PantoneId??0
                 ,renkId: zetaCodeNormalIplik.Renkid??0
                 ,uretimTeknolojitermId:zetaCodeNormalIplik.UretimTeknolojisiId??0);
@@ -392,7 +394,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.ZetaCodeNormalIplikDto.Renkid = model.ZetaCodeNormalIplikDto.RenkIdFormat.AsInt();
             Action action = () =>
             {
-                GetZetaCodeNormalIplikService().InsertOrUpdate(model.ZetaCodeNormalIplikDto);
+                GetNormalIplikService().InsertOrUpdate(model.ZetaCodeNormalIplikDto);
             };
 
             if (HandleException(action))
@@ -401,7 +403,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var zetaCodeNormalIplik = model.ZetaCodeNormalIplikDto;
             FillCollections(model
                 , sirketId: zetaCodeNormalIplik.SirketId
-                , ulkeId: zetaCodeNormalIplik.Ulke
+                , ulkeId: zetaCodeNormalIplik.UlkeId
                 , pantoneRenkId: zetaCodeNormalIplik.PantoneId ?? 0
                 , renkId: zetaCodeNormalIplik.Renkid ?? 0
                 , uretimTeknolojitermId: zetaCodeNormalIplik.UretimTeknolojisiId ?? 0);
@@ -415,23 +417,25 @@ namespace Helezon.FollowMe.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
 
-        protected bool HandleException(Action action)
+
+        private string MyToString(object obj)
         {
-            try
+            if (obj == null)
             {
-                action.Invoke();
-                return true;
+                return string.Empty;
             }
-            catch (DbEntityValidationException e)
+            return obj.ToString();
+        }
+
+        private List<Tuple<string, string>> GetPropertiesWithTheirValues(object obj)
+        {
+            if (obj ==null)
             {
-                var newException = new FormattedDbEntityValidationException(e);
-                Failure = newException.Message;
+                return new List<Tuple<string, string>>();
             }
-            catch (Exception ex)
-            {
-                Failure = ex.Message;
-            }
-            return false;
+            return obj.GetType()
+                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                 .Select(a => Tuple.Create(a.Name, MyToString(a.GetValue(obj, null)))).ToList();
         }
 
 
@@ -440,16 +444,48 @@ namespace Helezon.FollowMe.WebUI.Controllers
             if (!id.HasValue || id < 1 || string.IsNullOrWhiteSpace(companyId))           
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var normalIplik = GetZetaCodeNormalIplikService().GetAllZetaCodeNormalIplikler(id.Value, companyId).FirstOrDefault();
+            var normalIplik = GetNormalIplikService().GetAllNormalIplikler(id.Value, companyId,include:true).FirstOrDefault();
             if (normalIplik  == null)
             {
                 return new HttpNotFoundResult();
             }
-
             var model = new ZetaCodeNormalIplikCardVm();
-            model.ZetaCodeNormalIplik = normalIplik;
 
 
+
+            if (normalIplik.IplikKategoriFlam != null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriFlam);          
+            }
+            else if (normalIplik.IplikKategoriKircili!= null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKircili);
+               
+            }
+            else if (normalIplik.IplikKategoriKrep != null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKrep);
+               
+            }
+            else if (normalIplik.IplikKategoriNopeli != null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriNopeli);
+               
+            }
+            else if (normalIplik.IplikKategoriSim != null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriSim);
+            }
+            else if (normalIplik.IplikKategoriDegrede != null)
+            {
+                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriDegrede);
+
+            }
+
+            model.ZetaCodeNormalIplikDto = normalIplik;
+            model.ParentIplikCategories = GetTermService().GetAllParentsById(normalIplik.IplikKategosiId);
+            model.ParentIplikCategories.Reverse();
+   
 
             var photoEditUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
                                     , Url.Encode("/ZetaCodeNormalIplik/ZetaCodeNormalIplikCard?Id=" + normalIplik.Id + "&companyId=" + normalIplik.SirketId)
@@ -457,8 +493,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
                                     , normalIplik.Id
                                     , normalIplik.SirketId);
 
-            model.ZetaCodeNormalIplik.PictureEditUrl = photoEditUrl;
-            model.ZetaCodeNormalIplik.PictureUrl = GetZetaCodeNormalIplikPictureService().GetZetaCodeNormalIplikPictureUrl(model.ZetaCodeNormalIplik.Id,model.ZetaCodeNormalIplik.SirketId);
+            model.ZetaCodeNormalIplikDto.PictureEditUrl = photoEditUrl;
+            model.ZetaCodeNormalIplikDto.PictureUrl = GetZetaCodeNormalIplikPictureService().GetZetaCodeNormalIplikPictureUrl(model.ZetaCodeNormalIplikDto.Id,model.ZetaCodeNormalIplikDto.SirketId);
 
             return View(model);
         }
@@ -561,7 +597,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 //public decimal FlamlarArasindakiMesafe { get; set; } // FlamlarArasindakiMesafe
                 //public decimal FlamUzunlugu { get; set; } // FlamUzunlugu
                 //public decimal FlamYuksekligi { get; set; } // FlamYuksekligi
-                var flam = GetZetaCodeNormalIplikService().GetIplikKategoriFlamByZetaCodeNormalIplikId(normalIplikId);
+                var flam = GetNormalIplikService().GetIplikKategoriFlamByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.Mesafe = new SelectList(mesafe.Value, "Value", "Text", flam?.FlamlarArasindakiMesafe);
                 ViewBag.Uzunluk = new SelectList(uzunluk.Value, "Value", "Text", flam?.FlamUzunlugu);
                 ViewBag.Yukseklik = new SelectList(yukseklik.Value, "Value", "Text", flam?.FlamYuksekligi);
@@ -570,7 +606,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             else if (partialName == "degrede")
             {
                 //DEGREDE IPLIK
-               var degrede = GetZetaCodeNormalIplikService().GetIplikKategoriDegredeByZetaCodeNormalIplikId(normalIplikId);
+               var degrede = GetNormalIplikService().GetIplikKategoriDegredeByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.BoyaYonu = new SelectList(GetOthersService().GetAllBoyaYonu(), "Id", "Name", degrede?.BoyaYonu);
                 ViewBag.BoyaTipi = new SelectList(GetOthersService().GetAllBoyaTipi(), "Id", "Name", degrede?.BoyaTipi);
                 model = degrede;
@@ -581,7 +617,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 // public string KircillarArasiMesafe { get; set; } // KircillarArasiMesafe (length: 10)
                 // public string KircilUzunlugu { get; set; } // KircilUzunlugu (length: 10)
                 // public string KircilYuksekligi { get; set; } // KircilYuksekligi (length: 10)
-               var kircili = GetZetaCodeNormalIplikService().GetIplikKategoriKirciliByZetaCodeNormalIplikId(normalIplikId);
+               var kircili = GetNormalIplikService().GetIplikKategoriKirciliByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.Mesafe = new SelectList(mesafe.Value, "Value", "Text", kircili?.KircillarArasiMesafe);
                 ViewBag.Uzunluk = new SelectList(uzunluk.Value, "Value", "Text", kircili?.KircilUzunlugu);
                 ViewBag.Yukseklik = new SelectList(yukseklik.Value, "Value", "Text", kircili?.KircilYuksekligi);
@@ -595,7 +631,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 //public string NoktaUzunlugu { get; set; } // NoktaUzunlugu (length: 10)
                 //public string NoktaYuksekligi { get; set; } // NoktaYuksekligi (length: 10)
 
-                var nopeli = GetZetaCodeNormalIplikService().GetIplikKategoriNopeliByZetaCodeNormalIplikId(normalIplikId);
+                var nopeli = GetNormalIplikService().GetIplikKategoriNopeliByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.Mesafe = new SelectList(mesafe.Value, "Value", "Text", nopeli?.NoktalarArasiMesafe);
                 ViewBag.Uzunluk = new SelectList(uzunluk.Value, "Value", "Text", nopeli?.NoktaUzunlugu);
                 ViewBag.Yukseklik = new SelectList(yukseklik.Value, "Value", "Text", nopeli?.NoktaYuksekligi);
@@ -606,7 +642,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 //SIM IPLIK
                 //public string SimKesimBoyutu { get; set; } // SimKesimBoyutu (length: 200)
-                var sim = GetZetaCodeNormalIplikService().GetIplikKategoriSimByZetaCodeNormalIplikId(normalIplikId);
+                var sim = GetNormalIplikService().GetIplikKategoriSimByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.SimKesimBoyutu = new SelectList(simKesimBoyutu.Value, "Value", "Text", sim?.SimKesimBoyutu);
                 model = sim;
             }
@@ -614,7 +650,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 //KREP IPLIK
                 //public string TurSayisi { get; set; } // TurSayisi (length: 10)
-                var krep = GetZetaCodeNormalIplikService().GetIplikKategoriKrepByZetaCodeNormalIplikId(normalIplikId);
+                var krep = GetNormalIplikService().GetIplikKategoriKrepByZetaCodeNormalIplikId(normalIplikId);
                 ViewBag.TurSayisi = new SelectList(krepTurSayisi.Value, "Value", "Text", krep?.TurSayisi);
                 model = krep;
             }

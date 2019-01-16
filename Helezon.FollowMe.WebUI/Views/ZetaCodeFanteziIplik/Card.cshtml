@@ -1,0 +1,478 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeFanteziIplikCardVm
+
+@using FollowMe.Web.Controllers;
+@{
+    ViewBag.Title = "";
+    ViewBag.Action = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section afterGlobalStyles {
+
+    <style>
+        .companyTable * {
+            text-transform: uppercase !important;
+        }
+
+        .companyTable td, .companyTable th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /*.companyTable th {
+            background-color: #FFBC00
+        }
+        .companyTable td {
+            background-color: #E2EFDE
+        }*/
+        
+    </style>
+}
+
+<div class="companyTable sectionToPrint">
+    <table>
+        <tbody>
+            <tr class="sectionToPrintIgnore">
+                <td>
+
+                    <div class="btn-group btn-group-justified">
+                        @*<div class="btn-group">
+                            <button type="button" class="btn btn-default">Rehber</button>
+                        </div>*@
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">Z CODE</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">FIYAT TEKLIFLERI</button>
+
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">STOK</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" onclick="javascript:companyCardPrint();">YAZDIR</button>
+
+                        </div>                       
+                        <div class="btn-group">
+                            <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeNormalIplik/Edit?id={0}&companyId={1}"
+                                                                         ,Model.ZetaCodeFanteziIplikDto.Id,Model.ZetaCodeFanteziIplikDto.SirketId))'" class="btn btn-default">
+
+                                Edit
+
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td rowspan="10" style="width:25%;min-width:25%;vertical-align:top!important">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Z CODE PHOTO
+                                                <a href="javascript:void(0);"
+                                                   onclick="location.href='@Html.Raw(Model.PictureEditUrl)'">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img style="width:250px;max-width:250px;height:300px;max-height:300px" 
+                                                     src="@Html.Raw(Model.PictureUrl)" 
+                                                     alt="@Html.Raw(Model.ZetaCodeFanteziIplikDto.ZetaCodeFormatli)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td rowspan="10">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>AKTIF/PASIF</th>
+                                                        <th>URUN KATEGORISI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Html.Raw(Model.ZetaCodeFanteziIplikDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>@Model.ZetaCodeFanteziIplikDto.IplikKategosi.Name</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr><th>FIRMA CODENAME</th></tr>
+                                                
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@(Model.ZetaCodeFanteziIplikDto.Company.Code + " " + Model.ZetaCodeFanteziIplikDto.Company.Name)</td>
+                                                    </tr>
+                                               
+
+</tbody>
+                                            </table>
+                                        </td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Z-CODE NO</th>
+                                                        <th>URUN RENGI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Model.ZetaCodeFanteziIplikDto.ZetaCodeFormatli</td>
+                                                        <td>@(Model.Renkler)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>IPLIK URUN ISMI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            @Model.ZetaCodeFanteziIplikDto.UrunIsmi
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td rowspan="10" valign="top" style="width:25%;min-width:25%;vertical-align:top!important">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                BLU SIP NO
+                                                                <a href="javascript:void(0);"
+                                                                   onclick="location.href='@Html.Raw("/ZetaCodeNormalIplik/Create?operation=masterbluesiparis")'">
+                                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                                </a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.BlueSiparisNo</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                URUN COLLECTION YERI
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
+                                                                            <td>@Model.ZetaCodeFanteziIplikDto.RafyeriTurkiye.Name</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>GR ASKI RAF NO</th>
+                                                                            <td>@Model.ZetaCodeFanteziIplikDto.RafyeriYunanistan.Name</td>
+                                                                        </tr>                                                                    
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a data-toggle="tab" href="#home">URUN BILGILERI</a></li>
+                        <li><a data-toggle="tab" href="#menu1">FOLLOW ME BLUE</a></li>
+                        <li><a data-toggle="tab" href="#menu2">FOLLOW ME RED</a></li>
+                        <li><a data-toggle="tab" href="#menu3">CUZDAN</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active" style="">
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td style="width:50%;max-width:50%">
+                                                    <table>
+                                                        @for (int i = 0; i < Model.ParentIplikCategories.Count; i++)
+                                                        {
+                                                            <tr>
+                                                                <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
+                                                                <td>@Model.ParentIplikCategories[i].Name</td>
+                                                            </tr>
+
+                                                        }                                                      
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table>                                                    
+                                                        <tr>
+                                                            <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.ZetaCodePrevious</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN MENSEI</th>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.Ulke.Name</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>BLUE URUN KODU</th>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi</td>
+                                                        </tr>
+                                                                                                           
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td></td>
+                                                    <th>NE</th>
+                                                    <th>DENYE</th>
+                                                    <th>NM</th>
+                                                    <th>EA</th>
+                                                    <th>FL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    
+                                                        <text>
+                                                            <th>IPLIK NUMARASI</th>
+                                                            @*<td>@Model.ZetaCodeFanteziIplikDto.Ne</td>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.Dny</td>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.Nm</td>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.Ea</td>
+                                                            <td>@Model.ZetaCodeFanteziIplikDto.Fl</td>*@
+                                                        </text>
+                                                    
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>ELYAF ORANI</th>
+                                                    <th>ELYAF CINSI</th>
+                                                    <th>ELYAF KALITESI</th>
+                                                    <th>PARLAKLIK</th>
+                                                    <th>URETIM TEKNOLOJISI</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>IPLIK RENK ISMI</th>
+                                                    <th>IPLIK RENK KODU</th>
+                                                    <th>PANTONE NO</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    @*<td>@(Model.ZetaCodeFanteziIplikDto.Renk?.Ad)</td>
+                                                    <td>@(Model.ZetaCodeFanteziIplikDto.Renk?.IplikRenkKodu)</td>
+                                                    <td>@(Model.ZetaCodeFanteziIplikDto.PantoneRenk?.PantoneKodu + " " + Model.ZetaCodeFanteziIplikDto.PantoneRenk?.PantoneRengi) </td>*@
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="4">FANTAZI IPLIK</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>IPLIK</th>
+                                                    <th>Z CODE NO</th>
+                                                    <th>IPLIK ISMI</th>
+                                                    <th>IPLIK RENGI</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>1.IPLIK</th>
+                                                    <td>Z-2314</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>2.IPLIK</th>
+                                                    <td>Z-2314</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>3.IPLIK</th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>4.IPLIK</th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>5.IPLIK</th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        
+
+                        </div>
+                        <div id="menu1" class="tab-pane fade" style="">
+                           
+                        </div>
+                        <div id="menu2" class="tab-pane fade" style="">
+                        
+
+                        </div>
+                        <div id="menu3" class="tab-pane fade" style="">
+                          
+                        </div>                   
+                    </div>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+@*
+            <tr>
+            <td>PHONE NUMBER</td>
+            <td></td>
+        </tr>
+
+    <tr>
+        <td>FAX NUMBER</td>
+        <td></td>
+    </tr>
+
+*@

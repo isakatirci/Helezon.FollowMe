@@ -15,7 +15,7 @@
         İki Kırçıl Arasındaki Mesafe:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircillarArasiMesafeFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKircili.KircillarArasiMesafe"
        , (IEnumerable<SelectListItem>)ViewBag.Mesafe
        , new { @class = "form-control select2" })
 
@@ -23,7 +23,7 @@
         class="form-control mask_number transform_none"
         id="IplikKategoriKircili_KircillarArasiMesafe"
         value="@Model.KircillarArasiMesafeFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircillarArasiMesafeFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriKircili.KircillarArasiMesafeFormat">*@
     </div>
 </div>
 
@@ -32,14 +32,14 @@
         Kırçıl Uzunluğu:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilUzunluguFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilUzunlugu"
        , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
         id="IplikKategoriKircili_KircilUzunlugu "
         value="@Model.KircilUzunluguFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilUzunluguFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilUzunluguFormat">*@
     </div>
 </div>
 
@@ -48,14 +48,15 @@
         Kırçıl Yüksekliği:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilYuksekligiFormat"
+        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriKircili.Id", Model?.Id)
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilYuksekligi"
        , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
         id="IplikKategoriKircili_KircilYuksekligi"
         value="@Model.KircilYuksekligiFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriKirciliDto.KircilYuksekligiFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilYuksekligiFormat">*@
     </div>
 </div>
 

@@ -27,7 +27,7 @@ namespace Helezon.FollowMe.Entities.Models
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
         public int? IplikKategosiId { get; set; } // IplikKategosiId
         public string SirketId { get; set; } // SirketId (length: 128)
-        public int? Ulke { get; set; } // Ulke
+        public int? UlkeId { get; set; } // UlkeId
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
         public int BlueKod { get; set; } // BlueKod
         public int BlueSiparisNo { get; set; } // BlueSiparisNo

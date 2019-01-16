@@ -45,7 +45,8 @@ namespace Helezon.FollowMe.Service
 
 
                 cfg.CreateMap<ZetaCodeFanteziIplik, ZetaCodeFanteziIplikDto>()
-                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore())
+                .ForMember(dest => dest.Company, opt => opt.Ignore());
 
                 cfg.CreateMap<ZetaCodeFanteziIplikDto, ZetaCodeFanteziIplik>();
           

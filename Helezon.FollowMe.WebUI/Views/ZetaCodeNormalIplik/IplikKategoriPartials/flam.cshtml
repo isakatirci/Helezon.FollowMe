@@ -5,7 +5,8 @@
         İki Flam Arasındaki Mesafe:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamlarArasindakiMesafeFormat"
+        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriFlam.Id",Model?.Id)
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamlarArasindakiMesafe"
        , (IEnumerable<SelectListItem>)ViewBag.Mesafe
        , new { @class = "form-control select2" })
         @*<input type="text"
@@ -20,7 +21,7 @@
         Flam Uzunluğu:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamUzunlugu"
        , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
        , new { @class = "form-control select2" })
 
@@ -36,7 +37,7 @@
         Flam Yüksekliği:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamYuksekligiFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamYuksekligi"
        , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
        , new { @class = "form-control select2" })
         @*<input type="text"

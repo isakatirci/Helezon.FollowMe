@@ -16,6 +16,8 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         {
             Collections = new ZetaCodeFanteziIplikViewCollections();
             ZetaCodeFanteziIplikDto = new ZetaCodeFanteziIplikDto();
+            ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik = new List<ZetaCodeNormalIplikDto>();
+            ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Add(new ZetaCodeNormalIplikDto());
         }
     }
     public class ZetaCodeFanteziIplikViewCollections
@@ -23,6 +25,12 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public SelectList Sirketler { get; set; }
         public List<SelectListItem> Ulkeler { get; set; }
         public SelectList IplikKategorileri { get; set; }
+        public List<SelectListItem> NormalIplikler { get; set; }
+        public List<SelectListItem> EaIpliNolar { get; internal set; }
+        public List<SelectListItem> DnyIpliNolar { get; internal set; }
+        public List<SelectListItem> NmIpliNolar { get; internal set; }
+        public List<SelectListItem> FlIpliNolar { get; internal set; }
+
         //public SelectList BoyaYonu { get; internal set; }
         //public SelectList BoyaTipi { get; internal set; }
 

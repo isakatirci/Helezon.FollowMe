@@ -1,123 +1,227 @@
-﻿@model IEnumerable<FollowMe.Web.Models.ZetaCodeFanteziIplik>
+﻿@model IEnumerable<Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeFanteziIplikVm>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "";
+}
+@{
+
+    Layout = "~/Views/Shared/_LayoutZetaCodeIndex.cshtml";
+
 }
 
-<h2>Index</h2>
+<style type="text/css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IplikKategosiId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Master)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZetaCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZetaCodePrevious)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPassive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChangedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChangedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ulke)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlueUrunKodIsmi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlueKod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlueSiparisNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RafyeriTurkiyeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RafyeriYunanistanId)
-        </th>
-        <th></th>
-    </tr>
+    .dataTables_scrollBody {
+        height: 800px !important;
+    }
+</style>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IplikKategosiId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Master)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZetaCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZetaCodePrevious)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPassive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ulke)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlueUrunKodIsmi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlueKod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlueSiparisNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RafyeriTurkiyeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RafyeriYunanistanId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green">
+                    @*<i class="icon-settings font-red"></i>
+                        <span class="caption-subject bold uppercase"></span>*@
+                </div>
+                <div class="tools"> </div>
+            </div>
+            <div class="portlet-body table-both-scroll">
+                @*<div class="table-responsive">*@
+                <table class="table table-striped table-bordered table-hover order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.IplikKategosiId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.Master)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.ZetaCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.ZetaCodePrevious)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.Ea)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.IsPassive)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.Ulke)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.BlueKod)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.BlueSiparisNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.RafyeriTurkiyeId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ZetaCodeFanteziIplikDto.RafyeriYunanistanId)
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ZetaCodeFanteziIplikDto.Id, companyId = item.ZetaCodeFanteziIplikDto.SirketId })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.IplikKategosiId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.Master)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action(actionName:"Card",controllerName:"ZetaCodeFanteziIplik", routeValues: new { id = item.ZetaCodeFanteziIplikDto.Id , companyId = item.ZetaCodeFanteziIplikDto.SirketId })">
+                                        @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.ZetaCodeFormatli)
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.ZetaCodePrevious)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.Ea)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.IsPassive)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.Ulke)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.BlueKod)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.BlueSiparisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.RafyeriTurkiyeId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZetaCodeFanteziIplikDto.RafyeriYunanistanId)
+                                </td>
+
+                            </tr>
+
+
+                        }
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section beforeGlobalScripts {
+
+    <script src="~/Content/global/scripts/datatable.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="~/Content/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+
 }
 
-</table>
+
+@section afterGlobalScripts {
+
+    @*<script src="~/Content/pages/scripts/table-datatables-scroller.min.js"></script>*@
+    @*<script src="~/Content/pages/scripts/table-datatables-fixedheader.min.js" type="text/javascript"></script>*@
+
+
+    <script>
+
+
+
+        var initTable3 = function () {
+            var table = $('#sample_3');
+
+            var oTable = table.dataTable({
+
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "_MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+
+                // Or you can use remote translation file
+                //"language": {
+                //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
+                //},
+
+                // setup buttons extension: http://datatables.net/extensions/buttons/
+                buttons: [
+                    { extend: 'print', className: 'btn dark btn-outline' },
+                    { extend: 'pdf', className: 'btn green btn-outline' },
+                    { extend: 'csv', className: 'btn purple btn-outline ' }
+                ],
+
+                // scroller extension: http://datatables.net/extensions/scroller/
+                scrollY: 450,
+                deferRender: true,
+                scroller: true,
+                deferRender: true,
+                scrollX: true,
+                scrollCollapse: true,
+
+                stateSave: true,
+
+                "order": [
+                    [0, 'asc']
+                ],
+
+                "lengthMenu": [
+                    [10, 15, 20, -1],
+                    [10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+
+                "dom": "<'row' <'col-md-12'B>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row' <'col-md-12'T>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+            });
+        }
+
+
+
+        $(document).ready(function () {
+            initTable3();
+        });
+
+    </script>
+
+}

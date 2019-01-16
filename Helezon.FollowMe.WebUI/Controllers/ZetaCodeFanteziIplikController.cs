@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FollowMe.Web;
 using FollowMe.Web.Controllers;
 using FollowMe.Web.Models;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
@@ -43,10 +44,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
         public void FillCollections(ZetaCodeFanteziIplikVm model
                                         , string sirketId = ""
-                                        , int? ulkeId = null
-                                        , int pantoneRenkId = 0
-                                        , int renkId = 0
-                                        , int uretimTeknolojitermId = 0)
+                                        , int? ulkeId = null)
         {
             var blueCompanies = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
             model.Collections.Sirketler
@@ -57,17 +55,34 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 ulke.Selected = true;
             }
-            model.Collections.Ulkeler = temp;   
-            //model.Collections.PantoneRenkleri = new SelectList(GetZetaCodeNormalIplikService().GetPantoneRenkler(), "Id", "PantoneKodu", pantoneRenkId);
-            //model.Renkler = new GetSelectListWithId(GetSelectListRenkler);
-            //model.Collections.UretimTeknolojileri = new SelectList(GetTermService().GetTermsByTaxonomyId(31), "Id", "Name", uretimTeknolojitermId);
-            //model.NE = new IplikNoGuideMethod(GetSelectListNE);
-            //model.NM = new IplikNoGuideMethod(GetSelectListNM);
-            //model.DYN = new IplikNoGuideMethod(GetSelectListDYN);
-            //model.FL = new IplikNoGuideMethod(GetSelectListFL);
-            //model.EA = new IplikNoGuideMethod(GetSelectListEA);
-            //model.ElyafOrani = new ElyafOraniMethod(GetSelectListElyafOrani);
+       
 
+            model.Collections.EaIpliNolar = GetNormalIplikService().GetIplikNoGuideByColumnName("EA").Select(x => new SelectListItem() { Value = x.Ea.ToString(), Text = x.Ea.ToString() }).ToList();
+            model.Collections.DnyIpliNolar = GetNormalIplikService().GetIplikNoGuideByColumnName("DNY").Select(x => new SelectListItem() { Value = x.Dny.ToString(), Text = x.Dny.ToString() }).ToList();
+            model.Collections.NmIpliNolar = GetNormalIplikService().GetIplikNoGuideByColumnName("NM").Select(x => new SelectListItem() { Value = x.Nm.ToString(), Text = x.Nm.ToString() }).ToList();
+            model.Collections.FlIpliNolar = GetNormalIplikService().GetIplikNoGuideByColumnName("FL").Select(x => new SelectListItem() { Value = x.Fl.ToString(), Text = x.Fl.ToString() }).ToList();
+            model.Collections.EaIpliNolar.Insert(0,new SelectListItem { Value = "", Text = "Please Select", Selected = true });
+            model.Collections.DnyIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
+            model.Collections.FlIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
+            model.Collections.NmIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
+
+            model.Collections.Ulkeler = temp;
+            model.Collections.NormalIplikler = GetNormalIplikService().GetAllZetaCodeAndUrunIsmiOfNormalIplikler().Select(x => new SelectListItem {
+                Value = x.Id.ToString(), Text = x.ZetaCodeFormat() + ", " + x.UrunIsmi
+            }).ToList();
+
+        }
+
+        public ActionResult GetNormalIplikRenkler(int? normalIplikId)
+        {
+            if (!normalIplikId.HasValue || normalIplikId.Value < 1)
+            {
+                return new EmptyResult();
+            }
+            var normalIplik = GetNormalIplikService().GetRenklerOfNormalIplik(normalIplikId: normalIplikId.Value);
+            var model = new GetNormalIplikRenklerVm();
+            model.NormalIplikDto = normalIplik;
+            return PartialView(viewName: "~/Views/ZetaCodeFanteziIplik/_NormalIplikRenkler.cshtml", model: model);
         }
 
         // GET: ZetaCodeFanteziIplik/Edit/5
@@ -77,12 +92,18 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ZetaCodeFanteziIplik zetaCodeFanteziIplik = db.ZetaCodeFanteziIplik.Find(id);
+
+            var zetaCodeFanteziIplik = GetFanteziIplikService().GetFanteziIplikById(id.Value, companyId, includeNormalIplikler: true);
             if (zetaCodeFanteziIplik == null)
             {
                 return HttpNotFound();
             }
-            return View(zetaCodeFanteziIplik);
+            var model = new ZetaCodeFanteziIplikVm();
+            model.ZetaCodeFanteziIplikDto = zetaCodeFanteziIplik;
+            FillCollections(model
+                , sirketId: zetaCodeFanteziIplik.SirketId
+                , ulkeId: zetaCodeFanteziIplik.Ulke?.Id.AsInt());
+            return View(model);
         }
 
         // POST: ZetaCodeFanteziIplik/Edit/5
@@ -90,15 +111,56 @@ namespace Helezon.FollowMe.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ZetaCodeFanteziIplikVm zetaCodeFanteziIplik)
+        public ActionResult Edit(ZetaCodeFanteziIplikVm model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(zetaCodeFanteziIplik).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            return View(zetaCodeFanteziIplik);
+
+            Action action = () =>
+            {
+                GetFanteziIplikService().InsertOrUpdate(model.ZetaCodeFanteziIplikDto);
+            };
+
+            if (HandleException(action))
+                return RedirectToAction("Index");
+
+            var fanteziIplik = model.ZetaCodeFanteziIplikDto;
+            FillCollections(model
+                , sirketId: fanteziIplik.SirketId
+                , ulkeId: fanteziIplik.Ulke?.Id.AsInt()
+               );
+
+            return View(viewName: "Edit", model: model);
+        }
+
+        public ActionResult Card(int? id, string companyId)
+        {
+            if (!id.HasValue || id < 1 || string.IsNullOrWhiteSpace(companyId))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var fanteziIplik = GetFanteziIplikService().GetAllFanteziIplikler(id.Value, companyId).FirstOrDefault();
+            if (fanteziIplik == null)
+            {
+                return new HttpNotFoundResult();
+            }
+            var model = new ZetaCodeFanteziIplikCardVm();
+
+            model.ZetaCodeFanteziIplikDto = fanteziIplik;
+            model.ParentIplikCategories = GetTermService().GetAllParentsById(fanteziIplik.IplikKategosiId);
+            model.ParentIplikCategories.Reverse();
+
+            if (true)
+            {
+
+            }
+
+            var photoEditUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
+                                    , Url.Encode("/ZetaCodeNormalIplik/Card?Id=" + fanteziIplik.Id + "&companyId=" + fanteziIplik.SirketId)
+                                    , (int)EntityType.ZetaCodeNormalIplik
+                                    , fanteziIplik.Id
+                                    , fanteziIplik.SirketId);
+
+            model.PictureEditUrl = photoEditUrl;
+            model.PictureUrl = GetZetaCodeFanteziIplikPictureService().GetZetaCodeFanteziIplikPictureUrl(model.ZetaCodeFanteziIplikDto.Id, model.ZetaCodeFanteziIplikDto.SirketId);
+            return View(model);
         }
 
         // GET: ZetaCodeFanteziIplik/Delete/5

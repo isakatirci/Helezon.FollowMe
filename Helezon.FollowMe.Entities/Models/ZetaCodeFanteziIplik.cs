@@ -21,13 +21,18 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeFanteziIplik: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
         public int? IplikKategosiId { get; set; } // IplikKategosiId
         public string SirketId { get; set; } // SirketId (length: 128)
         public bool Master { get; set; } // Master
         public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
+        public string Nm { get; set; } // NM (length: 10)
+        public string Fl { get; set; } // FL (length: 10)
         public string Ea { get; set; } // EA (length: 10)
-        public int? Ulke { get; set; } // Ulke
+        public string Dny { get; set; } // DNY (length: 10)
+        public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
+        public int? UlkeId { get; set; } // UlkeId
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
         public int BlueKod { get; set; } // BlueKod
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
@@ -42,6 +47,10 @@ namespace Helezon.FollowMe.Entities.Models
         // Reverse navigation
 
         /// <summary>
+        /// Child ZetaCodeFanteziIplikPicture where [ZetaCodeFanteziIplikPicture].[ZetaCodeFanteziIplikId] point to this entity (FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture.FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik
+        /// <summary>
         /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
@@ -55,6 +64,7 @@ namespace Helezon.FollowMe.Entities.Models
 
         public ZetaCodeFanteziIplik()
         {
+            ZetaCodeFanteziIplikPicture = new System.Collections.Generic.List<ZetaCodeFanteziIplikPicture>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }

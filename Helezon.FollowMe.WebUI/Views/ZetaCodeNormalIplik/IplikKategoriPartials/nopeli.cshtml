@@ -5,14 +5,16 @@
         İki Nokta Arasındaki Mesafe:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktalarArasiMesafeFormat"
+        
+        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriKrep.Id", Model?.Id)
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafe"
        , (IEnumerable<SelectListItem>)ViewBag.Mesafe
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
         id="IplikKategoriNopeli_NoktalarArasiMesafe"
         value="@Model.NoktalarArasiMesafeFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktalarArasiMesafeFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafeFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -20,7 +22,7 @@
         Nokta Uzunluğu:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaUzunluguFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunlugu"
        , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
        , new { @class = "form-control select2" })
 
@@ -28,7 +30,7 @@
         class="form-control mask_number transform_none"
         id="IplikKategoriNopeli_NoktaUzunlugu"
         value="@Model.NoktaUzunluguFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaUzunluguFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunluguFormat">*@
     </div>
 </div>
 
@@ -37,14 +39,14 @@
         Nokta Yüksekliği:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaYuksekligiFormat"
+        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligiFormat"
        , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
         id="IplikKategoriNopeli_NoktaYuksekligi"
         value="@Model.NoktaYuksekligiFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeliDto.NoktaYuksekligiFormat">*@
+        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligiFormat">*@
     </div>
 </div>
 

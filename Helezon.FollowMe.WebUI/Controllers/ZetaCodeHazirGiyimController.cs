@@ -13,5 +13,9 @@ namespace Helezon.FollowMe.WebUI.Controllers
         {
             return View();
         }
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

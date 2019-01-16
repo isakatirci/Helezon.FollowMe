@@ -67,6 +67,10 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Helezon.FollowMe.WebUI\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,7 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
-    <Compile Include="CompanyImageService - Copy.cs" />
+    <Compile Include="ZetaCodeFanteziIplikPictureService.cs" />
+    <Compile Include="ZetaCodeNormalIplikPictureService.cs" />
     <Compile Include="CompanyImageService.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="DataTransferObjects\FollowMeDto.cs">

@@ -31,7 +31,7 @@ namespace Helezon.FollowMe.Entities.Models
             HasKey(x => x.ZetaCodeNormalIplikId);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.BoyamaProsesi).HasColumnName(@"BoyamaProsesi").HasColumnType("nvarchar").IsRequired().HasMaxLength(200);
+            Property(x => x.BoyamaProsesi).HasColumnName(@"BoyamaProsesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
             Property(x => x.ZetaCodeNormalIplikId).HasColumnName(@"ZetaCodeNormalIplikId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.BoyaTipi).HasColumnName(@"BoyaTipi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.BoyaYonu).HasColumnName(@"BoyaYonu").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);

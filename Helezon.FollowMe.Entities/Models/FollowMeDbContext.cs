@@ -54,6 +54,12 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        public System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
+        public System.Data.Entity.DbSet<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi
+        public System.Data.Entity.DbSet<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture
+        public System.Data.Entity.DbSet<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine
+        public System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma
+        public System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture
         public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
         public System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
 
@@ -145,6 +151,12 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermRelationshipMap());
             modelBuilder.Configurations.Add(new TermTaxonomyMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap());
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziPictureMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasMakineMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaPictureMap());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap());
 
@@ -187,6 +199,12 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermRelationshipMap(schema));
             modelBuilder.Configurations.Add(new TermTaxonomyMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziPictureMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasMakineMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaPictureMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap(schema));
             OnCreateModelPartial(modelBuilder, schema);

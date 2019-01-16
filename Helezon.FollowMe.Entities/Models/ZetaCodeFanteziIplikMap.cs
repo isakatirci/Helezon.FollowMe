@@ -31,13 +31,18 @@ namespace Helezon.FollowMe.Entities.Models
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.UrunIsmi).HasColumnName(@"UrunIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(800);
             Property(x => x.IplikKategosiId).HasColumnName(@"IplikKategosiId").HasColumnType("int").IsOptional();
             Property(x => x.SirketId).HasColumnName(@"SirketId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.Master).HasColumnName(@"Master").HasColumnType("bit").IsRequired();
             Property(x => x.ZetaCode).HasColumnName(@"ZetaCode").HasColumnType("int").IsRequired();
             Property(x => x.ZetaCodePrevious).HasColumnName(@"ZetaCodePrevious").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
+            Property(x => x.Nm).HasColumnName(@"NM").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.Fl).HasColumnName(@"FL").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Ea).HasColumnName(@"EA").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.Ulke).HasColumnName(@"Ulke").HasColumnType("int").IsOptional();
+            Property(x => x.Dny).HasColumnName(@"DNY").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.IplikNoCinsi).HasColumnName(@"IplikNoCinsi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.UlkeId).HasColumnName(@"UlkeId").HasColumnType("int").IsOptional();
             Property(x => x.BlueUrunKodIsmi).HasColumnName(@"BlueUrunKodIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
             Property(x => x.BlueKod).HasColumnName(@"BlueKod").HasColumnType("int").IsRequired();
             Property(x => x.BlueSiparisNo).HasColumnName(@"BlueSiparisNo").HasColumnType("int").IsRequired();

@@ -8,9 +8,18 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public static class ViewModelExtensions
     {
+        private static string ZetaCodeFormat(string zetaCode) {
+
+            return string.Format("Z - {0}", zetaCode.ToString().PadLeft(4, '0'));
+        }
         public static string ZetaCodeFormat(this ZetaCodeFanteziIplikDto fanteziIplik)
         {
-            return string.Format("Z - {0}", fanteziIplik.ZetaCode.ToString().PadLeft(4, '0'));
+            return ZetaCodeFormat(fanteziIplik.ZetaCode.ToString());
+        }
+        public static string ZetaCodeFormat(this ZetaCodeNormalIplikDto fanteziIplik)
+        {
+            return ZetaCodeFormat(fanteziIplik.ZetaCode.ToString());
         }
     }
+    
 }

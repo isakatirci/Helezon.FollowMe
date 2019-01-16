@@ -11,6 +11,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public TermDto IplikKategosi { get; set; }
         public TermDto RafyeriTurkiye { get; set; }
         public TermDto RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public string ZetaCodeFormatli
+        {
+            get
+            {
+
+                return string.Format("Z - {0}", this.ZetaCode.ToString().PadLeft(4, '0'));
+            }
+        }
         partial void InitializePartial()
         {
             IplikKategosi = new TermDto();
@@ -20,6 +29,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
     }
     public partial class ZetaCodeNormalIplikDto
     {
+        public PairIdNameDto Ulke { get; set; }
+
         public string ZetaCodeFormat { get {
 
                 return string.Format("Z - {0}", this.ZetaCode.ToString().PadLeft(4, '0'));
@@ -52,11 +63,29 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string IplikKategosiName { get; set; }
         public string RafyeriYunanistanName { get; set; }
         public string RafyeriTurkiyeName { get; set; }
-       public string UlkeAdi { get; set; }
+        //public string UlkeAdi { get; set; }
         public string UretimTeknolojisiName { get; set; }
         public string PictureEditUrl { get; set; }
         public string PictureUrl { get; set; }
 
+    }
+
+    public partial class ZetaCodeKumasFantaziDto
+    {
+        public string ZetaCodeFormatli { get; set; }
+        public TermDto UrunKategorisi { get; set; }
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+
+    }
+    public partial class ZetaCodeKumasOrmeDokumaDto
+    {
+        public string ZetaCodeFormatli { get; set; }
+        public TermDto UrunKategorisi { get; set; }
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
     }
 
     //IplikKategoriDegrede

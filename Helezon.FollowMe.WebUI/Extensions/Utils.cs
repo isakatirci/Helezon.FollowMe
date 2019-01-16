@@ -179,7 +179,16 @@ namespace FollowMe.Web.Controllers
             TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileriNormal, "İplik Kategorileri Normal");
             TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileriFantazi, "İplik Kategorileri Fantazi");
 
-            TaxonomyNamesZCode.Add(TaxonomyType.KumasKategorileri, "Kumaş Kategorileri");
+
+            TaxonomyNamesZCode.Add(TaxonomyType.KoleksiyonKategorileri, "Koleksiyon Kategorileri");
+            TaxonomyNamesZCode.Add(TaxonomyType.MakineDetaylari, "Makine Detayları");
+            TaxonomyNamesZCode.Add(TaxonomyType.BoyahaneIslemleri, "Boyahane İşlemleri");
+            TaxonomyNamesZCode.Add(TaxonomyType.KumasGoruntuler, "Kumaş Görüntüler");
+            TaxonomyNamesZCode.Add(TaxonomyType.YikamaTalimati, "Yıkama Talimatı");
+            TaxonomyNamesZCode.Add(TaxonomyType.UcuncuAdimIslemleri, "3. Adım İşlemler");
+
+
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylari, "Örgü Detayları");
 
 
 
@@ -1038,7 +1047,7 @@ namespace FollowMe.Web
         ComputerSkills,
         ReasonWhyPassiveForPersonnel,
         IplikKategorileriNormal,
-        KumasKategorileri,
+        OrguDetaylari,
         IplikNo,
         ElyafCinsiveKalitesi,
         ElyafOrani,
@@ -1049,7 +1058,15 @@ namespace FollowMe.Web
         RafYeriIplikTurkiye,
         RafYeriIplikYunanistan,
         IplikKategorileriFantazi,
-        //CompanySubType,
+
+        KoleksiyonKategorileri,
+        MakineDetaylari,
+        BoyahaneIslemleri,
+        KumasGoruntuler,
+        YikamaTalimati,
+        UcuncuAdimIslemleri
+
+
     }
 
 }

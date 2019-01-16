@@ -24,7 +24,7 @@ namespace Helezon.FollowMe.Service
         string GetTermNameById(int? id);
         TermDto GetTermById(int? id);
         TermDto GetParentTermById(int termId);
-        List<TermDto> GetAllParentsById(int termid);
+        List<TermDto> GetAllParentsById(int? termid);
     }
 
     /// <summary>
@@ -136,16 +136,20 @@ namespace Helezon.FollowMe.Service
             return GetTermById(id)?.Name ?? string.Empty;
         }
 
-        public List<TermDto> GetAllParentsById(int termid)
+        public List<TermDto> GetAllParentsById(int? termid)
         {
             var parents = new List<TermDto>();
+            if (!termid.HasValue)
+            {
+                return parents;
+            }
             var term = GetTermById(termid);
             if (term == null)
                 return parents;
             parents.Add(term);
             while (true)
             {
-                var parent = GetParentTermById(termid);
+                var parent = GetParentTermById(termid.Value);
                 if (parent != null)
                 {
                     parents.Add(parent);

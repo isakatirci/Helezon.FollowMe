@@ -1,4 +1,8 @@
 ﻿@model ZetaCodeFanteziIplikVm
+@{
+
+    Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
+}
 
 @using Helezon.FollowMe.WebUI.Models.ViewModels
 
@@ -10,7 +14,7 @@
 }
 
 
-<form action="/ZetaCodeNormalIplik/Edit" id="frmZetaCodeNormalIplik" method="post">
+<form action="/ZetaCodeFanteziIplik/Edit" id="frmZetaCodeFanteziIplik" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ZetaCodeFanteziIplikDto.Id)
@@ -132,6 +136,17 @@
                                                 </div>
                                             </div>
 
+                                            @*<div class="form-group">
+                                                @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownList("ZetaCodeFanteziIplikDto.Ea"
+    , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
+    , htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.ZetaCodeFanteziIplikDto.Ea, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>*@
+
+
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
@@ -141,7 +156,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="control-label col-md-2" for="ZetaCodeFanteziIplikDto.IplikKategosiId"></label>
+                                                <label class="control-label col-md-2" for="ZetaCodeFanteziIplikDto.IplikKategosiId">iplik Kategosi</label>
                                                 <div class="col-md-6">
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
@@ -181,15 +196,29 @@
                     </div>
                     <div id="collapse_iplik_sec" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <div class="form-body">
-                                <div class="form-horizontal form-bordered form-row-stripped">
+                            <div class="form-horizontal form-bordered form-row-stripped">
+                                <div class="form-body">
                                     @{
                                         var normalIplikCount = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count;
                                     }
                                     <div class="form-group">
-                                        <label class="control-label col-md-2" for="">Kaç İplikten Oluşuyor</label>
+                                        <label class="control-label col-md-2" for="normal_iplik_count">İplik No Cinsi</label>
                                         <div class="col-md-6">
-                                            <select id="">
+                                            <select id="ZetaCodeNormalIplikDto_IplikNoCinsi"
+                                                    onchange="javascript:setVisibleIplikNo($(this))"
+                                                    name="ZetaCodeFanteziIplikDto.IplikNoCinsi"
+                                                    class="form-control">
+                                                <option value="">Please Select</option>
+                                                @*<option @(Model?.ZetaCodeFanteziIplikDto.IplikNoCinsi == "NE" ? "selected" : string.Empty ) value="NE">NE</option>*@
+                                                <option @(Model?.ZetaCodeFanteziIplikDto.IplikNoCinsi == "NM" ? "selected" : string.Empty ) value="NM">NM</option>
+                                                <option @(Model?.ZetaCodeFanteziIplikDto.IplikNoCinsi == "DNY" ? "selected" : string.Empty ) value="DNY">DNY</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="normal_iplik_count">Kaç İplikten Oluşuyor</label>
+                                        <div class="col-md-6">
+                                            <select id="normal_iplik_count" class="form-control">
                                                 <option value="">Please Select</option>
                                                 <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
                                                 <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
@@ -198,9 +227,99 @@
                                                 <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
                                             </select>
                                         </div>
-                                    </div>                               
+                                    </div>
+                                    <div class="form-group ea_iplik_no" style="display: none;">
+                                        <label class="control-label col-md-2 ea_iplik_no" for="">Ea</label>
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("Model.ZetaCodeFanteziIplikDto.Ne"
+                                                                                   , new SelectList(Model.Collections.EaIpliNolar, "Value", "Text", Model.ZetaCodeFanteziIplikDto?.Ea)
+                                                                                   , new { @class = "form-control select2" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group nm_iplik_no" style="display: none;">
+                                        <label class="control-label col-md-2 nm_iplik_no" for="">Nm</label>
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("Model.ZetaCodeFanteziIplikDto.Nm"
+                                   , new SelectList(Model.Collections.NmIpliNolar, "Value", "Text", Model.ZetaCodeFanteziIplikDto?.Nm)
+                                   , new { @class = "form-control select2" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group dny_iplik_no" style="display: none;">
+                                        <label class="control-label col-md-2 dny_iplik_no" for="">Dny</label>
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("Model.ZetaCodeFanteziIplikDto.Nm"
+                                           , new SelectList(Model.Collections.DnyIpliNolar, "Value", "Text", Model.ZetaCodeFanteziIplikDto?.Dny)
+                                           , new { @class = "form-control select2" })
+                                        </div>                                      
+                                    </div>
+                                    <div class="form-group fl_iplik_no" style="display: none;">
+                                        <label class="control-label col-md-2 " for="">Fl</label>
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("Model.ZetaCodeFanteziIplikDto.Nm"
+                                           , new SelectList(Model.Collections.FlIpliNolar, "Value", "Text", Model.ZetaCodeFanteziIplikDto?.Fl)
+                                           , new { @class = "form-control select2" })
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle" href="javascript:void();"> Zeta Code Normal İplikler </a>
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        <div class="form-body">
+                                            <div class="mt-repeater">
+                                                <div data-repeater-list="ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik">
+                                                    @{
+                                                        for (int i = 0; i < Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count; i++)
+                                                        {
+
+                                                            var normalIplik = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.ElementAt(i);
+                                                            <text>
+                                                                <div data-repeater-item>
+                                                                    <div class="mt-repeater-item">
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                <div class="col-md-2">
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <input type="hidden"
+                                                                                           class="normal_iplik_id"
+                                                                                           name="Id"
+                                                                                           value="@normalIplik.Id" />
+                                                                                    <br />
+                                                                                    @Html.DropDownList("NormalIplik"
+                                                                                   , new SelectList(Model.Collections.NormalIplikler, "Value", "Text", normalIplik.Id.ToString()),"Please Select"
+                                                                                   , new { @class = "form-control select2 normal_iplik", @onchange = "setNormalIplikId($(this))" })
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                                                                                        <i class="fa fa-close"></i> Delete
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row" id="normal_iplik_form">
+                                                                                @Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </text>
+                                                        }
+                                                    }
+                                                </div>
+                                                <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
+                                                    <i class="fa fa-plus"></i> Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -293,8 +412,45 @@
 @section afterGlobalScripts {
 
     <script>
+        function setNormalIplikId(dll) {
+            if ($(dll).val() > 0) {
+                $(dll).closest(".mt-repeater-item").find(".normal_iplik_id").val($(dll).val())
+                getNormalIplikRenkler($(dll).val(), $(dll).closest(".mt-repeater-item").find("#normal_iplik_form"));
+            }
+
+        }
         function validateSomeFields() {
 
+        }
+
+        function setVisibleIplikNo(dll) {
+            var self = $(dll);
+            if (self.val().length > 0) {
+                var iplikNo = self.val();
+                if (iplikNo === "DNY") {
+                    self.closest(".form-body").find(".dny_iplik_no").show();
+                    self.closest(".form-body").find(".nm_iplik_no").hide();
+                    self.closest(".form-body").find(".fl_iplik_no").show();
+                    if ($("#ZetaCodeNormalIplikDto_IplikKategosiId").val() === "326") {
+                        self.closest(".form-body").find(".ea_iplik_no").show();
+                    } else {
+                        self.closest(".form-body").find(".ea_iplik_no").hide();
+                    }
+                } else if (iplikNo === "NM") {
+                    self.closest(".form-body").find(".dny_iplik_no").hide();
+                    self.closest(".form-body").find(".nm_iplik_no").show();
+                    self.closest(".form-body").find(".fl_iplik_no").hide();
+                    self.closest(".form-body").find(".ea_iplik_no").hide();
+                } 
+                //326 - ZetaCodeNormalIplikDto_IplikKategosiId
+
+            } else {
+                self.closest(".form-body").find(".ne_iplik_no").hide();
+                self.closest(".form-body").find(".dny_iplik_no").hide();
+                self.closest(".form-body").find(".nm_iplik_no").hide();
+                self.closest(".form-body").find(".fl_iplik_no").hide();
+                self.closest(".form-body").find(".ea_iplik_no").hide();
+            }
         }
 
         var modulFantezilIplikVm = (function () {
@@ -371,18 +527,9 @@
                     $(this).repeater({
                         show: function () {
 
-                            var elyafOrani = 0;
 
-                            $(".mt-repeater .elyaf-orani").each(function () {
-                                var self = this;
-                                //console.log($(self).val());
-                                if ($(self).val() && $(self).val().length > 0) {
-                                    elyafOrani += parseInt($(self).val());
-                                }
-                            });
-
-                            if (elyafOrani >= 100) {
-                                alert("Elyaf Oranı %100 Olmalıdır");
+                            if ($('.mt-repeater .normal_iplik').length > parseInt($("#normal_iplik_count").val())) {
+                                alert("En fazla " + $("#normal_iplik_count").val() + " adet normal iplik seçilebilir");
                                 $(this).remove();
                                 return;
                             }
@@ -390,7 +537,7 @@
 
                             $(this).slideDown();
 
-                            ajaxTreeFillTermTreeRef($(this).find(".treeElyafCinsiKalitesi"), "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
+                            //ajaxTreeFillTermTreeRef($(this).find(".treeElyafCinsiKalitesi"), "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
 
                             //modulFantezilIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
 
@@ -410,7 +557,7 @@
 
 
 
-                            //$('.mt-repeater .select2-container').css('width', '100%');
+                            $('.mt-repeater .select2-container').css('width', '100%');
 
                         },
 
@@ -501,10 +648,32 @@
 
         })();
 
+        function getNormalIplikRenkler(normalIplikId, containerNormalIplikForm) {
+            $.ajax({
+                url: "/ZetaCodeFanteziIplik/GetNormalIplikRenkler",
+                type: "GET",
+                data: { normalIplikId: normalIplikId }
+            })
+                .done(function (partialViewResult) {
+                    $(containerNormalIplikForm).empty();
+                    $(containerNormalIplikForm).html(partialViewResult);
+                    //$(".mask_number").inputmask('999.99', {
+                    //    numericInput: true
+                    //}); //123456  =>  â‚¬ ___.__1.234,56
+                });
+        }
+
+
+        function refreshIplikNo()
+        {
+
+            setVisibleIplikNo($("#ZetaCodeNormalIplikDto_IplikNoCinsi"));
+        }
+
         $(document).ready(function () {
 
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategorilerFantezi"
-                , "#ZetaCodeNormalIplikDto_IplikKategosiId", "#ZetaCodeNormalIplikDto_IplikKategosiName");
+                , "#ZetaCodeNormalIplikDto_IplikKategosiId", "#ZetaCodeNormalIplikDto_IplikKategosiName", refreshIplikNo);
 
 
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
@@ -513,7 +682,7 @@
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
                 , "#ZetaCodeNormalIplikDto_RafyeriYunanistanId", "#ZetaCodeNormalIplikDto_RafyeriYunanistanName");
 
-
+            modulFantezilIplikVm.repeater();
         });
 
     </script>

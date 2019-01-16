@@ -1,0 +1,54 @@
+﻿
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section afterGlobalStyles {
+    @RenderSection("afterGlobalStyles", required: false)
+
+}
+
+
+<div class="row">
+    <div class="col-md-2">
+
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+                Go To The Index Page&nbsp;
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeNormalIplik/Index">Normal İplik</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeFanteziIplik/Index">Fantazi İplik</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeKumasOrmeDokuma/Index">Kumaş Örme Dokuma</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeKumasFantazi/Index">Kumaş Fantazi</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeAksesuar/Index">Aksesuar</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="~/ZetaCodeHazirGiyim/Index">Hazır Giyim</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @RenderBody()
+    </div>
+</div>
+
+
+
+@section afterGlobalScripts {
+    @RenderSection("afterGlobalScripts", required: false)
+}
+
+@section beforeGlobalScripts {
+
+    @RenderSection("beforeGlobalScripts", required: false)
+
+}

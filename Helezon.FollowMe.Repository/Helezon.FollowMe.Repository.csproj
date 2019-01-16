@@ -68,6 +68,7 @@
     <Compile Include="Repositories\PersonnelImageRepository.cs" />
     <Compile Include="Repositories\PersonnelTermRepository.cs" />
     <Compile Include="Repositories\ZetaCodeFanteziIplikRepository.cs" />
+    <Compile Include="Repositories\ZetaCodeFanteziIplikPictureRepository.cs" />
     <Compile Include="Repositories\ZetaCodeNormalIplikPictureRepository.cs" />
     <Compile Include="Repositories\ZetaCodeNormalIplikRepository.cs" />
   </ItemGroup>
