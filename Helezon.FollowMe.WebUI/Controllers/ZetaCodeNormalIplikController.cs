@@ -97,7 +97,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 ulke.Selected = true;
             }
             model.Collections.Ulkeler = temp;
-            model.Collections.PantoneRenkleri = new SelectList(GetNormalIplikService().GetPantoneRenkler(), "Id", "PantoneKodu", pantoneRenkId);
+            model.Collections.PantoneRenkleri = new SelectList(GetNormalIplikService().GetPantoneRenkler()
+                .Select(x => new { Id = x.Id.ToString(), PantoneKodu = x.PantoneKodu + " " + x.PantoneRengi }), "Id", "PantoneKodu", pantoneRenkId.ToString());
             model.Renkler = new GetSelectListWithId(GetSelectListRenkler);
             model.Collections.UretimTeknolojileri = new SelectList(GetTermService().GetTermsByTaxonomyId(31), "Id", "Name", uretimTeknolojitermId);
             model.NE = new IplikNoGuideMethod(GetSelectListNE);
@@ -302,10 +303,98 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.RafYeriIplikYunanistan);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult JSTreeBoyaIslemleri()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.BoyahaneIslemleri);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult JSTreeMakineMarkalar()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.MakineDetaylariMakineMarkasi);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeMakineModeller()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.MakineDetaylariMakineModeli);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeAksesuarlar()
+        {
+            //               var jsTreeDataDtos = (from tx in termTaxonomy
+            //                                      join te in term on tx.TermId equals te.Id
+            //                                      where tx.TaxonomyId == taxonomyId && te.TaxonomyId == taxonomyId && tx.CompanyId == companyId && te.CompanyId == companyId
+            //                                      select new JsTreeDataDto
+            //                                      {
+            //                                          id = te.Id.ToString(),
+            //                                          text = te.Name,
+            //                                          parent = tx.Parent.HasValue && tx.Parent == 0 ? "#" : tx.Parent.ToString(),
+            //                                          state = new { disabled = te.Disabled }
+            //                                      }).ToList();
+
+
+            var data = GetOthersService().GetAllAksesuar().Select(x=> new JsTreeDataDto
+            {
+                id = x.Id.ToString(),
+                text = x.Name,
+                parent =  "#" 
+            }).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /*************************************************************************/
+        public ActionResult JSTreeOrguDetaylariOrmeCozgulu()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.OrguDetaylariOrmeCozgulu);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult JSTreeOrguDetaylariOrmeDuz()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.OrguDetaylariOrmeDuz);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult JSTreeOrguDetaylariOrmeYuvarlak()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.OrguDetaylariOrmeYuvarlak);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult JSTreeOrguDetaylariDokuma()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.OrguDetaylariDokuma);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeOrguDetaylariNonwoven()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.OrguDetaylariNonwoven);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /**************************************************************************/
         public ActionResult JSTreeElyafCinsiveKalitesi()
         {
             var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.ElyafCinsiveKalitesi);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeKoleksiyonKategorileri()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.KoleksiyonKategorileri);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeHazirGiyimKategorileri()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.HazirGiyimKategorileri);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JSTreeKumasGoruntuleri()
+        {
+            var data = GetTermService().GetJsTreeData("00000000-0000-0000-0000-000000000001", (int)TaxonomyType.KumasGoruntuler);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

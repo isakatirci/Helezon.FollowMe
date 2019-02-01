@@ -53,12 +53,22 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.PantoneId).HasColumnName(@"PantoneId").HasColumnType("int").IsOptional();
+            Property(x => x.Renkid).HasColumnName(@"Renkid").HasColumnType("int").IsOptional();
 
             // Foreign keys
+            HasOptional(a => a.PantoneRenk).WithMany(b => b.ZetaCodeFanteziIplik).HasForeignKey(c => c.PantoneId).WillCascadeOnDelete(false); // FK_ZetaCodeFanteziIplik_PantoneRenk
+            HasOptional(a => a.Renk).WithMany(b => b.ZetaCodeFanteziIplik).HasForeignKey(c => c.Renkid).WillCascadeOnDelete(false); // FK_ZetaCodeFanteziIplik_Renk
             HasRequired(a => a.Company).WithMany(b => b.ZetaCodeFanteziIplik).HasForeignKey(c => c.SirketId).WillCascadeOnDelete(false); // FK_ZetaCodeFanteziIplik_Company
+            HasMany(t => t.ZetaCodeKumasOrmeDokuma).WithMany(t => t.ZetaCodeFanteziIplik).Map(m =>
+            {
+                m.ToTable("ZetaCode_FanteziIplik_NormalKumas", "dbo");
+                m.MapLeftKey("FanzteziIplikId");
+                m.MapRightKey("NormalKumasId");
+            });
             HasMany(t => t.ZetaCodeNormalIplik).WithMany(t => t.ZetaCodeFanteziIplik).Map(m =>
             {
-                m.ToTable("ZetaCodeNormalFantezi", "dbo");
+                m.ToTable("ZetaCode_FanteziIplik_NormalIplik", "dbo");
                 m.MapLeftKey("FanzteziIplikId");
                 m.MapRightKey("NormalIplikId");
             });

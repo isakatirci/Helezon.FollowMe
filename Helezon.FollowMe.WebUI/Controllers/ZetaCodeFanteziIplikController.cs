@@ -21,10 +21,10 @@ namespace Helezon.FollowMe.WebUI.Controllers
         {
             var fanteziIplikler = GetFanteziIplikService().GetAllFanteziIplikler();
             //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
-            var model = new List<ZetaCodeFanteziIplikVm>();
+            var model = new List<ZetaCodeFanteziIplikEditVm>();
             foreach (var item in fanteziIplikler)
             {
-                model.Add(new ZetaCodeFanteziIplikVm
+                model.Add(new ZetaCodeFanteziIplikEditVm
                 {
                     ZetaCodeFanteziIplikDto = item
                 });
@@ -37,12 +37,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
         // GET: ZetaCodeFanteziIplik/Create
         public ActionResult Create()
         {
-            var model = new ZetaCodeFanteziIplikVm();
+            var model = new ZetaCodeFanteziIplikEditVm();
             FillCollections(model);
             return View(viewName: "Edit", model: model);
         }
 
-        public void FillCollections(ZetaCodeFanteziIplikVm model
+        public void FillCollections(ZetaCodeFanteziIplikEditVm model
                                         , string sirketId = ""
                                         , int? ulkeId = null)
         {
@@ -73,17 +73,17 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
         }
 
-        public ActionResult GetNormalIplikRenkler(int? normalIplikId)
-        {
-            if (!normalIplikId.HasValue || normalIplikId.Value < 1)
-            {
-                return new EmptyResult();
-            }
-            var normalIplik = GetNormalIplikService().GetRenklerOfNormalIplik(normalIplikId: normalIplikId.Value);
-            var model = new GetNormalIplikRenklerVm();
-            model.NormalIplikDto = normalIplik;
-            return PartialView(viewName: "~/Views/ZetaCodeFanteziIplik/_NormalIplikRenkler.cshtml", model: model);
-        }
+        //public ActionResult GetNormalIplikRenkler(int? normalIplikId)
+        //{
+        //    if (!normalIplikId.HasValue || normalIplikId.Value < 1)
+        //    {
+        //        return new EmptyResult();
+        //    }
+        //    var normalIplik = GetNormalIplikService().GetRenklerOfNormalIplik(normalIplikId: normalIplikId.Value);
+        //    var model = new GetNormalIplikRenklerVm();
+        //    model.NormalIplikDto = normalIplik;
+        //    return PartialView(viewName: "~/Views/ZetaCodeFanteziIplik/_NormalIplikRenkler.cshtml", model: model);
+        //}
 
         // GET: ZetaCodeFanteziIplik/Edit/5
         public ActionResult Edit(int? id,string companyId)
@@ -98,7 +98,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-            var model = new ZetaCodeFanteziIplikVm();
+            var model = new ZetaCodeFanteziIplikEditVm();
             model.ZetaCodeFanteziIplikDto = zetaCodeFanteziIplik;
             FillCollections(model
                 , sirketId: zetaCodeFanteziIplik.SirketId
@@ -111,7 +111,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ZetaCodeFanteziIplikVm model)
+        public ActionResult Edit(ZetaCodeFanteziIplikEditVm model)
         {
 
             Action action = () =>

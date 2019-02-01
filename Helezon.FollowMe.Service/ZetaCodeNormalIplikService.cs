@@ -60,19 +60,14 @@ namespace Helezon.FollowMe.Service
         public List<RenkDto> GetRenkler(int dilId)
         {
             var repository = _repository.GetRepository<Renk>().Queryable();
-            return repository.Where(x => x.DilId == dilId).Select(x => new { x.Id, x.Ad, x.HtmlKod, x.IplikRenkKodu }).ToList()
-                .Select(x => new RenkDto
-                {
-                    Id = x.Id,
-                    Ad = x.Ad,
-                    HtmlKod = x.HtmlKod
-                    //+ (!string.IsNullOrWhiteSpace(x.IplikRenkKodu) ? "|" + x.IplikRenkKodu : string.Empty)
-                }).OrderBy(x => x.Ad).ToList();
+            return AutoMapperConfig.Mapper.Map<IOrderedEnumerable<Renk>, List<RenkDto>>(repository.Where(x => x.DilId == dilId).ToList().OrderBy(x => x.Ad));
         }
         public List<PantoneRenkDto> GetPantoneRenkler()
         {
-            var reposiyory = _repository.GetRepository<PantoneRenk>().Queryable();
-            return reposiyory.Select(x => new PantoneRenkDto { Id = x.Id, PantoneKodu = x.PantoneKodu + " " + x.PantoneRengi }).ToList();
+            var reposiyory = _repository.GetRepository<PantoneRenk>().QueryableNoTracking();
+            return AutoMapperConfig.Mapper.Map<List<PantoneRenk>, List<PantoneRenkDto>>(reposiyory.ToList());
+
+            //return reposiyory.Select(x => new PantoneRenkDto { Id = x.Id, PantoneKodu = x.PantoneKodu + " " + x.PantoneRengi }).ToList();
         }
 
         //public int GetSiparisNoByCompanyCode(int code)
@@ -232,7 +227,7 @@ namespace Helezon.FollowMe.Service
             var zetaCode = _repository.Queryable().Max(x => (int?)x.ZetaCode)??0;
             zetaCode++;
             var blueSiparisNo = _repository.Queryable()
-                .Where(x => x.SirketId == zetaCodeNormalIplik.SirketId)
+                .Where(x => x.SirketId == zetaCodeNormalIplik.SirketId && x.ZetaCode == zetaCode)
                 .Max(x => (int?)x.BlueSiparisNo)??0;
             blueSiparisNo++;
             //Daha sonra bunu başla bir metoda taşı

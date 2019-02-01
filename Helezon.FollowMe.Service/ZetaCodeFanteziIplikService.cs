@@ -4,6 +4,7 @@ using Repository.Pattern.Repositories;
 using Service.Pattern;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Helezon.FollowMe.Service
         void InsertOrUpdate(ZetaCodeFanteziIplikDto entity);
         List<ZetaCodeFanteziIplikDto> GetAllFanteziIplikler(int? id = null, string companyId = null);
         ZetaCodeFanteziIplikDto GetFanteziIplikById(int value, string companyId, bool includeNormalIplikler = false);
+        List<ZetaCodeFanteziIplikDto> GetAllZetaCodeAndUrunIsmiOfFantaziIplikler(int? fanteziIplikId = null);
+        ZetaCodeFanteziIplikDto GetRenklerOfFanteziIplik(int fanteziplikId);
     }
 
     /// <summary>
@@ -41,11 +44,29 @@ namespace Helezon.FollowMe.Service
             _othersService = new OthersService();
             _repoNormalIplik = _repository.GetRepositoryAsync<ZetaCodeNormalIplik>();
         }
+
+        public ZetaCodeFanteziIplikDto GetRenklerOfFanteziIplik(int fanteziplikId)
+        {
+            var fanteziIplik = _repository.QueryableNoTracking()
+                .Include(x => x.Renk).Include(x => x.PantoneRenk)
+                .Where(x => x.Id == fanteziplikId && !x.IsPassive)
+                .Select(x => x)
+                .FirstOrDefault();
+            if (fanteziIplik == null)
+            {
+                return null;
+            }
+            var temp = AutoMapperConfig.Mapper.Map<ZetaCodeFanteziIplik, ZetaCodeFanteziIplikDto>(fanteziIplik);
+            temp.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(fanteziIplik.Renk);
+            temp.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(fanteziIplik.PantoneRenk);
+
+            return temp;
+        }
         public override void Update(ZetaCodeFanteziIplik entity)
         {
             base.Update(entity);
         }
-  
+
         public override void Insert(ZetaCodeFanteziIplik entity)
         {
             var zetaCode = _repository.Queryable().Max(x => (int?)x.ZetaCode) ?? 0;
@@ -142,6 +163,27 @@ namespace Helezon.FollowMe.Service
                 fanteziIplikDto.IplikKategosi = _termService.GetTermById(fantezIplik.IplikKategosiId);
             }
             return fanteziIplikDto;
+        }
+
+
+        public List<ZetaCodeFanteziIplikDto> GetAllZetaCodeAndUrunIsmiOfFantaziIplikler(int? fanteziIplikId = null)
+        {
+            IQueryable<ZetaCodeFanteziIplik> query = null;
+
+            if (fanteziIplikId.HasValue)
+            {
+                query = _repository.QueryableNoTracking().Where(x => x.Id == fanteziIplikId.Value && !x.IsPassive);
+            }
+            else
+            {
+                query = _repository.QueryableNoTracking().Where(x => !x.IsPassive);
+            }
+            return query.Select(x => new ZetaCodeFanteziIplikDto
+            {
+                Id = x.Id,
+                UrunIsmi = x.UrunIsmi,
+                ZetaCode = x.ZetaCode
+            }).ToList();
         }
 
         //public ZetaCodeFanteziIplikDto GetNormalIpliklerOfFanteziIplikByFanteziIplikId(int fantaziIplikId, string companyId, bool includeNormalIplikler = false)

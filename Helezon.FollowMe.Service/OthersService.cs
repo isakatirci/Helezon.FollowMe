@@ -27,9 +27,23 @@ namespace Helezon.FollowMe.Service
         HashSet<PairIdNameDto> GetAllMakineYedekFinelar();
         HashSet<PairIdNameDto> GetAllMakineYedekSistemler();
         HashSet<PairIdNameDto> GetAllMakineIgneSayisi();
+        HashSet<PairIdNameDto> GetAllElastan();
+        HashSet<PairIdNameDto> GetAllTupAcikEn();
+        HashSet<PairIdNameDto> GetAllAksesuar();
+        HashSet<PairIdNameDto> GetYikamaSekilleri();
+        HashSet<PairIdNameDto> GetBedenKaliplari();
     }
     public class OthersService : IOthersService
     {
+
+        //            BedenKalipIsimleri.Add(BedenKalip.Boy, "Boy");
+        //            BedenKalipIsimleri.Add(BedenKalip.En, "En");
+        //            BedenKalipIsimleri.Add(BedenKalip.Ense, "Ense");
+        //            BedenKalipIsimleri.Add(BedenKalip.Kolboyu, "Kolboyu");
+        //            BedenKalipIsimleri.Add(BedenKalip.Omuz, "Omuz");
+
+
+
         private static Lazy<HashSet<PairIdNameDto>> _ulkeler = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto> {
            new PairIdNameDto { Id="1", Name="Turkey"},
               new PairIdNameDto { Id="2", Name="Greece"},
@@ -266,6 +280,55 @@ namespace Helezon.FollowMe.Service
                 new PairIdNameDto { Id= "4", Name= "Simetrik" },
                 new PairIdNameDto { Id= "5", Name= "Dörtgen" }
         });
+        //ELASTAN
+        private static Lazy<HashSet<PairIdNameDto>> _elastan = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto>() {
+                new PairIdNameDto { Id= "1", Name= "%10 FULL ELASTANE" },
+                new PairIdNameDto { Id= "2", Name= "%5 YARIM ELASTANE" },
+                new PairIdNameDto { Id= "3", Name= "YOK" }            
+        });
+
+        private static Lazy<HashSet<PairIdNameDto>> _yikamaSekilleri = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto>() {
+                new PairIdNameDto { Id= "1", Name= "ELDE" },
+                new PairIdNameDto { Id= "2", Name= "TERS" },
+                new PairIdNameDto { Id= "3", Name= "MAKINE" }
+        });
+
+        //TUP - ACIK EN
+        private static Lazy<HashSet<PairIdNameDto>> _tupAcikEn = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto>() {
+                new PairIdNameDto { Id= "1", Name= "ACIK EN" },
+                new PairIdNameDto { Id= "2", Name= "ACIK EN/TUP" },
+                new PairIdNameDto { Id= "3", Name= "TUP" }
+        });
+        //AKSESUAR
+        private static Lazy<HashSet<PairIdNameDto>> _aksesuar = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto>() {
+                new PairIdNameDto { Id= "1", Name= "DIL ACICI" },
+                new PairIdNameDto { Id= "2", Name= "MECLI" },
+        });
+
+        private static Lazy<HashSet<PairIdNameDto>> _bedenKaliplari = new Lazy<HashSet<PairIdNameDto>>(() => new HashSet<PairIdNameDto>() {
+                new PairIdNameDto { Id= "1", Name= "Boy" },
+                new PairIdNameDto { Id= "2", Name= "En" },
+                new PairIdNameDto { Id= "3", Name= "Ense" },
+                new PairIdNameDto { Id= "4", Name= "Kolboyu" },
+                new PairIdNameDto { Id= "5", Name= "Omuz" },
+        });
+
+
+
+
+
+        public HashSet<PairIdNameDto> GetAllElastan()
+        {
+            return _elastan.Value;
+        }
+        public HashSet<PairIdNameDto> GetAllTupAcikEn()
+        {
+            return _tupAcikEn.Value;
+        }
+        public HashSet<PairIdNameDto> GetAllAksesuar()
+        {
+            return _aksesuar.Value;
+        }
 
         public HashSet<PairIdNameDto> GetAllCountry()
         {
@@ -285,6 +348,8 @@ namespace Helezon.FollowMe.Service
         {
             return _ulkeler.Value.FirstOrDefault(x=>x.Id == id);
         }
+
+
 
         public string GetCountryNameById(string id)
         {
@@ -397,6 +462,16 @@ namespace Helezon.FollowMe.Service
         public HashSet<PairIdNameDto> GetAllMakineIgneSayisi()
         {
             throw new NotImplementedException();
+        }
+
+        public HashSet<PairIdNameDto> GetYikamaSekilleri()
+        {
+           return _yikamaSekilleri.Value;
+        }
+
+        public HashSet<PairIdNameDto> GetBedenKaliplari()
+        {
+            return _bedenKaliplari.Value;
         }
     }
 }

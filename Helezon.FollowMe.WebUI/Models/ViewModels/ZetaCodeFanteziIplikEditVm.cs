@@ -8,11 +8,11 @@ using Helezon.FollowMe.Service.DataTransferObjects;
 
 namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
-    public class ZetaCodeFanteziIplikVm
+    public class ZetaCodeFanteziIplikEditVm
     {
         public ZetaCodeFanteziIplikDto ZetaCodeFanteziIplikDto { get; internal set; }
         public ZetaCodeFanteziIplikViewCollections Collections { get; set; }
-        public ZetaCodeFanteziIplikVm()
+        public ZetaCodeFanteziIplikEditVm()
         {
             Collections = new ZetaCodeFanteziIplikViewCollections();
             ZetaCodeFanteziIplikDto = new ZetaCodeFanteziIplikDto();

@@ -35,6 +35,10 @@ namespace Helezon.FollowMe.Entities.Models
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public string AksesuarIds { get; set; } // AksesuarIds (length: 500)
+        public int? TupAcikEnId { get; set; } // TupAcikEnId
+        public int? ElastanId { get; set; } // ElastanId
 
         // Reverse navigation
 
@@ -42,6 +46,13 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[KumasMakineId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma.FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Company pointed by [ZetaCodeKumasMakine].([CompanyId]) (FK_ZetaCodeKumasMakine_Company)
+        /// </summary>
+        public virtual Company Company { get; set; } // FK_ZetaCodeKumasMakine_Company
 
         public ZetaCodeKumasMakine()
         {

@@ -1,4 +1,5 @@
 ﻿using FollowMe.Web.Models;
+using Helezon.FollowMe.Service.Mappings.AutoMapper.Profiles;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Helezon.FollowMe.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MappingProfile.InitializeAutoMapper();
             //ModelBinders.Binders.Add(typeof(ZetaCodeNormalIplikVmBinder), new ZetaCodeNormalIplikVmBinder());
         }
         // last resort error logging

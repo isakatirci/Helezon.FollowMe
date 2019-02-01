@@ -1,0 +1,18 @@
+﻿@model bool?
+
+<div class="form-group">
+    @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-6">   
+        @Html.DropDownListFor(m => m, new SelectList(new[]
+               {
+                   new SelectListItem { Value = null, Text = "Please Select" },
+                   new SelectListItem { Value = "False", Text = "Yes" },
+                   new SelectListItem { Value = "True", Text = "No" },
+               },
+               "Value",
+               "Text"
+               ),
+        new { @class = "form-control select2" })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+</div>

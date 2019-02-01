@@ -79,9 +79,13 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
         /// <summary>
-        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalIplik]
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
         /// <summary>
         /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
         /// </summary>
@@ -108,6 +112,7 @@ namespace Helezon.FollowMe.Entities.Models
         {
             IplikNo = new System.Collections.Generic.List<IplikNo>();
             ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPicture>();
+            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
             ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();
         }

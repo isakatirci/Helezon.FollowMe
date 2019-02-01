@@ -73,9 +73,21 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<Person> Person { get; set; } // Person.FK_Person_Company
         /// <summary>
+        /// Child ZetaCodeAksesuar where [ZetaCodeAksesuar].[CompanyId] point to this entity (FK_ZetaCodeAksesuar_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar.FK_ZetaCodeAksesuar_Company
+        /// <summary>
+        /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[CompanyId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_Company
+        /// <summary>
         /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[SirketId] point to this entity (FK_ZetaCodeFanteziIplik_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Company
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim where [ZetaCodeHazirGiyim].[CompanyId] point to this entity (FK_ZetaCodeHazirGiyim_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // ZetaCodeHazirGiyim.FK_ZetaCodeHazirGiyim_Company
         /// <summary>
         /// Child ZetaCodeKumasFantazi where [ZetaCodeKumasFantazi].[CompanyId] point to this entity (FK_ZetaCodeKumasFantazi_Company)
         /// </summary>
@@ -84,6 +96,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[CompanyId] point to this entity (FK_ZetaCodeKumasFantaziPicture_Company)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture.FK_ZetaCodeKumasFantaziPicture_Company
+        /// <summary>
+        /// Child ZetaCodeKumasMakine where [ZetaCodeKumasMakine].[CompanyId] point to this entity (FK_ZetaCodeKumasMakine_Company)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine.FK_ZetaCodeKumasMakine_Company
         /// <summary>
         /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[CompanyId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_Company)
         /// </summary>
@@ -106,9 +122,13 @@ namespace Helezon.FollowMe.Entities.Models
             CompanyTerm = new System.Collections.Generic.List<CompanyTerm>();
             LogisticsCompany = new System.Collections.Generic.List<LogisticsCompany>();
             Person = new System.Collections.Generic.List<Person>();
+            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuar>();
+            ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyon>();
             ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyim>();
             ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantazi>();
             ZetaCodeKumasFantaziPicture = new System.Collections.Generic.List<ZetaCodeKumasFantaziPicture>();
+            ZetaCodeKumasMakine = new System.Collections.Generic.List<ZetaCodeKumasMakine>();
             ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
             ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPicture>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();

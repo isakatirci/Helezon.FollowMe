@@ -31,11 +31,6 @@ namespace Helezon.FollowMe.Entities.Models
         public bool Master { get; set; } // Master
         public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
         public string BlueUrunKodu { get; set; } // BlueUrunKodu (length: 200)
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public bool IsPassive { get; set; } // IsPassive
         public string En { get; set; } // En (length: 10)
         public string Gramaj { get; set; } // Gramaj (length: 10)
         public string Renk { get; set; } // Renk (length: 50)
@@ -44,13 +39,47 @@ namespace Helezon.FollowMe.Entities.Models
         public int? Renkid { get; set; } // Renkid
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
         public int? KumasMakineId { get; set; } // KumasMakineId
+        public string IplikKullanimOrani { get; set; } // IplikKullanimOrani (length: 10)
+        public string MetreTulOrani { get; set; } // MetreTulOrani (length: 10)
+        public int? KoleksiyonKategoriId { get; set; } // KoleksiyonKategoriId
+        public int? KumasGoruntuId { get; set; } // KumasGoruntuId
+        public int? OrguTipiId { get; set; } // OrguTipiId
+        public string BoyaIslemleriIds { get; set; } // BoyaIslemleriIds (length: 500)
+        public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
+        public int? MakineMarkaId { get; set; } // MakineMarkaId
+        public int? MakineModelId { get; set; } // MakineModelId
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
         /// <summary>
+        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFanteziOrmeDokuma> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma.FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma
+        /// <summary>
         /// Child ZetaCodeKumasOrmeDokumaPicture where [ZetaCodeKumasOrmeDokumaPicture].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture.FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma
+        /// <summary>
+        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
 
         // Foreign keys
 
@@ -66,7 +95,10 @@ namespace Helezon.FollowMe.Entities.Models
 
         public ZetaCodeKumasOrmeDokuma()
         {
+            ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokuma>();
             ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPicture>();
+            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();
         }
 

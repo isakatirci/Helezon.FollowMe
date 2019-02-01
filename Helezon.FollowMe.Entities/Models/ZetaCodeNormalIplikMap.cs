@@ -62,6 +62,12 @@ namespace Helezon.FollowMe.Entities.Models
             HasOptional(a => a.PantoneRenk).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.PantoneId).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_PantoneRengi
             HasOptional(a => a.Renk).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.Renkid).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_Renk
             HasRequired(a => a.Company).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.SirketId).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_Company
+            HasMany(t => t.ZetaCodeKumasOrmeDokuma).WithMany(t => t.ZetaCodeNormalIplik).Map(m =>
+            {
+                m.ToTable("ZetaCode_NormalIplik_NormalKumas", "dbo");
+                m.MapLeftKey("NormalIplikId");
+                m.MapRightKey("NormalKumasId");
+            });
             InitializePartial();
         }
         partial void InitializePartial();

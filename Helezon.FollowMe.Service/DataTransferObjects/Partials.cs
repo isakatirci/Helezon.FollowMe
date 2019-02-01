@@ -6,6 +6,46 @@ using System.Threading.Tasks;
 
 namespace Helezon.FollowMe.Service.DataTransferObjects
 {
+    public partial class ZetaCodeHazirGiyimDto
+    {
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public TermDto UrunKategori { get; set; }
+        
+        public string ZetaCodeFormatli
+        {
+            get
+            {
+
+                return string.Format("Z - {0}", this.ZetaCode.ToString().PadLeft(4, '0'));
+            }
+        }
+        partial void InitializePartial()
+        {
+            RafyeriTurkiye = new TermDto();
+            RafyeriYunanistan = new TermDto();
+        }
+    }
+    public partial class ZetaCodeAksesuarDto
+    {
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public string ZetaCodeFormatli
+        {
+            get
+            {
+
+                return string.Format("Z - {0}", this.ZetaCode.ToString().PadLeft(4, '0'));
+            }
+        }
+        partial void InitializePartial()
+        {
+            RafyeriTurkiye = new TermDto();
+            RafyeriYunanistan = new TermDto();
+        }
+    }
     public partial class ZetaCodeFanteziIplikDto
     {
         public TermDto IplikKategosi { get; set; }
@@ -25,6 +65,54 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             IplikKategosi = new TermDto();
             RafyeriTurkiye = new TermDto();
             RafyeriYunanistan = new TermDto();
+        }
+    }
+
+    public partial class ZetaCodeKumasFantaziDto
+    {
+        public TermDto MakineModeli { get; set; }
+        public TermDto MakineMarkasi { get; set; }
+        public List<TermDto> Aksesuarlar { get; set; }
+        public List<TermDto> BoyaIslemleri { get; set; }
+        public List<TermDto> OrguDetaylari { get; set; }
+        partial void InitializePartial()
+        {
+            MakineModeli = new TermDto();
+            MakineMarkasi = new TermDto();
+            RafyeriTurkiye = new TermDto();
+            RafyeriYunanistan = new TermDto();
+            BoyaIslemleri = new List<TermDto>();
+            OrguDetaylari = new List<TermDto>();
+            Aksesuarlar = new List<TermDto>();
+        }
+    }
+
+    public partial class ZetaCodeKumasOrmeDokumaDto
+    {
+        public TermDto KumasGoruntu { get; set; }
+        public TermDto KoleksiyonKategori { get; set; }
+        public TermDto RafyeriTurkiye { get; set; }
+        public TermDto RafyeriYunanistan { get; set; }
+        public string ZetaCodeFormatli { get; set; }
+        public TermDto UrunKategorisi { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public List<TermDto> BoyaIslemleri { get; set; }
+        public List<TermDto> OrguDetaylari { get; set; }
+        public List<TermDto> Aksesuarlar { get; set; }
+        public TermDto MakineModeli { get; set; }
+        public TermDto MakineMarkasi { get; set; }
+
+        partial void InitializePartial()
+        {
+            KumasGoruntu = new TermDto();
+            MakineModeli = new TermDto();
+            MakineMarkasi = new TermDto();
+            KoleksiyonKategori = new TermDto();
+            RafyeriTurkiye = new TermDto();
+            RafyeriYunanistan = new TermDto();
+            BoyaIslemleri = new List<TermDto>();
+            OrguDetaylari = new List<TermDto>();
+            Aksesuarlar = new List<TermDto>();
         }
     }
     public partial class ZetaCodeNormalIplikDto
@@ -79,14 +167,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public PairIdNameDto Ulke { get; set; }
 
     }
-    public partial class ZetaCodeKumasOrmeDokumaDto
-    {
-        public string ZetaCodeFormatli { get; set; }
-        public TermDto UrunKategorisi { get; set; }
-        public TermDto RafyeriTurkiye { get; set; }
-        public TermDto RafyeriYunanistan { get; set; }
-        public PairIdNameDto Ulke { get; set; }
-    }
+ 
 
     //IplikKategoriDegrede
 

@@ -1,6 +1,7 @@
 ﻿using FollowMe.Web.Models;
 using Helezon.FollowMe.Service;
 using Helezon.FollowMe.WebUI.Code;
+using Helezon.FollowMe.WebUI.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Repository.Pattern.Ef6;
@@ -61,6 +62,31 @@ namespace FollowMe.Web.Controllers
                 Failure = string.Join(", ",errors);
             }
             return false;
+        }
+
+
+        //
+        public ActionResult GetFanteziIplikRenkler(int? fanteziIplikId)
+        {
+            if (!fanteziIplikId.HasValue || fanteziIplikId.Value < 1)
+            {
+                return new EmptyResult();
+            }
+            var normalIplik = GetFanteziIplikService().GetRenklerOfFanteziIplik(fanteziplikId: fanteziIplikId.Value);
+            var model = new GetFanteziIplikRenklerVm();
+            model.FantezilIplikDto = normalIplik;
+            return PartialView(viewName: "~/Views/ZetaCodeFanteziIplik/_NormalIplikRenkler.cshtml", model: model);
+        }
+        public ActionResult GetNormalIplikRenkler(int? normalIplikId)
+        {
+            if (!normalIplikId.HasValue || normalIplikId.Value < 1)
+            {
+                return new EmptyResult();
+            }
+            var normalIplik = GetNormalIplikService().GetRenklerOfNormalIplik(normalIplikId: normalIplikId.Value);
+            var model = new GetNormalIplikRenklerVm();
+            model.NormalIplikDto = normalIplik;
+            return PartialView(viewName: "~/Views/ZetaCodeFanteziIplik/_NormalIplikRenkler.cshtml", model: model);
         }
 
 
@@ -136,6 +162,16 @@ namespace FollowMe.Web.Controllers
         public IZetaCodeFanteziIplikPictureService GetZetaCodeFanteziIplikPictureService()
         {
             return new ZetaCodeFanteziIplikPictureService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeFanteziIplikPicture>(_followMeDbContext, UnitOfWorkAsync));
+        }
+        public IKumasFanteziService GetKumasFanteziService()
+        {
+            return new KumasFanteziService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeKumasFantazi>(_followMeDbContext, UnitOfWorkAsync));
+        }
+
+        
+        public IKumasOrmeDokumaService GetKumasOrmeDokumaService()
+        {
+            return new KumasOrmeDokumaService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeKumasOrmeDokuma>(_followMeDbContext, UnitOfWorkAsync));
         }
         public  IPersonnelPictureService GetPersonnelPictureService()
         {       

@@ -27,12 +27,17 @@ namespace Helezon.FollowMe.Entities.Models
         // Reverse navigation
 
         /// <summary>
+        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[PantoneId] point to this entity (FK_ZetaCodeFanteziIplik_PantoneRenk)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_PantoneRenk
+        /// <summary>
         /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[PantoneId] point to this entity (FK_ZetaCodeNormaliplik_PantoneRengi)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_PantoneRengi
 
         public PantoneRenk()
         {
+            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }

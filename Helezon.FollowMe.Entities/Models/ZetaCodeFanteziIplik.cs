@@ -43,6 +43,8 @@ namespace Helezon.FollowMe.Entities.Models
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public int? PantoneId { get; set; } // PantoneId
+        public int? Renkid { get; set; } // Renkid
 
         // Reverse navigation
 
@@ -51,7 +53,11 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture.FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik
         /// <summary>
-        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCodeNormalFantezi]
+        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalIplik]
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
 
@@ -62,9 +68,20 @@ namespace Helezon.FollowMe.Entities.Models
         /// </summary>
         public virtual Company Company { get; set; } // FK_ZetaCodeFanteziIplik_Company
 
+        /// <summary>
+        /// Parent PantoneRenk pointed by [ZetaCodeFanteziIplik].([PantoneId]) (FK_ZetaCodeFanteziIplik_PantoneRenk)
+        /// </summary>
+        public virtual PantoneRenk PantoneRenk { get; set; } // FK_ZetaCodeFanteziIplik_PantoneRenk
+
+        /// <summary>
+        /// Parent Renk pointed by [ZetaCodeFanteziIplik].([Renkid]) (FK_ZetaCodeFanteziIplik_Renk)
+        /// </summary>
+        public virtual Renk Renk { get; set; } // FK_ZetaCodeFanteziIplik_Renk
+
         public ZetaCodeFanteziIplik()
         {
             ZetaCodeFanteziIplikPicture = new System.Collections.Generic.List<ZetaCodeFanteziIplikPicture>();
+            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }

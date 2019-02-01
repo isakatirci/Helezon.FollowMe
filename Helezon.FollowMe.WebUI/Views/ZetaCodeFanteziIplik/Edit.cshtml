@@ -1,4 +1,4 @@
-﻿@model ZetaCodeFanteziIplikVm
+﻿@model ZetaCodeFanteziIplikEditVm
 @{
 
     Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
@@ -412,13 +412,7 @@
 @section afterGlobalScripts {
 
     <script>
-        function setNormalIplikId(dll) {
-            if ($(dll).val() > 0) {
-                $(dll).closest(".mt-repeater-item").find(".normal_iplik_id").val($(dll).val())
-                getNormalIplikRenkler($(dll).val(), $(dll).closest(".mt-repeater-item").find("#normal_iplik_form"));
-            }
-
-        }
+    
         function validateSomeFields() {
 
         }

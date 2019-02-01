@@ -26,12 +26,33 @@ namespace FollowMe.Web.Controllers
         public static Dictionary<TaxonomyType, string> TaxonomyNamesZCode = new Dictionary<TaxonomyType, string>();
         public static Dictionary<EntityType, string> ObjectTypeNames = new Dictionary<EntityType, string>();
         public static Dictionary<FormFieldType, string> FormFieldTypeNames = new Dictionary<FormFieldType, string>();        //
+        //public static Dictionary<BedenKalip, string> BedenKalipIsimleri = new Dictionary<BedenKalip, string>();        //
+        //public static List<SelectListItem> SelectListBedenKalipIsimleri = new List<SelectListItem>();        //
+
         public static Dictionary<GenderType, string> GenderTypeNames = new Dictionary<GenderType, string>();
         public static Dictionary<ColorType, Tuple<string, string>> ColorTypeNames = new Dictionary<ColorType, Tuple<string, string>>();
         public static List<Tuple<int, string>> AreaCodes = new List<Tuple<int, string>>();
         public static List<PairIdName> DisplayAreaCodes = new List<PairIdName>();
         public static List<SelectListItem> SelectListItemRequired = new List<SelectListItem>();
         public static List<SelectListItem> SelectListItemRepeated = new List<SelectListItem>();
+
+
+        //protected static Lazy<List<SelectListItem>> _bedenKaliplari = new Lazy<List<SelectListItem>>(() =>
+        //{
+
+
+        //    var list = new List<SelectListItem>();
+        //    foreach (var item in BedenKalipIsimleri)
+        //    {
+        //        list.Add(new SelectListItem { Value = ((int)item.Key).ToString(), Text = item.Value });
+        //    }
+        //    return list;
+        //});
+
+        //public static List<SelectListItem> GetBedenKaliplari()
+        //{
+        //    return _bedenKaliplari.Value;
+        //}
 
 
         protected static Lazy<List<PairIdName>> _areaCodes = new Lazy<List<PairIdName>>(FillAreaCodes);
@@ -66,6 +87,10 @@ namespace FollowMe.Web.Controllers
         static Utils()
         {
 
+       
+
+
+
             SelectListItemRequired.Add(new SelectListItem { Text = "Required", Value = "true" });
             SelectListItemRequired.Add(new SelectListItem { Text = "Not Required", Value = "false" });
 
@@ -89,7 +114,7 @@ namespace FollowMe.Web.Controllers
             AddressTypeNames.Add(Tuple.Create(EntityType.Company, AddressType.Boyahane), "Boyahane");
             AddressTypeNames.Add(Tuple.Create(EntityType.Person, AddressType.Home), "Home");
 
-
+            //BedenKalip
 
             GenderTypeNames.Add(GenderType.Male, "Bay");
             GenderTypeNames.Add(GenderType.Female, "Bayan");
@@ -180,18 +205,27 @@ namespace FollowMe.Web.Controllers
             TaxonomyNamesZCode.Add(TaxonomyType.IplikKategorileriFantazi, "İplik Kategorileri Fantazi");
 
 
-            TaxonomyNamesZCode.Add(TaxonomyType.KoleksiyonKategorileri, "Koleksiyon Kategorileri");
-            TaxonomyNamesZCode.Add(TaxonomyType.MakineDetaylari, "Makine Detayları");
+            //TaxonomyNamesZCode.Add(TaxonomyType.KoleksiyonKategorileri, "Koleksiyon Kategorileri");
+            TaxonomyNamesZCode.Add(TaxonomyType.MakineDetaylariMakineMarkasi, "Makine Detayları - Makine Markası");
+            TaxonomyNamesZCode.Add(TaxonomyType.MakineDetaylariMakineModeli, "Makine Detayları - Makine Makine Modeli");
             TaxonomyNamesZCode.Add(TaxonomyType.BoyahaneIslemleri, "Boyahane İşlemleri");
             TaxonomyNamesZCode.Add(TaxonomyType.KumasGoruntuler, "Kumaş Görüntüler");
             TaxonomyNamesZCode.Add(TaxonomyType.YikamaTalimati, "Yıkama Talimatı");
             TaxonomyNamesZCode.Add(TaxonomyType.UcuncuAdimIslemleri, "3. Adım İşlemler");
-
-
-            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylari, "Örgü Detayları");
+            TaxonomyNamesZCode.Add(TaxonomyType.BaskiGoruntuler, "Baskı Görüntüler");
 
 
 
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylariOrmeDuz, "Örgü Detayları - Örme Düz");
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylariOrmeYuvarlak, "Örgü Detayları - Örme Yuvarlak");
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylariOrmeCozgulu, "Örgü Detayları - Örme Çözgülü");
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylariDokuma, "Örgü Detayları - Dokuma");
+            TaxonomyNamesZCode.Add(TaxonomyType.OrguDetaylariNonwoven, "Örgü Detayları - Nonwoven");
+
+
+            TaxonomyNamesZCode.Add(TaxonomyType.AksesuarUrunKompozisyonu, "Aksesurar Ürün Kompozisyonu");
+            TaxonomyNamesZCode.Add(TaxonomyType.AksesuarKategorileri, "Aksesuar Kategorileri");
+            TaxonomyNamesZCode.Add(TaxonomyType.HazirGiyimKategorileri, "Hazır Giyim Kategorileri");           
             //TaxonomyNamesZCode.Add(TaxonomyType.IplikNo, "İplik No");
             TaxonomyNamesZCode.Add(TaxonomyType.ElyafCinsiveKalitesi, "Elyaf Cinsi ve Kalitesi");
             //TaxonomyNamesZCode.Add(TaxonomyType.ElyafOrani, "Elyaf Oranı");
@@ -1047,7 +1081,7 @@ namespace FollowMe.Web
         ComputerSkills,
         ReasonWhyPassiveForPersonnel,
         IplikKategorileriNormal,
-        OrguDetaylari,
+        OrguDetaylariOrmeDuz,
         IplikNo,
         ElyafCinsiveKalitesi,
         ElyafOrani,
@@ -1060,13 +1094,30 @@ namespace FollowMe.Web
         IplikKategorileriFantazi,
 
         KoleksiyonKategorileri,
-        MakineDetaylari,
+        MakineDetaylariMakineMarkasi,
         BoyahaneIslemleri,
         KumasGoruntuler,
         YikamaTalimati,
-        UcuncuAdimIslemleri
+        UcuncuAdimIslemleri,
+        BaskiGoruntuler,
+        MakineDetaylariMakineModeli,
+        OrguDetaylariOrmeYuvarlak,
+        OrguDetaylariOrmeCozgulu,
+        OrguDetaylariDokuma,
+        OrguDetaylariNonwoven,
 
+        AksesuarKategorileri,
+        AksesuarUrunKompozisyonu,
+        HazirGiyimKategorileri
+    }
 
+    public enum BedenKalip
+    {
+        En,
+        Boy,
+        Omuz,
+        Ense,
+        Kolboyu
     }
 
 }

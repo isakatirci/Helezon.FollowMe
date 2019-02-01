@@ -20,6 +20,7 @@ namespace Repository.Pattern.Repositories
         IQueryFluent<TEntity> Query(Expression<Func<TEntity, bool>> query);
         IQueryFluent<TEntity> Query();
         IQueryable<TEntity> Queryable();
+        IQueryable<TEntity> QueryableNoTracking();
         IRepository<T> GetRepository<T>() where T : class;
         //IUnitOfWork IUnitOfWork();
     }

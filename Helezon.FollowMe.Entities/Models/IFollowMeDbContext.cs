@@ -20,6 +20,7 @@ namespace Helezon.FollowMe.Entities.Models
     {
         System.Data.Entity.DbSet<AddressGuide> AddressGuide { get; set; } // AddressGuide
         System.Data.Entity.DbSet<BankGuide> BankGuide { get; set; } // BankGuide
+        System.Data.Entity.DbSet<BedenOlculeri> BedenOlculeri { get; set; } // BedenOlculeri
         System.Data.Entity.DbSet<Company> Company { get; set; } // Company
         System.Data.Entity.DbSet<CompanyAddress> CompanyAddress { get; set; } // CompanyAddress
         System.Data.Entity.DbSet<CompanyBank> CompanyBank { get; set; } // CompanyBank
@@ -51,15 +52,22 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<Term> Term { get; set; } // Term
         System.Data.Entity.DbSet<TermRelationship> TermRelationship { get; set; } // TermRelationship
         System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
+        System.Data.Entity.DbSet<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar
+        System.Data.Entity.DbSet<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon
         System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
+        System.Data.Entity.DbSet<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // ZetaCodeHazirGiyim
         System.Data.Entity.DbSet<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi
         System.Data.Entity.DbSet<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture
+        System.Data.Entity.DbSet<ZetaCodeKumasFantezi3AdimIslemleri> ZetaCodeKumasFantezi3AdimIslemleri { get; set; } // ZetaCodeKumasFantezi3AdimIslemleri
+        System.Data.Entity.DbSet<ZetaCodeKumasFanteziFantezi> ZetaCodeKumasFanteziFantezi { get; set; } // ZetaCodeKumasFanteziFantezi
+        System.Data.Entity.DbSet<ZetaCodeKumasFanteziOrmeDokuma> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma
         System.Data.Entity.DbSet<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine
         System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma
         System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture
         System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
         System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
+        System.Data.Entity.DbSet<ZetaCodes> ZetaCodes { get; set; } // ZetaCodes
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();

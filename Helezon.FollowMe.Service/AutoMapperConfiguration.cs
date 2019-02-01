@@ -67,13 +67,16 @@ namespace Helezon.FollowMe.Service
 
 
                 cfg.CreateMap<PantoneRenk, PantoneRenkDto>()
-                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore())
+                .ForMember(dest => dest.ZetaCodeFanteziIplik, opt => opt.Ignore());
+
                 cfg.CreateMap<PantoneRenkDto, PantoneRenk>();
                 //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
 
 
                 cfg.CreateMap<Renk, RenkDto>()
-                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
+                .ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore())
+                .ForMember(dest => dest.ZetaCodeFanteziIplik, opt => opt.Ignore());
                 cfg.CreateMap<RenkDto, Renk>();
                 //.ForMember(dest => dest.ZetaCodeNormalIplik, opt => opt.Ignore());
 

@@ -550,10 +550,13 @@
     <Compile Include="Models\ViewModels\TermTaxonomyView.cs" />
     <Compile Include="Models\ViewModels\TermViewModel.cs" />
     <Compile Include="Models\ViewModels\ViewModelExtensions.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeHazirGiyimEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikCardVm.cs" />
-    <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeAksesuarEditVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeKumasFantaziCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeKumasOrmeDokumaCardVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeKumasFanteziEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeKumasOrmeDokumaEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikVm.cs" />
@@ -5491,6 +5494,7 @@
     <Content Include="Content\noUiSlider\nouislider.js" />
     <Content Include="Content\noUiSlider\nouislider.min.css" />
     <Content Include="Content\noUiSlider\nouislider.min.js" />
+    <Content Include="Content\noUiSlider\wNumb.js" />
     <Content Include="Content\pages\copy\ui-nestable.js" />
     <Content Include="Content\pages\css\about.css" />
     <Content Include="Content\pages\css\about.min.css" />
@@ -6419,6 +6423,8 @@
     <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ComponentsNoUiSliders.js" />
+    <Content Include="Scripts\ComponentsRepeater.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.min.js" />
     <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
@@ -6719,6 +6725,13 @@
     <Content Include="Views\ZetaCodeKumasOrmeDokuma\Card.cshtml" />
     <Content Include="Views\ZetaCodeKumasOrmeDokuma\Edit.cshtml" />
     <Content Include="Views\ZetaCodeKumasFantazi\Card.cshtml" />
+    <Content Include="Views\ZetaCodeHazirGiyim\Edit.cshtml" />
+    <Content Include="Views\ZetaCodeAksesuar\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MyTouchSpin.cshtml" />
+    <Content Include="Views\ZetaCodeKumasFantazi\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MyBoolean.cshtml" />
+    <Content Include="Views\ZetaCodeAksesuar\Card.cshtml" />
+    <Content Include="Views\ZetaCodeHazirGiyim\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,25 +21,47 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeKumasFantazi: Entity
     {
         public int Id { get; set; } // Id (Primary key)
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
         public int? UrunKategorisiId { get; set; } // UrunKategorisiId
         public int ZetaCode { get; set; } // ZetaCode
         public string ZetaCodePrevious { get; set; } // ZetaCodePrevious (length: 200)
-        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public int BlueSiparisNo { get; set; } // BlueSiparisNo
         public bool Master { get; set; } // Master
         public string UrunIsmi { get; set; } // UrunIsmi (length: 800)
-        public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
-        public bool IsPassive { get; set; } // IsPassive
-        public string Renk { get; set; } // Renk (length: 10)
+        public string BlueUrunKodu { get; set; } // BlueUrunKodu (length: 200)
         public string En { get; set; } // En (length: 10)
-        public string BaskiliEn { get; set; } // BaskiliEn (length: 10)
         public string Gramaj { get; set; } // Gramaj (length: 10)
-        public string BlueSiparisNo { get; set; } // BlueSiparisNo (length: 50)
+        public string BaskiliEn { get; set; } // BaskiliEn (length: 10)
+        public string Renk { get; set; } // Renk (length: 50)
+        public int? MenseyiUlkeId { get; set; } // MenseyiUlkeId
+        public int? PantoneId { get; set; } // PantoneId
+        public int? Renkid { get; set; } // Renkid
+        public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
+        public int? KumasMakineId { get; set; } // KumasMakineId
+        public string IplikKullanimOrani { get; set; } // IplikKullanimOrani (length: 10)
+        public string MetreTulOrani { get; set; } // MetreTulOrani (length: 10)
+        public int? KoleksiyonKategoriId { get; set; } // KoleksiyonKategoriId
+        public int? KumasGoruntuId { get; set; } // KumasGoruntuId
+        public int? OrguTipiId { get; set; } // OrguTipiId
+        public string BoyaIslemleriIds { get; set; } // BoyaIslemleriIds (length: 500)
+        public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
+        public int? MakineMarkaId { get; set; } // MakineMarkaId
+        public int? MakineModelId { get; set; } // MakineModelId
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
@@ -47,6 +69,18 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[KumasFantaziId] point to this entity (FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture.FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi
+        /// <summary>
+        /// Child ZetaCodeKumasFantezi3AdimIslemleri where [ZetaCodeKumasFantezi3AdimIslemleri].[FantaziKumasId] point to this entity (FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantezi3AdimIslemleri> ZetaCodeKumasFantezi3AdimIslemleri { get; set; } // ZetaCodeKumasFantezi3AdimIslemleri.FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi
+        /// <summary>
+        /// Child ZetaCodeKumasFanteziFantezi where [ZetaCodeKumasFanteziFantezi].[KumasFanteziId] point to this entity (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFanteziFantezi> ZetaCodeKumasFanteziFantezi_KumasFanteziId { get; set; } // ZetaCodeKumasFanteziFantezi.FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi
+        /// <summary>
+        /// Child ZetaCodeKumasFanteziFantezi where [ZetaCodeKumasFanteziFantezi].[KumasOtherFanteziId] point to this entity (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFanteziFantezi> ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId { get; set; } // ZetaCodeKumasFanteziFantezi.FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1
 
         // Foreign keys
 
@@ -58,6 +92,9 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeKumasFantazi()
         {
             ZetaCodeKumasFantaziPicture = new System.Collections.Generic.List<ZetaCodeKumasFantaziPicture>();
+            ZetaCodeKumasFantezi3AdimIslemleri = new System.Collections.Generic.List<ZetaCodeKumasFantezi3AdimIslemleri>();
+            ZetaCodeKumasFanteziFantezi_KumasFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFantezi>();
+            ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFantezi>();
             InitializePartial();
         }
 

@@ -11,12 +11,12 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public ZetaCodeKumasFantaziDto ZetaCodeKumasFantaziDto { get; set; }
         public string PictureUrl { get; set; }
         public string PictureEditUrl { get; set; }
-        public List<TermDto> ParentUrunKategoriler { get; set; }
+        //public List<TermDto> ParentUrunKategoriler { get; set; }
         public ZetaCodeKumasFantaziCardVm()
         {
             ZetaCodeKumasFantaziDto = new ZetaCodeKumasFantaziDto();
-            ParentUrunKategoriler = new List<TermDto>();
-            ParentUrunKategoriler.Add(new TermDto());
+            //ParentUrunKategoriler = new List<TermDto>();
+            //ParentUrunKategoriler.Add(new TermDto());
         }
     }
 

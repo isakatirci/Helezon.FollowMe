@@ -84,7 +84,7 @@ namespace Repository.Pattern.Ef6
         public virtual IQueryFluent<TEntity> Query(Expression<Func<TEntity, bool>> query) => new QueryFluent<TEntity>(this, query);
 
         public IQueryable<TEntity> Queryable() => Set;
-
+        public IQueryable<TEntity> QueryableNoTracking() => Set.AsNoTracking();
 
         public virtual async Task<TEntity> FindAsync(params object[] keyValues) => await Set.FindAsync(keyValues);
 
