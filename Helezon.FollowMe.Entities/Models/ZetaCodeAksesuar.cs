@@ -22,6 +22,7 @@ namespace Helezon.FollowMe.Entities.Models
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
+        public string UrunKompozisyonu { get; set; } // UrunKompozisyonu (length: 400)
         public int? UlkeId { get; set; } // UlkeId
         public bool Master { get; set; } // Master
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
@@ -48,6 +49,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[AksesuarId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
 
         // Foreign keys
 
@@ -59,6 +64,7 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeAksesuar()
         {
             ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyon>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyim>();
             InitializePartial();
         }
 

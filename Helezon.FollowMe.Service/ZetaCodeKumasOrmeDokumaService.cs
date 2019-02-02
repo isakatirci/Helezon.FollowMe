@@ -31,7 +31,13 @@ namespace Helezon.FollowMe.Service
         public KumasOrmeDokumaService(IRepositoryAsync<ZetaCodeKumasOrmeDokuma> repository) : base(repository)
         {
             _repository = repository;
-        }   
+        }
+
+        private void MetreKgOraniHesapla(ZetaCodeKumasOrmeDokuma kumasOrmeDokuma)
+        {
+            //metre/kg oranı formül: 100000/gram gr/en cm (çıkan sonuçta virgülden sonra sağda 2 basamak görünsün)
+            kumasOrmeDokuma.MetreTulOrani = (100000 / decimal.Parse(kumasOrmeDokuma.Gramaj) / decimal.Parse(kumasOrmeDokuma.En)).ToString("####.00");
+        }
 
         public List<ZetaCodeKumasOrmeDokumaDto> GetZetaCodeIsimler(string companyId)
         {

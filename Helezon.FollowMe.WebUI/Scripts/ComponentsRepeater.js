@@ -1,8 +1,8 @@
 ﻿
 var ComponentsRepeater = (function () {
 
-    var myRepeater = function (validateNumberOfItems) {
-        $('.mt-repeater').each(function () {
+    var myRepeater = function (selector,validateNumberOfItems) {
+        $(selector).each(function () {
             $(this).repeater({
                 show: function () {
 

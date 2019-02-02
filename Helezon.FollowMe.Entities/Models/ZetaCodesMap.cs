@@ -32,7 +32,7 @@ namespace Helezon.FollowMe.Entities.Models
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ZetaCode).HasColumnName(@"ZetaCode").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             InitializePartial();
         }
         partial void InitializePartial();

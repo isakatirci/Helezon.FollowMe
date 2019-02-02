@@ -38,13 +38,13 @@ namespace Helezon.FollowMe.Entities.Models
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
+        public int? PantoneId { get; set; } // PantoneId
+        public int? Renkid { get; set; } // Renkid
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? PantoneId { get; set; } // PantoneId
-        public int? Renkid { get; set; } // Renkid
 
         // Reverse navigation
 

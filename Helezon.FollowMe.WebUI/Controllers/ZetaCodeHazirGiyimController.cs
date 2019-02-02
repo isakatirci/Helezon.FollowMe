@@ -91,8 +91,58 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Text = x.Name
             }).ToList();
 
+            var normalKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+            var fanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+            var aksesuarlar = GetAksesuarService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+
+            model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasOrmeDokuma.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "NormalKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasFantazi.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "FanteziKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Aksesuarlar.AddRange(model.HazirGiyimDto.ZetaCodeAksesuar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id.ToString(),
+                ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
+            }));
+
+
+            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "NormalKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "FanteziKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Collections.Aksesuarlar.AddRange(aksesuarlar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id.ToString(),
+                ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
+            }));
 
             model.Collections.Ulkeler = temp;
+
+            if (!model.Kumaslar.Any())
+            {
+                model.Kumaslar.Add(new ZetaCodeVm());
+            }
+
+            if (!model.Aksesuarlar.Any())
+            {
+                model.Aksesuarlar.Add(new ZetaCodeVm());
+            }
 
         }
     }

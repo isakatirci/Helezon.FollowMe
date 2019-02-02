@@ -48,19 +48,19 @@ namespace Helezon.FollowMe.Entities.Models
         public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
         public int? MakineMarkaId { get; set; } // MakineMarkaId
         public int? MakineModelId { get; set; } // MakineModelId
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
@@ -68,6 +68,10 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
         /// <summary>
         /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
         /// </summary>
@@ -97,6 +101,7 @@ namespace Helezon.FollowMe.Entities.Models
         {
             ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokuma>();
             ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPicture>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyim>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();

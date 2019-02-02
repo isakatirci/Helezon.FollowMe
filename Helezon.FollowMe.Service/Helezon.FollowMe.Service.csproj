@@ -87,7 +87,7 @@
     <Compile Include="ZetaCodeAksesuarService.cs" />
     <Compile Include="ZetaCodeFanteziIplikPictureService.cs" />
     <Compile Include="ZetaCodeHazirGiyimService.cs" />
-    <Compile Include="ZetaCodeKumasOrmeDokumaService - Copy.cs" />
+    <Compile Include="ZetaCodeKumasFantazi.cs" />
     <Compile Include="ZetaCodeKumasOrmeDokumaService.cs" />
     <Compile Include="ZetaCodeNormalIplikPictureService.cs" />
     <Compile Include="CompanyImageService.cs" />

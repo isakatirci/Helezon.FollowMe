@@ -30,7 +30,7 @@ namespace Helezon.FollowMe.Entities.Models
             ToTable("ZetaCodeNormalIplik", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.UrunIsmi).HasColumnName(@"UrunIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(800);
             Property(x => x.Master).HasColumnName(@"Master").HasColumnType("bit").IsRequired();
             Property(x => x.ZetaCode).HasColumnName(@"ZetaCode").HasColumnType("int").IsRequired();
@@ -46,17 +46,17 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.Renkid).HasColumnName(@"Renkid").HasColumnType("int").IsOptional();
             Property(x => x.RafyeriTurkiyeId).HasColumnName(@"RafyeriTurkiyeId").HasColumnType("int").IsOptional();
             Property(x => x.RafyeriYunanistanId).HasColumnName(@"RafyeriYunanistanId").HasColumnType("int").IsOptional();
-            Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
-            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
-            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
-            Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.IplikNoCinsi).HasColumnName(@"IplikNoCinsi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Ne).HasColumnName(@"NE").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Nm).HasColumnName(@"NM").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Dny).HasColumnName(@"DNY").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Fl).HasColumnName(@"FL").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.Ea).HasColumnName(@"EA").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
+            Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
 
             // Foreign keys
             HasOptional(a => a.PantoneRenk).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.PantoneId).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_PantoneRengi

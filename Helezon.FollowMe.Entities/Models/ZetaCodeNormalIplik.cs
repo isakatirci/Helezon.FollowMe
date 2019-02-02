@@ -36,17 +36,17 @@ namespace Helezon.FollowMe.Entities.Models
         public int? Renkid { get; set; } // Renkid
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
-        public bool IsPassive { get; set; } // IsPassive
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
         public string Ne { get; set; } // NE (length: 10)
         public string Nm { get; set; } // NM (length: 10)
         public string Dny { get; set; } // DNY (length: 10)
         public string Fl { get; set; } // FL (length: 10)
         public string Ea { get; set; } // EA (length: 10)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Reverse navigation
 

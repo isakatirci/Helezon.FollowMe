@@ -30,7 +30,7 @@ namespace Helezon.FollowMe.Entities.Models
             ToTable("ZetaCodeFanteziIplik", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.UrunIsmi).HasColumnName(@"UrunIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(800);
             Property(x => x.IplikKategosiId).HasColumnName(@"IplikKategosiId").HasColumnType("int").IsOptional();
             Property(x => x.SirketId).HasColumnName(@"SirketId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
@@ -48,13 +48,13 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.BlueSiparisNo).HasColumnName(@"BlueSiparisNo").HasColumnType("int").IsRequired();
             Property(x => x.RafyeriTurkiyeId).HasColumnName(@"RafyeriTurkiyeId").HasColumnType("int").IsOptional();
             Property(x => x.RafyeriYunanistanId).HasColumnName(@"RafyeriYunanistanId").HasColumnType("int").IsOptional();
+            Property(x => x.PantoneId).HasColumnName(@"PantoneId").HasColumnType("int").IsOptional();
+            Property(x => x.Renkid).HasColumnName(@"Renkid").HasColumnType("int").IsOptional();
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.PantoneId).HasColumnName(@"PantoneId").HasColumnType("int").IsOptional();
-            Property(x => x.Renkid).HasColumnName(@"Renkid").HasColumnType("int").IsOptional();
 
             // Foreign keys
             HasOptional(a => a.PantoneRenk).WithMany(b => b.ZetaCodeFanteziIplik).HasForeignKey(c => c.PantoneId).WillCascadeOnDelete(false); // FK_ZetaCodeFanteziIplik_PantoneRenk

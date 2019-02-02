@@ -1149,6 +1149,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
     {
         public int Id { get; set; } // Id (Primary key)
         public string CompanyId { get; set; } // CompanyId (length: 128)
+        public string UrunKompozisyonu { get; set; } // UrunKompozisyonu (length: 400)
         public int? UlkeId { get; set; } // UlkeId
         public bool Master { get; set; } // Master
         public string BlueUrunKodIsmi { get; set; } // BlueUrunKodIsmi (length: 200)
@@ -1175,6 +1176,10 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[AksesuarId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
         /// </summary>
         public System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
 
         // Foreign keys
 
@@ -1186,6 +1191,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public ZetaCodeAksesuarDto()
         {
             ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
             InitializePartial();
         }
 
@@ -1249,13 +1255,13 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int BlueSiparisNo { get; set; } // BlueSiparisNo
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
+        public int? PantoneId { get; set; } // PantoneId
+        public int? Renkid { get; set; } // Renkid
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? PantoneId { get; set; } // PantoneId
-        public int? Renkid { get; set; } // Renkid
 
         // Reverse navigation
 
@@ -1350,20 +1356,20 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string Boy { get; set; } // Boy (length: 10)
         public string Gram { get; set; } // Gram (length: 10)
         public int? KategoriId { get; set; } // KategoriId
+        public int? BaskiGoruntuId { get; set; } // BaskiGoruntuId
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? BaskiGoruntuId { get; set; } // BaskiGoruntuId
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
@@ -1371,6 +1377,18 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// Child BedenOlculeri where [BedenOlculeri].[HazirGiyimId] point to this entity (FK_BedenOlculeri_ZetaCodeHazirGiyim)
         /// </summary>
         public System.Collections.Generic.List<BedenOlculeriDto> BedenOlculeri { get; set; } // BedenOlculeri.FK_BedenOlculeri_ZetaCodeHazirGiyim
+        /// <summary>
+        /// Child ZetaCodeAksesuar (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeAksesuarDto> ZetaCodeAksesuar { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasFantazi (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeKumasFantaziDto> ZetaCodeKumasFantazi { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
 
         // Foreign keys
 
@@ -1382,6 +1400,9 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public ZetaCodeHazirGiyimDto()
         {
             BedenOlculeri = new System.Collections.Generic.List<BedenOlculeriDto>();
+            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantaziDto>();
+            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
+            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuarDto>();
             InitializePartial();
         }
 
@@ -1421,22 +1442,26 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? MakineMarkaId { get; set; } // MakineMarkaId
         public int? MakineModelId { get; set; } // MakineModelId
         public string CompanyId { get; set; } // CompanyId (length: 128)
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
         /// <summary>
         /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[KumasFantaziId] point to this entity (FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi)
         /// </summary>
@@ -1467,6 +1492,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
             ZetaCodeKumasFantezi3AdimIslemleri = new System.Collections.Generic.List<ZetaCodeKumasFantezi3AdimIslemleriDto>();
             ZetaCodeKumasFanteziFantezi_KumasFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto>();
             ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
             InitializePartial();
         }
 
@@ -1692,19 +1718,19 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
         public int? MakineMarkaId { get; set; } // MakineMarkaId
         public int? MakineModelId { get; set; } // MakineModelId
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
@@ -1712,6 +1738,10 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
         /// </summary>
         public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
+        /// </summary>
+        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
         /// <summary>
         /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
         /// </summary>
@@ -1741,6 +1771,7 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         {
             ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokumaDto>();
             ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPictureDto>();
+            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
             ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
             InitializePartial();
@@ -1803,17 +1834,17 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? Renkid { get; set; } // Renkid
         public int? RafyeriTurkiyeId { get; set; } // RafyeriTurkiyeId
         public int? RafyeriYunanistanId { get; set; } // RafyeriYunanistanId
-        public bool IsPassive { get; set; } // IsPassive
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public string IplikNoCinsi { get; set; } // IplikNoCinsi (length: 10)
         public string Ne { get; set; } // NE (length: 10)
         public string Nm { get; set; } // NM (length: 10)
         public string Dny { get; set; } // DNY (length: 10)
         public string Fl { get; set; } // FL (length: 10)
         public string Ea { get; set; } // EA (length: 10)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
         // Reverse navigation
 
@@ -1909,6 +1940,22 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
 
         public ZetaCodeNormalIplikPictureDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCodes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodesDto
+    {
+        public int Id { get; set; } // Id
+        public int ZetaCode { get; set; } // ZetaCode (Primary key)
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+
+        public ZetaCodesDto()
         {
             InitializePartial();
         }

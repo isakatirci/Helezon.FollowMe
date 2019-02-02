@@ -243,6 +243,37 @@ namespace Helezon.FollowMe.Service
             return string.Equals(s1, s2, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        Dictionary<int, string> elyafKisaltmalar = new Dictionary<int, string> {
+                    {348 ,"CO" },
+                    {344 ,"PES"},
+                    {350 ,"CV" },
+                    {352 ,"LI" },
+                    {347 ,"WO" },
+                    {353 ,"PA" },
+                    {349 ,"EL" },
+                    {351 ,"SE" },
+                    {354 ,"PAN"},
+                    {345 ,"CMD"},
+                    {365 ,"CLY"},
+                    {364 ,"CA" },
+                    {422 ,"CTA"},
+                    {423 ,"PP" },
+                    {363 ,"PE "},
+                    {343 ,"PU" },
+                    {346 ,"BAM"},
+                    {366 ,"SPF"},
+                    {355 ,"CUP"},
+                    {362 ,"WN" },
+                    {425 ,"WP" },
+                    {424 ,"WS" }
+        };
+        private string GetElyafKisaltma(int termId, string termName)
+        {
+            if (elyafKisaltmalar.ContainsKey(termId))
+                return elyafKisaltmalar[termId];
+            return termName;
+        }
+
         private void IplikUrunIsmiOlustur(ZetaCodeNormalIplikDto normalIplikDto) {
             var iplikNoCinsi = string.Empty;
             var iplikKategorisi = string.Empty;
@@ -302,11 +333,11 @@ namespace Helezon.FollowMe.Service
                     }
                     else if (count == 2)
                     {
-                        elyaf = parents[1].Name;
+                        elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
                     }
                     else if (count == 3)
                     {
-                        elyaf = parents[1].Name;
+                        elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
                         parlaklik = parents[2].Name;
                     }                   
                 }

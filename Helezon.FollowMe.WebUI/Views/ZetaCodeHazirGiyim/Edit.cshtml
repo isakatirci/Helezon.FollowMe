@@ -217,7 +217,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-2" for="normal_iplik_count">Kaç Kumaştan Oluşuyor</label>
                                         <div class="col-md-6">
-                                            <select id="normal_iplik_count" class="form-control">
+                                            <select id="kumas_counter" class="form-control">
                                                 <option value="">Please Select</option>
                                                 <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
                                                 <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
@@ -238,13 +238,12 @@
                                 <div class="panel-body">
                                     <div class="form-horizontal form-bordered form-row-stripped">
                                         <div class="form-body">
-                                            <div class="mt-repeater">
-                                                <div data-repeater-list="ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik">
+                                            <div class="mt-repeater1">
+                                                <div data-repeater-list="Kumaslar">
                                                     @{
-                                                        for (int i = 0; i < 1; i++)
+                                                        for (int i = 0; i < Model.Kumaslar.Count; i++)
                                                         {
 
-                                                            var normalIplik = 0;
                                                             <text>
                                                                 <div data-repeater-item>
                                                                     <div class="mt-repeater-item">
@@ -252,23 +251,19 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-2">
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <input type="hidden"
-                                                                                           class="normal_iplik_id"
-                                                                                           name="Id"
-                                                                                           value="@normalIplik" />
-                                                                                    <br />
-                                                                                    @*@Html.DropDownList("NormalIplik"
-                                                                                        , new SelectList(Model.Collections.NormalIplikler, "Value", "Text", normalIplik.Id.ToString()),"Please Select"
-                                                                                        , new { @class = "form-control select2 normal_iplik", @onchange = "setNormalIplikId($(this))" })*@
+                                                                                <div class="col-md-6">                                                                                  
+                                                                                    @Html.DropDownList("Model.Kumaslar["+i+ "].Id"
+                                                                                        , new SelectList(Model.Collections.Kumaslar, "Value", "Text", Model.Kumaslar[i].Id)
+                                                                                        , "Please Select"
+                                                                                        , new { @class = "form-control select2", @onchange = "" })
                                                                                 </div>
                                                                                 <div class="col-md-2">
-                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0">
                                                                                         <i class="fa fa-close"></i> Delete
                                                                                     </a>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row" id="normal_iplik_form">
+                                                                            <div class="row" id="">
                                                                                 @*@Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })*@
                                                                             </div>
                                                                         </div>
@@ -296,7 +291,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-2" for="normal_iplik_count">Kaç Aksesuardan Oluşuyor</label>
                                         <div class="col-md-6">
-                                            <select id="normal_iplik_count" class="form-control">
+                                            <select id="aksesuar_counter" class="form-control">
                                                 <option value="">Please Select</option>
                                                 <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
                                                 <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
@@ -317,13 +312,12 @@
                                 <div class="panel-body">
                                     <div class="form-horizontal form-bordered form-row-stripped">
                                         <div class="form-body">
-                                            <div class="mt-repeater">
-                                                <div data-repeater-list="ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik">
+                                            <div class="mt-repeater2">
+                                                <div data-repeater-list="Aksesuarlar">
                                                     @{
-                                                        for (int i = 0; i < 1; i++)
+                                                        for (int i = 0; i < Model.Aksesuarlar.Count; i++)
                                                         {
 
-                                                            var normalIplik = 0;
                                                             <text>
                                                                 <div data-repeater-item>
                                                                     <div class="mt-repeater-item">
@@ -332,22 +326,18 @@
                                                                                 <div class="col-md-2">
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <input type="hidden"
-                                                                                           class="normal_iplik_id"
-                                                                                           name="Id"
-                                                                                           value="@normalIplik" />
-                                                                                    <br />
-                                                                                    @*@Html.DropDownList("NormalIplik"
-                                                                                        , new SelectList(Model.Collections.NormalIplikler, "Value", "Text", normalIplik.Id.ToString()),"Please Select"
-                                                                                        , new { @class = "form-control select2 normal_iplik", @onchange = "setNormalIplikId($(this))" })*@
+                                                                                    @Html.DropDownList("Model.Aksesuarlar[" + i+ "].Id"
+                                                                                        , new SelectList(Model.Collections.Aksesuarlar, "Value", "Text", Model.Aksesuarlar[i].Id)
+                                                                                        , "Please Select"
+                                                                                        , new { @class = "form-control select2", @onchange = "" })
                                                                                 </div>
                                                                                 <div class="col-md-2">
-                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0">
                                                                                         <i class="fa fa-close"></i> Delete
                                                                                     </a>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row" id="normal_iplik_form">
+                                                                            <div class="row" id="">
                                                                                 @*@Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })*@
                                                                             </div>
                                                                         </div>
@@ -799,7 +789,26 @@
 
         jQuery(document).ready(function () {
 
-            ComponentsRepeater.myRepeater();
+            ComponentsRepeater.myRepeater('.mt-repeater1',function () {
+                var tempValue = $("#kumas_counter").val();
+                console.log(tempValue);
+                var tempValue = $(".mt-repeater1 .form-group").length;
+                console.log(tempValue);
+                return ($("#kumas_counter").val() * 1) >= $(".mt-repeater1 .form-group").length;               
+
+
+            });
+
+            ComponentsRepeater.myRepeater('.mt-repeater2', function () {
+
+                var tempValue = $("#aksesuar_counter").val();
+                console.log(tempValue);
+                var tempValue = $(".mt-repeater2 .form-group").length;
+                console.log(tempValue);
+                return ($("#aksesuar_counter").val()*1) >= $(".mt-repeater2 .form-group").length; 
+
+
+            });
             //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_En", 0.1, 150, 0.1,false,2);
             //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_Boy", 0.1, 150, 0.1,false, 2);
             //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_Gram", 0.1, 1000, 0.1, false, 2);

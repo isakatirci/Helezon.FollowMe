@@ -45,6 +45,12 @@ namespace Helezon.FollowMe.Service
                 }).ToList();
         }
 
+        private void MetreKgOraniHesapla(ZetaCodeKumasFantaziDto kumasFantazi)
+        {
+            //normal Kumaştan farklıdır: metre/kg oranı formül: 100000/gram gr/baskılı en cm (çıkan sonuçta virgülden sonra sağda 2 basamak görünsün)  
+            kumasFantazi.MetreTulOrani = (100000 / decimal.Parse(kumasFantazi.Gramaj) / decimal.Parse(kumasFantazi.BaskiliEn)).ToString("####.00");
+        }
+
         public override void Insert(ZetaCodeKumasFantazi entity)
         {
             var zetaCode = _repository.Queryable().Max(x => (int?)x.ZetaCode) ?? 1401;

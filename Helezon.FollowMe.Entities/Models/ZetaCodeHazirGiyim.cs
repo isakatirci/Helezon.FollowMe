@@ -37,20 +37,20 @@ namespace Helezon.FollowMe.Entities.Models
         public string Boy { get; set; } // Boy (length: 10)
         public string Gram { get; set; } // Gram (length: 10)
         public int? KategoriId { get; set; } // KategoriId
+        public int? BaskiGoruntuId { get; set; } // BaskiGoruntuId
+        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
+        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
+        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
+        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
+        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
+        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
+        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
+        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? BaskiGoruntuId { get; set; } // BaskiGoruntuId
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 10)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 10)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 10)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 10)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 10)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
 
         // Reverse navigation
 
@@ -58,6 +58,18 @@ namespace Helezon.FollowMe.Entities.Models
         /// Child BedenOlculeri where [BedenOlculeri].[HazirGiyimId] point to this entity (FK_BedenOlculeri_ZetaCodeHazirGiyim)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<BedenOlculeri> BedenOlculeri { get; set; } // BedenOlculeri.FK_BedenOlculeri_ZetaCodeHazirGiyim
+        /// <summary>
+        /// Child ZetaCodeAksesuar (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasFantazi (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // Many to many mapping
+        /// <summary>
+        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
 
         // Foreign keys
 
@@ -69,6 +81,9 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeHazirGiyim()
         {
             BedenOlculeri = new System.Collections.Generic.List<BedenOlculeri>();
+            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantazi>();
+            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
+            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuar>();
             InitializePartial();
         }
 

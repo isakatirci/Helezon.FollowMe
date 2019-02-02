@@ -168,7 +168,11 @@ namespace FollowMe.Web.Controllers
             return new KumasFanteziService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeKumasFantazi>(_followMeDbContext, UnitOfWorkAsync));
         }
 
-        
+        public IAksesuarService GetAksesuarService()
+        {
+            return new AksesuarService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeAksesuar>(_followMeDbContext, UnitOfWorkAsync));
+        }
+
         public IKumasOrmeDokumaService GetKumasOrmeDokumaService()
         {
             return new KumasOrmeDokumaService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeKumasOrmeDokuma>(_followMeDbContext, UnitOfWorkAsync));

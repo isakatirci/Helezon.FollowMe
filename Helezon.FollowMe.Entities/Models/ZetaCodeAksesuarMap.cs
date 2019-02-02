@@ -30,8 +30,9 @@ namespace Helezon.FollowMe.Entities.Models
             ToTable("ZetaCodeAksesuar", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.UrunKompozisyonu).HasColumnName(@"UrunKompozisyonu").HasColumnType("nvarchar").IsOptional().HasMaxLength(400);
             Property(x => x.UlkeId).HasColumnName(@"UlkeId").HasColumnType("int").IsOptional();
             Property(x => x.Master).HasColumnName(@"Master").HasColumnType("bit").IsRequired();
             Property(x => x.BlueUrunKodIsmi).HasColumnName(@"BlueUrunKodIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(200);
@@ -54,6 +55,12 @@ namespace Helezon.FollowMe.Entities.Models
 
             // Foreign keys
             HasRequired(a => a.Company).WithMany(b => b.ZetaCodeAksesuar).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_ZetaCodeAksesuar_Company
+            HasMany(t => t.ZetaCodeHazirGiyim).WithMany(t => t.ZetaCodeAksesuar).Map(m =>
+            {
+                m.ToTable("ZetaCode_HazirGiyim_Aksesuar", "dbo");
+                m.MapLeftKey("AksesuarId");
+                m.MapRightKey("HazirGiyimId");
+            });
             InitializePartial();
         }
         partial void InitializePartial();
