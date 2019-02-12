@@ -1,4 +1,5 @@
 ﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using Newtonsoft.Json;
 using Repository.Pattern.Repositories;
@@ -27,7 +28,7 @@ namespace Helezon.FollowMe.Service
         List<ZetaCodeNormalIplikDto> GetAllNormalIplikler(int? id = null, string companyId = null,bool include = false);
         void GetSequenceBlueSiparisNo(SequenceBlueSiparisNo sequenceBlueSiparisNo);
         List<IplikNoGuideDto> GetIplikNoGuideByColumnName(string column);
-        void InsertOrUpdate(ZetaCodeNormalIplikDto zetaCodeNormalIplikDto);
+        void InsertOrUpdate(NormalIplikContainerDto normalIplikContainerDto);
         IplikKategoriSimDto GetIplikKategoriSimByZetaCodeNormalIplikId(int? normalIplikId);
         IplikKategoriDegredeDto GetIplikKategoriDegredeByZetaCodeNormalIplikId(int? normalIplikId);
         IplikKategoriKrepDto GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId);
@@ -37,6 +38,7 @@ namespace Helezon.FollowMe.Service
         IplikKategoriFlamDto GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId);
         ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId);
         List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null);
+        List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId);
     }
 
     /// <summary>
@@ -49,12 +51,41 @@ namespace Helezon.FollowMe.Service
         private readonly ITermService _termService;
         private readonly IOthersService _othersService;
         private readonly ICompanyService _companyService;
+
+
+        private readonly IRepositoryAsync<IplikKategoriDegrede> _repoDegrede;
+        private readonly IRepositoryAsync<IplikKategoriFlam> _repoFlam;
+        private readonly IRepositoryAsync<IplikKategoriKircili> _repoKircili;
+        private readonly IRepositoryAsync<IplikKategoriKrep> _repoKrep;
+        private readonly IRepositoryAsync<IplikKategoriNopeli> _repoNopeli;
+        private readonly IRepositoryAsync<IplikKategoriSim> _repoSim;
+        private readonly IZetaCodeService _zetaCodeService;
+
+
+
         public ZetaCodeNormalIplikService(IRepositoryAsync<ZetaCodeNormalIplik> repository) : base(repository)
         {
             _repository = repository;
-             _termService = new TermService(_repository.GetRepositoryAsync<Term>());
+            _repoDegrede = repository.GetRepositoryAsync<IplikKategoriDegrede>();
+            _repoFlam = repository.GetRepositoryAsync<IplikKategoriFlam>();
+            _repoKircili = repository.GetRepositoryAsync<IplikKategoriKircili>();
+            _repoKrep = repository.GetRepositoryAsync<IplikKategoriKrep>();
+            _repoNopeli = repository.GetRepositoryAsync<IplikKategoriNopeli>();
+            _repoSim = repository.GetRepositoryAsync<IplikKategoriSim>();
+            _termService = new TermService(_repository.GetRepositoryAsync<Term>());
             _othersService = new OthersService();
             _companyService = new CompanyService(_repository.GetRepositoryAsync<Company>());
+            _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+        }
+        public List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId)
+        {
+            return _repository.QueryableNoTracking().Where(x => /*x.CompanyId == companyId &&*/ !x.IsPassive)
+                .Select(x => new ZetaCodeNormalIplikDto
+                {
+                    ZetaCode = x.ZetaCode,
+                    UrunIsmi = x.UrunIsmi,
+                    Id = x.Id
+                }).ToList();
         }
 
         public List<RenkDto> GetRenkler(int dilId)
@@ -86,22 +117,23 @@ namespace Helezon.FollowMe.Service
 
             //var sequence = _repository.GetRepository<IplikNo>().Queryable();
 
-            var normalIplikDto = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(entity);
-            if (includeIplikNo)
-            {
-                normalIplikDto.IplikNo = AutoMapperConfig.Mapper.Map<List<IplikNo>, List<IplikNoDto>>(entity.IplikNo.Where(x => !x.IsPassive).ToList());
+            //var normalIplikDto = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(entity);
+            //if (includeIplikNo)
+            //{
+            //    normalIplikDto.IplikNo = AutoMapperConfig.Mapper.Map<List<IplikNo>, List<IplikNoDto>>(entity.IplikNo.Where(x => !x.IsPassive).ToList());
 
-                normalIplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(normalIplikDto.RafyeriTurkiyeId);
-                normalIplikDto.RafyeriYunanistanName = _termService.GetTermNameById(normalIplikDto.RafyeriYunanistanId);
-                normalIplikDto.IplikKategosiName = _termService.GetTermNameById(normalIplikDto.IplikKategosiId);
+            //    normalIplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(normalIplikDto.RafyeriTurkiyeId);
+            //    normalIplikDto.RafyeriYunanistanName = _termService.GetTermNameById(normalIplikDto.RafyeriYunanistanId);
+            //    normalIplikDto.IplikKategosiName = _termService.GetTermNameById(normalIplikDto.IplikKategosiId);
 
-                normalIplikDto.Company = AutoMapperConfig.Mapper.Map<Company, CompanyDto>(entity.Company);
-                foreach (var item in normalIplikDto.IplikNo)
-                {
-                    item.ElyafCinsiKalitesiName = _termService.GetTermNameById(item.ElyafCinsiKalitesi);
-                }
-            }   
-            return normalIplikDto;
+            //    normalIplikDto.Company = AutoMapperConfig.Mapper.Map<Company, CompanyDto>(entity.Company);
+            //    foreach (var item in normalIplikDto.IplikNo)
+            //    {
+            //        item.ElyafCinsiKalitesiName = _termService.GetTermNameById(item.ElyafCinsiKalitesi);
+            //    }
+            //}   
+            //return normalIplikDto;
+            return null;
         }
 
         private Expression<Func<ZetaCodeNormalIplik, bool>> QueryNormalIplik(int? id = null, string companyId = null)
@@ -113,17 +145,18 @@ namespace Helezon.FollowMe.Service
 
         public ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId)
         {
-            var normalIplik = _repository.Query(x => x.Id == normalIplikId).Include(x => x.Renk).Include(x => x.PantoneRenk).Select(x => x).FirstOrDefault();
-            if (normalIplik == null)
-            {
-                return null;
-            }
+            //var normalIplik = _repository.Query(x => x.Id == normalIplikId).Include(x => x.Renk).Include(x => x.PantoneRenk).Select(x => x).FirstOrDefault();
+            //if (normalIplik == null)
+            //{
+            //    return null;
+            //}
 
-            var temp = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(normalIplik);
-            temp.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(normalIplik.Renk);
-            temp.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(normalIplik.PantoneRenk);
+            //var temp = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(normalIplik);
+            //temp.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(normalIplik.Renk);
+            //temp.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(normalIplik.PantoneRenk);
 
-            return temp;
+            //return temp;
+            return null;
         }
         public List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null)
         {
@@ -147,58 +180,61 @@ namespace Helezon.FollowMe.Service
         }
 
 
+  
+
         public List<ZetaCodeNormalIplikDto> GetAllNormalIplikler(int? id = null, string companyId = null, bool include = false)
         {
-            var query = _repository.Query(QueryNormalIplik(id, companyId));
+            //var query = _repository.QueryableNoTracking().ToList();
 
-            if (include)            
-                query = query.Include(x => x.PantoneRenk).Include(x => x.Renk).Include(x => x.IplikNo)
-                    .Include(x=>x.IplikKategoriFlam)
-                    .Include(x => x.IplikKategoriKircili)
-                    .Include(x => x.IplikKategoriKrep)
-                    .Include(x => x.IplikKategoriNopeli)
-                    .Include(x => x.IplikKategoriSim)
-                    .Include(x => x.IplikKategoriDegrede);
-            
-            var zetaCodeNormalIplikler = query.Select(x => x).ToList();
-            var zetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
+            //if (include)            
+            //    query = query.Include(x => x.PantoneRenk).Include(x => x.Renk).Include(x => x.IplikNo)
+            //        .Include(x=>x.IplikKategoriFlam)
+            //        .Include(x => x.IplikKategoriKircili)
+            //        .Include(x => x.IplikKategoriKrep)
+            //        .Include(x => x.IplikKategoriNopeli)
+            //        .Include(x => x.IplikKategoriSim)
+            //        .Include(x => x.IplikKategoriDegrede);
 
-            foreach (var iplik in zetaCodeNormalIplikler)
-            {
-                var iplikDto = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(iplik);
-                if (include)
-                {
-                    iplikDto.IplikNo = AutoMapperConfig.Mapper.Map<ICollection<IplikNo>, List<IplikNoDto>>(iplik.IplikNo);
-                    iplikDto.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(iplik.PantoneRenk);
-                    iplikDto.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(iplik.Renk);
+            //var zetaCodeNormalIplikler = query.Select(x => x).ToList();
+            //var zetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
 
-                    iplikDto.IplikKategoriFlam = AutoMapperConfig.Mapper.Map<IplikKategoriFlam, IplikKategoriFlamDto>(iplik.IplikKategoriFlam);
-                    iplikDto.IplikKategoriKircili = AutoMapperConfig.Mapper.Map<IplikKategoriKircili, IplikKategoriKirciliDto>(iplik.IplikKategoriKircili);
-                    iplikDto.IplikKategoriKrep = AutoMapperConfig.Mapper.Map<IplikKategoriKrep, IplikKategoriKrepDto>(iplik.IplikKategoriKrep);
-                    iplikDto.IplikKategoriNopeli = AutoMapperConfig.Mapper.Map<IplikKategoriNopeli, IplikKategoriNopeliDto>(iplik.IplikKategoriNopeli);
-                    iplikDto.IplikKategoriSim = AutoMapperConfig.Mapper.Map<IplikKategoriSim, IplikKategoriSimDto>(iplik.IplikKategoriSim);
-                    iplikDto.IplikKategoriDegrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegrede, IplikKategoriDegredeDto>(iplik.IplikKategoriDegrede);
+            //foreach (var iplik in zetaCodeNormalIplikler)
+            //{
+            //    var iplikDto = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplik, ZetaCodeNormalIplikDto>(iplik);
+            //    if (include)
+            //    {
+            //        iplikDto.IplikNo = AutoMapperConfig.Mapper.Map<ICollection<IplikNo>, List<IplikNoDto>>(iplik.IplikNo);
+            //        iplikDto.PantoneRenk = AutoMapperConfig.Mapper.Map<PantoneRenk, PantoneRenkDto>(iplik.PantoneRenk);
+            //        iplikDto.Renk = AutoMapperConfig.Mapper.Map<Renk, RenkDto>(iplik.Renk);
+
+            //        iplikDto.IplikKategoriFlam = AutoMapperConfig.Mapper.Map<IplikKategoriFlam, IplikKategoriFlamDto>(iplik.IplikKategoriFlam);
+            //        iplikDto.IplikKategoriKircili = AutoMapperConfig.Mapper.Map<IplikKategoriKircili, IplikKategoriKirciliDto>(iplik.IplikKategoriKircili);
+            //        iplikDto.IplikKategoriKrep = AutoMapperConfig.Mapper.Map<IplikKategoriKrep, IplikKategoriKrepDto>(iplik.IplikKategoriKrep);
+            //        iplikDto.IplikKategoriNopeli = AutoMapperConfig.Mapper.Map<IplikKategoriNopeli, IplikKategoriNopeliDto>(iplik.IplikKategoriNopeli);
+            //        iplikDto.IplikKategoriSim = AutoMapperConfig.Mapper.Map<IplikKategoriSim, IplikKategoriSimDto>(iplik.IplikKategoriSim);
+            //        iplikDto.IplikKategoriDegrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegrede, IplikKategoriDegredeDto>(iplik.IplikKategoriDegrede);
 
 
-                    if (iplikDto.IplikKategosiId.HasValue)
-                        iplikDto.IplikKategosiName = _termService.GetTermNameById(iplik.IplikKategosiId);
-                    iplikDto.Company = AutoMapperConfig.Mapper.Map<Company, CompanyDto>(iplik.Company);
-                    if (iplikDto.UlkeId.HasValue)
-                        iplikDto.Ulke = _othersService.GetCountryById(iplikDto.UlkeId.Value.ToString());
-                    //if (!string.IsNullOrWhiteSpace(iplikDto.SirketId))
-                    //    iplikDto.Company = _companyService.GetCompanyById(iplikDto.SirketId);
-                    if (iplikDto.UretimTeknolojisiId.HasValue)
-                        iplikDto.UretimTeknolojisiName = _termService.GetTermNameById(iplikDto.UretimTeknolojisiId.Value);
-                    if (iplikDto.RafyeriTurkiyeId.HasValue)
-                        iplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(iplikDto.RafyeriTurkiyeId.Value);
-                    if (iplikDto.RafyeriYunanistanId.HasValue)
-                        iplikDto.RafyeriYunanistanName = _termService.GetTermNameById(iplikDto.RafyeriYunanistanId.Value);
+            //        if (iplikDto.IplikKategosiId.HasValue)
+            //            iplikDto.IplikKategosiName = _termService.GetTermNameById(iplik.IplikKategosiId);
+            //        iplikDto.Company = AutoMapperConfig.Mapper.Map<Company, CompanyDto>(iplik.Company);
+            //        if (iplikDto.UlkeId.HasValue)
+            //            iplikDto.Ulke = _othersService.GetCountryById(iplikDto.UlkeId.Value.ToString());
+            //        //if (!string.IsNullOrWhiteSpace(iplikDto.SirketId))
+            //        //    iplikDto.Company = _companyService.GetCompanyById(iplikDto.SirketId);
+            //        if (iplikDto.UretimTeknolojisiId.HasValue)
+            //            iplikDto.UretimTeknolojisiName = _termService.GetTermNameById(iplikDto.UretimTeknolojisiId.Value);
+            //        if (iplikDto.RafyeriTurkiyeId.HasValue)
+            //            iplikDto.RafyeriTurkiyeName = _termService.GetTermNameById(iplikDto.RafyeriTurkiyeId.Value);
+            //        if (iplikDto.RafyeriYunanistanId.HasValue)
+            //            iplikDto.RafyeriYunanistanName = _termService.GetTermNameById(iplikDto.RafyeriYunanistanId.Value);
 
-                } 
-                zetaCodeNormalIplikDtos.Add(iplikDto);
-            }            
+            //    } 
+            //    zetaCodeNormalIplikDtos.Add(iplikDto);
+            //}            
 
-            return zetaCodeNormalIplikDtos;            
+            //return zetaCodeNormalIplikDtos;  
+            return AutoMapperConfig.Mapper.Map<List<ZetaCodeNormalIplik>, List<ZetaCodeNormalIplikDto>>(_repository.QueryableNoTracking().ToList()); 
         }
 
         public void GetSequenceBlueSiparisNo(SequenceBlueSiparisNo sequenceBlueSiparisNo)
@@ -222,20 +258,20 @@ namespace Helezon.FollowMe.Service
         {
             base.Update(entity);
         }
-        public override void Insert(ZetaCodeNormalIplik zetaCodeNormalIplik)
+        public override void Insert(ZetaCodeNormalIplik entity)
         {
-            var zetaCode = _repository.Queryable().Max(x => (int?)x.ZetaCode)??0;
-            zetaCode++;
-            var blueSiparisNo = _repository.Queryable()
-                .Where(x => x.SirketId == zetaCodeNormalIplik.SirketId && x.ZetaCode == zetaCode)
-                .Max(x => (int?)x.BlueSiparisNo)??0;
-            blueSiparisNo++;
+            //var zetaCode = _repository.Queryable().Max(x => (int?)x.ZetaCode)??0;
+            //zetaCode++;
+            //var blueSiparisNo = _repository.Queryable()
+            //    .Where(x => x.SirketId == zetaCodeNormalIplik.SirketId && x.ZetaCode == zetaCode)
+            //    .Max(x => (int?)x.BlueSiparisNo)??0;
+            //blueSiparisNo++;
             //Daha sonra bunu başla bir metoda taşı
-            if (zetaCode > 1400)
-                throw new Exception("ZetaCode 1400 olamaz");
-            zetaCodeNormalIplik.BlueSiparisNo = blueSiparisNo;
-            zetaCodeNormalIplik.ZetaCode = zetaCode;
-            base.Insert(zetaCodeNormalIplik);
+
+            var code = _zetaCodeService.GetZetaCodeForIplikInsert();
+            //entity.ZetaCode = code;
+            entity.Id = code;         
+            base.Insert(entity);
         }
 
         private bool MyInvariantEquals(string s1,string s2)
@@ -318,50 +354,51 @@ namespace Helezon.FollowMe.Service
             var elyaflar = new List<string>();
             var parlakliklar = new List<string>();
 
-            foreach (var iplikNo in normalIplikDto.IplikNo)
-            {
-                var parlaklik = string.Empty;
-                var elyaf = string.Empty;
-                if (iplikNo.ElyafCinsiKalitesi.HasValue)
-                {
-                    var parents = _termService.GetAllParentsById(iplikNo.ElyafCinsiKalitesi.Value);
-                    parents.Reverse();
-                    var count = parents.Count;
-                    if (count == 1)
-                    {
-                        elyaf = parents[0].Name;
-                    }
-                    else if (count == 2)
-                    {
-                        elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
-                    }
-                    else if (count == 3)
-                    {
-                        elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
-                        parlaklik = parents[2].Name;
-                    }                   
-                }
-                else
-                {
-                    elyaflar.Add(string.Empty);
-                }
-                elyaflar.Add(elyaf);
-                parlakliklar.Add(parlaklik);
-                elyafOranlari.Add(iplikNo.ElyafOrani ?? 0);
-            }
+            //foreach (var iplikNo in normalIplikDto.IplikNo)
+            //{
+            //    var parlaklik = string.Empty;
+            //    var elyaf = string.Empty;
+            //    if (iplikNo.ElyafCinsiKalitesi.HasValue)
+            //    {
+            //        var parents = _termService.GetAllParentsById(iplikNo.ElyafCinsiKalitesi.Value);
+            //        parents.Reverse();
+            //        var count = parents.Count;
+            //        if (count == 1)
+            //        {
+            //            elyaf = parents[0].Name;
+            //        }
+            //        else if (count == 2)
+            //        {
+            //            elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
+            //        }
+            //        else if (count == 3)
+            //        {
+            //            elyaf = GetElyafKisaltma(parents[1].Id, parents[1].Name);
+            //            parlaklik = parents[2].Name;
+            //        }                   
+            //    }
+            //    else
+            //    {
+            //        elyaflar.Add(string.Empty);
+            //    }
+            //    elyaflar.Add(elyaf);
+            //    parlakliklar.Add(parlaklik);
+            //    elyafOranlari.Add(iplikNo.ElyafOrani ?? 0);
+            //}
             var urunIsmi = string.Format("{0} - {1} - {2} - {3} - {4}", iplikNoCinsi, iplikKategorisi, string.Join("/", elyafOranlari), string.Join("/", elyaflar), string.Join("/", parlakliklar));
             normalIplikDto.UrunIsmi = urunIsmi;
         }
 
-        public void InsertOrUpdate(ZetaCodeNormalIplikDto zetaCodeNormalIplikDto)
+        public void InsertOrUpdate(NormalIplikContainerDto normalIplikContainerDto)
         {
             try
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
-                IplikUrunIsmiOlustur(zetaCodeNormalIplikDto);
-                if (zetaCodeNormalIplikDto.Master)
+                var normalIplikDto = normalIplikContainerDto.NormalIplik;
+                IplikUrunIsmiOlustur(normalIplikDto);
+                if (normalIplikDto.Master)
                     _repository.UnitOfWorkAsync().ExecuteSqlCommand("UPDATE ZetaCodeNormalIplik SET Master = 0 WHERE MASTER = 1");
-                var zetaCodeNormalIplik = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplikDto, ZetaCodeNormalIplik>(zetaCodeNormalIplikDto);
+                var normalIplik = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplikDto, ZetaCodeNormalIplik>(normalIplikDto);
                 var iplikNoService = new IplikNoService(_repository.GetRepositoryAsync<IplikNo>());
                 var repoSim = _repository.GetRepositoryAsync<IplikKategoriSim>();
                 var repoDegrede = _repository.GetRepositoryAsync<IplikKategoriDegrede>();
@@ -370,126 +407,71 @@ namespace Helezon.FollowMe.Service
                 var repoKrep = _repository.GetRepositoryAsync<IplikKategoriKrep>();
                 var repoNopeli = _repository.GetRepositoryAsync<IplikKategoriNopeli>();
 
+                normalIplik.SirketId = normalIplikContainerDto.Company.Id;
 
-
-
-                if (zetaCodeNormalIplikDto.IplikKategoriDegrede != null)
+                if (normalIplik.Id > 0)
                 {
-                    zetaCodeNormalIplik.IplikKategoriDegrede.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
+                    this.Update(normalIplik);
                 }
-                if (zetaCodeNormalIplik.IplikKategoriFlam != null)
+                else
                 {
-                    zetaCodeNormalIplik.IplikKategoriFlam.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
-                }
-                if (zetaCodeNormalIplik.IplikKategoriKircili != null)
-                {
-                    zetaCodeNormalIplik.IplikKategoriKircili.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
-                }
-                if (zetaCodeNormalIplik.IplikKategoriKrep != null)
-                {
-                    zetaCodeNormalIplik.IplikKategoriKrep.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
-                }
-                if (zetaCodeNormalIplik.IplikKategoriNopeli != null)
-                {
-                    zetaCodeNormalIplik.IplikKategoriNopeli.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
-                }
-                if (zetaCodeNormalIplik.IplikKategoriSim != null)
-                {
-                    zetaCodeNormalIplik.IplikKategoriSim.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
+                    this.Insert(normalIplik);
                 }
 
+                _repository.UnitOfWorkAsync().SaveChanges();          
 
 
-                //http://www.entityframeworktutorial.net/entityframework6/save-entity-graph.aspx
-
-                if (zetaCodeNormalIplik.IplikKategoriDegrede != null)
+                if (normalIplikContainerDto.Degrede != null)
                 {
-                    if (zetaCodeNormalIplik.IplikKategoriDegrede.Id > 0)
+                    var degrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegredeDto, IplikKategoriDegrede>(normalIplikContainerDto.Degrede);
+                    degrede.ZetaCodeNormalIplikId = normalIplik.Id;
+                    if (degrede.Id > 0)
                     {
-                        repoDegrede.Update(zetaCodeNormalIplik.IplikKategoriDegrede);
+                        _repoDegrede.Update(degrede);
                     }
                     else
                     {
-                        repoDegrede.Insert(zetaCodeNormalIplik.IplikKategoriDegrede);
+                        _repoDegrede.Insert(degrede);
                     }
                 }
-                if (zetaCodeNormalIplik.IplikKategoriFlam != null)
+                var flam = normalIplikContainerDto.Degrede;
+                if (flam != null)
                 {
-                    if (zetaCodeNormalIplik.IplikKategoriFlam.Id > 0)
-                    {
-                        repoFlam.Update(zetaCodeNormalIplik.IplikKategoriFlam);
-                    }
-                    else
-                    {
-                        repoFlam.Insert(zetaCodeNormalIplik.IplikKategoriFlam);
-                    }
+                    flam.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
-                if (zetaCodeNormalIplik.IplikKategoriKircili != null)
+                var kircili = normalIplikContainerDto.Degrede;
+                if (kircili != null)
                 {
-                    if (zetaCodeNormalIplik.IplikKategoriKircili.Id > 0)
-                    {
-                        repoKircili.Update(zetaCodeNormalIplik.IplikKategoriKircili);
-                    }
-                    else
-                    {
-                        repoKircili.Insert(zetaCodeNormalIplik.IplikKategoriKircili);
-                    }
+                    kircili.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
-                if (zetaCodeNormalIplik.IplikKategoriKrep != null)
+                var krep = normalIplikContainerDto.Degrede;
+                if (krep != null)
                 {
-                    if (zetaCodeNormalIplik.IplikKategoriKrep.Id > 0)
-                    {
-                        repoKrep.Update(zetaCodeNormalIplik.IplikKategoriKrep);
-                    }
-                    else
-                    {
-                        repoKrep.Insert(zetaCodeNormalIplik.IplikKategoriKrep);
-                    }
-
-                }
-                if (zetaCodeNormalIplik.IplikKategoriNopeli != null)
-                {
-                    if (zetaCodeNormalIplik.IplikKategoriNopeli.Id > 0)
-                    {
-                        repoNopeli.Update(zetaCodeNormalIplik.IplikKategoriNopeli);
-                    }
-                    else
-                    {
-                        repoNopeli.Insert(zetaCodeNormalIplik.IplikKategoriNopeli);
-                    }
+                    krep.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
 
-                if (zetaCodeNormalIplik.IplikKategoriSim != null)
+                var nopeli = normalIplikContainerDto.Degrede;
+                if (nopeli != null)
                 {
-                    if (zetaCodeNormalIplik.IplikKategoriSim.Id > 0)
-                    {
-                        repoSim.Update(zetaCodeNormalIplik.IplikKategoriSim);
-                    }
-                    else
-                    {
-                        repoSim.Insert(zetaCodeNormalIplik.IplikKategoriSim);
-                    }
+                    nopeli.ZetaCodeNormalIplikId = normalIplik.Id;
+                }
+                var sim = normalIplikContainerDto.Degrede;
+                if (sim != null)
+                {
+                    sim.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
 
-
-                var activeIplikNoIds = new List<int>();
-                foreach (var iplikNo in zetaCodeNormalIplik.IplikNo)
-                {
-                    iplikNo.ZetaCodeNormalIplikId = zetaCodeNormalIplik.Id;
-                    if (iplikNo.Id > 0)
-                    {
-                        activeIplikNoIds.Add(iplikNo.Id);
-                    }                  
-                }
-
-            
+                var activeIplikNoIds = new List<int>();    
+                
                 var sum = 0;
-                foreach (var iplikNo in zetaCodeNormalIplik.IplikNo)
+                var iplikNolar= AutoMapperConfig.Mapper.Map<List<IplikNoDto>, List<IplikNo>>(normalIplikContainerDto.IplikNolar); 
+                foreach (var iplikNo in iplikNolar)
                 {
-                    sum += iplikNo.ElyafOrani??0;
+                    sum += iplikNo.ElyafOrani ?? 0;
                     if (iplikNo.Id > 0)
                     {
                         iplikNoService.Update(iplikNo);
+                        activeIplikNoIds.Add(iplikNo.Id);
                     }
                     else
                     {
@@ -497,31 +479,24 @@ namespace Helezon.FollowMe.Service
                     }
                 }
 
-                if (sum != 100)
-                {
-                    throw new Exception("Elyaf Oranı %100 olmalıdır");
-                }
-
-
-                if (zetaCodeNormalIplik.Id > 0)
-                {
-                    this.Update(zetaCodeNormalIplik);
-                }
-                else
-                {
-                    this.Insert(zetaCodeNormalIplik);
-                }
-
-                if (zetaCodeNormalIplik.Id > 0)
+                if (normalIplik.Id > 0)
                 {
                     var passiveIplikNolar = iplikNoService.Queryable()
-                        .Where(x => x.ZetaCodeNormalIplikId == zetaCodeNormalIplik.Id && !activeIplikNoIds.Contains(x.Id) && !x.IsPassive).ToList();
+                        .Where(x => x.ZetaCodeNormalIplikId == normalIplik.Id && !activeIplikNoIds.Contains(x.Id) && !x.IsPassive).ToList();
                     foreach (var passiveIplikNo in passiveIplikNolar)
                     {
                         passiveIplikNo.IsPassive = true;
                         iplikNoService.Update(passiveIplikNo);
                     }
                 }
+
+                _repository.UnitOfWorkAsync().SaveChanges();
+
+                if (iplikNolar != null && iplikNolar.Any() && sum != 100)
+                {
+                    throw new Exception("Elyaf Oranı %100 olmalıdır");
+                }           
+
                 _repository.UnitOfWorkAsync().SaveChanges();
                 _repository.UnitOfWorkAsync().Commit();
 
@@ -605,21 +580,21 @@ namespace Helezon.FollowMe.Service
 
         public ZetaCodeNormalIplikDto GetZetaCodeNormalIplikByMaster()
         {
-            var master = _repository.Queryable().Where(x => x.Master).Select(x => new { x.Id, x.SirketId }).FirstOrDefault();
-            if (master != null)
-            {
+            //var master = _repository.Queryable().Where(x => x.Master).Select(x => new { x.Id, x.SirketId }).FirstOrDefault();
+            //if (master != null)
+            //{
 
-                var temp = GetZetaCodeNormalIplikById(master.Id, master.SirketId);
-                temp.Id = 0;
-                foreach (var iplikNo in temp.IplikNo)
-                {
-                    iplikNo.Id = 0;
-                    iplikNo.ZetaCodeNormalIplikId = 0;
-                    iplikNo.ZetaCodeNormalIplik = null;
-                }
-                return temp;
+            //    var temp = GetZetaCodeNormalIplikById(master.Id, master.SirketId);
+            //    temp.Id = 0;
+            //    foreach (var iplikNo in temp.IplikNo)
+            //    {
+            //        iplikNo.Id = 0;
+            //        iplikNo.ZetaCodeNormalIplikId = 0;
+            //        iplikNo.ZetaCodeNormalIplik = null;
+            //    }
+            //    return temp;
 
-            }
+            //}
             return null;
         }
     }

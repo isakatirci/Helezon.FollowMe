@@ -34,23 +34,10 @@ namespace Helezon.FollowMe.Entities.Models
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public bool? Disabled { get; set; } // Disabled
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child CompanyTerm where [CompanyTerm].[TermId] point to this entity (FK_CompanyTerm_Term)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<CompanyTerm> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
-        /// <summary>
-        /// Child PersonnelTerm where [PersonnelTerm].[Name] point to this entity (FK_PersonnelTerm_Term)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
-
         public Term()
         {
             NoChildrenClass = false;
             NoDragClass = false;
-            CompanyTerm = new System.Collections.Generic.List<CompanyTerm>();
-            PersonnelTerm = new System.Collections.Generic.List<PersonnelTerm>();
             InitializePartial();
         }
 

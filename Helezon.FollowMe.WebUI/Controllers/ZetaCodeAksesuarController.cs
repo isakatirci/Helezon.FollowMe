@@ -1,5 +1,6 @@
 ﻿using FollowMe.Web;
 using FollowMe.Web.Controllers;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 using System;
@@ -28,6 +29,28 @@ namespace Helezon.FollowMe.WebUI.Controllers
             FillCollections(model);
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Edit(AksesuarEditVm model)
+        {            
+
+            var result = HandleException(() =>
+            {
+                var container = new AksesuarContainerDto();
+
+                GetAksesuarService().InsertOrUpdate(container);
+            });
+
+            if (result)
+                return RedirectToActionPermanent(actionName: "Index", controllerName: "ZetaCode");
+
+
+
+            FillCollections(model);
+            return View(model);
+        }
+
+
         public ActionResult Card()
         {
             return View(new ZetaCodeKumasOrmeDokumaCardVm());

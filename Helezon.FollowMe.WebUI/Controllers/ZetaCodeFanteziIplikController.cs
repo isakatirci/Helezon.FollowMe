@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FollowMe.Web;
 using FollowMe.Web.Controllers;
 using FollowMe.Web.Models;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 
 namespace Helezon.FollowMe.WebUI.Controllers
@@ -26,7 +27,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 model.Add(new ZetaCodeFanteziIplikEditVm
                 {
-                    ZetaCodeFanteziIplikDto = item
+                    FanteziIplik = item
                 });
             }
             return View(model);
@@ -71,6 +72,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Value = x.Id.ToString(), Text = x.ZetaCodeFormat() + ", " + x.UrunIsmi
             }).ToList();
 
+           
+
         }
 
         //public ActionResult GetNormalIplikRenkler(int? normalIplikId)
@@ -99,7 +102,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 return HttpNotFound();
             }
             var model = new ZetaCodeFanteziIplikEditVm();
-            model.ZetaCodeFanteziIplikDto = zetaCodeFanteziIplik;
+            model.FanteziIplik = zetaCodeFanteziIplik;
             FillCollections(model
                 , sirketId: zetaCodeFanteziIplik.SirketId
                 , ulkeId: zetaCodeFanteziIplik.Ulke?.Id.AsInt());
@@ -114,15 +117,24 @@ namespace Helezon.FollowMe.WebUI.Controllers
         public ActionResult Edit(ZetaCodeFanteziIplikEditVm model)
         {
 
+
+            var keys = Request.Form.Keys;
+            var companyId = Request.Form["Company.Id"];//Company.Id
+
+            var container = new FanteziIplikContainerDto();
+            container.FanteziIplik = model.FanteziIplik;
+            container.NormalIplikler = model.NormalIplikler;
+            model.Company.Id = companyId;
+            container.Company = model.Company;
             Action action = () =>
             {
-                GetFanteziIplikService().InsertOrUpdate(model.ZetaCodeFanteziIplikDto);
+                GetFanteziIplikService().InsertOrUpdate(container);
             };
 
             if (HandleException(action))
-                return RedirectToAction("Index");
+                return RedirectToAction(controllerName:"ZetaCode",actionName: "Index");
 
-            var fanteziIplik = model.ZetaCodeFanteziIplikDto;
+            var fanteziIplik = model.FanteziIplik;
             FillCollections(model
                 , sirketId: fanteziIplik.SirketId
                 , ulkeId: fanteziIplik.Ulke?.Id.AsInt()

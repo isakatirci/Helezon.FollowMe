@@ -57,17 +57,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasOptional(a => a.PantoneRenk).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.PantoneId).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_PantoneRengi
-            HasOptional(a => a.Renk).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.Renkid).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_Renk
-            HasRequired(a => a.Company).WithMany(b => b.ZetaCodeNormalIplik).HasForeignKey(c => c.SirketId).WillCascadeOnDelete(false); // FK_ZetaCodeNormaliplik_Company
-            HasMany(t => t.ZetaCodeKumasOrmeDokuma).WithMany(t => t.ZetaCodeNormalIplik).Map(m =>
-            {
-                m.ToTable("ZetaCode_NormalIplik_NormalKumas", "dbo");
-                m.MapLeftKey("NormalIplikId");
-                m.MapRightKey("NormalKumasId");
-            });
             InitializePartial();
         }
         partial void InitializePartial();

@@ -26,21 +26,8 @@ namespace Helezon.FollowMe.Entities.Models
         public string Ad { get; set; } // Ad (length: 50)
         public string IplikRenkKodu { get; set; } // IplikRenkKodu (length: 100)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[Renkid] point to this entity (FK_ZetaCodeFanteziIplik_Renk)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Renk
-        /// <summary>
-        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[Renkid] point to this entity (FK_ZetaCodeNormaliplik_Renk)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Renk
-
         public Renk()
         {
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
             InitializePartial();
         }
 

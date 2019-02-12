@@ -15,6 +15,7 @@ using FollowMe.Web;
 using FollowMe.Web.Controllers;
 using FollowMe.Web.Models;
 using Helezon.FollowMe.Service;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using Helezon.FollowMe.WebUI.Code;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
@@ -57,7 +58,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 if (string.Equals(operation, "masterbluesiparis", StringComparison.InvariantCulture))
                 {
-                    model.ZetaCodeNormalIplikDto = GetNormalIplikService().GetZetaCodeNormalIplikByMaster();
+                    model.NormalIplik = GetNormalIplikService().GetZetaCodeNormalIplikByMaster();
                 }
             }         
             FillCollections(model);
@@ -71,7 +72,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             foreach (var item in list)
             {
                 model.Add(new ZetaCodeNormalIplikVm {
-                    ZetaCodeNormalIplikDto = item
+                    NormalIplik = item
                 });
             }
             return View(model);
@@ -108,6 +109,13 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.EA = new IplikNoGuideMethod(GetSelectListEA);
             model.ElyafOrani = new ElyafOraniMethod(GetSelectListElyafOrani);
 
+
+            if (!model.IplikNolar.Any())
+            {
+                model.IplikNolar.Add(new IplikNoDto());
+            }
+
+
         }    
 
         public string GetSelectListNE(string value)
@@ -140,7 +148,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Text= x.Ad            });
 
             var sb = new StringBuilder(150);
-            sb.AppendLine(@"<select class=""form-control select2"" onchange=""setHtmlColorCode($(this))"" id=""ZetaCodeNormalIplikDto_RenkIdFormat"" name=""ZetaCodeNormalIplikDto.RenkIdFormat"">");
+            sb.AppendLine(@"<select class=""form-control select2"" onchange=""setHtmlColorCode($(this))"" id=""NormalIplik_RenkIdFormat"" name=""NormalIplik.RenkIdFormat"">");
             var flag = id.HasValue;
             if (!flag)
             {
@@ -232,7 +240,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             //}
 
             var sb = new System.Text.StringBuilder(150);
-            sb.AppendFormat("<select class=\"form-control select2\" name=\"{0}\" >", "ZetaCodeNormalIplikDto." + columnName);
+            sb.AppendFormat("<select class=\"form-control select2\" name=\"{0}\" >", "NormalIplik." + columnName);
             if (string.IsNullOrWhiteSpace(value))
             {
                 sb.AppendLine("<option value=\"\" selected> Please Select </option>");
@@ -416,7 +424,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 return HttpNotFound();
             }
             var model = new ZetaCodeNormalIplikVm();
-            model.ZetaCodeNormalIplikDto = zetaCodeNormalIplik;
+            model.NormalIplik = zetaCodeNormalIplik;
             FillCollections(model
                 ,sirketId: zetaCodeNormalIplik.SirketId
                 ,ulkeId:zetaCodeNormalIplik.UlkeId
@@ -445,51 +453,27 @@ namespace Helezon.FollowMe.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ZetaCodeNormalIplikVm model)
         {
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriDegredeDto != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriDegredeDto.BoyamaProsesi = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriDegredeDto.BoyamaProsesiFormat);
-            //}
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriFlam != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamlarArasindakiMesafe = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamlarArasindakiMesafeFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamUzunlugu = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamUzunluguFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamYuksekligi = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamYuksekligiFormat);
-            //}
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriKircili != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircillarArasiMesafe = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircillarArasiMesafeFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilUzunlugu = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilUzunluguFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilYuksekligi = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriKircili.KircilYuksekligiFormat);
-            //}
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriKrep != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriKrep.TurSayisi = (int)MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriKrep.TurSayisiFormat);
+            var container = new NormalIplikContainerDto();
+            model.NormalIplik.Renkid = model.NormalIplik.RenkIdFormat.AsInt();
+            container.NormalIplik = model.NormalIplik;
+            container.Degrede = model.Degrede;
+            container.Flam = model.Flam;
+            container.Sim = model.Sim;
+            container.Kircili = model.Kircili;
+            container.Nopeli = model.Nopeli;
+            container.Krep = model.Krep;
+            container.Company = model.Company;
+            container.IplikNolar = model.IplikNolar;
 
-            //}
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriNopeli != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafe = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafeFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunlugu = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunluguFormat);
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligi = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligiFormat);
-            //}
-
-            //if (model.ZetaCodeNormalIplikDto.IplikKategoriSim != null)
-            //{
-            //    model.ZetaCodeNormalIplikDto.IplikKategoriSim.SimKesimBoyutu = MyNumberParse(model.ZetaCodeNormalIplikDto.IplikKategoriSim.SimKesimBoyutuFormat);
-
-            //}
-
-
-            model.ZetaCodeNormalIplikDto.Renkid = model.ZetaCodeNormalIplikDto.RenkIdFormat.AsInt();
             Action action = () =>
             {
-                GetNormalIplikService().InsertOrUpdate(model.ZetaCodeNormalIplikDto);
+                GetNormalIplikService().InsertOrUpdate(container);
             };
 
             if (HandleException(action))
-                return RedirectToAction("Index");
+                return RedirectToAction(controllerName:"ZetaCode",actionName: "Index");
 
-            var zetaCodeNormalIplik = model.ZetaCodeNormalIplikDto;
+            var zetaCodeNormalIplik = model.NormalIplik;
             FillCollections(model
                 , sirketId: zetaCodeNormalIplik.SirketId
                 , ulkeId: zetaCodeNormalIplik.UlkeId
@@ -542,34 +526,34 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
 
 
-            if (normalIplik.IplikKategoriFlam != null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriFlam);          
-            }
-            else if (normalIplik.IplikKategoriKircili!= null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKircili);
+            //if (normalIplik.IplikKategoriFlam != null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriFlam);          
+            //}
+            //else if (normalIplik.IplikKategoriKircili!= null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKircili);
                
-            }
-            else if (normalIplik.IplikKategoriKrep != null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKrep);
+            //}
+            //else if (normalIplik.IplikKategoriKrep != null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriKrep);
                
-            }
-            else if (normalIplik.IplikKategoriNopeli != null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriNopeli);
+            //}
+            //else if (normalIplik.IplikKategoriNopeli != null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriNopeli);
                
-            }
-            else if (normalIplik.IplikKategoriSim != null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriSim);
-            }
-            else if (normalIplik.IplikKategoriDegrede != null)
-            {
-                model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriDegrede);
+            //}
+            //else if (normalIplik.IplikKategoriSim != null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriSim);
+            //}
+            //else if (normalIplik.IplikKategoriDegrede != null)
+            //{
+            //    model.IplikKategoriDetay = GetPropertiesWithTheirValues(normalIplik.IplikKategoriDegrede);
 
-            }
+            //}
 
             model.ZetaCodeNormalIplikDto = normalIplik;
             model.ParentIplikCategories = GetTermService().GetAllParentsById(normalIplik.IplikKategosiId);
@@ -798,3 +782,38 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
     }
 }
+
+
+//      if (model.Degrede != null)
+//            {
+//                model.Degrede.BoyamaProsesi = MyNumberParse(model.Degrede.BoyamaProsesiFormat);
+//            }
+//            if (model.Flam != null)
+//            {
+//                model.Flam.FlamlarArasindakiMesafe = MyNumberParse(model.Flam.FlamlarArasindakiMesafeFormat);
+//                model.Flam.FlamUzunlugu = MyNumberParse(model.Flam.FlamUzunluguFormat);
+//                model.Flam.FlamYuksekligi = MyNumberParse(model.Flam.FlamYuksekligiFormat);
+//            }
+//            if (model.Kircili != null)
+//            {
+//                model.Kircili.KircillarArasiMesafe = MyNumberParse(model.Kircili.KircillarArasiMesafeFormat);
+//                model.Kircili.KircilUzunlugu = MyNumberParse(model.Kircili.KircilUzunluguFormat);
+//                model.Kircili.KircilYuksekligi = MyNumberParse(model.Kircili.KircilYuksekligiFormat);
+//            }
+//            if (model.Krep != null)
+//            {
+//                model.Krep.TurSayisi = (int)MyNumberParse(model.Krep.TurSayisiFormat);
+//
+//            }
+//            if (model.Nopeli != null)
+//            {
+//                model.Nopeli.NoktalarArasiMesafe = MyNumberParse(model.Nopeli.NoktalarArasiMesafeFormat);
+//                model.Nopeli.NoktaUzunlugu = MyNumberParse(model.Nopeli.NoktaUzunluguFormat);
+//                model.Nopeli.NoktaYuksekligi = MyNumberParse(model.Nopeli.NoktaYuksekligiFormat);
+//            }
+//
+//            if (model.Sim != null)
+//            {
+//                model.Sim.SimKesimBoyutu = MyNumberParse(model.Sim.SimKesimBoyutuFormat);
+//
+//            }

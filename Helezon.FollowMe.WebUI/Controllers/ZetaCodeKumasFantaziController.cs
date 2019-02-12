@@ -1,5 +1,6 @@
 ﻿using FollowMe.Web;
 using FollowMe.Web.Controllers;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 using System;
@@ -32,15 +33,74 @@ namespace Helezon.FollowMe.WebUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(KumasFanteziEditVm model)
-        {
+        {           
+
             var result = HandleException(() =>
             {
-                GetKumasFanteziService().InsertOrUpdate(model.KumasFantaziDto);
+                var container = new KumasFantaziContainerDto();
+                if (model.Kumaslar != null && model.Kumaslar.Any())
+                {
+                    for (int i = 0; i < model.Kumaslar.Count; i++)
+                    {
+                        if (model.Kumaslar[i] == null || string.IsNullOrWhiteSpace(model.Kumaslar[i].Id) || model.Kumaslar[i].Id.IndexOf('|') < 0)
+                        {
+                            break;
+                        }
+                        var arr = model.Kumaslar[i].Id.Split('|');                       
+                        var id = arr[0].Trim();
+                        var iplikTipi = arr[1].Trim();
+                        if (string.Equals(iplikTipi, "FanteziKumas", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            container.KumasFanteziler.Add(new ZetaCodeKumasFanteziKumasFanteziDto {
+                                KumasFanteziId = model.KumasFantazi.Id,
+                                KumasOtherFanteziId = id.AsInt()
+
+                            });
+                        }
+                        else if (string.Equals(iplikTipi, "NormalKumas", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            container.KumasOrmeDokumalar.Add(new ZetaCodeKumasFanteziKumasOrmeDokumaDto {
+                                KumasFanteziId = model.KumasFantazi.Id,
+                                KumasOrmeDokumaId = id.AsInt()
+                            });
+                        }
+
+                    }
+                }
+                container.KumasMakine = model.Makine;
+                container.YikamaTalimati = model.YikamaTalimati;
+                container.KumasFantazi = model.KumasFantazi;
+                //container.KumasFantezi3AdimIslemleri = model.KumasFantezi3AdimIslemleri;
+
+                if (model.KumasFantezi3AdimIslemleri != null && model.KumasFantezi3AdimIslemleri.Any())
+                {
+                    for (int i = 0; i < model.KumasFantezi3AdimIslemleri.Count; i++)
+                    {
+                        if (string.IsNullOrWhiteSpace(model.KumasFantezi3AdimIslemleri[i]._3AdimIslemlerId)
+                        && string.IsNullOrWhiteSpace(model.KumasFantezi3AdimIslemleri[i].DesenKodu))
+                        {
+                            break;
+                        }
+                        container.KumasFantezi3AdimIslemleri.Add(new ZetaCodeKumasFantezi3AdimIslemleriDto
+                        {
+                            DesemRengi1= model.KumasFantezi3AdimIslemleri[i].DesemRengi1.Split('|')[0],
+                            DesemRengi2 = model.KumasFantezi3AdimIslemleri[i].DesemRengi2.Split('|')[0],
+                            DesemRengi3 = model.KumasFantezi3AdimIslemleri[i].DesemRengi3.Split('|')[0],
+                            DesenKodu = model.KumasFantezi3AdimIslemleri[i].DesenKodu,
+                            Id = model.KumasFantezi3AdimIslemleri[i].Id,
+                            _3AdimIslemlerId = model.KumasFantezi3AdimIslemleri[i]._3AdimIslemlerId
+
+
+                        });
+                    }                   
+                }
+
+                GetKumasFanteziService().InsertOrUpdate(container);
             });
 
-            if (result)            
-                return View(viewName:"Index");
-            
+                if (result)
+                    return RedirectToActionPermanent(actionName: "Index", controllerName: "ZetaCode");
+
             FillCollections(model);
             return View(model);
         }
@@ -123,17 +183,13 @@ namespace Helezon.FollowMe.WebUI.Controllers
                     Value = x.Id.ToString()
                 });
 
-            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri().Select(x => new SelectListItem
-            {
-                Value = x.Id,
-                Text = x.Name
-            }).ToList();
+            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri();
 
-            model.AdimIslemleri = new SelectList(GetTermService().GetTermsByTaxonomyId((int)TaxonomyType.UcuncuAdimIslemleri), dataTextField: "Name", dataValueField: "Id");
+            model.AdimIslemleri = GetTermService().GetTermsByTaxonomyId((int)TaxonomyType.UcuncuAdimIslemleri);
 
-            if (!model.KumasFantaziDto.ZetaCodeKumasFantezi3AdimIslemleri.Any())
+            if (!model.KumasFantezi3AdimIslemleri.Any())
             {
-                model.KumasFantaziDto.ZetaCodeKumasFantezi3AdimIslemleri.Add(new ZetaCodeKumasFantezi3AdimIslemleriDto());
+                model.KumasFantezi3AdimIslemleri.Add(new ZetaCodeKumasFantezi3AdimIslemleriDto());
             }
 
             model.OrmeDokumaKumaslar = new List<SelectListItem>();
@@ -150,21 +206,68 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
 
             //model.Collections.FanteziKumaslar=GetKumasFanteziService().
-            model.Collections.OrmeDokumaKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler(model.KumasFantaziDto.CompanyId).Select(x => new SelectListItem
+            model.Collections.OrmeDokumaKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler(model.KumasFantazi.CompanyId).Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.ZetaCode + "," + x.UrunIsmi
 
             }).ToList();
 
-            model.Collections.FanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler(model.KumasFantaziDto.CompanyId).Select(x => new SelectListItem
+            model.Collections.FanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler(model.KumasFantazi.CompanyId).Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.ZetaCode + "," + x.UrunIsmi
 
             }).ToList();
-            model.Collections.Ulkeler = temp;    
+            model.Collections.Ulkeler = temp;
 
+            //
+
+
+            if (model.ZetaCodeKumasMakine == null)
+            {
+                model.ZetaCodeKumasMakine = new ZetaCodeKumasMakineDto();
+            }
+
+
+            if (model.YikamaTalimati == null)
+            {
+                model.YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
+            }
+
+            var normalKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+            var fanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+
+            model.Kumaslar.AddRange(model.KumasFantazi.KumasOrmeDokumalar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "NormalKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Kumaslar.AddRange(model.KumasFantazi.KumasFanteziler.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "FanteziKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+
+            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "NormalKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "FanteziKumas",
+                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            }));
+
+            if (!model.Kumaslar.Any())
+            {
+                model.Kumaslar.Add(new ZetaCodeVm());
+            }
+           
         }
     }
 }

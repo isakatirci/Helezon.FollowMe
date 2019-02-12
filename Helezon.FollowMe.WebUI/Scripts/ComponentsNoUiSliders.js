@@ -1,6 +1,6 @@
-﻿var ComponentsNoUiSliders = function () {
+﻿var ComponentsNoUiSliders = (function () {
 
-    var myNoUiSlidersStater = function (id, min, max, step,useParse,decimals) {
+    var myNoUiSlidersStater = function (id, min, max, step, useParse, decimals) {
 
         if (typeof useParse === "undefined") {
             useParse = true;
@@ -93,6 +93,6 @@
 
     };
 
-}();
+})();
 
 

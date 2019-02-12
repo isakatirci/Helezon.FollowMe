@@ -16,32 +16,34 @@ namespace Helezon.FollowMe.Entities.Models
 {
     using Repository.Pattern.Ef6;
 
-    // ZetaCodeKumasFanteziFantezi
+    // ZetaCodeYikamaTalimati
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public partial class ZetaCodeKumasFanteziFanteziMap : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ZetaCodeKumasFanteziFantezi>
+    public partial class ZetaCodeYikamaTalimatiMap : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ZetaCodeYikamaTalimati>
     {
-        public ZetaCodeKumasFanteziFanteziMap()
+        public ZetaCodeYikamaTalimatiMap()
             : this("dbo")
         {
         }
 
-        public ZetaCodeKumasFanteziFanteziMap(string schema)
+        public ZetaCodeYikamaTalimatiMap(string schema)
         {
-            ToTable("ZetaCodeKumasFanteziFantezi", schema);
+            ToTable("ZetaCodeYikamaTalimati", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.KuruTemizleme).HasColumnName(@"KuruTemizleme").HasColumnType("bit").IsOptional();
+            Property(x => x.YikamaSekli).HasColumnName(@"YikamaSekli").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
+            Property(x => x.YikamaMaxDerecesi).HasColumnName(@"YikamaMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
+            Property(x => x.UtulemeMaxDerecesi).HasColumnName(@"UtulemeMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
+            Property(x => x.TersYikama).HasColumnName(@"TersYikama").HasColumnType("bit").IsOptional();
+            Property(x => x.Cekemezlik).HasColumnName(@"Cekemezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.Donmezlik).HasColumnName(@"Donmezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
+            Property(x => x.YikamaAdedi).HasColumnName(@"YikamaAdedi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.KumasFanteziId).HasColumnName(@"KumasFanteziId").HasColumnType("int").IsOptional();
-            Property(x => x.KumasOtherFanteziId).HasColumnName(@"KumasOtherFanteziId").HasColumnType("int").IsOptional();
-
-            // Foreign keys
-            HasOptional(a => a.KumasFantezi).WithMany(b => b.ZetaCodeKumasFanteziFantezi_KumasFanteziId).HasForeignKey(c => c.KumasFanteziId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi
-            HasOptional(a => a.KumasOtherFantezi).WithMany(b => b.ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId).HasForeignKey(c => c.KumasOtherFanteziId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1
             InitializePartial();
         }
         partial void InitializePartial();

@@ -14,7 +14,9 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public interface IZetaCodeService : IService<ZetaCodes>
     {
-
+        int GetZetaCodeForIplikInsert(string companyId = "00000000-0000-0000-0000-000000000002");
+        int GetZetaCodeForKumasAksesuarInsert(string companyId = "00000000-0000-0000-0000-000000000002");
+        int GetZetaCodeForHazirGiyimInsert(string companyId = "00000000-0000-0000-0000-000000000002");
     }
 
     /// <summary>
@@ -47,6 +49,28 @@ namespace Helezon.FollowMe.Service
             base.Insert(entity);    
         }
 
+
+        public int GetZetaCodeForIplikInsert(string companyId = "00000000-0000-0000-0000-000000000002") {
+
+            var code = GetZetaCodeForIplik(companyId);
+            this.Insert(new ZetaCodes { CompanyId =companyId, ZetaCode = code });
+            return code;
+        }
+
+        public int GetZetaCodeForKumasAksesuarInsert(string companyId = "00000000-0000-0000-0000-000000000002") {
+
+            var code = GetZetaCodeForKumasAksesuar(companyId);
+            this.Insert(new ZetaCodes { CompanyId = companyId, ZetaCode = code });
+            return code;
+        }
+
+        public int GetZetaCodeForHazirGiyimInsert(string companyId = "00000000-0000-0000-0000-000000000002")
+        {
+            var code = GetZetaCodeForHazirGiyim(companyId);
+            this.Insert(new ZetaCodes { CompanyId = companyId, ZetaCode = code });
+            return code;
+
+        }
         public int GetZetaCodeForIplik(string companyId)
         {
             var code = _repository.QueryableNoTracking().Where(x => x.ZetaCode < 1401  /*x.CompanyId == ""*/).Max(x => (int?)x.ZetaCode);

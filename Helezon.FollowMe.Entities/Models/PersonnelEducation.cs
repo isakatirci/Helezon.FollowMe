@@ -33,13 +33,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? MakedPassiveOn { get; set; } // MakedPassiveOn
         public string MakedPassiveBy { get; set; } // MakedPassiveBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelEducation].([PersonnelId]) (FK_PersonnelEducation_Person)
-        /// </summary>
-        public virtual Person Person { get; set; } // FK_PersonnelEducation_Person
-
         public PersonnelEducation()
         {
             StudiedSchoolName = "0";

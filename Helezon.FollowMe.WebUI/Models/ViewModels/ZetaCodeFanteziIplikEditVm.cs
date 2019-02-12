@@ -10,14 +10,18 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeFanteziIplikEditVm
     {
-        public ZetaCodeFanteziIplikDto ZetaCodeFanteziIplikDto { get; internal set; }
+        public ZetaCodeFanteziIplikDto FanteziIplik { get; internal set; }
         public ZetaCodeFanteziIplikViewCollections Collections { get; set; }
+        public CompanyDto Company { get; set; }
+        public List<ZetaCodeNormalIplikDto> NormalIplikler { get; set; }
         public ZetaCodeFanteziIplikEditVm()
         {
             Collections = new ZetaCodeFanteziIplikViewCollections();
-            ZetaCodeFanteziIplikDto = new ZetaCodeFanteziIplikDto();
-            ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik = new List<ZetaCodeNormalIplikDto>();
-            ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Add(new ZetaCodeNormalIplikDto());
+            FanteziIplik = new ZetaCodeFanteziIplikDto();
+            Company = new CompanyDto();
+            NormalIplikler = new List<ZetaCodeNormalIplikDto>();
+            //ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik = new List<ZetaCodeNormalIplikDto>();
+            //ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Add(new ZetaCodeNormalIplikDto());
         }
     }
     public class ZetaCodeFanteziIplikViewCollections

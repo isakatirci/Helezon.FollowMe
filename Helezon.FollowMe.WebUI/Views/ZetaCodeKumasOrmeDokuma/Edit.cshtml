@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
-    var update = Model != null && Model.KumasOrmeDokumaDto != null && Model.KumasOrmeDokumaDto.Id > 0;
+    var update = Model != null && Model.KumasOrmeDokuma != null && Model.KumasOrmeDokuma.Id > 0;
 }
 
 @section afterGlobalStyles
-    {
+{
 
     @*<link href="~/Content/global/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
         <link href="~/Content/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet" />*@
@@ -27,12 +27,11 @@
     </style>
 }
 
-<form action="/ZetaCodeFanteziIplik/Edit" id="frmZetaCodeFanteziIplik" method="post">
+<form action="/ZetaCodeKumasOrmeDokuma/Edit" id="frmKumasOrmeDokuma" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.KumasOrmeDokumaDto.Id)
-    @Html.HiddenFor(model => model.KumasOrmeDokumaDto.ZetaCode)
-
+    @Html.HiddenFor(model => model.KumasOrmeDokuma.Id)
+    @Html.HiddenFor(model => model.KumasOrmeDokuma.ZetaCode)
     <div class="portlet box green">
         <div class="portlet-title">
             <div class="caption">
@@ -59,154 +58,93 @@
                                             @if (update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasOrmeDokuma.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <div class="checkbox">
-                                                            @Html.EditorFor(model => model.KumasOrmeDokumaDto.IsPassive, new { SelectName = "KumasOrmeDokumaDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
-                                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.IsPassive, "", new { @class = "text-danger" })
+                                                            @Html.DropDownList("KumasOrmeDokuma.IsPassive", MyHtmlHelpers.SelectListForBoolean(Model.KumasOrmeDokuma.IsPassive), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.IsPassive, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasOrmeDokuma.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
                                                                id="ZetaCodeFanteziIplikDto_ZetaCode"
-                                                               value="@Model.KumasOrmeDokumaDto.ZetaCodeFormatli" />
+                                                               value="@Model.KumasOrmeDokuma.ZetaCodeFormatli" />
                                                     </div>
                                                 </div>
                                             }
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
-                                           , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.KumasOrmeDokuma.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
-                                                        , new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.ZetaCodePrevious
-                                                         , "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.KumasOrmeDokuma.ZetaCodePrevious, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.ZetaCodePrevious, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.Master
-                                           , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.KumasOrmeDokuma.Master, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    <div class="checkbox">
-                                                        @Html.EditorFor(model => model.KumasOrmeDokumaDto.Master
-                                                   , new { SelectName = "KumasOrmeDokumaDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
-                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Master
-                                                   , "", new { @class = "text-danger" })
-                                                    </div>
+                                                    @Html.DropDownList("KumasOrmeDokuma.Master", MyHtmlHelpers.SelectListForBoolean(Model.KumasOrmeDokuma.Master), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.Master, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
-
-
                                             @if (!update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.CompanyId
-                                               , "Blue Cod Name"
-                                               , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasOrmeDokuma.CompanyId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.DropDownList("KumasOrmeDokumaDto.SirketId"
-                                                            , Model.Collections.Sirketler, "Please Select"
-                                                            , htmlAttributes: new { @class = "form-control select2" })
-                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.CompanyId
-                                                   , "", new { @class = "text-danger" })
+                                                        @Html.DropDownList("KumasOrmeDokuma.CompanyId", Model.Collections.Sirketler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.CompanyId, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
                                             else
                                             {
-                                                <input type="hidden" name="KumasOrmeDokumaDto.SirketId"
-                                                       id="ZetaCodeNormalIplikDto_SirketId"
-                                                       value="@Model.KumasOrmeDokumaDto.CompanyId" />
+                                                <input type="hidden" name="KumasOrmeDokuma.CompanyId" id="KumasOrmeDokuma_CompanyId" value="@Model.KumasOrmeDokuma.CompanyId" />
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.CompanyId
-                                               , "Blue Cod Name"
-                                               , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasOrmeDokuma.CompanyId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                class="form-control"
                                                                readonly
-                                                               value="@(Model.KumasOrmeDokumaDto.Company?.Code + " " + Model.KumasOrmeDokumaDto.Company?.Name)" />
+                                                               value="@(Model.Company.Code + " " + Model.Company.Name)" />
                                                     </div>
                                                 </div>
                                             }
-
 
                                             @if (update)
                                             {
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasOrmeDokuma.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.EditorFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.KumasOrmeDokuma.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.BlueSiparisNo, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
 
-
-
-
-
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.KumasOrmeDokuma.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("KumasOrmeDokumaDto.Ulke"
-    , Model.Collections.Ulkeler, "Please Select"
-    , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("KumasOrmeDokuma.Ulke", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.Ulke, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
-                                            @*<div class="form-group">
-                                                                                            @Html.LabelFor(model => model.KumasOrmeDokumaDto.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                                                            <div class="col-md-6">
-                                                                                                @Html.DropDownList("KumasOrmeDokumaDto.Ea"
-                                                , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
-                                                , htmlAttributes: new { @class = "form-control select2" })
-                                                                                                @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Ea, "", new { @class = "text-danger" })
-                                                                                            </div>
-                                                                                        </div>*@
-
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.KumasOrmeDokuma.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.KumasOrmeDokuma.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.BlueUrunKodIsmi, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
-
-                                            @*<div class="form-group">
-                                                    <label class="control-label col-md-2" for="KumasOrmeDokumaDto.IplikKategosiId">iplik Kategosi</label>
-                                                    <div class="col-md-6">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-body">
-                                                                <input type="hidden"
-                                                                       name="KumasOrmeDokumaDto.IplikKategosiId"
-                                                                       id="ZetaCodeNormalIplikDto_IplikKategosiId"
-                                                                       value="@(Model.KumasOrmeDokumaDto.UrunKategorisi?.Id)" />
-                                                                <input type="text"
-                                                                       name="KumasOrmeDokumaDto.IplikKategosiName"
-                                                                       id="ZetaCodeNormalIplikDto_IplikKategosiName"
-                                                                       readonly
-                                                                       class="form-control"
-                                                                       value="@(Model.KumasOrmeDokumaDto.UrunKategorisi?.Name)" />
-                                                                <br />
-                                                                <div id="treeIplikKategosiId"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>*@
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -220,104 +158,49 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_iplik_sec"> IPLIK SEC </a>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_kumas_sec"> IPLIK SECME </a>
                         </h4>
                     </div>
-                    <div id="collapse_iplik_sec" class="panel-collapse collapse">
+                    <div id="collapse_kumas_sec" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="form-horizontal form-bordered form-row-stripped">
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.IplikKullanimOrani, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.MetreTulOrani, templateName: "MyTouchSpin")
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="normal_iplik_count">Kaç İplikten Oluşuyor</label>
-                                    <div class="col-md-6">
-                                        @{
-                                            var normalIplikCount = Model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Count;
-                                        }
-                                        <select id="normal_iplik_count" class="form-control">
-                                            <option value="">Please Select</option>
-                                            <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
-                                            <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
-                                            <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
-                                            <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
-                                            <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" href="javascript:void(0);"> Zeta Code Normal İplikler </a>
-                                    </h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-horizontal form-bordered form-row-stripped">
-                                        <div class="form-body">
-                                            <div class="mt-repeater">
-                                                <div data-repeater-list="ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik">
-                                                    @{
-                                                        for (int i = 0; i < Model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Count; i++)
-                                                        {
-
-                                                            var normalIplik = Model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.ElementAt(i);
-                                                            <text>
-                                                                <div data-repeater-item>
-                                                                    <div class="mt-repeater-item">
-                                                                        <div class="form-group">
-                                                                            <div class="row">
-                                                                                <div class="col-md-2">
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <input type="hidden"
-                                                                                           class="normal_iplik_id"
-                                                                                           name="Id"
-                                                                                           value="@normalIplik.Id" />
-                                                                                    <br />
-                                                                                    @Html.DropDownList("NormalIplik"
-                                                                                   , new SelectList(Model.Collections.NormalIplikler, "Value", "Text", normalIplik.Id.ToString()),"Please Select"
-                                                                                   , new { @class = "form-control select2 normal_iplik", @onchange = "setNormalIplikId($(this))" })
-                                                                                </div>
-                                                                                <div class="col-md-2">
-                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
-                                                                                        <i class="fa fa-close"></i> Delete
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row" id="normal_iplik_form">
-                                                                                @Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </text>
-                                                        }
-                                                    }
-                                                </div>
-                                                <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
-                                                    <i class="fa fa-plus"></i> Add
-                                                </a>
-                                            </div>
+                                <div class="form-body">
+                                    @{
+                                        //var normalIplikCount = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count;
+                                        var normalIplikCount = 0;
+                                    }
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="normal_iplik_count">Kaç İplikten Oluşuyor</label>
+                                        <div class="col-md-6">
+                                            <select id="iplik_counter" class="form-control">
+                                                <option value="">Please Select</option>
+                                                <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
+                                                <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
+                                                <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
+                                                <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
+                                                <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-primary">
+
+                            <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a class="accordion-toggle" href="javascript:void(0);"> Zeta Code Fantazi İplikler </a>
+                                        <a class="accordion-toggle" href="javascript:void(0);"> IPLIKLER </a>
                                     </h4>
                                 </div>
                                 <div class="panel-body">
+
                                     <div class="form-horizontal form-bordered form-row-stripped">
                                         <div class="form-body">
-                                            <div class="mt-repeater">
-                                                <div data-repeater-list="ZetaCodeFanteziIplikDto.ZetaCodeFanteziIplik">
+                                            <div id="mt-repeater1">
+                                                <div data-repeater-list="Iplikler">
                                                     @{
-                                                        for (int i = 0; i < Model.KumasOrmeDokumaDto.ZetaCodeFanteziIplik.Count; i++)
+                                                        for (int i = 0; i < Model.Iplikler.Count; i++)
                                                         {
 
-                                                            var fanteziIplik = Model.KumasOrmeDokumaDto.ZetaCodeFanteziIplik[i];
                                                             <text>
                                                                 <div data-repeater-item>
                                                                     <div class="mt-repeater-item">
@@ -326,23 +209,19 @@
                                                                                 <div class="col-md-2">
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <input type="hidden"
-                                                                                           class="fantezi_iplik_id"
-                                                                                           name="Id"
-                                                                                           value="@fanteziIplik.Id" />
-                                                                                    <br />
-                                                                                    @Html.DropDownList("FanteziIplik"
-                                                                                   , new SelectList(Model.Collections.FanteziIplikler, "Value", "Text", fanteziIplik.Id.ToString()),"Please Select"
-                                                                                   , new { @class = "form-control select2 fantezi_iplik", @onchange = "setFanteziIplikId($(this))" })
+                                                                                    @Html.DropDownList("Id"
+                                                                                        , new SelectList(Model.Collections.Iplikler, "Id", "ZetaCode", Model.Iplikler[i].Id)
+                                                                                        , "Please Select"
+                                                                                        , new { @class = "form-control select2", @onchange = "" })
                                                                                 </div>
                                                                                 <div class="col-md-2">
-                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
+                                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0">
                                                                                         <i class="fa fa-close"></i> Delete
                                                                                     </a>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row" id="fantezi_iplik_form">
-                                                                                @Html.Action("GetFanteziIplikRenkler", new { fanteziIplikId = fanteziIplik.Id })
+                                                                            <div class="row" id="">
+                                                                                @*@Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })*@
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -364,106 +243,31 @@
                 </div>
 
 
+                @Html.Partial("_MyPartialKumasMakine", new ZetaCodeKumasMakineEditVm {
+               Makine = Model.KumasMakine,
+               Collections =new ZetaCodeKumasMakineEditVmCollections {
+                   Elastanlar = Model.Collections.Elastanlar,
+                   TupAcikEnler = Model.Collections.TupAcikEnler
+               } })
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_makine_sec"> MAKINE DETAYLARI </a>
-                        </h4>
-                    </div>
-                    <div id="collapse_makine_sec" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-horizontal form-bordered form-row-stripped">
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Makine Markası</label>
-                                    <div class="col-md-6">
-                                        @Html.HiddenFor(x => x.KumasOrmeDokumaDto.MakineMarkaId)
-                                        @Html.TextBoxFor(x => x.KumasOrmeDokumaDto.MakineMarkasi.Name, new { @class = "form-control", @readonly = "" })
-                                        <br />
-                                        <div class="panel panel-default">
-                                            <div class="panel-body" style="height:200px; overflow-y:auto;">
-                                                <div id="treeMakineMarkalar">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Makine Modeli</label>
-                                    <div class="col-md-6">
-                                        @Html.HiddenFor(x => x.KumasOrmeDokumaDto.MakineModelId)
-                                        @Html.TextBoxFor(x => x.KumasOrmeDokumaDto.MakineModeli.Name, new { @class = "form-control", @readonly = "" })
-                                        <br />
-                                        <div class="panel panel-default">
-                                            <div class="panel-body" style="height:200px; overflow-y:auto;">
-                                                <div id="treeMakineModeller">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @Html.EditorFor(x => x.KumasMakineDto.ModelYili, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.Pus, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.Fine, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.YedekFine, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.Sistem, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.IgneSayisi, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.HamGr, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasMakineDto.HamCm, templateName: "MyTouchSpin")
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Aksesuarlar</label>
-                                    <div class="col-md-6">
-                                        @Html.HiddenFor(x => x.KumasMakineDto.AksesuarIds)
-                                        <textarea rows="2"
-                                                  readonly
-                                                  cols="20"
-                                                  id="KumasOrmeDokumaDto_Aksesuarlar"
-                                                  value="@(string.Join(",",Model.KumasOrmeDokumaDto.Aksesuarlar.Select(x => x.Name)))"
-                                                  class="form-control"></textarea>
-                                        <br />
-                                        <div class="panel panel-default">
-                                            <div class="panel-body" style="height:200px; overflow-y:auto;">
-                                                <div id="treeAksesuarlar">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.KumasMakineDto.TupAcikEnId, "TupAcikEnler", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-6">
-                                        @Html.DropDownListFor(model => model.KumasMakineDto.TupAcikEnId, new SelectList(Model.Collections.TupAcikEnler, "Id", "Name"), "Please Select", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.KumasMakineDto.TupAcikEnId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.KumasMakineDto.ElastanId, "Elastanlar", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-6">
-                                        @Html.DropDownListFor(model => model.KumasMakineDto.ElastanId, new SelectList(Model.Collections.Elastanlar, "Id", "Name"), "Please Select", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.KumasMakineDto.ElastanId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 @*<div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_group1"> GROUP #2 </a>
-                        </h4>
-                    </div>
-                    <div id="collapse_group1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-horizontal form-bordered form-row-stripped">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_group1"> GROUP #2 </a>
+                </h4>
+            </div>
+            <div id="collapse_group1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-horizontal form-bordered form-row-stripped">
 
 
-                            </div>
-                        </div>
                     </div>
-                </div>*@
+                </div>
+            </div>
+        </div>*@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -481,7 +285,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2">Örgü Tipi</label>
                                     <div class="col-md-6">
-                                        @Html.DropDownListFor(x => x.KumasOrmeDokumaDto.OrguTipiId
+                                        @Html.DropDownListFor(x => x.KumasOrmeDokuma.OrguTipiId
                                    , Model.Collections.OrguTipleri
                                    , "Please Select"
                                    , new { @class = "form-control select2", @onchange = "getOrguDetaylari($(this))" })
@@ -490,12 +294,12 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2"></label>
                                     <div class="col-md-6">
-                                        @Html.HiddenFor(x => x.KumasOrmeDokumaDto.OrguDetaylariIds)
+                                        @Html.HiddenFor(x => x.KumasOrmeDokuma.OrguDetaylariIds)
                                         <textarea rows="2"
                                                   readonly
                                                   cols="20"
-                                                  id="KumasOrmeDokumaDto_OrguDetaylari"
-                                                  value="@(string.Join(",",Model.KumasOrmeDokumaDto.OrguDetaylari.Select(x => x.Name)))"
+                                                  id="KumasOrmeDokuma_OrguDetaylari"
+                                                  value="@(string.Join(",",Model.KumasOrmeDokuma.OrguDetaylari.Select(x => x.Name)))"
                                                   class="form-control"></textarea>
                                         <br />
                                         <div class="panel panel-default">
@@ -521,18 +325,18 @@
                     <div id="collapse_boya_islemleri" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="form-horizontal form-bordered form-row-stripped">
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.En, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.Gramaj, templateName: "MyTouchSpin")
+                                @Html.EditorFor(x => x.KumasOrmeDokuma.En, templateName: "MyTouchSpin")
+                                @Html.EditorFor(x => x.KumasOrmeDokuma.Gramaj, templateName: "MyTouchSpin")
                                 <div class="form-group">
-                                    @Html.LabelFor(x => x.KumasOrmeDokumaDto.BoyaIslemleriIds, new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(x => x.KumasOrmeDokuma.BoyaIslemleriIds, new { @class = "control-label col-md-2" })
                                     <div class="col-md-6">
-                                        @Html.HiddenFor(x => x.KumasOrmeDokumaDto.BoyaIslemleriIds)
-                                        <textarea id="KumasOrmeDokumaDto_BoyaIslemleri"
+                                        @Html.HiddenFor(x => x.KumasOrmeDokuma.BoyaIslemleriIds)
+                                        <textarea id="KumasOrmeDokuma_BoyaIslemleri"
                                                   class="form-control"
                                                   rows="3"
                                                   readonly
                                                   cols="20"
-                                                  value="@(string.Join(",",Model.KumasOrmeDokumaDto.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
+                                                  value="@(string.Join(",",Model.KumasOrmeDokuma.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
                                         <div class="panel panel-default">
                                             <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                 <div id="treeBoyaIslemleri">
@@ -547,33 +351,18 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_yikama_talimati"> YIKAMA TALIMATI </a>
-                        </h4>
-                    </div>
-                    <div id="collapse_yikama_talimati" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-horizontal form-bordered form-row-stripped">
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiKuruTemizleme, "MyBoolean")
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.KumasOrmeDokumaDto.YikamaTalimatiYikamaSekli, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-6">
-                                        @Html.DropDownListFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiYikamaSekli, Model.Collections.YikamaSekilleri, "Please Select", new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.YikamaTalimatiYikamaSekli, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiYikamaMaxDerecesi, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiUtulemeMaxDerecesi, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiTersYikama, templateName: "MyBoolean")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiCekemezlik, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiDonmezlik, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.KumasOrmeDokumaDto.YikamaTalimatiYikamaAdedi, templateName: "MyTouchSpin")
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                @Html.Partial("_MyPartialYikamaTalimati",model:new ZetaCodeYikamaTalimatiEditVm
+           {
+               YikamaTalimati = Model.YikamaTalimati,
+               Collections=new ZetaCodeYikamaTalimatiEditVmCollections {
+
+                   YikamaSekilleri = Model.Collections.YikamaSekilleri
+
+               }
+
+           })
+
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -587,23 +376,23 @@
                                 <div class="form-body">
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.KumasOrmeDokumaDto.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.KumasOrmeDokuma.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
-                                            @Html.DropDownList("KumasOrmeDokumaDto.PantoneId"
-                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.KumasOrmeDokumaDto.PantoneId.HasValue ? Model.KumasOrmeDokumaDto.PantoneId.ToString() : "")
+                                            @Html.DropDownList("KumasOrmeDokuma.PantoneId"
+                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.KumasOrmeDokuma.PantoneId.HasValue ? Model.KumasOrmeDokuma.PantoneId.ToString() : "")
                                                , "Please Select"
                                                , htmlAttributes: new { @class = "form-control select2" })
-                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.PantoneId, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.PantoneId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.KumasOrmeDokumaDto.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.KumasOrmeDokuma.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-3">
-                                            @Html.DropDownList("KumasOrmeDokumaDto.Renkid"
-                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.KumasOrmeDokumaDto.Renkid.HasValue ? Model.KumasOrmeDokumaDto.Renkid.ToString() : "")
+                                            @Html.DropDownList("KumasOrmeDokuma.Renkid"
+                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.KumasOrmeDokuma.Renkid.HasValue ? Model.KumasOrmeDokuma.Renkid.ToString() : "")
                                             , "Please Select"
                                             , htmlAttributes: new { @class = "form-control select2", @onchange = "setHtmlColorCode($(this))" })
-                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokumaDto.Renkid, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.Renkid, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col-md-3">
                                             <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
@@ -629,36 +418,36 @@
                                 <div class="panel-body">
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.KumasOrmeDokumaDto.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.KumasOrmeDokuma.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
-                                            @Html.DropDownList("KumasOrmeDokumaDto.KumasGoruntuId"
-                                                       , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.KumasOrmeDokumaDto.KumasGoruntuId.HasValue ? Model.KumasOrmeDokumaDto.KumasGoruntuId.ToString() : "")
+                                            @Html.DropDownList("KumasOrmeDokuma.KumasGoruntuId"
+                                                       , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.KumasOrmeDokuma.KumasGoruntuId.HasValue ? Model.KumasOrmeDokuma.KumasGoruntuId.ToString() : "")
                                                        , "Please Select"
                                                        , new { @class = "form-control select2" })
                                         </div>
                                     </div>
 
                                     @*<div class="form-group">
-                                            @Html.LabelFor(model => model.KumasOrmeDokumaDto.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-6">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        @Html.HiddenFor(model => model.KumasOrmeDokumaDto.KoleksiyonKategoriId)
-                                                        @Html.TextBoxFor(model => model.KumasOrmeDokumaDto.KoleksiyonKategori.Name, new { @class = "form-control" })
-                                                        <br />
-                                                        <div id="treeKoleksiyonKategorileri"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
+                                @Html.LabelFor(model => model.KumasOrmeDokuma.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            @Html.HiddenFor(model => model.KumasOrmeDokuma.KoleksiyonKategoriId)
+                                            @Html.TextBoxFor(model => model.KumasOrmeDokuma.KoleksiyonKategori.Name, new { @class = "form-control" })
+                                            <br />
+                                            <div id="treeKoleksiyonKategorileri"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
 
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.KumasOrmeDokumaDto.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.KumasOrmeDokuma.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.KumasOrmeDokumaDto.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.KumasOrmeDokumaDto.RafyeriTurkiye.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.KumasOrmeDokuma.RafyeriTurkiyeId)
+                                                    @Html.TextBoxFor(x => x.KumasOrmeDokuma.RafyeriTurkiye.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -667,12 +456,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.KumasOrmeDokumaDto.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.KumasOrmeDokuma.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.KumasOrmeDokumaDto.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.KumasOrmeDokumaDto.RafyeriYunanistan.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.KumasOrmeDokuma.RafyeriYunanistanId)
+                                                    @Html.TextBoxFor(x => x.KumasOrmeDokuma.RafyeriYunanistan.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>
@@ -721,14 +510,14 @@
     <script src="~/Content/noUiSlider/wNumb.js"></script>
     <script src="~/Content/noUiSlider/nouislider.min.js"></script>
     <script src="~/Scripts/ComponentsNoUiSliders.js"></script>
-
+    <script src="~/Scripts/ComponentsRepeater.js"></script>
     <script>
 
         function setNormalIplikId(dll) {
-            if ($(dll).val() > 0) {
-                $(dll).closest(".mt-repeater-item").find(".normal_iplik_id").val($(dll).val())
-                getNormalIplikRenkler($(dll).val(), $(dll).closest(".mt-repeater-item").find("#normal_iplik_form"));
-            }
+            //if ($(dll).val() > 0) {
+            //    $(dll).closest(".mt-repeater-item").find(".normal_iplik_id").val($(dll).val())
+            //    getNormalIplikRenkler($(dll).val(), $(dll).closest(".mt-repeater-item").find("#normal_iplik_form"));
+            //}
 
         }
 
@@ -864,104 +653,118 @@
                     //Örgü Detayları - Örme Düz
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeDuz"
-                        , "#KumasOrmeDokumaDto_OrguDetaylariIds"
-                        , "#KumasOrmeDokumaDto_OrguDetaylari", false, ".form-group");
+                        , "#KumasOrmeDokuma_OrguDetaylariIds"
+                        , "#KumasOrmeDokuma_OrguDetaylari", false, ".form-group");
                 } else if ($(dll).val() === "45") {
                     //Örgü Detayları - Örme Yuvarlak
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeYuvarlak"
-                        , "#KumasOrmeDokumaDto_OrguDetaylariIds"
-                        , "#KumasOrmeDokumaDto_OrguDetaylari", false, ".form-group");
+                        , "#KumasOrmeDokuma_OrguDetaylariIds"
+                        , "#KumasOrmeDokuma_OrguDetaylari", false, ".form-group");
                 }
                 else if ($(dll).val() === "46") {
                     //Örgü Detayları - Örme Çözgülü
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeCozgulu"
-                        , "#KumasOrmeDokumaDto_OrguDetaylariIds"
-                        , "#KumasOrmeDokumaDto_OrguDetaylari", false, ".form-group");
+                        , "#KumasOrmeDokuma_OrguDetaylariIds"
+                        , "#KumasOrmeDokuma_OrguDetaylari", false, ".form-group");
 
                 }
                 else if ($(dll).val() === "47") {
                     //Örgü Detayları - Dokuma
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariDokuma"
-                        , "#KumasOrmeDokumaDto_OrguDetaylariIds"
-                        , "#KumasOrmeDokumaDto_OrguDetaylari", false, ".form-group");
+                        , "#KumasOrmeDokuma_OrguDetaylariIds"
+                        , "#KumasOrmeDokuma_OrguDetaylari", false, ".form-group");
                 }
                 else if ($(dll).val() === "48") {
                     //Örgü Detayları - Nonwoven
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariNonwoven"
-                        , "#KumasOrmeDokumaDto_OrguDetaylariIds"
-                        , "#KumasOrmeDokumaDto_OrguDetaylari", false, ".form-group");
+                        , "#KumasOrmeDokuma_OrguDetaylariIds"
+                        , "#KumasOrmeDokuma_OrguDetaylari", false, ".form-group");
                 }
             }
         }
 
         jQuery(document).ready(function () {
 
-          
-            
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_ModelYili", 1970, 2050, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_Pus", 2, 60, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_Fine", 2, 90, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_YedekFine", 2, 90, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_Sistem", 2, 135, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_IgneSayisi", 15, 16965, 1);            
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_YikamaTalimatiYikamaMaxDerecesi", 0, 100, 10);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_YikamaTalimatiUtulemeMaxDerecesi", 20, 100, 5);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_YikamaTalimatiCekemezlik", -30, 30, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_YikamaTalimatiDonmezlik", -30, 30, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_YikamaTalimatiYikamaAdedi", 1, 30, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_En", 1, 250, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_Gramaj", 1, 1000, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_HamGr", 1, 1000, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasMakineDto_HamCm", 1, 250, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_IplikKullanimOrani", 1, 100, 1);   
-            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokumaDto_MetreTulOrani", 1, 1000, 1);  
-            //ComponentsNoUiSlidersmyNoUiSlidersStater("#KumasOrmeDokumaDto_BaskiliEn", 1, 200, 1);
+            ComponentsRepeater.myRepeater("#mt-repeater1", function () {
+                var tempValue = $("#iplik_counter").val();
+                console.log(tempValue);
+                var tempValue = $("#mt-repeater1 div[data-repeater-item]").length;
+                console.log(tempValue);
+                return ($("#iplik_counter").val() * 1) >= $("#mt-repeater1 div[data-repeater-item]").length;
+
+
+            });
+               
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_ModelYili", 1970, 2050, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_Pus", 2, 60, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_Fine", 2, 90, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_YedekFine", 2, 90, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_Sistem", 2, 135, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_IgneSayisi", 15, 16965, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_HamGr", 1, 1000, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Makine_HamCm", 1, 250, 1);
+
+         
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_YikamaMaxDerecesi", 0, 100, 10);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_UtulemeMaxDerecesi", 20, 100, 5);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_Cekemezlik", -30, 30, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_Donmezlik", -30, 30, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_YikamaAdedi", 1, 30, 1);
+
+      
+
+            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokuma_En", 1, 250, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokuma_Gramaj", 1, 1000, 1);
+      
+            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokuma_IplikKullanimOrani", 1, 100, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#KumasOrmeDokuma_MetreTulOrani", 1, 1000, 1);
+            //ComponentsNoUiSlidersmyNoUiSlidersStater("#KumasOrmeDokuma_BaskiliEn", 1, 200, 1);
 
             //modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeKumasGoruntuleri"
             //    , "/ZetaCodeNormalIplik/JSTreeKumasGoruntuleri"
-            //    , "#KumasOrmeDokumaDto_KumasGoruntuId"
-            //    , "#KumasOrmeDokumaDto_KumasGoruntu_Name");
+            //    , "#KumasOrmeDokuma_KumasGoruntuId"
+            //    , "#KumasOrmeDokuma_KumasGoruntu_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeKoleksiyonKategorileri"
                 , "/ZetaCodeNormalIplik/JSTreeKoleksiyonKategorileri"
-                , "#KumasOrmeDokumaDto_KoleksiyonKategoriId"
-                , "#KumasOrmeDokumaDto_KoleksiyonKategori_Name");
+                , "#KumasOrmeDokuma_KoleksiyonKategoriId"
+                , "#KumasOrmeDokuma_KoleksiyonKategori_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriTurkiye"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
-                , "#KumasOrmeDokumaDto_RafyeriTurkiyeId"
-                , "#KumasOrmeDokumaDto_RafyeriTurkiye_Name");
+                , "#KumasOrmeDokuma_RafyeriTurkiyeId"
+                , "#KumasOrmeDokuma_RafyeriTurkiye_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriYunanistan"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
-                , "#KumasOrmeDokumaDto_RafyeriYunanistanId"
-                , "#KumasOrmeDokumaDto_RafyeriYunanistan_Name");
+                , "#KumasOrmeDokuma_RafyeriYunanistanId"
+                , "#KumasOrmeDokuma_RafyeriYunanistan_Name");
 
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeBoyaIslemleri"
                 , "/ZetaCodeNormalIplik/JSTreeBoyaIslemleri"
-                , "#KumasOrmeDokumaDto_BoyaIslemleriIds"
-                , "#KumasOrmeDokumaDto_BoyaIslemleri", true, ".form-group");
+                , "#KumasOrmeDokuma_BoyaIslemleriIds"
+                , "#KumasOrmeDokuma_BoyaIslemleri", true, ".form-group");
 
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeAksesuarlar"
                 , "/ZetaCodeNormalIplik/JSTreeAksesuarlar"
-                , "#KumasOrmeDokumaDto_AksesuarIds"
-                , "#KumasOrmeDokumaDto_Aksesuarlar", true, ".form-group");
+                , "#Makine_AksesuarIds"
+                , "#Aksesuarlar", true, ".form-group");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeMakineMarkalar"
                 , "/ZetaCodeNormalIplik/JSTreeMakineMarkalar"
-                , "#KumasOrmeDokumaDto_MakineMarkaId"
-                , "#KumasOrmeDokumaDto_MakineMarkasi_Name", false, ".form-group");
+                , "#Makine_MarkaId"
+                , "#Makine_MakineMarkasi_Name", false, ".form-group");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeMakineModeller"
                 , "/ZetaCodeNormalIplik/JSTreeMakineModeller"
-                , "#KumasOrmeDokumaDto_MakineModelId"
-                , "#KumasOrmeDokumaDto_MakineModeli_Name", false, ".form-group");
+                , "#Makine_ModelId"
+                , "#Makine_MakineModeli_Name", false, ".form-group");
 
         });
     </script>

@@ -33,13 +33,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string DesemRengi3 { get; set; } // DesemRengi3 (length: 50)
         public string _3AdimIslemlerId { get; set; } // _3AdimIslemlerId (length: 10)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFantezi3AdimIslemleri].([FantaziKumasId]) (FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi)
-        /// </summary>
-        public virtual ZetaCodeKumasFantazi ZetaCodeKumasFantazi { get; set; } // FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi
-
         public ZetaCodeKumasFantezi3AdimIslemleri()
         {
             InitializePartial();

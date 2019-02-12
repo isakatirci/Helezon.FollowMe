@@ -1,4 +1,5 @@
-﻿using Helezon.FollowMe.Service;
+﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,30 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class KumasFanteziEditVm
     {
-        public ZetaCodeKumasFantaziDto KumasFantaziDto { get; set; }
-        public ZetaCodeKumasMakineDto KumasMakineDto { get; set; }
+        public ZetaCodeKumasFantaziDto KumasFantazi { get; set; }
         public List<SelectListItem> FanteziKumaslar { get; set; }
-        public List<SelectListItem> OrmeDokumaKumaslar { get; set; }        
+        public List<SelectListItem> OrmeDokumaKumaslar { get; set; }
+        public List<ZetaCodeVm> Kumaslar { get; set; }
         public KumasFanteziEditVmCollections Collections { get; set; }
-        public SelectList AdimIslemleri { get; set; }
+        public CompanyDto Company { get; set; }
+        public ZetaCodeKumasMakineDto ZetaCodeKumasMakine { get; set; }
+
+        public List<ZetaCodeKumasFantezi3AdimIslemleriDto> KumasFantezi3AdimIslemleri { get; set; }
+        //
+        public ZetaCodeKumasMakineDto Makine { get; set; }
+        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
+        public ZetaCodeYikamaTalimatiDto ZetaCodeYikamaTalimati { get; set; }
+        public List<TermDto> AdimIslemleri { get; internal set; }
 
         public KumasFanteziEditVm()
         {
-            KumasFantaziDto = new ZetaCodeKumasFantaziDto();
-
+            KumasFantazi = new ZetaCodeKumasFantaziDto();
+            //KumasFantaziDto.Company = new CompanyDto();
             Collections = new KumasFanteziEditVmCollections();
+            Kumaslar = new List<ZetaCodeVm>();
+            KumasFantezi3AdimIslemleri = new List<ZetaCodeKumasFantezi3AdimIslemleriDto>();
+            ZetaCodeYikamaTalimati = new ZetaCodeYikamaTalimatiDto();
+            ZetaCodeKumasMakine = new ZetaCodeKumasMakineDto();
         }
     }
     public class KumasFanteziEditVmCollections
@@ -43,11 +56,12 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<SelectListItem> FanteziKumaslar { get; set; }
         public List<SelectListItem> OrmeDokumaKumaslar { get; set; }
         //
-        public List<SelectListItem> YikamaSekilleri { get; set; }
+        public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
 
         //
         //
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
+        public List<ZetaCodeVm> Kumaslar { get; set; }
 
 
         //public List<SelectListItem> NormalIplikler { get; set; }
@@ -64,6 +78,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             OrguCesidleri = new List<SelectListItem>();
             OrguKabiliyetleri = new List<SelectListItem>();
             OrguDigerleri = new List<SelectListItem>();
+            Kumaslar = new List<ZetaCodeVm>();
         }
     }
 }

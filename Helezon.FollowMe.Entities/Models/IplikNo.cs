@@ -30,13 +30,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikNo].([ZetaCodeNormalIplikId]) (FK_IplikNo_ZetaCodeNormaliplik)
-        /// </summary>
-        public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikNo_ZetaCodeNormaliplik
-
         public IplikNo()
         {
             InitializePartial();

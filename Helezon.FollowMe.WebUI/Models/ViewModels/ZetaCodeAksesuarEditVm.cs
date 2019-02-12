@@ -10,14 +10,16 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class AksesuarEditVm
     {
-        public ZetaCodeAksesuarDto AksesuarDto { get; internal set; }
+        public ZetaCodeAksesuarDto Aksesuar { get; internal set; }
         public ZetaCodeAksesuarEditVmCollections Collections { get; set; }
         public List<ZetaCodeAksesuarKompozisyonDto> AksesuarKompozisyonlar { get; set; }
+        public CompanyDto Company { get; set; }
         public AksesuarEditVm()
         {
             Collections = new ZetaCodeAksesuarEditVmCollections();
-            AksesuarDto = new ZetaCodeAksesuarDto();
+            Aksesuar = new ZetaCodeAksesuarDto();
             AksesuarKompozisyonlar = new List<ZetaCodeAksesuarKompozisyonDto>();
+            Company = new CompanyDto();
         }
     }
     public class ZetaCodeAksesuarEditVmCollections

@@ -30,18 +30,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasFantaziPicture].([CompanyId]) (FK_ZetaCodeKumasFantaziPicture_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeKumasFantaziPicture_Company
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFantaziPicture].([KumasFantaziId]) (FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi)
-        /// </summary>
-        public virtual ZetaCodeKumasFantazi ZetaCodeKumasFantazi { get; set; } // FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi
-
         public ZetaCodeKumasFantaziPicture()
         {
             InitializePartial();

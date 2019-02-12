@@ -1,8 +1,10 @@
 ﻿
 var ComponentsRepeater = (function () {
 
-    var myRepeater = function (selector,validateNumberOfItems) {
+    var myRepeater = function (selector, validateNumberOfItems) {
+        debugger;
         $(selector).each(function () {
+            debugger;
             $(this).repeater({
                 show: function () {
 
@@ -28,9 +30,9 @@ var ComponentsRepeater = (function () {
                     //modulFantezilIplikVm.ajaxTreeFillTermTree("#treeElyafCinsiKalitesi", "/ZetaCodeNormalIplik/JSTreeElyafCinsiveKalitesi");
 
 
-                    $('.mt-repeater .select2-container').remove();
+                    $(selector + ' .select2-container').remove();
 
-                    $(".mt-repeater .select2").each(function () {
+                    $(selector +" .select2").each(function () {
 
                         $(this).select2({
                             placeholder: "Please Select",
@@ -40,7 +42,7 @@ var ComponentsRepeater = (function () {
                     });
 
 
-                    $('.mt-repeater .select2-container').css('width', '100%');
+                    $(selector +' .select2-container').css('width', '100%');
 
                 },
 

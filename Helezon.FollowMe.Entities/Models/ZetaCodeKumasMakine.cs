@@ -21,42 +21,28 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeKumasMakine: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public int? MarkaId { get; set; } // MarkaId
+        public int? ModelId { get; set; } // ModelId
         public string ModelYili { get; set; } // ModelYili (length: 10)
         public string Pus { get; set; } // Pus (length: 10)
         public string Fine { get; set; } // Fine (length: 10)
         public string YedekFine { get; set; } // YedekFine (length: 10)
         public string Sistem { get; set; } // Sistem (length: 10)
         public string IgneSayisi { get; set; } // IgneSayisi (length: 10)
-        public string HamCm { get; set; } // HamCm (length: 10)
         public string HamGr { get; set; } // HamGr (length: 10)
-        public string Elastane { get; set; } // Elastane (length: 10)
+        public string HamCm { get; set; } // HamCm (length: 10)
+        public string AksesuarIds { get; set; } // AksesuarIds (length: 500)
+        public int? TupAcikEnId { get; set; } // TupAcikEnId
+        public int? ElastanId { get; set; } // ElastanId
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public string CompanyId { get; set; } // CompanyId (length: 128)
-        public string AksesuarIds { get; set; } // AksesuarIds (length: 500)
-        public int? TupAcikEnId { get; set; } // TupAcikEnId
-        public int? ElastanId { get; set; } // ElastanId
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[KumasMakineId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma.FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasMakine].([CompanyId]) (FK_ZetaCodeKumasMakine_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeKumasMakine_Company
 
         public ZetaCodeKumasMakine()
         {
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
             InitializePartial();
         }
 

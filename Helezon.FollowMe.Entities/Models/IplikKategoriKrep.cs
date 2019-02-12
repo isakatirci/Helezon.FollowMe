@@ -25,13 +25,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string BukumYonu { get; set; } // BukumYonu (length: 50)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriKrep].([ZetaCodeNormalIplikId]) (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriKrep_ZetaCodeNormalIplik
-
         public IplikKategoriKrep()
         {
             InitializePartial();

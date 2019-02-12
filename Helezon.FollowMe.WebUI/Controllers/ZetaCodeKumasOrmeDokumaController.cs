@@ -1,5 +1,6 @@
 ﻿using FollowMe.Web;
 using FollowMe.Web.Controllers;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,47 @@ namespace Helezon.FollowMe.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ZetaCodeKumasOrmeDokumaEditVm model)
         {
-            GetKumasOrmeDokumaService().InsertOrUpdate(model.KumasOrmeDokumaDto);
+            var result = HandleException(() =>
+            {
+                var container = new KumasOrmeDokumaContainerDto();
+                if (model.Iplikler != null && model.Iplikler.Any())
+                {
+                    for (int i = 0; i < model.Iplikler.Count; i++)
+                    {
+
+                        if (string.IsNullOrWhiteSpace(model.Iplikler[i].Id))
+                        {
+                            continue;
+                        }
+
+                        var arr = model.Iplikler[i].Id.Split('|');
+                        var id = arr[0].Trim();
+                        var iplikTipi = arr[1].Trim();
+                        //if (string.Equals(iplikTipi, "Normaliplik", StringComparison.InvariantCultureIgnoreCase))
+                        //{
+                        //    container.NormalIplikler.Add(new Service.DataTransferObjects.ZetaCodeNormalIplikDto()
+                        //    {
+                        //        Id = id.AsInt()
+                        //    });
+                        //}
+                        //else if (string.Equals(iplikTipi, "Fanzteziiplik", StringComparison.InvariantCultureIgnoreCase))
+                        //{
+                        //    container.FanteziIplikler.Add(new Service.DataTransferObjects.ZetaCodeFanteziIplikDto()
+                        //    {
+                        //        Id = id.AsInt()
+                        //    });
+                        //}
+
+                    }
+                }
+                container.KumasOrmeDokuma = model.KumasOrmeDokuma;
+                container.KumasMakine = model.KumasMakine;
+                container.YikamaTalimati = model.YikamaTalimati;           
+                GetKumasOrmeDokumaService().InsertOrUpdate(container);
+            });
+
+            if (result)
+                return RedirectToActionPermanent(actionName: "Index", controllerName: "ZetaCode");
             FillCollections(model);
             return View(model);
         }
@@ -57,11 +98,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.Collections.Elastanlar = GetOthersService().GetAllElastan();
 
 
-            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri().Select(x => new SelectListItem
-            {
-                Value = x.Id,
-                Text = x.Name
-            }).ToList();
+            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri();
 
             model.Collections.OrguTipleri.Add(new SelectListItem
             {
@@ -139,16 +176,70 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Text = x.ZetaCodeFormat() + ", " + x.UrunIsmi
             }).ToList();
 
-            if (!model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Any())
+            //if (!model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Any())
+            //{
+            //    model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Add(new Service.DataTransferObjects.ZetaCodeNormalIplikDto());
+            //}
+
+            if (!model.ZetaCodeFanteziIplikDtos.Any())
             {
-                model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Add(new Service.DataTransferObjects.ZetaCodeNormalIplikDto());
+                model.ZetaCodeFanteziIplikDtos.Add(new Service.DataTransferObjects.ZetaCodeFanteziIplikDto());
+            }          
+
+            if (model.KumasMakine == null)
+            {
+                model.KumasMakine = new Service.DataTransferObjects.ZetaCodeKumasMakineDto();
             }
 
-            if (!model.KumasOrmeDokumaDto.ZetaCodeFanteziIplik.Any())
+            if (model.YikamaTalimati == null)
             {
-                model.KumasOrmeDokumaDto.ZetaCodeFanteziIplik.Add(new Service.DataTransferObjects.ZetaCodeFanteziIplikDto());
+                model.YikamaTalimati = new Service.DataTransferObjects.ZetaCodeYikamaTalimatiDto();
             }
 
+            if (model.KumasMakine.Aksesuarlar == null)
+            {
+                model.KumasMakine.Aksesuarlar = new List<Service.DataTransferObjects.TermDto>();
+            }
+
+
+            var normalIplikler = GetNormalIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+            var fanteziIplikler = GetFanteziIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
+
+            model.Iplikler.AddRange(model.ZetaCodeNormalIplikDtos.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "Normaliplik",
+                ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
+            }));
+
+            model.Iplikler.AddRange(model.ZetaCodeFanteziIplikDtos.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "Fanteziiplik",
+                ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
+            }));
+
+
+            model.Collections.Iplikler.AddRange(normalIplikler.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "Normaliplik",
+                ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
+            }));
+
+            model.Collections.Iplikler.AddRange(fanteziIplikler.Select(x => new ZetaCodeVm
+            {
+                Id = x.Id + "|" + "Fanteziiplik",
+                ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
+            }));
+
+            if (!model.Iplikler.Any())
+            {
+                model.Iplikler.Add(new ZetaCodeVm());
+            }
+
+
+        }
+        private string ZetaCodeFormatli(int zetaCode)
+        {
+            return "Z" + zetaCode.ToString().PadLeft(4, '0');
         }
     }
 }

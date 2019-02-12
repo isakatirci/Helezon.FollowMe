@@ -31,18 +31,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string CompanyId { get; set; } // CompanyId (length: 128)
         public int? AksesuarId { get; set; } // AksesuarId
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeAksesuarKompozisyon].([CompanyId]) (FK_ZetaCodeAksesuarKompozisyon_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeAksesuarKompozisyon_Company
-
-        /// <summary>
-        /// Parent ZetaCodeAksesuar pointed by [ZetaCodeAksesuarKompozisyon].([AksesuarId]) (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
-        /// </summary>
-        public virtual ZetaCodeAksesuar ZetaCodeAksesuar { get; set; } // FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
-
         public ZetaCodeAksesuarKompozisyon()
         {
             InitializePartial();

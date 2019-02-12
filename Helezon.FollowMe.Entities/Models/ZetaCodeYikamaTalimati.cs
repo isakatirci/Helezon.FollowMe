@@ -16,32 +16,26 @@ namespace Helezon.FollowMe.Entities.Models
 {
     using Repository.Pattern.Ef6;
 
-    // ZetaCodeKumasFanteziOrmeDokuma
+    // ZetaCodeYikamaTalimati
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public partial class ZetaCodeKumasFanteziOrmeDokuma: Entity
+    public partial class ZetaCodeYikamaTalimati: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public bool? KuruTemizleme { get; set; } // KuruTemizleme
+        public string YikamaSekli { get; set; } // YikamaSekli (length: 50)
+        public string YikamaMaxDerecesi { get; set; } // YikamaMaxDerecesi (length: 50)
+        public string UtulemeMaxDerecesi { get; set; } // UtulemeMaxDerecesi (length: 50)
+        public bool? TersYikama { get; set; } // TersYikama
+        public string Cekemezlik { get; set; } // Cekemezlik (length: 10)
+        public string Donmezlik { get; set; } // Donmezlik (length: 10)
+        public string YikamaAdedi { get; set; } // YikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? KumasFanteziId { get; set; } // KumasFanteziId
-        public int? KumasOrmeDokumaId { get; set; } // KumasOrmeDokumaId
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFanteziFantezi pointed by [ZetaCodeKumasFanteziOrmeDokuma].([KumasFanteziId]) (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi)
-        /// </summary>
-        public virtual ZetaCodeKumasFanteziFantezi ZetaCodeKumasFanteziFantezi { get; set; } // FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi
-
-        /// <summary>
-        /// Parent ZetaCodeKumasOrmeDokuma pointed by [ZetaCodeKumasFanteziOrmeDokuma].([KumasOrmeDokumaId]) (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public virtual ZetaCodeKumasOrmeDokuma ZetaCodeKumasOrmeDokuma { get; set; } // FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma
-
-        public ZetaCodeKumasFanteziOrmeDokuma()
+        public ZetaCodeYikamaTalimati()
         {
             InitializePartial();
         }

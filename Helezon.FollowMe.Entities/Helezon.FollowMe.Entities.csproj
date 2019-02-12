@@ -290,6 +290,12 @@
     <Compile Include="Models\ZetaCodeFanteziIplikMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZetaCodeFanteziIplikNormalIplik.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeFanteziIplikNormalIplikMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZetaCodeFanteziIplikPicture.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
@@ -297,6 +303,24 @@
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodeHazirGiyim.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimAksesuar.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimAksesuarMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimKumasFantezi.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimKumasFanteziMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimKumasOrmeDokuma.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeHazirGiyimKumasOrmeDokumaMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodeHazirGiyimMap.cs">
@@ -320,16 +344,16 @@
     <Compile Include="Models\ZetaCodeKumasFantezi3AdimIslemleriMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZetaCodeKumasFanteziFantezi.cs">
+    <Compile Include="Models\ZetaCodeKumasFanteziKumasFantezi.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZetaCodeKumasFanteziFanteziMap.cs">
+    <Compile Include="Models\ZetaCodeKumasFanteziKumasFanteziMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZetaCodeKumasFanteziOrmeDokuma.cs">
+    <Compile Include="Models\ZetaCodeKumasFanteziKumasOrmeDokuma.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZetaCodeKumasFanteziOrmeDokumaMap.cs">
+    <Compile Include="Models\ZetaCodeKumasFanteziKumasOrmeDokumaMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodeKumasMakine.cs">
@@ -362,10 +386,28 @@
     <Compile Include="Models\ZetaCodeNormalIplikPictureMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZetaCodeNormalKumasFanteziIplik.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalKumasFanteziIplikMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalKumasNormalIplik.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeNormalKumasNormalIplikMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZetaCodes.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZetaCodesMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeYikamaTalimati.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeYikamaTalimatiMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

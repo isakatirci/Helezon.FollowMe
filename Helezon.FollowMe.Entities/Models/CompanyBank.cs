@@ -41,13 +41,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? MakedPassiveOn { get; set; } // MakedPassiveOn
         public string MakedPassiveBy { get; set; } // MakedPassiveBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyBank].([CompanyId]) (FK_CompanyBank_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_CompanyBank_Company
-
         public CompanyBank()
         {
             BankNameTermId = 0;

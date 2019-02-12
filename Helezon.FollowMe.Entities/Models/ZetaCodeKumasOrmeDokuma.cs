@@ -46,64 +46,15 @@ namespace Helezon.FollowMe.Entities.Models
         public int? OrguTipiId { get; set; } // OrguTipiId
         public string BoyaIslemleriIds { get; set; } // BoyaIslemleriIds (length: 500)
         public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
-        public int? MakineMarkaId { get; set; } // MakineMarkaId
-        public int? MakineModelId { get; set; } // MakineModelId
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFanteziOrmeDokuma> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma.FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokumaPicture where [ZetaCodeKumasOrmeDokumaPicture].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture.FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma
-        /// <summary>
-        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasOrmeDokuma].([CompanyId]) (FK_ZetaCodeKumasOrmeDokuma_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeKumasOrmeDokuma_Company
-
-        /// <summary>
-        /// Parent ZetaCodeKumasMakine pointed by [ZetaCodeKumasOrmeDokuma].([KumasMakineId]) (FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine)
-        /// </summary>
-        public virtual ZetaCodeKumasMakine ZetaCodeKumasMakine { get; set; } // FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine
+        public int? YikamaTalimatiId { get; set; } // YikamaTalimatiId
 
         public ZetaCodeKumasOrmeDokuma()
         {
-            ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokuma>();
-            ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPicture>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyim>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplik>();
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();
         }
 

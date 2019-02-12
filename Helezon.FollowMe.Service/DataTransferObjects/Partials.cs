@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace Helezon.FollowMe.Service.DataTransferObjects
 {
+    public partial class ZetaCodeKumasMakineDto
+    {
+        public TermDto MakineMarkasi { get; set; }
+        public TermDto MakineModeli { get; set; }
+        public List<TermDto> Aksesuarlar { get; set; }
+        partial void InitializePartial()
+        {
+            Aksesuarlar = new List<TermDto>();
+            AksesuarIds = string.Empty;
+        }
+
+    }
+
     public partial class ZetaCodeHazirGiyimDto
     {
         public TermDto RafyeriTurkiye { get; set; }
@@ -75,11 +88,17 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public List<TermDto> Aksesuarlar { get; set; }
         public List<TermDto> BoyaIslemleri { get; set; }
         public List<TermDto> OrguDetaylari { get; set; }
+
+        public List<ZetaCodeKumasFantaziDto> KumasOrmeDokumalar { get; set; }
+        public List<ZetaCodeKumasOrmeDokumaDto> KumasFanteziler { get; set; }       
+
         partial void InitializePartial()
         {
             MakineModeli = new TermDto();
             MakineMarkasi = new TermDto();
             RafyeriTurkiye = new TermDto();
+            KumasOrmeDokumalar = new List<ZetaCodeKumasFantaziDto>();
+            KumasFanteziler = new List<ZetaCodeKumasOrmeDokumaDto>();
             RafyeriYunanistan = new TermDto();
             BoyaIslemleri = new List<TermDto>();
             OrguDetaylari = new List<TermDto>();

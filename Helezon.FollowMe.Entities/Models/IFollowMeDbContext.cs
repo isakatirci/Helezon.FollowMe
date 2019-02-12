@@ -55,19 +55,26 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar
         System.Data.Entity.DbSet<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon
         System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        System.Data.Entity.DbSet<ZetaCodeFanteziIplikNormalIplik> ZetaCodeFanteziIplikNormalIplik { get; set; } // ZetaCode_FanteziIplik_NormalIplik
         System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
         System.Data.Entity.DbSet<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // ZetaCodeHazirGiyim
+        System.Data.Entity.DbSet<ZetaCodeHazirGiyimAksesuar> ZetaCodeHazirGiyimAksesuar { get; set; } // ZetaCode_HazirGiyim_Aksesuar
+        System.Data.Entity.DbSet<ZetaCodeHazirGiyimKumasFantezi> ZetaCodeHazirGiyimKumasFantezi { get; set; } // ZetaCode_HazirGiyim_KumasFantezi
+        System.Data.Entity.DbSet<ZetaCodeHazirGiyimKumasOrmeDokuma> ZetaCodeHazirGiyimKumasOrmeDokuma { get; set; } // ZetaCode_HazirGiyim_KumasOrmeDokuma
         System.Data.Entity.DbSet<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi
         System.Data.Entity.DbSet<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture
         System.Data.Entity.DbSet<ZetaCodeKumasFantezi3AdimIslemleri> ZetaCodeKumasFantezi3AdimIslemleri { get; set; } // ZetaCodeKumasFantezi3AdimIslemleri
-        System.Data.Entity.DbSet<ZetaCodeKumasFanteziFantezi> ZetaCodeKumasFanteziFantezi { get; set; } // ZetaCodeKumasFanteziFantezi
-        System.Data.Entity.DbSet<ZetaCodeKumasFanteziOrmeDokuma> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma
+        System.Data.Entity.DbSet<ZetaCodeKumasFanteziKumasFantezi> ZetaCodeKumasFanteziKumasFantezi { get; set; } // ZetaCode_KumasFantezi_KumasFantezi
+        System.Data.Entity.DbSet<ZetaCodeKumasFanteziKumasOrmeDokuma> ZetaCodeKumasFanteziKumasOrmeDokuma { get; set; } // ZetaCode_KumasFantezi_KumasOrmeDokuma
         System.Data.Entity.DbSet<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine
         System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma
         System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture
         System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
         System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
+        System.Data.Entity.DbSet<ZetaCodeNormalKumasFanteziIplik> ZetaCodeNormalKumasFanteziIplik { get; set; } // ZetaCode_NormalKumas_FanteziIplik
+        System.Data.Entity.DbSet<ZetaCodeNormalKumasNormalIplik> ZetaCodeNormalKumasNormalIplik { get; set; } // ZetaCode_NormalKumas_NormalIplik
         System.Data.Entity.DbSet<ZetaCodes> ZetaCodes { get; set; } // ZetaCodes
+        System.Data.Entity.DbSet<ZetaCodeYikamaTalimati> ZetaCodeYikamaTalimati { get; set; } // ZetaCodeYikamaTalimati
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();

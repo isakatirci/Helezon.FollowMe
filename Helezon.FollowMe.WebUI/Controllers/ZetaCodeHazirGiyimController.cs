@@ -37,15 +37,15 @@ namespace Helezon.FollowMe.WebUI.Controllers
                         , string sirketId = ""
                         , int? ulkeId = null)
         {
-            if (model.HazirGiyimDto.BedenOlculeri == null || !model.HazirGiyimDto.BedenOlculeri.Any())
-            {
-                model.HazirGiyimDto.BedenOlculeri = new List<Service.DataTransferObjects.BedenOlculeriDto>();
-                model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
-                model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
-                model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
-                model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
-                model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
-            }
+            //if (model.HazirGiyimDto.BedenOlculeri == null || !model.HazirGiyimDto.BedenOlculeri.Any())
+            //{
+            //    model.HazirGiyimDto.BedenOlculeri = new List<Service.DataTransferObjects.BedenOlculeriDto>();
+            //    model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
+            //    model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
+            //    model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
+            //    model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
+            //    model.HazirGiyimDto.BedenOlculeri.Add(new Service.DataTransferObjects.BedenOlculeriDto { });
+            //}
 
 
 
@@ -95,23 +95,23 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var fanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
             var aksesuarlar = GetAksesuarService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
 
-            model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasOrmeDokuma.Select(x => new ZetaCodeVm
-            {
-                Id = x.Id + "|" + "NormalKumas",
-                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
-            }));
+            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasOrmeDokuma.Select(x => new ZetaCodeVm
+            //{
+            //    Id = x.Id + "|" + "NormalKumas",
+            //    ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            //}));
 
-            model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasFantazi.Select(x => new ZetaCodeVm
-            {
-                Id = x.Id + "|" + "FanteziKumas",
-                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
-            }));
+            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasFantazi.Select(x => new ZetaCodeVm
+            //{
+            //    Id = x.Id + "|" + "FanteziKumas",
+            //    ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+            //}));
 
-            model.Aksesuarlar.AddRange(model.HazirGiyimDto.ZetaCodeAksesuar.Select(x => new ZetaCodeVm
-            {
-                Id = x.Id.ToString(),
-                ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
-            }));
+            //model.Aksesuarlar.AddRange(model.HazirGiyimDto.ZetaCodeAksesuar.Select(x => new ZetaCodeVm
+            //{
+            //    Id = x.Id.ToString(),
+            //    ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
+            //}));
 
 
             model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeVm

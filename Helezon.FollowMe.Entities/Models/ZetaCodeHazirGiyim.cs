@@ -52,38 +52,8 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child BedenOlculeri where [BedenOlculeri].[HazirGiyimId] point to this entity (FK_BedenOlculeri_ZetaCodeHazirGiyim)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<BedenOlculeri> BedenOlculeri { get; set; } // BedenOlculeri.FK_BedenOlculeri_ZetaCodeHazirGiyim
-        /// <summary>
-        /// Child ZetaCodeAksesuar (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasFantazi (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeHazirGiyim].([CompanyId]) (FK_ZetaCodeHazirGiyim_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeHazirGiyim_Company
-
         public ZetaCodeHazirGiyim()
         {
-            BedenOlculeri = new System.Collections.Generic.List<BedenOlculeri>();
-            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantazi>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
-            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuar>();
             InitializePartial();
         }
 

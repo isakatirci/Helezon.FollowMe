@@ -42,9 +42,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.DesemRengi2).HasColumnName(@"DesemRengi2").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
             Property(x => x.DesemRengi3).HasColumnName(@"DesemRengi3").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
             Property(x => x._3AdimIslemlerId).HasColumnName(@"_3AdimIslemlerId").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
-
-            // Foreign keys
-            HasRequired(a => a.ZetaCodeKumasFantazi).WithMany(b => b.ZetaCodeKumasFantezi3AdimIslemleri).HasForeignKey(c => c.FantaziKumasId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi
             InitializePartial();
         }
         partial void InitializePartial();

@@ -39,10 +39,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasRequired(a => a.Company).WithMany(b => b.ZetaCodeKumasOrmeDokumaPicture).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasOrmeDokumaPicture_Company
-            HasRequired(a => a.ZetaCodeKumasOrmeDokuma).WithMany(b => b.ZetaCodeKumasOrmeDokumaPicture).HasForeignKey(c => c.KumasOrmeDokumaId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma
             InitializePartial();
         }
         partial void InitializePartial();

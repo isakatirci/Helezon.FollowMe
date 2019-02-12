@@ -34,7 +34,7 @@
     Settings.UseDataAnnotations = false; // If true, will add data annotations to the poco classes.
     Settings.UseDataAnnotationsWithFluent = false; // If true, then non-Entity Framework-specific DataAnnotations (like [Required] and [StringLength]) will be applied to Entities even if UseDataAnnotations is false.
     Settings.UsePropertyInitializers = false; // Removes POCO constructor and instead uses C# 6 property initialisers to set defaults
-    Settings.UseLazyLoading = true; // Marks all navigation properties as virtual or not, to support or disable EF Lazy Loading feature
+    Settings.UseLazyLoading = false; // Marks all navigation properties as virtual or not, to support or disable EF Lazy Loading feature
     Settings.UseInheritedBaseInterfaceFunctions = false; // If true, the main DBContext interface functions will come from the DBContextInterfaceBaseClasses and not generated. If false, the functions will be generated.
     Settings.IncludeComments = CommentsStyle.AtEndOfField; // Adds comments to the generated code
     Settings.IncludeExtendedPropertyComments = CommentsStyle.InSummaryBlock; // Adds extended properties as comments to the generated code
@@ -44,7 +44,7 @@
     Settings.IncludeStoredProcedures = true;
     Settings.IncludeTableValuedFunctions = false; // If true, you must set IncludeStoredProcedures = true, and install the "EntityFramework.CodeFirstStoreFunctions" Nuget Package.
     Settings.DisableGeographyTypes = false; // Turns off use of System.Data.Entity.Spatial.DbGeography and System.Data.Entity.Spatial.DbGeometry as OData doesn't support entities with geometry/geography types.
-    //Settings.CollectionInterfaceType = "System.Collections.Generic.List"; // Determines the declaration type of collections for the Navigation Properties. ICollection is used if not set.
+    Settings.CollectionInterfaceType = "System.Collections.Generic.List"; // Determines the declaration type of collections for the Navigation Properties. ICollection is used if not set.
     Settings.CollectionType = "System.Collections.Generic.List";  // Determines the type of collection for the Navigation Properties. "ObservableCollection" for example. Add "System.Collections.ObjectModel" to AdditionalNamespaces if setting the CollectionType = "ObservableCollection".
     Settings.NullableShortHand = true; //true => T?, false => Nullable<T>
     Settings.AddIDbContextFactory = true; // Will add a default IDbContextFactory<DbContextName> implementation for easy dependency injection
@@ -496,7 +496,7 @@
 
         // You can also change the access modifier of the foreign-key's navigation property:
         // if(fk.PkTableName == "Categories") fk.AccessModifier = "internal";
-
+           return null;
         return fk;
     };
 

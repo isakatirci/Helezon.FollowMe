@@ -26,13 +26,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string FlamYuksekligi { get; set; } // FlamYuksekligi (length: 10)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriFlam].([ZetaCodeNormalIplikId]) (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriFlam_ZetaCodeNormalIplik
-
         public IplikKategoriFlam()
         {
             InitializePartial();

@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
-    var update = Model != null && Model.AksesuarDto != null && Model.AksesuarDto.Id > 0;
+    var update = Model != null && Model.Aksesuar != null && Model.Aksesuar.Id > 0;
 }
 
 @section afterGlobalStyles
@@ -27,11 +27,11 @@
     </style>
 }
 
-<form action="/ZetaCodeFanteziIplik/Edit" id="frmZetaCodeFanteziIplik" method="post">
+<form action="/ZetaCodeAksesuar/Edit" id="frmZetaCodeAksesuar" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.AksesuarDto.Id)
-    @Html.HiddenFor(model => model.AksesuarDto.ZetaCode)
+    @Html.HiddenFor(model => model.Aksesuar.Id)
+    @Html.HiddenFor(model => model.Aksesuar.ZetaCode)
 
     <div class="portlet box green">
         <div class="portlet-title">
@@ -59,45 +59,45 @@
                                             @if (update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.AksesuarDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.Aksesuar.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <div class="checkbox">
-                                                            @Html.EditorFor(model => model.AksesuarDto.IsPassive, new { SelectName = "AksesuarDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
-                                                            @Html.ValidationMessageFor(model => model.AksesuarDto.IsPassive, "", new { @class = "text-danger" })
+                                                            @Html.EditorFor(model => model.Aksesuar.IsPassive, new { SelectName = "AksesuarDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
+                                                            @Html.ValidationMessageFor(model => model.Aksesuar.IsPassive, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.AksesuarDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.Aksesuar.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
                                                                id="ZetaCodeFanteziIplikDto_ZetaCode"
-                                                               value="@Model.AksesuarDto.ZetaCodeFormatli" />
+                                                               value="@Model.Aksesuar.ZetaCodeFormatli" />
                                                     </div>
                                                 </div>
                                             }
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.AksesuarDto.ZetaCodePrevious
+                                                @Html.LabelFor(model => model.Aksesuar.ZetaCodePrevious
                                            , htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.AksesuarDto.ZetaCodePrevious
+                                                    @Html.EditorFor(model => model.Aksesuar.ZetaCodePrevious
                                                         , new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.AksesuarDto.ZetaCodePrevious
+                                                    @Html.ValidationMessageFor(model => model.Aksesuar.ZetaCodePrevious
                                                          , "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.AksesuarDto.Master
+                                                @Html.LabelFor(model => model.Aksesuar.Master
                                            , htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     <div class="checkbox">
-                                                        @Html.EditorFor(model => model.AksesuarDto.Master
+                                                        @Html.EditorFor(model => model.Aksesuar.Master
                                                    , new { SelectName = "AksesuarDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
-                                                        @Html.ValidationMessageFor(model => model.AksesuarDto.Master
+                                                        @Html.ValidationMessageFor(model => model.Aksesuar.Master
                                                    , "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
@@ -107,14 +107,14 @@
                                             @if (!update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.AksesuarDto.CompanyId
+                                                    @Html.LabelFor(model => model.Aksesuar.CompanyId
                                                , "Blue Cod Name"
                                                , htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         @Html.DropDownList("AksesuarDto.CompanyId"
                                                             , Model.Collections.Sirketler, "Please Select"
                                                             , htmlAttributes: new { @class = "form-control select2" })
-                                                        @Html.ValidationMessageFor(model => model.AksesuarDto.CompanyId
+                                                        @Html.ValidationMessageFor(model => model.Aksesuar.CompanyId
                                                    , "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
@@ -123,16 +123,16 @@
                                             {
                                                 <input type="hidden" name="AksesuarDto.SirketId"
                                                        id="ZetaCodeNormalIplikDto_SirketId"
-                                                       value="@Model.AksesuarDto.CompanyId" />
+                                                       value="@Model.Aksesuar.CompanyId" />
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.AksesuarDto.CompanyId
+                                                    @Html.LabelFor(model => model.Aksesuar.CompanyId
                                                , "Blue Cod Name"
                                                , htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                class="form-control"
                                                                readonly
-                                                               value="@(Model.AksesuarDto.Company?.Code + " " + Model.AksesuarDto.Company?.Name)" />
+                                                               value="@(Model.Company.Code + " " + Model.Company.Name)" />
                                                     </div>
                                                 </div>
                                             }
@@ -142,10 +142,10 @@
                                             {
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.AksesuarDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.Aksesuar.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.EditorFor(model => model.AksesuarDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                        @Html.ValidationMessageFor(model => model.AksesuarDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.Aksesuar.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.Aksesuar.BlueSiparisNo, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
@@ -155,12 +155,12 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.AksesuarDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Aksesuar.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     @Html.DropDownList("AksesuarDto.Ulke"
     , Model.Collections.Ulkeler, "Please Select"
     , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.AksesuarDto.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.Aksesuar.Ulke, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -176,10 +176,10 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.AksesuarDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Aksesuar.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.AksesuarDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.AksesuarDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.Aksesuar.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.Aksesuar.BlueUrunKodIsmi, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -230,9 +230,9 @@
                         <div class="panel-body">
                             <div class="form-horizontal form-bordered form-row-stripped">
                                 <div class="form-body">
-                                    @Html.EditorFor(model => model.AksesuarDto.En, "MyTouchSpin")
-                                    @Html.EditorFor(model => model.AksesuarDto.Boy, "MyTouchSpin")
-                                    @Html.EditorFor(model => model.AksesuarDto.Gram, "MyTouchSpin")
+                                    @Html.EditorFor(model => model.Aksesuar.En, "MyTouchSpin")
+                                    @Html.EditorFor(model => model.Aksesuar.Boy, "MyTouchSpin")
+                                    @Html.EditorFor(model => model.Aksesuar.Gram, "MyTouchSpin")
 
                                     <div class="form-group">
                                         <label class="control-label col-md-2" for="normal_iplik_count">Kaç Kumaş Örme Dokumadan Oluşuyor</label>
@@ -252,7 +252,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-repeater">
-                                        <div data-repeater-list="OrmeDokumaKumaslar">
+                                        <div data-repeater-list="AksesuarKompozisyonlar">
                                             @{
                                                 for (int i = 0; i < Model.AksesuarKompozisyonlar.Count; i++)
                                                 {
@@ -262,10 +262,10 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-2" for=""></label>
                                                                     <div class="col-md-4">
-                                                                        @Html.DropDownListFor(expression: x => x.AksesuarKompozisyonlar[i].UrunKompozisyonId, selectList: new SelectList(Model.Collections.UrunKompozisyonlar, "Id", "Name"),optionLabel:"Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                                        @Html.DropDownList("UrunKompozisyonId", selectList: new SelectList(Model.Collections.UrunKompozisyonlar, "Id", "Name"),optionLabel:"Please Select", htmlAttributes: new { @class = "form-control select2" })
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        @Html.DropDownListFor(expression: x => x.AksesuarKompozisyonlar[i].YuzdeOrani, selectList: Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control select2 yuzde_orani" })
+                                                                        @Html.DropDownList("YuzdeOrani", selectList: Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control select2 yuzde_orani" })
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0;">
@@ -307,23 +307,23 @@
                                 <div class="form-body">
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.AksesuarDto.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Aksesuar.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             @Html.DropDownList("AksesuarDto.PantoneId"
-                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.AksesuarDto.PantoneId.HasValue ? Model.AksesuarDto.PantoneId.ToString() : "")
+                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.Aksesuar.PantoneId.HasValue ? Model.Aksesuar.PantoneId.ToString() : "")
                                                , "Please Select"
                                                , htmlAttributes: new { @class = "form-control select2" })
-                                            @Html.ValidationMessageFor(model => model.AksesuarDto.PantoneId, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.Aksesuar.PantoneId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.AksesuarDto.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Aksesuar.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-3">
                                             @Html.DropDownList("AksesuarDto.Renkid"
-                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.AksesuarDto.Renkid.HasValue ? Model.AksesuarDto.Renkid.ToString() : "")
+                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.Aksesuar.Renkid.HasValue ? Model.Aksesuar.Renkid.ToString() : "")
                                             , "Please Select"
                                             , htmlAttributes: new { @class = "form-control select2", @onchange = "setHtmlColorCode($(this))" })
-                                            @Html.ValidationMessageFor(model => model.AksesuarDto.Renkid, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.Aksesuar.Renkid, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col-md-3">
                                             <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
@@ -373,12 +373,12 @@
                             </div>*@
 
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.AksesuarDto.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.Aksesuar.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.AksesuarDto.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.AksesuarDto.RafyeriTurkiye.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.Aksesuar.RafyeriTurkiyeId)
+                                                    @Html.TextBoxFor(x => x.Aksesuar.RafyeriTurkiye.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -387,12 +387,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.AksesuarDto.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.Aksesuar.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.AksesuarDto.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.AksesuarDto.RafyeriYunanistan.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.Aksesuar.RafyeriYunanistanId)
+                                                    @Html.TextBoxFor(x => x.Aksesuar.RafyeriYunanistan.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>
@@ -414,7 +414,7 @@
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <button type="submit" onclick="validateSomeFields()" class="btn green btn-block">
+                                        <button type="submit" onclick="validateSomeFields(event)" class="btn green btn-block">
                                             @*<i class="fa fa-pencil"></i>*@ Submit
                                         </button>
                                     </div>
@@ -444,7 +444,8 @@
     <script>
 
 
-        function validateSomeFields() {
+        function validateSomeFields(event) {
+            
             var yuzdeOrani = $('.yuzde_orani option:selected');
             var yuzdeOraniToplam = 0;
             for (var i = 0; i < yuzdeOrani.length; i++) {
@@ -453,9 +454,10 @@
             }
             if (yuzdeOraniToplam !== 100) {
                 alert("Toplam %100 olmalıdır");
-                $(this).remove();
-                //event.preventDefault();
-                return;
+                debugger;
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
             }
         }
 
@@ -619,6 +621,7 @@
                     show: function () {
 
                         var yuzdeOrani = $('.yuzde_orani option:selected');
+                        debugger;
                         var yuzdeOraniToplam = 0;
                         for (var i = 0; i < yuzdeOrani.length; i++) {
                             debugger;
@@ -629,13 +632,6 @@
                             $(this).remove();
                             return;
                         }
-
-
-                        //if ($('.mt-repeater .normal_iplik').length > parseInt($("#normal_iplik_count").val())) {
-                        //    alert("En fazla " + $("#normal_iplik_count").val() + " adet normal iplik seçilebilir");
-                        //    $(this).remove();
-                        //    return;
-                        //}
 
 
                         $(this).slideDown();
@@ -658,6 +654,12 @@
 
                         });
 
+                        debugger;
+                        if ($('.mt-repeater .mt-repeater-item').length > parseInt(($("#normal_iplik_count").val() || 0))) {
+                            alert("En fazla " + $("#normal_iplik_count").val() + " adet normal iplik seçilebilir");
+                            $(this).remove();                            
+                            return false;
+                        }
                       
 
                         $('.mt-repeater .select2-container').css('width', '100%');

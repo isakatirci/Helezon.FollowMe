@@ -42,9 +42,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.Xl3).HasColumnName(@"XL3").HasColumnType("int").IsOptional();
             Property(x => x.Xl4).HasColumnName(@"XL4").HasColumnType("int").IsOptional();
             Property(x => x.Xl5).HasColumnName(@"XL5").HasColumnType("int").IsOptional();
-
-            // Foreign keys
-            HasOptional(a => a.ZetaCodeHazirGiyim).WithMany(b => b.BedenOlculeri).HasForeignKey(c => c.HazirGiyimId).WillCascadeOnDelete(false); // FK_BedenOlculeri_ZetaCodeHazirGiyim
             InitializePartial();
         }
         partial void InitializePartial();

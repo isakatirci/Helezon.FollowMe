@@ -80,6 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="ContainerDtos\AksesuarContainerDto.cs" />
+    <Compile Include="ContainerDtos\FanteziIplikContainerDto.cs" />
+    <Compile Include="ContainerDtos\KumasFantaziContainerDto.cs" />
+    <Compile Include="ContainerDtos\KumasOrmeDokumaContainerDto.cs" />
+    <Compile Include="ContainerDtos\NormalIplikContainerDto.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Mappings\AutoMapper\Profiles\BusinessProfile.cs" />
     <Compile Include="Mappings\AutoMapper\Profiles\MappingProfile.cs" />
@@ -87,7 +92,7 @@
     <Compile Include="ZetaCodeAksesuarService.cs" />
     <Compile Include="ZetaCodeFanteziIplikPictureService.cs" />
     <Compile Include="ZetaCodeHazirGiyimService.cs" />
-    <Compile Include="ZetaCodeKumasFantazi.cs" />
+    <Compile Include="ZetaCodeKumasFantaziService.cs" />
     <Compile Include="ZetaCodeKumasOrmeDokumaService.cs" />
     <Compile Include="ZetaCodeNormalIplikPictureService.cs" />
     <Compile Include="CompanyImageService.cs" />

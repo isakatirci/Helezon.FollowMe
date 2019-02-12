@@ -39,9 +39,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasRequired(a => a.ZetaCodeFanteziIplik).WithMany(b => b.ZetaCodeFanteziIplikPicture).HasForeignKey(c => c.ZetaCodeFanteziIplikId).WillCascadeOnDelete(false); // FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik
             InitializePartial();
         }
         partial void InitializePartial();

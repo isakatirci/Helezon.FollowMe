@@ -43,28 +43,8 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[AksesuarId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeAksesuar].([CompanyId]) (FK_ZetaCodeAksesuar_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeAksesuar_Company
-
         public ZetaCodeAksesuar()
         {
-            ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyon>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyim>();
             InitializePartial();
         }
 

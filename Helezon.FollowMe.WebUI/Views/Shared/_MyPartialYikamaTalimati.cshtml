@@ -1,0 +1,47 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeYikamaTalimatiEditVm
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_yikama_talimati"> YIKAMA TALIMATI </a>
+        </h4>
+    </div>
+    <div id="collapse_yikama_talimati" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YikamaTalimati.KuruTemizleme, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("YikamaTalimati.KuruTemizleme", MyHtmlHelpers.SelectListForBoolean(Model.YikamaTalimati.KuruTemizleme), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.YikamaTalimati.KuruTemizleme, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YikamaTalimati.YikamaSekli, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("YikamaTalimati.YikamaSekli", new SelectList(Model.Collections.YikamaSekilleri, "Id", "Name", Model.YikamaTalimati.YikamaSekli), "Please Select", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.YikamaTalimati.YikamaSekli, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.EditorFor(x => x.YikamaTalimati.YikamaMaxDerecesi, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.YikamaTalimati.UtulemeMaxDerecesi, templateName: "MyTouchSpin")
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YikamaTalimati.TersYikama, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("YikamaTalimati.TersYikama", MyHtmlHelpers.SelectListForBoolean(Model.YikamaTalimati.TersYikama), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.YikamaTalimati.TersYikama, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                @Html.EditorFor(x => x.YikamaTalimati.Cekemezlik, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.YikamaTalimati.Donmezlik, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.YikamaTalimati.YikamaAdedi, templateName: "MyTouchSpin")
+            </div>  
+        </div>
+    </div>
+</div>
+

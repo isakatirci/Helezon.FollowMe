@@ -48,72 +48,8 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].[ZetaCodeNormalIplikId] (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual IplikKategoriDegrede IplikKategoriDegrede { get; set; } // IplikKategoriDegrede.FK_IplikKategoriDegrede_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriFlam].[ZetaCodeNormalIplikId] (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual IplikKategoriFlam IplikKategoriFlam { get; set; } // IplikKategoriFlam.FK_IplikKategoriFlam_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKircili].[ZetaCodeNormalIplikId] (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
-        /// </summary>
-        public virtual IplikKategoriKircili IplikKategoriKircili { get; set; } // IplikKategoriKircili.FK_IplikKategoriKircili_ZetaCodeNormalIplik1
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriKrep].[ZetaCodeNormalIplikId] (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual IplikKategoriKrep IplikKategoriKrep { get; set; } // IplikKategoriKrep.FK_IplikKategoriKrep_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriNopeli].[ZetaCodeNormalIplikId] (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual IplikKategoriNopeli IplikKategoriNopeli { get; set; } // IplikKategoriNopeli.FK_IplikKategoriNopeli_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplik pointed by [IplikKategoriSim].[ZetaCodeNormalIplikId] (FK_IplikKategoriSim_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual IplikKategoriSim IplikKategoriSim { get; set; } // IplikKategoriSim.FK_IplikKategoriSim_ZetaCodeNormalIplik
-        /// <summary>
-        /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<IplikNo> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalIplik]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture.FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeNormalIplik].([SirketId]) (FK_ZetaCodeNormaliplik_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_ZetaCodeNormaliplik_Company
-
-        /// <summary>
-        /// Parent PantoneRenk pointed by [ZetaCodeNormalIplik].([PantoneId]) (FK_ZetaCodeNormaliplik_PantoneRengi)
-        /// </summary>
-        public virtual PantoneRenk PantoneRenk { get; set; } // FK_ZetaCodeNormaliplik_PantoneRengi
-
-        /// <summary>
-        /// Parent Renk pointed by [ZetaCodeNormalIplik].([Renkid]) (FK_ZetaCodeNormaliplik_Renk)
-        /// </summary>
-        public virtual Renk Renk { get; set; } // FK_ZetaCodeNormaliplik_Renk
-
         public ZetaCodeNormalIplik()
         {
-            IplikNo = new System.Collections.Generic.List<IplikNo>();
-            ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPicture>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokuma>();
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplik>();
             InitializePartial();
         }
 

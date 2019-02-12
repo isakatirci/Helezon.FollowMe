@@ -57,19 +57,26 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar
         public System.Data.Entity.DbSet<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
+        public System.Data.Entity.DbSet<ZetaCodeFanteziIplikNormalIplik> ZetaCodeFanteziIplikNormalIplik { get; set; } // ZetaCode_FanteziIplik_NormalIplik
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
         public System.Data.Entity.DbSet<ZetaCodeHazirGiyim> ZetaCodeHazirGiyim { get; set; } // ZetaCodeHazirGiyim
+        public System.Data.Entity.DbSet<ZetaCodeHazirGiyimAksesuar> ZetaCodeHazirGiyimAksesuar { get; set; } // ZetaCode_HazirGiyim_Aksesuar
+        public System.Data.Entity.DbSet<ZetaCodeHazirGiyimKumasFantezi> ZetaCodeHazirGiyimKumasFantezi { get; set; } // ZetaCode_HazirGiyim_KumasFantezi
+        public System.Data.Entity.DbSet<ZetaCodeHazirGiyimKumasOrmeDokuma> ZetaCodeHazirGiyimKumasOrmeDokuma { get; set; } // ZetaCode_HazirGiyim_KumasOrmeDokuma
         public System.Data.Entity.DbSet<ZetaCodeKumasFantazi> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi
         public System.Data.Entity.DbSet<ZetaCodeKumasFantaziPicture> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture
         public System.Data.Entity.DbSet<ZetaCodeKumasFantezi3AdimIslemleri> ZetaCodeKumasFantezi3AdimIslemleri { get; set; } // ZetaCodeKumasFantezi3AdimIslemleri
-        public System.Data.Entity.DbSet<ZetaCodeKumasFanteziFantezi> ZetaCodeKumasFanteziFantezi { get; set; } // ZetaCodeKumasFanteziFantezi
-        public System.Data.Entity.DbSet<ZetaCodeKumasFanteziOrmeDokuma> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma
+        public System.Data.Entity.DbSet<ZetaCodeKumasFanteziKumasFantezi> ZetaCodeKumasFanteziKumasFantezi { get; set; } // ZetaCode_KumasFantezi_KumasFantezi
+        public System.Data.Entity.DbSet<ZetaCodeKumasFanteziKumasOrmeDokuma> ZetaCodeKumasFanteziKumasOrmeDokuma { get; set; } // ZetaCode_KumasFantezi_KumasOrmeDokuma
         public System.Data.Entity.DbSet<ZetaCodeKumasMakine> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine
         public System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokuma> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma
         public System.Data.Entity.DbSet<ZetaCodeKumasOrmeDokumaPicture> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture
         public System.Data.Entity.DbSet<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik
         public System.Data.Entity.DbSet<ZetaCodeNormalIplikPicture> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture
+        public System.Data.Entity.DbSet<ZetaCodeNormalKumasFanteziIplik> ZetaCodeNormalKumasFanteziIplik { get; set; } // ZetaCode_NormalKumas_FanteziIplik
+        public System.Data.Entity.DbSet<ZetaCodeNormalKumasNormalIplik> ZetaCodeNormalKumasNormalIplik { get; set; } // ZetaCode_NormalKumas_NormalIplik
         public System.Data.Entity.DbSet<ZetaCodes> ZetaCodes { get; set; } // ZetaCodes
+        public System.Data.Entity.DbSet<ZetaCodeYikamaTalimati> ZetaCodeYikamaTalimati { get; set; } // ZetaCodeYikamaTalimati
 
         static FollowMeDbContext()
         {
@@ -162,19 +169,26 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarMap());
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarKompozisyonMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap());
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikNormalIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap());
             modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimMap());
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimAksesuarMap());
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimKumasFanteziMap());
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimKumasOrmeDokumaMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziPictureMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantezi3AdimIslemleriMap());
-            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziFanteziMap());
-            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziOrmeDokumaMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziKumasFanteziMap());
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziKumasOrmeDokumaMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasMakineMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaMap());
             modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaPictureMap());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalKumasFanteziIplikMap());
+            modelBuilder.Configurations.Add(new ZetaCodeNormalKumasNormalIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodesMap());
+            modelBuilder.Configurations.Add(new ZetaCodeYikamaTalimatiMap());
 
             OnModelCreatingPartial(modelBuilder);
         }
@@ -218,19 +232,26 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarKompozisyonMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikNormalIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimAksesuarMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimKumasFanteziMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeHazirGiyimKumasOrmeDokumaMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantaziPictureMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasFantezi3AdimIslemleriMap(schema));
-            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziFanteziMap(schema));
-            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziOrmeDokumaMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziKumasFanteziMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeKumasFanteziKumasOrmeDokumaMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasMakineMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeKumasOrmeDokumaPictureMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeNormalIplikPictureMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalKumasFanteziIplikMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeNormalKumasNormalIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodesMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeYikamaTalimatiMap(schema));
             OnCreateModelPartial(modelBuilder, schema);
             return modelBuilder;
         }

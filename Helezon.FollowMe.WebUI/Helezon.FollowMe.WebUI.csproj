@@ -550,6 +550,7 @@
     <Compile Include="Models\ViewModels\TermTaxonomyView.cs" />
     <Compile Include="Models\ViewModels\TermViewModel.cs" />
     <Compile Include="Models\ViewModels\ViewModelExtensions.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeKumasMakineEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeHazirGiyimEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeAksesuarEditVm.cs" />
@@ -560,6 +561,7 @@
     <Compile Include="Models\ViewModels\ZetaCodeKumasOrmeDokumaEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeNormalIplikVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeYikamaTalimatiEditVm.cs" />
     <Compile Include="Models\ZetaCodeFanteziIplik.cs">
       <DependentUpon>EmasDb.tt</DependentUpon>
     </Compile>
@@ -6732,6 +6734,8 @@
     <Content Include="Views\Shared\EditorTemplates\MyBoolean.cshtml" />
     <Content Include="Views\ZetaCodeAksesuar\Card.cshtml" />
     <Content Include="Views\ZetaCodeHazirGiyim\Card.cshtml" />
+    <Content Include="Views\Shared\_MyPartialKumasMakine.cshtml" />
+    <Content Include="Views\Shared\_MyPartialYikamaTalimati.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

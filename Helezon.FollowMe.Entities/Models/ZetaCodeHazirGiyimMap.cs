@@ -61,21 +61,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasRequired(a => a.Company).WithMany(b => b.ZetaCodeHazirGiyim).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_ZetaCodeHazirGiyim_Company
-            HasMany(t => t.ZetaCodeKumasFantazi).WithMany(t => t.ZetaCodeHazirGiyim).Map(m =>
-            {
-                m.ToTable("ZetaCode_HazirGiyim_KumasFantezi", "dbo");
-                m.MapLeftKey("HazirGiyimId");
-                m.MapRightKey("KumasFanteziId");
-            });
-            HasMany(t => t.ZetaCodeKumasOrmeDokuma).WithMany(t => t.ZetaCodeHazirGiyim).Map(m =>
-            {
-                m.ToTable("ZetaCode_HazirGiyim_KumasOrmeDokuma", "dbo");
-                m.MapLeftKey("HazirGiyimId");
-                m.MapRightKey("KumasOrmeDokumaId");
-            });
             InitializePartial();
         }
         partial void InitializePartial();

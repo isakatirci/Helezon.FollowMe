@@ -1,0 +1,85 @@
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeKumasMakineEditVm
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_makine_sec"> MAKINE DETAYLARI </a>
+        </h4>
+    </div>
+    <div id="collapse_makine_sec" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Makine Markası</label>
+                    <div class="col-md-6">
+                        @Html.HiddenFor(x => x.Makine.MarkaId)
+                        @Html.TextBoxFor(x => x.Makine.MakineMarkasi.Name, new { @class = "form-control", @readonly = "" })
+                        <br />
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                <div id="treeMakineMarkalar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Makine Modeli</label>
+                    <div class="col-md-6">
+                        @Html.HiddenFor(x => x.Makine.ModelId)
+                        @Html.TextBoxFor(x => x.Makine.MakineModeli.Name, new { @class = "form-control", @readonly = "" })
+                        <br />
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                <div id="treeMakineModeller">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.EditorFor(x => x.Makine.ModelYili, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.Pus, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.Fine, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.YedekFine, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.Sistem, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.IgneSayisi, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.HamGr, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Makine.HamCm, templateName: "MyTouchSpin")
+                <div class="form-group">
+                    <label class="control-label col-md-2">Aksesuarlar</label>
+                    <div class="col-md-6">
+                        @Html.HiddenFor(x => x.Makine.AksesuarIds)
+                        <textarea rows="2"
+                                  readonly
+                                  cols="20"
+                                  id="Aksesuarlar"
+                                  value="@(string.Join(",",Model.Makine.Aksesuarlar.Select(x => x.Name)))"
+                                  class="form-control"></textarea>
+                        <br />
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                <div id="treeAksesuarlar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Makine.TupAcikEnId, "TupAcikEnler", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("Makine.TupAcikEnId", new SelectList(Model.Collections.TupAcikEnler, "Id", "Name", Model.Makine.TupAcikEnId), "Please Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Makine.TupAcikEnId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Makine.ElastanId, "Elastanlar", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("Makine.ElastanId", new SelectList(Model.Collections.Elastanlar, "Id", "Name", Model.Makine.ElastanId), "Please Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Makine.ElastanId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+

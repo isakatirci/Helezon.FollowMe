@@ -34,9 +34,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.TurSayisi).HasColumnName(@"TurSayisi").HasColumnType("nvarchar").IsRequired().HasMaxLength(10);
             Property(x => x.BukumYonu).HasColumnName(@"BukumYonu").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.ZetaCodeNormalIplikId).HasColumnName(@"ZetaCodeNormalIplikId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-
-            // Foreign keys
-            HasRequired(a => a.ZetaCodeNormalIplik).WithOptional(b => b.IplikKategoriKrep).WillCascadeOnDelete(false); // FK_IplikKategoriKrep_ZetaCodeNormalIplik
             InitializePartial();
         }
         partial void InitializePartial();

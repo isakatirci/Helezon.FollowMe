@@ -50,9 +50,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.MakedPassiveOn).HasColumnName(@"MakedPassiveOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.MakedPassiveBy).HasColumnName(@"MakedPassiveBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasRequired(a => a.Company).WithMany(b => b.CompanyBank).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_CompanyBank_Company
             InitializePartial();
         }
         partial void InitializePartial();

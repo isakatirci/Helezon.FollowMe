@@ -26,13 +26,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string ExportCode { get; set; } // ExportCode
         public string LogisticsCompanyId { get; set; } // LogisticsCompanyId (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [LogisticsCompany].([CompanyId]) (FK_LogisticsCompany_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_LogisticsCompany_Company
-
         public LogisticsCompany()
         {
             LogisticsCompanyId = "00000000-0000-0000-0000-000000000000";

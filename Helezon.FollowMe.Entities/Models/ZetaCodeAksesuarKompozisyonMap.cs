@@ -40,10 +40,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.AksesuarId).HasColumnName(@"AksesuarId").HasColumnType("int").IsOptional();
-
-            // Foreign keys
-            HasOptional(a => a.Company).WithMany(b => b.ZetaCodeAksesuarKompozisyon).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_ZetaCodeAksesuarKompozisyon_Company
-            HasOptional(a => a.ZetaCodeAksesuar).WithMany(b => b.ZetaCodeAksesuarKompozisyon).HasForeignKey(c => c.AksesuarId).WillCascadeOnDelete(false); // FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
             InitializePartial();
         }
         partial void InitializePartial();

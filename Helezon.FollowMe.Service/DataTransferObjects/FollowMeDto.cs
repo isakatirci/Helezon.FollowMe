@@ -101,13 +101,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? Xl4 { get; set; } // XL4
         public int? Xl5 { get; set; } // XL5
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeHazirGiyim pointed by [BedenOlculeri].([HazirGiyimId]) (FK_BedenOlculeri_ZetaCodeHazirGiyim)
-        /// </summary>
-        public ZetaCodeHazirGiyimDto ZetaCodeHazirGiyim { get; set; } // FK_BedenOlculeri_ZetaCodeHazirGiyim
-
         public BedenOlculeriDto()
         {
             InitializePartial();
@@ -142,96 +135,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child CompanyAddress where [CompanyAddress].[CompanyId] point to this entity (FK_CompanyAddress_Company)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyAddressDto> CompanyAddress { get; set; } // CompanyAddress.FK_CompanyAddress_Company
-        /// <summary>
-        /// Child CompanyBank where [CompanyBank].[CompanyId] point to this entity (FK_CompanyBank_Company)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyBankDto> CompanyBank { get; set; } // CompanyBank.FK_CompanyBank_Company
-        /// <summary>
-        /// Child CompanyPicture where [CompanyPicture].[CompanyId] point to this entity (FK_CompanyImage_Company)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyPictureDto> CompanyPicture { get; set; } // CompanyPicture.FK_CompanyImage_Company
-        /// <summary>
-        /// Child CompanyTelephone where [CompanyTelephone].[CompanyId] point to this entity (FK_CompanyTelephone_Company)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyTelephoneDto> CompanyTelephone { get; set; } // CompanyTelephone.FK_CompanyTelephone_Company
-        /// <summary>
-        /// Child CompanyTerm where [CompanyTerm].[CompanyId] point to this entity (FK_CompanyTerm_Company)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Company
-        /// <summary>
-        /// Child LogisticsCompany where [LogisticsCompany].[CompanyId] point to this entity (FK_LogisticsCompany_Company)
-        /// </summary>
-        public System.Collections.Generic.List<LogisticsCompanyDto> LogisticsCompany { get; set; } // LogisticsCompany.FK_LogisticsCompany_Company
-        /// <summary>
-        /// Child Person where [Person].[CompanyId] point to this entity (FK_Person_Company)
-        /// </summary>
-        public System.Collections.Generic.List<PersonDto> Person { get; set; } // Person.FK_Person_Company
-        /// <summary>
-        /// Child ZetaCodeAksesuar where [ZetaCodeAksesuar].[CompanyId] point to this entity (FK_ZetaCodeAksesuar_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeAksesuarDto> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar.FK_ZetaCodeAksesuar_Company
-        /// <summary>
-        /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[CompanyId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_Company
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[SirketId] point to this entity (FK_ZetaCodeFanteziIplik_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Company
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim where [ZetaCodeHazirGiyim].[CompanyId] point to this entity (FK_ZetaCodeHazirGiyim_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // ZetaCodeHazirGiyim.FK_ZetaCodeHazirGiyim_Company
-        /// <summary>
-        /// Child ZetaCodeKumasFantazi where [ZetaCodeKumasFantazi].[CompanyId] point to this entity (FK_ZetaCodeKumasFantazi_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFantaziDto> ZetaCodeKumasFantazi { get; set; } // ZetaCodeKumasFantazi.FK_ZetaCodeKumasFantazi_Company
-        /// <summary>
-        /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[CompanyId] point to this entity (FK_ZetaCodeKumasFantaziPicture_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFantaziPictureDto> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture.FK_ZetaCodeKumasFantaziPicture_Company
-        /// <summary>
-        /// Child ZetaCodeKumasMakine where [ZetaCodeKumasMakine].[CompanyId] point to this entity (FK_ZetaCodeKumasMakine_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasMakineDto> ZetaCodeKumasMakine { get; set; } // ZetaCodeKumasMakine.FK_ZetaCodeKumasMakine_Company
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[CompanyId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma.FK_ZetaCodeKumasOrmeDokuma_Company
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokumaPicture where [ZetaCodeKumasOrmeDokumaPicture].[CompanyId] point to this entity (FK_ZetaCodeKumasOrmeDokumaPicture_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPictureDto> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture.FK_ZetaCodeKumasOrmeDokumaPicture_Company
-        /// <summary>
-        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[SirketId] point to this entity (FK_ZetaCodeNormaliplik_Company)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Company
-
         public CompanyDto()
         {
-            CompanyAddress = new System.Collections.Generic.List<CompanyAddressDto>();
-            CompanyBank = new System.Collections.Generic.List<CompanyBankDto>();
-            CompanyPicture = new System.Collections.Generic.List<CompanyPictureDto>();
-            CompanyTelephone = new System.Collections.Generic.List<CompanyTelephoneDto>();
-            CompanyTerm = new System.Collections.Generic.List<CompanyTermDto>();
-            LogisticsCompany = new System.Collections.Generic.List<LogisticsCompanyDto>();
-            Person = new System.Collections.Generic.List<PersonDto>();
-            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuarDto>();
-            ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto>();
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
-            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantaziDto>();
-            ZetaCodeKumasFantaziPicture = new System.Collections.Generic.List<ZetaCodeKumasFantaziPictureDto>();
-            ZetaCodeKumasMakine = new System.Collections.Generic.List<ZetaCodeKumasMakineDto>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
-            ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPictureDto>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             InitializePartial();
         }
 
@@ -258,13 +163,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyAddress].([CompanyId]) (FK_CompanyAddress_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_CompanyAddress_Company
 
         public CompanyAddressDto()
         {
@@ -299,13 +197,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? MakedPassiveOn { get; set; } // MakedPassiveOn
         public string MakedPassiveBy { get; set; } // MakedPassiveBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyBank].([CompanyId]) (FK_CompanyBank_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_CompanyBank_Company
-
         public CompanyBankDto()
         {
             BankNameTermId = 0;
@@ -328,13 +219,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyPicture].([CompanyId]) (FK_CompanyImage_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_CompanyImage_Company
 
         public CompanyPictureDto()
         {
@@ -360,13 +244,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyTelephone].([CompanyId]) (FK_CompanyTelephone_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_CompanyTelephone_Company
-
         public CompanyTelephoneDto()
         {
             InitializePartial();
@@ -388,18 +265,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [CompanyTerm].([CompanyId]) (FK_CompanyTerm_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_CompanyTerm_Company
-
-        /// <summary>
-        /// Parent Term pointed by [CompanyTerm].([TermId]) (FK_CompanyTerm_Term)
-        /// </summary>
-        public TermDto Term { get; set; } // FK_CompanyTerm_Term
 
         public CompanyTermDto()
         {
@@ -443,13 +308,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string BoyaTipi { get; set; } // BoyaTipi (length: 10)
         public string BoyaYonu { get; set; } // BoyaYonu (length: 10)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].([ZetaCodeNormalIplikId]) (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriDegrede_ZetaCodeNormalIplik
-
         public IplikKategoriDegredeDto()
         {
             InitializePartial();
@@ -467,13 +325,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string FlamUzunlugu { get; set; } // FlamUzunlugu (length: 10)
         public string FlamYuksekligi { get; set; } // FlamYuksekligi (length: 10)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriFlam].([ZetaCodeNormalIplikId]) (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriFlam_ZetaCodeNormalIplik
 
         public IplikKategoriFlamDto()
         {
@@ -493,13 +344,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string KircilYuksekligi { get; set; } // KircilYuksekligi (length: 10)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriKircili].([ZetaCodeNormalIplikId]) (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriKircili_ZetaCodeNormalIplik1
-
         public IplikKategoriKirciliDto()
         {
             InitializePartial();
@@ -516,13 +360,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string TurSayisi { get; set; } // TurSayisi (length: 10)
         public string BukumYonu { get; set; } // BukumYonu (length: 50)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriKrep].([ZetaCodeNormalIplikId]) (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriKrep_ZetaCodeNormalIplik
 
         public IplikKategoriKrepDto()
         {
@@ -542,13 +379,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string NoktaYuksekligi { get; set; } // NoktaYuksekligi (length: 10)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriNopeli].([ZetaCodeNormalIplikId]) (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriNopeli_ZetaCodeNormalIplik
-
         public IplikKategoriNopeliDto()
         {
             InitializePartial();
@@ -564,13 +394,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int Id { get; set; } // Id
         public string SimKesimBoyutu { get; set; } // SimKesimBoyutu (length: 200)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriSim].([ZetaCodeNormalIplikId]) (FK_IplikKategoriSim_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriSim_ZetaCodeNormalIplik
 
         public IplikKategoriSimDto()
         {
@@ -593,13 +416,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikNo].([ZetaCodeNormalIplikId]) (FK_IplikNo_ZetaCodeNormaliplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_IplikNo_ZetaCodeNormaliplik
 
         public IplikNoDto()
         {
@@ -655,13 +471,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string ExportCode { get; set; } // ExportCode
         public string LogisticsCompanyId { get; set; } // LogisticsCompanyId (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [LogisticsCompany].([CompanyId]) (FK_LogisticsCompany_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_LogisticsCompany_Company
-
         public LogisticsCompanyDto()
         {
             LogisticsCompanyId = "00000000-0000-0000-0000-000000000000";
@@ -679,21 +488,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string PantoneKodu { get; set; } // PantoneKodu (length: 200)
         public string PantoneRengi { get; set; } // PantoneRengi (length: 200)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[PantoneId] point to this entity (FK_ZetaCodeFanteziIplik_PantoneRenk)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_PantoneRenk
-        /// <summary>
-        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[PantoneId] point to this entity (FK_ZetaCodeNormaliplik_PantoneRengi)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_PantoneRengi
-
         public PantoneRenkDto()
         {
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             InitializePartial();
         }
 
@@ -733,50 +529,10 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
         public int? PositionId { get; set; } // PositionId
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child PersonnelAddress where [PersonnelAddress].[PersonnelId] point to this entity (FK_PersonnelAddress_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelAddressDto> PersonnelAddress { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
-        /// <summary>
-        /// Child PersonnelBank where [PersonnelBank].[PersonnelId] point to this entity (FK_PersonnelBank_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelBankDto> PersonnelBank { get; set; } // PersonnelBank.FK_PersonnelBank_Person
-        /// <summary>
-        /// Child PersonnelEducation where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelEducationDto> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
-        /// <summary>
-        /// Child PersonnelPicture where [PersonnelPicture].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelPictureDto> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
-        /// <summary>
-        /// Child PersonnelTelephone where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelTelephoneDto> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
-        /// <summary>
-        /// Child PersonnelTerm where [PersonnelTerm].[PersonnelId] point to this entity (FK_PersonnelTerm_Person)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [Person].([CompanyId]) (FK_Person_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_Person_Company
-
         public PersonDto()
         {
             IsAuthorized = false;
             GenderTypeId = 0;
-            PersonnelAddress = new System.Collections.Generic.List<PersonnelAddressDto>();
-            PersonnelBank = new System.Collections.Generic.List<PersonnelBankDto>();
-            PersonnelEducation = new System.Collections.Generic.List<PersonnelEducationDto>();
-            PersonnelPicture = new System.Collections.Generic.List<PersonnelPictureDto>();
-            PersonnelTelephone = new System.Collections.Generic.List<PersonnelTelephoneDto>();
-            PersonnelTerm = new System.Collections.Generic.List<PersonnelTermDto>();
             InitializePartial();
         }
 
@@ -804,13 +560,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelAddress].([PersonnelId]) (FK_PersonnelAddress_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelAddress_Person
 
         public PersonnelAddressDto()
         {
@@ -844,13 +593,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelBank].([PersonnelId]) (FK_PersonnelBank_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelBank_Person
-
         public PersonnelBankDto()
         {
             BankNameTermId = 0;
@@ -878,13 +620,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? MakedPassiveOn { get; set; } // MakedPassiveOn
         public string MakedPassiveBy { get; set; } // MakedPassiveBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelEducation].([PersonnelId]) (FK_PersonnelEducation_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelEducation_Person
-
         public PersonnelEducationDto()
         {
             StudiedSchoolName = "0";
@@ -907,13 +642,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelPicture].([PersonnelId]) (FK_PersonnelImage_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelImage_Person
 
         public PersonnelPictureDto()
         {
@@ -940,13 +668,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelTelephone].([PersonnelId]) (FK_PersonnelTelephone_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelTelephone_Person
-
         public PersonnelTelephoneDto()
         {
             InitializePartial();
@@ -969,18 +690,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelTerm].([PersonnelId]) (FK_PersonnelTerm_Person)
-        /// </summary>
-        public PersonDto Person { get; set; } // FK_PersonnelTerm_Person
-
-        /// <summary>
-        /// Parent Term pointed by [PersonnelTerm].([Name]) (FK_PersonnelTerm_Term)
-        /// </summary>
-        public TermDto Term { get; set; } // FK_PersonnelTerm_Term
 
         public PersonnelTermDto()
         {
@@ -1016,21 +725,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string Ad { get; set; } // Ad (length: 50)
         public string IplikRenkKodu { get; set; } // IplikRenkKodu (length: 100)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik where [ZetaCodeFanteziIplik].[Renkid] point to this entity (FK_ZetaCodeFanteziIplik_Renk)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik.FK_ZetaCodeFanteziIplik_Renk
-        /// <summary>
-        /// Child ZetaCodeNormalIplik where [ZetaCodeNormalIplik].[Renkid] point to this entity (FK_ZetaCodeNormaliplik_Renk)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // ZetaCodeNormalIplik.FK_ZetaCodeNormaliplik_Renk
-
         public RenkDto()
         {
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
             InitializePartial();
         }
 
@@ -1073,23 +769,10 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public bool? Disabled { get; set; } // Disabled
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child CompanyTerm where [CompanyTerm].[TermId] point to this entity (FK_CompanyTerm_Term)
-        /// </summary>
-        public System.Collections.Generic.List<CompanyTermDto> CompanyTerm { get; set; } // CompanyTerm.FK_CompanyTerm_Term
-        /// <summary>
-        /// Child PersonnelTerm where [PersonnelTerm].[Name] point to this entity (FK_PersonnelTerm_Term)
-        /// </summary>
-        public System.Collections.Generic.List<PersonnelTermDto> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Term
-
         public TermDto()
         {
             NoChildrenClass = false;
             NoDragClass = false;
-            CompanyTerm = new System.Collections.Generic.List<CompanyTermDto>();
-            PersonnelTerm = new System.Collections.Generic.List<PersonnelTermDto>();
             InitializePartial();
         }
 
@@ -1170,28 +853,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeAksesuarKompozisyon where [ZetaCodeAksesuarKompozisyon].[AksesuarId] point to this entity (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon.FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeAksesuar].([CompanyId]) (FK_ZetaCodeAksesuar_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeAksesuar_Company
-
         public ZetaCodeAksesuarDto()
         {
-            ZetaCodeAksesuarKompozisyon = new System.Collections.Generic.List<ZetaCodeAksesuarKompozisyonDto>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
             InitializePartial();
         }
 
@@ -1212,18 +875,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public string CompanyId { get; set; } // CompanyId (length: 128)
         public int? AksesuarId { get; set; } // AksesuarId
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeAksesuarKompozisyon].([CompanyId]) (FK_ZetaCodeAksesuarKompozisyon_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeAksesuarKompozisyon_Company
-
-        /// <summary>
-        /// Parent ZetaCodeAksesuar pointed by [ZetaCodeAksesuarKompozisyon].([AksesuarId]) (FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar)
-        /// </summary>
-        public ZetaCodeAksesuarDto ZetaCodeAksesuar { get; set; } // FK_ZetaCodeAksesuarKompozisyon_ZetaCodeAksesuar
 
         public ZetaCodeAksesuarKompozisyonDto()
         {
@@ -1263,43 +914,23 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplikPicture where [ZetaCodeFanteziIplikPicture].[ZetaCodeFanteziIplikId] point to this entity (FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikPictureDto> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture.FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalIplik]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeFanteziIplik].([SirketId]) (FK_ZetaCodeFanteziIplik_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeFanteziIplik_Company
-
-        /// <summary>
-        /// Parent PantoneRenk pointed by [ZetaCodeFanteziIplik].([PantoneId]) (FK_ZetaCodeFanteziIplik_PantoneRenk)
-        /// </summary>
-        public PantoneRenkDto PantoneRenk { get; set; } // FK_ZetaCodeFanteziIplik_PantoneRenk
-
-        /// <summary>
-        /// Parent Renk pointed by [ZetaCodeFanteziIplik].([Renkid]) (FK_ZetaCodeFanteziIplik_Renk)
-        /// </summary>
-        public RenkDto Renk { get; set; } // FK_ZetaCodeFanteziIplik_Renk
-
         public ZetaCodeFanteziIplikDto()
         {
-            ZetaCodeFanteziIplikPicture = new System.Collections.Generic.List<ZetaCodeFanteziIplikPictureDto>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_FanteziIplik_NormalIplik
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeFanteziIplikNormalIplikDto
+    {
+        public int NormalIplikId { get; set; } // NormalIplikId (Primary key)
+        public int FanzteziIplikId { get; set; } // FanzteziIplikId (Primary key)
+
+        public ZetaCodeFanteziIplikNormalIplikDto()
+        {
             InitializePartial();
         }
 
@@ -1319,13 +950,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeFanteziIplik pointed by [ZetaCodeFanteziIplikPicture].([ZetaCodeFanteziIplikId]) (FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik)
-        /// </summary>
-        public ZetaCodeFanteziIplikDto ZetaCodeFanteziIplik { get; set; } // FK_ZetaCodeFanteziIplikPicture_ZetaCodeFanteziIplik
 
         public ZetaCodeFanteziIplikPictureDto()
         {
@@ -1371,38 +995,53 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child BedenOlculeri where [BedenOlculeri].[HazirGiyimId] point to this entity (FK_BedenOlculeri_ZetaCodeHazirGiyim)
-        /// </summary>
-        public System.Collections.Generic.List<BedenOlculeriDto> BedenOlculeri { get; set; } // BedenOlculeri.FK_BedenOlculeri_ZetaCodeHazirGiyim
-        /// <summary>
-        /// Child ZetaCodeAksesuar (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_Aksesuar]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeAksesuarDto> ZetaCodeAksesuar { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasFantazi (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFantaziDto> ZetaCodeKumasFantazi { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeHazirGiyim].([CompanyId]) (FK_ZetaCodeHazirGiyim_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeHazirGiyim_Company
-
         public ZetaCodeHazirGiyimDto()
         {
-            BedenOlculeri = new System.Collections.Generic.List<BedenOlculeriDto>();
-            ZetaCodeKumasFantazi = new System.Collections.Generic.List<ZetaCodeKumasFantaziDto>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
-            ZetaCodeAksesuar = new System.Collections.Generic.List<ZetaCodeAksesuarDto>();
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_HazirGiyim_Aksesuar
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeHazirGiyimAksesuarDto
+    {
+        public int HazirGiyimId { get; set; } // HazirGiyimId (Primary key)
+        public int AksesuarId { get; set; } // AksesuarId (Primary key)
+
+        public ZetaCodeHazirGiyimAksesuarDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_HazirGiyim_KumasFantezi
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeHazirGiyimKumasFanteziDto
+    {
+        public int HazirGiyimId { get; set; } // HazirGiyimId (Primary key)
+        public int KumasFanteziId { get; set; } // KumasFanteziId (Primary key)
+
+        public ZetaCodeHazirGiyimKumasFanteziDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_HazirGiyim_KumasOrmeDokuma
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeHazirGiyimKumasOrmeDokumaDto
+    {
+        public int HazirGiyimId { get; set; } // HazirGiyimId (Primary key)
+        public int KumasOrmeDokumaId { get; set; } // KumasOrmeDokumaId (Primary key)
+
+        public ZetaCodeHazirGiyimKumasOrmeDokumaDto()
+        {
             InitializePartial();
         }
 
@@ -1439,60 +1078,16 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? OrguTipiId { get; set; } // OrguTipiId
         public string BoyaIslemleriIds { get; set; } // BoyaIslemleriIds (length: 500)
         public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
-        public int? MakineMarkaId { get; set; } // MakineMarkaId
-        public int? MakineModelId { get; set; } // MakineModelId
         public string CompanyId { get; set; } // CompanyId (length: 128)
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasFantezi]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasFantaziPicture where [ZetaCodeKumasFantaziPicture].[KumasFantaziId] point to this entity (FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFantaziPictureDto> ZetaCodeKumasFantaziPicture { get; set; } // ZetaCodeKumasFantaziPicture.FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi
-        /// <summary>
-        /// Child ZetaCodeKumasFantezi3AdimIslemleri where [ZetaCodeKumasFantezi3AdimIslemleri].[FantaziKumasId] point to this entity (FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFantezi3AdimIslemleriDto> ZetaCodeKumasFantezi3AdimIslemleri { get; set; } // ZetaCodeKumasFantezi3AdimIslemleri.FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi
-        /// <summary>
-        /// Child ZetaCodeKumasFanteziFantezi where [ZetaCodeKumasFanteziFantezi].[KumasFanteziId] point to this entity (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto> ZetaCodeKumasFanteziFantezi_KumasFanteziId { get; set; } // ZetaCodeKumasFanteziFantezi.FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi
-        /// <summary>
-        /// Child ZetaCodeKumasFanteziFantezi where [ZetaCodeKumasFanteziFantezi].[KumasOtherFanteziId] point to this entity (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto> ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId { get; set; } // ZetaCodeKumasFanteziFantezi.FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasFantazi].([CompanyId]) (FK_ZetaCodeKumasFantazi_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeKumasFantazi_Company
+        public int? YikamaTalimatiId { get; set; } // YikamaTalimatiId
 
         public ZetaCodeKumasFantaziDto()
         {
-            ZetaCodeKumasFantaziPicture = new System.Collections.Generic.List<ZetaCodeKumasFantaziPictureDto>();
-            ZetaCodeKumasFantezi3AdimIslemleri = new System.Collections.Generic.List<ZetaCodeKumasFantezi3AdimIslemleriDto>();
-            ZetaCodeKumasFanteziFantezi_KumasFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto>();
-            ZetaCodeKumasFanteziFantezi_KumasOtherFanteziId = new System.Collections.Generic.List<ZetaCodeKumasFanteziFanteziDto>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
             InitializePartial();
         }
 
@@ -1512,18 +1107,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasFantaziPicture].([CompanyId]) (FK_ZetaCodeKumasFantaziPicture_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeKumasFantaziPicture_Company
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFantaziPicture].([KumasFantaziId]) (FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi)
-        /// </summary>
-        public ZetaCodeKumasFantaziDto ZetaCodeKumasFantazi { get; set; } // FK_ZetaCodeKumasFantaziPicture_ZetaCodeKumasFantazi
 
         public ZetaCodeKumasFantaziPictureDto()
         {
@@ -1550,13 +1133,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string DesemRengi3 { get; set; } // DesemRengi3 (length: 50)
         public string _3AdimIslemlerId { get; set; } // _3AdimIslemlerId (length: 10)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFantezi3AdimIslemleri].([FantaziKumasId]) (FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi)
-        /// </summary>
-        public ZetaCodeKumasFantaziDto ZetaCodeKumasFantazi { get; set; } // FK_ZetaCodeKumasFantezi3AdimIslemleri_ZetaCodeKumasFantazi
-
         public ZetaCodeKumasFantezi3AdimIslemleriDto()
         {
             InitializePartial();
@@ -1565,73 +1141,31 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         partial void InitializePartial();
     }
 
-    // ZetaCodeKumasFanteziFantezi
+    // ZetaCode_KumasFantezi_KumasFantezi
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public partial class ZetaCodeKumasFanteziFanteziDto
+    public partial class ZetaCodeKumasFanteziKumasFanteziDto
     {
         public int Id { get; set; } // Id (Primary key)
-        public bool IsPassive { get; set; } // IsPassive
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public int? KumasFanteziId { get; set; } // KumasFanteziId
-        public int? KumasOtherFanteziId { get; set; } // KumasOtherFanteziId
+        public int KumasFanteziId { get; set; } // KumasFanteziId
+        public int KumasOtherFanteziId { get; set; } // KumasOtherFanteziId
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasFanteziId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokumaDto> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma.FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFanteziFantezi].([KumasFanteziId]) (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi)
-        /// </summary>
-        public ZetaCodeKumasFantaziDto KumasFantezi { get; set; } // FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFantazi pointed by [ZetaCodeKumasFanteziFantezi].([KumasOtherFanteziId]) (FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1)
-        /// </summary>
-        public ZetaCodeKumasFantaziDto KumasOtherFantezi { get; set; } // FK_ZetaCodeKumasFanteziFantezi_ZetaCodeKumasFantazi1
-
-        public ZetaCodeKumasFanteziFanteziDto()
+        public ZetaCodeKumasFanteziKumasFanteziDto()
         {
-            ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokumaDto>();
             InitializePartial();
         }
 
         partial void InitializePartial();
     }
 
-    // ZetaCodeKumasFanteziOrmeDokuma
+    // ZetaCode_KumasFantezi_KumasOrmeDokuma
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public partial class ZetaCodeKumasFanteziOrmeDokumaDto
+    public partial class ZetaCodeKumasFanteziKumasOrmeDokumaDto
     {
         public int Id { get; set; } // Id (Primary key)
-        public bool IsPassive { get; set; } // IsPassive
-        public System.DateTime? CreatedOn { get; set; } // CreatedOn
-        public string CreatedBy { get; set; } // CreatedBy (length: 128)
-        public System.DateTime? ChangedOn { get; set; } // ChangedOn
-        public string ChangedBy { get; set; } // ChangedBy (length: 128)
         public int? KumasFanteziId { get; set; } // KumasFanteziId
         public int? KumasOrmeDokumaId { get; set; } // KumasOrmeDokumaId
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeKumasFanteziFantezi pointed by [ZetaCodeKumasFanteziOrmeDokuma].([KumasFanteziId]) (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi)
-        /// </summary>
-        public ZetaCodeKumasFanteziFanteziDto ZetaCodeKumasFanteziFantezi { get; set; } // FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasFanteziFantezi
-
-        /// <summary>
-        /// Parent ZetaCodeKumasOrmeDokuma pointed by [ZetaCodeKumasFanteziOrmeDokuma].([KumasOrmeDokumaId]) (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public ZetaCodeKumasOrmeDokumaDto ZetaCodeKumasOrmeDokuma { get; set; } // FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma
-
-        public ZetaCodeKumasFanteziOrmeDokumaDto()
+        public ZetaCodeKumasFanteziKumasOrmeDokumaDto()
         {
             InitializePartial();
         }
@@ -1644,42 +1178,28 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
     public partial class ZetaCodeKumasMakineDto
     {
         public int Id { get; set; } // Id (Primary key)
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public int? MarkaId { get; set; } // MarkaId
+        public int? ModelId { get; set; } // ModelId
         public string ModelYili { get; set; } // ModelYili (length: 10)
         public string Pus { get; set; } // Pus (length: 10)
         public string Fine { get; set; } // Fine (length: 10)
         public string YedekFine { get; set; } // YedekFine (length: 10)
         public string Sistem { get; set; } // Sistem (length: 10)
         public string IgneSayisi { get; set; } // IgneSayisi (length: 10)
-        public string HamCm { get; set; } // HamCm (length: 10)
         public string HamGr { get; set; } // HamGr (length: 10)
-        public string Elastane { get; set; } // Elastane (length: 10)
+        public string HamCm { get; set; } // HamCm (length: 10)
+        public string AksesuarIds { get; set; } // AksesuarIds (length: 500)
+        public int? TupAcikEnId { get; set; } // TupAcikEnId
+        public int? ElastanId { get; set; } // ElastanId
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-        public string CompanyId { get; set; } // CompanyId (length: 128)
-        public string AksesuarIds { get; set; } // AksesuarIds (length: 500)
-        public int? TupAcikEnId { get; set; } // TupAcikEnId
-        public int? ElastanId { get; set; } // ElastanId
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma where [ZetaCodeKumasOrmeDokuma].[KumasMakineId] point to this entity (FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // ZetaCodeKumasOrmeDokuma.FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasMakine].([CompanyId]) (FK_ZetaCodeKumasMakine_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeKumasMakine_Company
 
         public ZetaCodeKumasMakineDto()
         {
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
             InitializePartial();
         }
 
@@ -1716,64 +1236,15 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public int? OrguTipiId { get; set; } // OrguTipiId
         public string BoyaIslemleriIds { get; set; } // BoyaIslemleriIds (length: 500)
         public string OrguDetaylariIds { get; set; } // OrguDetaylariIds (length: 500)
-        public int? MakineMarkaId { get; set; } // MakineMarkaId
-        public int? MakineModelId { get; set; } // MakineModelId
-        public string YikamaTalimatiKuruTemizleme { get; set; } // YikamaTalimatiKuruTemizleme (length: 50)
-        public string YikamaTalimatiYikamaSekli { get; set; } // YikamaTalimatiYikamaSekli (length: 50)
-        public string YikamaTalimatiYikamaMaxDerecesi { get; set; } // YikamaTalimatiYikamaMaxDerecesi (length: 50)
-        public string YikamaTalimatiUtulemeMaxDerecesi { get; set; } // YikamaTalimatiUtulemeMaxDerecesi (length: 50)
-        public string YikamaTalimatiTersYikama { get; set; } // YikamaTalimatiTersYikama (length: 50)
-        public string YikamaTalimatiCekemezlik { get; set; } // YikamaTalimatiCekemezlik (length: 10)
-        public string YikamaTalimatiDonmezlik { get; set; } // YikamaTalimatiDonmezlik (length: 10)
-        public string YikamaTalimatiYikamaAdedi { get; set; } // YikamaTalimatiYikamaAdedi (length: 10)
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalKumas]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeHazirGiyim (Many-to-Many) mapped by table [ZetaCode_HazirGiyim_KumasOrmeDokuma]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeHazirGiyimDto> ZetaCodeHazirGiyim { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasFanteziOrmeDokuma where [ZetaCodeKumasFanteziOrmeDokuma].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokumaDto> ZetaCodeKumasFanteziOrmeDokuma { get; set; } // ZetaCodeKumasFanteziOrmeDokuma.FK_ZetaCodeKumasFanteziOrmeDokuma_ZetaCodeKumasOrmeDokuma
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokumaPicture where [ZetaCodeKumasOrmeDokumaPicture].[KumasOrmeDokumaId] point to this entity (FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPictureDto> ZetaCodeKumasOrmeDokumaPicture { get; set; } // ZetaCodeKumasOrmeDokumaPicture.FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma
-        /// <summary>
-        /// Child ZetaCodeNormalIplik (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplik { get; set; } // Many to many mapping
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasOrmeDokuma].([CompanyId]) (FK_ZetaCodeKumasOrmeDokuma_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeKumasOrmeDokuma_Company
-
-        /// <summary>
-        /// Parent ZetaCodeKumasMakine pointed by [ZetaCodeKumasOrmeDokuma].([KumasMakineId]) (FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine)
-        /// </summary>
-        public ZetaCodeKumasMakineDto ZetaCodeKumasMakine { get; set; } // FK_ZetaCodeKumasOrmeDokuma_ZetaCodeKumasMakine
+        public int? YikamaTalimatiId { get; set; } // YikamaTalimatiId
 
         public ZetaCodeKumasOrmeDokumaDto()
         {
-            ZetaCodeKumasFanteziOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasFanteziOrmeDokumaDto>();
-            ZetaCodeKumasOrmeDokumaPicture = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaPictureDto>();
-            ZetaCodeHazirGiyim = new System.Collections.Generic.List<ZetaCodeHazirGiyimDto>();
-            ZetaCodeNormalIplik = new System.Collections.Generic.List<ZetaCodeNormalIplikDto>();
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
             InitializePartial();
         }
 
@@ -1793,18 +1264,6 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public bool IsPassive { get; set; } // IsPassive
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeKumasOrmeDokumaPicture].([CompanyId]) (FK_ZetaCodeKumasOrmeDokumaPicture_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeKumasOrmeDokumaPicture_Company
-
-        /// <summary>
-        /// Parent ZetaCodeKumasOrmeDokuma pointed by [ZetaCodeKumasOrmeDokumaPicture].([KumasOrmeDokumaId]) (FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma)
-        /// </summary>
-        public ZetaCodeKumasOrmeDokumaDto ZetaCodeKumasOrmeDokuma { get; set; } // FK_ZetaCodeKumasOrmeDokumaPicture_ZetaCodeKumasOrmeDokuma
 
         public ZetaCodeKumasOrmeDokumaPictureDto()
         {
@@ -1846,72 +1305,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriDegrede].[ZetaCodeNormalIplikId] (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
-        /// </summary>
-        public IplikKategoriDegredeDto IplikKategoriDegrede { get; set; } // IplikKategoriDegrede.FK_IplikKategoriDegrede_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriFlam].[ZetaCodeNormalIplikId] (FK_IplikKategoriFlam_ZetaCodeNormalIplik)
-        /// </summary>
-        public IplikKategoriFlamDto IplikKategoriFlam { get; set; } // IplikKategoriFlam.FK_IplikKategoriFlam_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriKircili].[ZetaCodeNormalIplikId] (FK_IplikKategoriKircili_ZetaCodeNormalIplik1)
-        /// </summary>
-        public IplikKategoriKirciliDto IplikKategoriKircili { get; set; } // IplikKategoriKircili.FK_IplikKategoriKircili_ZetaCodeNormalIplik1
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriKrep].[ZetaCodeNormalIplikId] (FK_IplikKategoriKrep_ZetaCodeNormalIplik)
-        /// </summary>
-        public IplikKategoriKrepDto IplikKategoriKrep { get; set; } // IplikKategoriKrep.FK_IplikKategoriKrep_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriNopeli].[ZetaCodeNormalIplikId] (FK_IplikKategoriNopeli_ZetaCodeNormalIplik)
-        /// </summary>
-        public IplikKategoriNopeliDto IplikKategoriNopeli { get; set; } // IplikKategoriNopeli.FK_IplikKategoriNopeli_ZetaCodeNormalIplik
-        /// <summary>
-        /// Parent (One-to-One) ZetaCodeNormalIplikDto pointed by [IplikKategoriSim].[ZetaCodeNormalIplikId] (FK_IplikKategoriSim_ZetaCodeNormalIplik)
-        /// </summary>
-        public IplikKategoriSimDto IplikKategoriSim { get; set; } // IplikKategoriSim.FK_IplikKategoriSim_ZetaCodeNormalIplik
-        /// <summary>
-        /// Child IplikNo where [IplikNo].[ZetaCodeNormalIplikId] point to this entity (FK_IplikNo_ZetaCodeNormaliplik)
-        /// </summary>
-        public System.Collections.Generic.List<IplikNoDto> IplikNo { get; set; } // IplikNo.FK_IplikNo_ZetaCodeNormaliplik
-        /// <summary>
-        /// Child ZetaCodeFanteziIplik (Many-to-Many) mapped by table [ZetaCode_FanteziIplik_NormalIplik]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplik { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeKumasOrmeDokuma (Many-to-Many) mapped by table [ZetaCode_NormalIplik_NormalKumas]
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto> ZetaCodeKumasOrmeDokuma { get; set; } // Many to many mapping
-        /// <summary>
-        /// Child ZetaCodeNormalIplikPicture where [ZetaCodeNormalIplikPicture].[ZetaCodeNormalIplikId] point to this entity (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
-        /// </summary>
-        public System.Collections.Generic.List<ZetaCodeNormalIplikPictureDto> ZetaCodeNormalIplikPicture { get; set; } // ZetaCodeNormalIplikPicture.FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [ZetaCodeNormalIplik].([SirketId]) (FK_ZetaCodeNormaliplik_Company)
-        /// </summary>
-        public CompanyDto Company { get; set; } // FK_ZetaCodeNormaliplik_Company
-
-        /// <summary>
-        /// Parent PantoneRenk pointed by [ZetaCodeNormalIplik].([PantoneId]) (FK_ZetaCodeNormaliplik_PantoneRengi)
-        /// </summary>
-        public PantoneRenkDto PantoneRenk { get; set; } // FK_ZetaCodeNormaliplik_PantoneRengi
-
-        /// <summary>
-        /// Parent Renk pointed by [ZetaCodeNormalIplik].([Renkid]) (FK_ZetaCodeNormaliplik_Renk)
-        /// </summary>
-        public RenkDto Renk { get; set; } // FK_ZetaCodeNormaliplik_Renk
-
         public ZetaCodeNormalIplikDto()
         {
-            IplikNo = new System.Collections.Generic.List<IplikNoDto>();
-            ZetaCodeNormalIplikPicture = new System.Collections.Generic.List<ZetaCodeNormalIplikPictureDto>();
-            ZetaCodeKumasOrmeDokuma = new System.Collections.Generic.List<ZetaCodeKumasOrmeDokumaDto>();
-            ZetaCodeFanteziIplik = new System.Collections.Generic.List<ZetaCodeFanteziIplikDto>();
             InitializePartial();
         }
 
@@ -1932,14 +1327,39 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public System.DateTime? CreatedOn { get; set; } // CreatedOn
         public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [ZetaCodeNormalIplikPicture].([ZetaCodeNormalIplikId]) (FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik)
-        /// </summary>
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplik { get; set; } // FK_ZetaCodeNormalIplikPicture_ZetaCodeNormalIplik
-
         public ZetaCodeNormalIplikPictureDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_NormalKumas_FanteziIplik
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeNormalKumasFanteziIplikDto
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int FanzteziIplikId { get; set; } // FanzteziIplikId
+        public int NormalKumasId { get; set; } // NormalKumasId
+
+        public ZetaCodeNormalKumasFanteziIplikDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCode_NormalKumas_NormalIplik
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeNormalKumasNormalIplikDto
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int NormalKumasId { get; set; } // NormalKumasId
+        public int NormalIplikId { get; set; } // NormalIplikId
+
+        public ZetaCodeNormalKumasNormalIplikDto()
         {
             InitializePartial();
         }
@@ -1956,6 +1376,33 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
         public string CompanyId { get; set; } // CompanyId (length: 128)
 
         public ZetaCodesDto()
+        {
+            InitializePartial();
+        }
+
+        partial void InitializePartial();
+    }
+
+    // ZetaCodeYikamaTalimati
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public partial class ZetaCodeYikamaTalimatiDto
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public bool? KuruTemizleme { get; set; } // KuruTemizleme
+        public string YikamaSekli { get; set; } // YikamaSekli (length: 50)
+        public string YikamaMaxDerecesi { get; set; } // YikamaMaxDerecesi (length: 50)
+        public string UtulemeMaxDerecesi { get; set; } // UtulemeMaxDerecesi (length: 50)
+        public bool? TersYikama { get; set; } // TersYikama
+        public string Cekemezlik { get; set; } // Cekemezlik (length: 10)
+        public string Donmezlik { get; set; } // Donmezlik (length: 10)
+        public string YikamaAdedi { get; set; } // YikamaAdedi (length: 10)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
+        public System.DateTime? ChangedOn { get; set; } // ChangedOn
+        public string ChangedBy { get; set; } // ChangedBy (length: 128)
+
+        public ZetaCodeYikamaTalimatiDto()
         {
             InitializePartial();
         }

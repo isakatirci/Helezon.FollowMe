@@ -40,13 +40,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelBank].([PersonnelId]) (FK_PersonnelBank_Person)
-        /// </summary>
-        public virtual Person Person { get; set; } // FK_PersonnelBank_Person
-
         public PersonnelBank()
         {
             BankNameTermId = 0;

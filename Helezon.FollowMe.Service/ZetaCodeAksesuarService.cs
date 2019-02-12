@@ -1,4 +1,5 @@
 ﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using Repository.Pattern.Repositories;
 using Service.Pattern;
@@ -16,6 +17,7 @@ namespace Helezon.FollowMe.Service
     public interface IAksesuarService : IService<ZetaCodeAksesuar>
     {
         List<ZetaCodeAksesuarDto> GetZetaCodeIsimler(string companyId);
+        void InsertOrUpdate(AksesuarContainerDto container);
     }
 
     /// <summary>
@@ -24,10 +26,13 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public class AksesuarService : Service<ZetaCodeAksesuar>, IAksesuarService
     {
-        private IRepositoryAsync<ZetaCodeAksesuar> _repository;
+        private readonly IRepositoryAsync<ZetaCodeAksesuar> _repository;
+        private readonly IRepositoryAsync<ZetaCodeAksesuarKompozisyon> _repoKompozisyon;
+        
         public AksesuarService(IRepositoryAsync<ZetaCodeAksesuar> repository) : base(repository)
         {
             _repository = repository;
+            _repoKompozisyon = _repository.GetRepositoryAsync<ZetaCodeAksesuarKompozisyon>();
         }
 
         public List<ZetaCodeAksesuarDto> GetZetaCodeIsimler(string companyId)
@@ -39,6 +44,51 @@ namespace Helezon.FollowMe.Service
                     UrunKompozisyonu = x.UrunKompozisyonu,
                     Id = x.Id
                 }).ToList();
+        }
+
+        public void InsertOrUpdate(AksesuarContainerDto container)
+        {
+            try
+            {
+                _repository.UnitOfWorkAsync().BeginTransaction();
+                var aksesuar = AutoMapperConfig.Mapper.Map<ZetaCodeAksesuarDto, ZetaCodeAksesuar>(container.Aksesuar);
+                if (aksesuar.Id > 0)
+                {
+                    this.Update(aksesuar);
+                }
+                else
+                {
+                    this.Insert(aksesuar);
+                }
+                _repository.UnitOfWorkAsync().SaveChanges();
+
+                var kompozisyonlar = AutoMapperConfig.Mapper.Map<List<ZetaCodeAksesuarKompozisyonDto>,List<ZetaCodeAksesuarKompozisyon>>(container.AksesuarKompozisyonlar); ;
+
+                if (kompozisyonlar != null && kompozisyonlar.Any())
+                {
+                    foreach (var kompozisyon in kompozisyonlar)
+                    {
+                        kompozisyon.AksesuarId = aksesuar.Id;
+                        if (kompozisyon.Id>0)
+                        {
+                            _repoKompozisyon.Update(kompozisyon);
+                        }
+                        else
+                        {
+                            _repoKompozisyon.Insert(kompozisyon);
+                        }
+                    }
+                }
+
+                _repository.UnitOfWorkAsync().SaveChanges();
+                _repository.UnitOfWorkAsync().Commit();
+
+            }
+            catch (Exception ex)
+            {
+                _repository.UnitOfWorkAsync().Rollback();
+                throw;
+            }
         }
     }
 }

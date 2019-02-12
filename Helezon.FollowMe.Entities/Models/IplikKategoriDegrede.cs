@@ -26,13 +26,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string BoyaTipi { get; set; } // BoyaTipi (length: 10)
         public string BoyaYonu { get; set; } // BoyaYonu (length: 10)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriDegrede].([ZetaCodeNormalIplikId]) (FK_IplikKategoriDegrede_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriDegrede_ZetaCodeNormalIplik
-
         public IplikKategoriDegrede()
         {
             InitializePartial();

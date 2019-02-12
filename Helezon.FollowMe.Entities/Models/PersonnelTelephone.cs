@@ -33,13 +33,6 @@ namespace Helezon.FollowMe.Entities.Models
         public System.DateTime? ChangedOn { get; set; } // ChangedOn
         public string ChangedBy { get; set; } // ChangedBy (length: 128)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Person pointed by [PersonnelTelephone].([PersonnelId]) (FK_PersonnelTelephone_Person)
-        /// </summary>
-        public virtual Person Person { get; set; } // FK_PersonnelTelephone_Person
-
         public PersonnelTelephone()
         {
             InitializePartial();

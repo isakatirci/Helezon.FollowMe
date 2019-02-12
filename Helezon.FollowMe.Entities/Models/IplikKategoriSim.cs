@@ -24,13 +24,6 @@ namespace Helezon.FollowMe.Entities.Models
         public string SimKesimBoyutu { get; set; } // SimKesimBoyutu (length: 200)
         public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId (Primary key)
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeNormalIplik pointed by [IplikKategoriSim].([ZetaCodeNormalIplikId]) (FK_IplikKategoriSim_ZetaCodeNormalIplik)
-        /// </summary>
-        public virtual ZetaCodeNormalIplik ZetaCodeNormalIplik { get; set; } // FK_IplikKategoriSim_ZetaCodeNormalIplik
-
         public IplikKategoriSim()
         {
             InitializePartial();

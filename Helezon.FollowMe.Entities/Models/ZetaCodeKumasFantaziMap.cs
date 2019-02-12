@@ -56,25 +56,13 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.OrguTipiId).HasColumnName(@"OrguTipiId").HasColumnType("int").IsOptional();
             Property(x => x.BoyaIslemleriIds).HasColumnName(@"BoyaIslemleriIds").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
             Property(x => x.OrguDetaylariIds).HasColumnName(@"OrguDetaylariIds").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
-            Property(x => x.MakineMarkaId).HasColumnName(@"MakineMarkaId").HasColumnType("int").IsOptional();
-            Property(x => x.MakineModelId).HasColumnName(@"MakineModelId").HasColumnType("int").IsOptional();
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.YikamaTalimatiKuruTemizleme).HasColumnName(@"YikamaTalimatiKuruTemizleme").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiYikamaSekli).HasColumnName(@"YikamaTalimatiYikamaSekli").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiYikamaMaxDerecesi).HasColumnName(@"YikamaTalimatiYikamaMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiUtulemeMaxDerecesi).HasColumnName(@"YikamaTalimatiUtulemeMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiTersYikama).HasColumnName(@"YikamaTalimatiTersYikama").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiCekemezlik).HasColumnName(@"YikamaTalimatiCekemezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.YikamaTalimatiDonmezlik).HasColumnName(@"YikamaTalimatiDonmezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.YikamaTalimatiYikamaAdedi).HasColumnName(@"YikamaTalimatiYikamaAdedi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-
-            // Foreign keys
-            HasOptional(a => a.Company).WithMany(b => b.ZetaCodeKumasFantazi).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_ZetaCodeKumasFantazi_Company
+            Property(x => x.YikamaTalimatiId).HasColumnName(@"YikamaTalimatiId").HasColumnType("int").IsOptional();
             InitializePartial();
         }
         partial void InitializePartial();

@@ -33,13 +33,6 @@ namespace Helezon.FollowMe.Entities.Models
         public int? Xl4 { get; set; } // XL4
         public int? Xl5 { get; set; } // XL5
 
-        // Foreign keys
-
-        /// <summary>
-        /// Parent ZetaCodeHazirGiyim pointed by [BedenOlculeri].([HazirGiyimId]) (FK_BedenOlculeri_ZetaCodeHazirGiyim)
-        /// </summary>
-        public virtual ZetaCodeHazirGiyim ZetaCodeHazirGiyim { get; set; } // FK_BedenOlculeri_ZetaCodeHazirGiyim
-
         public BedenOlculeri()
         {
             InitializePartial();

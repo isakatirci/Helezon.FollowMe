@@ -10,13 +10,24 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeKumasOrmeDokumaEditVm
     {
-        public ZetaCodeKumasOrmeDokumaDto KumasOrmeDokumaDto { get; set; }
-        public ZetaCodeKumasMakineDto KumasMakineDto { get; set; }
+        public ZetaCodeKumasOrmeDokumaDto KumasOrmeDokuma { get; set; }
         public ZetaCodeKumasOrmeDokumaCollections Collections { get; set; }
+        public List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplikDtos { get; set; }
+        public List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplikDtos { get; set; }
+        public CompanyDto Company { get; set; }
+        public ZetaCodeKumasMakineDto KumasMakine { get; set; }
+        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
+
+        public List<ZetaCodeVm> Iplikler { get; set; }
         public ZetaCodeKumasOrmeDokumaEditVm()
         {
-            KumasOrmeDokumaDto = new ZetaCodeKumasOrmeDokumaDto();
+            KumasOrmeDokuma = new ZetaCodeKumasOrmeDokumaDto();
+            ZetaCodeFanteziIplikDtos = new List<ZetaCodeFanteziIplikDto>();
+            ZetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
             Collections = new ZetaCodeKumasOrmeDokumaCollections();
+            Iplikler = new List<ZetaCodeVm>();
+            KumasMakine = new ZetaCodeKumasMakineDto();
+            YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
 
         }
     }
@@ -32,8 +43,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
         public HashSet<PairIdNameDto> TupAcikEnler { get; set; }
         public HashSet<PairIdNameDto> Elastanlar { get; set; }
-
-        public List<SelectListItem> YikamaSekilleri { get; set; }
+        public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
 
         public SelectList UrunKategorileri { get; set; }
 
@@ -47,6 +57,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         //
         //
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
+        public List<ZetaCodeVm> Iplikler { get; set; }
 
 
         //public List<SelectListItem> NormalIplikler { get; set; }
@@ -60,7 +71,8 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             OrguTipleri = new List<SelectListItem>();
             OrguCesidleri = new List<SelectListItem>();
             OrguKabiliyetleri = new List<SelectListItem>();
-            OrguDigerleri = new List<SelectListItem>();        
+            OrguDigerleri = new List<SelectListItem>();
+            Iplikler = new List<ZetaCodeVm>();
         }
     }
 }

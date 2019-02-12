@@ -49,50 +49,10 @@ namespace Helezon.FollowMe.Entities.Models
         public int? ReasonWhyPassiveId { get; set; } // ReasonWhyPassiveId
         public int? PositionId { get; set; } // PositionId
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child PersonnelAddress where [PersonnelAddress].[PersonnelId] point to this entity (FK_PersonnelAddress_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelAddress> PersonnelAddress { get; set; } // PersonnelAddress.FK_PersonnelAddress_Person
-        /// <summary>
-        /// Child PersonnelBank where [PersonnelBank].[PersonnelId] point to this entity (FK_PersonnelBank_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelBank> PersonnelBank { get; set; } // PersonnelBank.FK_PersonnelBank_Person
-        /// <summary>
-        /// Child PersonnelEducation where [PersonnelEducation].[PersonnelId] point to this entity (FK_PersonnelEducation_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelEducation> PersonnelEducation { get; set; } // PersonnelEducation.FK_PersonnelEducation_Person
-        /// <summary>
-        /// Child PersonnelPicture where [PersonnelPicture].[PersonnelId] point to this entity (FK_PersonnelImage_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture.FK_PersonnelImage_Person
-        /// <summary>
-        /// Child PersonnelTelephone where [PersonnelTelephone].[PersonnelId] point to this entity (FK_PersonnelTelephone_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone.FK_PersonnelTelephone_Person
-        /// <summary>
-        /// Child PersonnelTerm where [PersonnelTerm].[PersonnelId] point to this entity (FK_PersonnelTerm_Person)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm.FK_PersonnelTerm_Person
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Company pointed by [Person].([CompanyId]) (FK_Person_Company)
-        /// </summary>
-        public virtual Company Company { get; set; } // FK_Person_Company
-
         public Person()
         {
             IsAuthorized = false;
             GenderTypeId = 0;
-            PersonnelAddress = new System.Collections.Generic.List<PersonnelAddress>();
-            PersonnelBank = new System.Collections.Generic.List<PersonnelBank>();
-            PersonnelEducation = new System.Collections.Generic.List<PersonnelEducation>();
-            PersonnelPicture = new System.Collections.Generic.List<PersonnelPicture>();
-            PersonnelTelephone = new System.Collections.Generic.List<PersonnelTelephone>();
-            PersonnelTerm = new System.Collections.Generic.List<PersonnelTerm>();
             InitializePartial();
         }
 
