@@ -14,7 +14,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public ZetaCodeKumasFantaziDto KumasFantazi { get; set; }
         public List<SelectListItem> FanteziKumaslar { get; set; }
         public List<SelectListItem> OrmeDokumaKumaslar { get; set; }
-        public List<ZetaCodeVm> Kumaslar { get; set; }
+        public List<ZetaCodeDto> Kumaslar { get; set; }
         public KumasFanteziEditVmCollections Collections { get; set; }
         public CompanyDto Company { get; set; }
         public ZetaCodeKumasMakineDto ZetaCodeKumasMakine { get; set; }
@@ -25,13 +25,15 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
         public ZetaCodeYikamaTalimatiDto ZetaCodeYikamaTalimati { get; set; }
         public List<TermDto> AdimIslemleri { get; internal set; }
+        public List<ZetaCodeDto> KumasOrmeDokumalar { get;  set; }
+        public List<ZetaCodeDto> KumasFanteziler { get;  set; }
 
         public KumasFanteziEditVm()
         {
             KumasFantazi = new ZetaCodeKumasFantaziDto();
             //KumasFantaziDto.Company = new CompanyDto();
             Collections = new KumasFanteziEditVmCollections();
-            Kumaslar = new List<ZetaCodeVm>();
+            Kumaslar = new List<ZetaCodeDto>();
             KumasFantezi3AdimIslemleri = new List<ZetaCodeKumasFantezi3AdimIslemleriDto>();
             ZetaCodeYikamaTalimati = new ZetaCodeYikamaTalimatiDto();
             ZetaCodeKumasMakine = new ZetaCodeKumasMakineDto();
@@ -61,7 +63,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         //
         //
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
-        public List<ZetaCodeVm> Kumaslar { get; set; }
+        public List<ZetaCodeDto> Kumaslar { get; set; }
 
 
         //public List<SelectListItem> NormalIplikler { get; set; }
@@ -78,7 +80,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             OrguCesidleri = new List<SelectListItem>();
             OrguKabiliyetleri = new List<SelectListItem>();
             OrguDigerleri = new List<SelectListItem>();
-            Kumaslar = new List<ZetaCodeVm>();
+            Kumaslar = new List<ZetaCodeDto>();
         }
     }
 }

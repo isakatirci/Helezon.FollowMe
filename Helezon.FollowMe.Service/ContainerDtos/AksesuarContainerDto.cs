@@ -10,7 +10,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
 {
     public class AksesuarContainerDto
     {
-        public ZetaCodeAksesuarDto Aksesuar { get; internal set; }
+        public ZetaCodeAksesuarDto Aksesuar { get;  set; }
         public List<ZetaCodeAksesuarKompozisyonDto> AksesuarKompozisyonlar { get; set; }
         public CompanyDto Company { get; set; }
         public AksesuarContainerDto()

@@ -82,6 +82,7 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ContainerDtos\AksesuarContainerDto.cs" />
     <Compile Include="ContainerDtos\FanteziIplikContainerDto.cs" />
+    <Compile Include="ContainerDtos\HazirGiyimContainerDto.cs" />
     <Compile Include="ContainerDtos\KumasFantaziContainerDto.cs" />
     <Compile Include="ContainerDtos\KumasOrmeDokumaContainerDto.cs" />
     <Compile Include="ContainerDtos\NormalIplikContainerDto.cs" />

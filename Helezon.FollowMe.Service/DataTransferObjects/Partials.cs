@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Helezon.FollowMe.Service.DataTransferObjects
 {
+
+    public class ZetaCodeDto
+    {
+        public string Id { get; set; }
+        public string ZetaCode { get; set; }
+        public string Ad { get; set; }
+    }
     public partial class ZetaCodeKumasMakineDto
     {
         public TermDto MakineMarkasi { get; set; }

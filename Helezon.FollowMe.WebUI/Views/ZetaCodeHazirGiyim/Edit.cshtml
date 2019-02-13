@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_LayoutZetaCode.cshtml";
-    var update = Model != null && Model.HazirGiyimDto != null && Model.HazirGiyimDto.Id > 0;
+    var update = Model != null && Model.HazirGiyim != null && Model.HazirGiyim.Id > 0;
 }
 
 @section afterGlobalStyles
@@ -27,16 +27,16 @@
     </style>
 }
 
-<form action="/ZetaCodeFanteziIplik/Edit" id="frmZetaCodeFanteziIplik" method="post">
+<form action="/ZetaCodeHazirGiyim/Edit" id="frmZetaCodeHazirGiyim" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.HazirGiyimDto.Id)
-    @Html.HiddenFor(model => model.HazirGiyimDto.ZetaCode)
+    @Html.HiddenFor(model => model.HazirGiyim.Id)
+    @Html.HiddenFor(model => model.HazirGiyim.ZetaCode)
 
     <div class="portlet box green">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Zeta Code Aksesuar @(update ? "Edit Page" : "Create")
+                <i class="fa fa-gift"></i>Zeta Code Hazir Giyim @(update ? "Edit Page" : "Create Page")
             </div>
             <div class="tools">
             </div>
@@ -58,48 +58,44 @@
                                         <div class="form-body">
                                             @if (update)
                                             {
+
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyimDto.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.HazirGiyim.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        <div class="checkbox">
-                                                            @Html.EditorFor(model => model.HazirGiyimDto.IsPassive, new { SelectName = "HazirGiyimDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
-                                                            @Html.ValidationMessageFor(model => model.HazirGiyimDto.IsPassive, "", new { @class = "text-danger" })
-                                                        </div>
+                                                        @Html.DropDownList("HazirGiyim.IsPassive", MyHtmlHelpers.SelectListForBoolean(Model.HazirGiyim.IsPassive), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.HazirGiyim.IsPassive, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
 
+
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyimDto.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.HazirGiyim.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
                                                                id="ZetaCodeFanteziIplikDto_ZetaCode"
-                                                               value="@Model.HazirGiyimDto.ZetaCodeFormatli" />
+                                                               value="@Model.HazirGiyim.ZetaCodeFormatli" />
                                                     </div>
                                                 </div>
                                             }
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyimDto.ZetaCodePrevious
+                                                @Html.LabelFor(model => model.HazirGiyim.ZetaCodePrevious
 , htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.HazirGiyimDto.ZetaCodePrevious
+                                                    @Html.EditorFor(model => model.HazirGiyim.ZetaCodePrevious
          , new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.HazirGiyimDto.ZetaCodePrevious
+                                                    @Html.ValidationMessageFor(model => model.HazirGiyim.ZetaCodePrevious
           , "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyimDto.Master
-, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.HazirGiyim.Master, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    <div class="checkbox">
-                                                        @Html.EditorFor(model => model.HazirGiyimDto.Master
-, new { SelectName = "HazirGiyimDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
-                                                        @Html.ValidationMessageFor(model => model.HazirGiyimDto.Master
-, "", new { @class = "text-danger" })
-                                                    </div>
+                                                    @Html.DropDownList("HazirGiyim.Master", MyHtmlHelpers.SelectListForBoolean(Model.HazirGiyim.Master), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.HazirGiyim.Master, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -107,32 +103,32 @@
                                             @if (!update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyimDto.CompanyId
+                                                    @Html.LabelFor(model => model.HazirGiyim.CompanyId
     , "Blue Cod Name"
     , htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.DropDownList("HazirGiyimDto.CompanyId"
+                                                        @Html.DropDownList("HazirGiyim.CompanyId"
              , Model.Collections.Sirketler, "Please Select"
              , htmlAttributes: new { @class = "form-control select2" })
-                                                        @Html.ValidationMessageFor(model => model.HazirGiyimDto.CompanyId
+                                                        @Html.ValidationMessageFor(model => model.HazirGiyim.CompanyId
     , "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
                                             else
                                             {
-                                                <input type="hidden" name="HazirGiyimDto.SirketId"
+                                                <input type="hidden" name="HazirGiyim.SirketId"
                                                        id="ZetaCodeNormalIplikDto_SirketId"
-                                                       value="@Model.HazirGiyimDto.CompanyId" />
+                                                       value="@Model.HazirGiyim.CompanyId" />
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyimDto.CompanyId
+                                                    @Html.LabelFor(model => model.HazirGiyim.CompanyId
     , "Blue Cod Name"
     , htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                class="form-control"
                                                                readonly
-                                                               value="@(Model.HazirGiyimDto.Company?.Code + " " + Model.HazirGiyimDto.Company?.Name)" />
+                                                               value="@(Model.Company.Code + " " + Model.Company.Name)" />
                                                     </div>
                                                 </div>
                                             }
@@ -142,10 +138,10 @@
                                             {
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyimDto.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.HazirGiyim.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.EditorFor(model => model.HazirGiyimDto.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                        @Html.ValidationMessageFor(model => model.HazirGiyimDto.BlueSiparisNo, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.HazirGiyim.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.HazirGiyim.BlueSiparisNo, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
@@ -155,31 +151,31 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyimDto.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.HazirGiyim.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("HazirGiyimDto.Ulke"
+                                                    @Html.DropDownList("HazirGiyim.Ulke"
 , Model.Collections.Ulkeler, "Please Select"
 , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.HazirGiyimDto.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.HazirGiyim.Ulke, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyimDto.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.HazirGiyim.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.HazirGiyimDto.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
-                                                    @Html.ValidationMessageFor(model => model.HazirGiyimDto.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.HazirGiyim.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.ValidationMessageFor(model => model.HazirGiyim.BlueUrunKodIsmi, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyimDto.UrunKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.HazirGiyim.UrunKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
-                                                            @Html.HiddenFor(model => model.HazirGiyimDto.UrunKategoriId)
-                                                            @Html.TextBoxFor(model => model.HazirGiyimDto.UrunKategori.Name, new { @class = "form-control" })
+                                                            @Html.HiddenFor(model => model.HazirGiyim.UrunKategoriId)
+                                                            @Html.TextBoxFor(model => model.HazirGiyim.UrunKategori.Name, new { @class = "form-control" })
                                                             <br />
                                                             <div id="treeHazirGiyimKategorileri"></div>
                                                         </div>
@@ -251,9 +247,9 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-2">
                                                                                 </div>
-                                                                                <div class="col-md-6">                                                                                  
-                                                                                    @Html.DropDownList("Model.Kumaslar["+i+ "].Id"
-                                                                                        , new SelectList(Model.Collections.Kumaslar, "Value", "Text", Model.Kumaslar[i].Id)
+                                                                                <div class="col-md-6">
+                                                                                    @Html.DropDownList("Id"
+                                                                                        , new SelectList(Model.Collections.Kumaslar, "Id", "ZetaCode", Model.Kumaslar[i].Id)
                                                                                         , "Please Select"
                                                                                         , new { @class = "form-control select2", @onchange = "" })
                                                                                 </div>
@@ -326,8 +322,8 @@
                                                                                 <div class="col-md-2">
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    @Html.DropDownList("Model.Aksesuarlar[" + i+ "].Id"
-                                                                                        , new SelectList(Model.Collections.Aksesuarlar, "Value", "Text", Model.Aksesuarlar[i].Id)
+                                                                                    @Html.DropDownList("Id"
+                                                                                        , new SelectList(Model.Collections.Aksesuarlar, "Id", "ZetaCode", Model.Aksesuarlar[i].Id)
                                                                                         , "Please Select"
                                                                                         , new { @class = "form-control select2", @onchange = "" })
                                                                                 </div>
@@ -360,33 +356,16 @@
                 </div>
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_yikama_talimati"> YIKAMA TALIMATI </a>
-                        </h4>
-                    </div>
-                    <div id="collapse_yikama_talimati" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-horizontal form-bordered form-row-stripped">
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiKuruTemizleme, "MyBoolean")
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.HazirGiyimDto.YikamaTalimatiYikamaSekli, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-6">
-                                        @Html.DropDownListFor(x => x.HazirGiyimDto.YikamaTalimatiYikamaSekli, Model.Collections.YikamaSekilleri, "Please Select", new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.HazirGiyimDto.YikamaTalimatiYikamaSekli, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiYikamaMaxDerecesi, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiUtulemeMaxDerecesi, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiTersYikama, templateName: "MyBoolean")
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiCekemezlik, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiDonmezlik, templateName: "MyTouchSpin")
-                                @Html.EditorFor(x => x.HazirGiyimDto.YikamaTalimatiYikamaAdedi, templateName: "MyTouchSpin")
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_MyPartialYikamaTalimati",model:new ZetaCodeYikamaTalimatiEditVm
+          {
+              YikamaTalimati = Model.YikamaTalimati,
+              Collections=new ZetaCodeYikamaTalimatiEditVmCollections {
+
+                  YikamaSekilleri = Model.Collections.YikamaSekilleri
+
+              }
+
+          })
 
 
                 <div class="panel panel-default">
@@ -399,10 +378,10 @@
                         <div class="panel-body">
                             <div class="form-horizontal form-bordered form-row-stripped">
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.HazirGiyimDto.BaskiGoruntuId, "Baskı Görüntü", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.HazirGiyim.BaskiGoruntuId, "Baskı Görüntü", htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-6">
-                                        @Html.DropDownListFor(x => x.HazirGiyimDto.BaskiGoruntuId, Model.Collections.BaskiGoruntuler, "Please Select", new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.HazirGiyimDto.BaskiGoruntuId, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(x => x.HazirGiyim.BaskiGoruntuId, Model.Collections.BaskiGoruntuler, "Please Select", new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.HazirGiyim.BaskiGoruntuId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -453,67 +432,67 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_6_1">
                                                     <div class="form-horizontal form-bordered form-row-stripped">
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xs, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].S, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].M, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].L, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xl, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xl2, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xl3, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xl4, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[0].Xl5, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xs, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].S, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].M, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].L, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl2, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl3, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl4, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl5, "MyTouchSpin")
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_6_2">
                                                     <div class="form-horizontal form-bordered form-row-stripped">
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xs, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].S, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].M, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].L, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xl, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xl2, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xl3, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xl4, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[1].Xl5, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xs, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].S, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].M, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].L, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl2, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl3, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl4, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl5, "MyTouchSpin")
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_6_3">
                                                     <div class="form-horizontal form-bordered form-row-stripped">
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xs, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].S, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].M, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].L, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xl, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xl2, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xl3, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xl4, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[2].Xl5, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xs, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].S, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].M, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].L, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl2, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl3, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl4, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl5, "MyTouchSpin")
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_6_4">
                                                     <div class="form-horizontal form-bordered form-row-stripped">
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xs, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].S, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].M, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].L, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xl, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xl2, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xl3, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xl4, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[3].Xl5, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xs, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].S, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].M, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].L, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl2, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl3, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl4, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl5, "MyTouchSpin")
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_6_5">
                                                     <div class="form-horizontal form-bordered form-row-stripped">
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xs, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].S, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].M, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].L, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xl, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xl2, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xl3, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xl4, "MyTouchSpin")
-                                                        @Html.EditorFor(x => x.HazirGiyimDto.BedenOlculeri[4].Xl5, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xs, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].S, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].M, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].L, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl2, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl3, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl4, "MyTouchSpin")
+                                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl5, "MyTouchSpin")
                                                     </div>
                                                 </div>
                                             </div>
@@ -537,23 +516,23 @@
                                 <div class="form-body">
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.HazirGiyimDto.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.HazirGiyim.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
-                                            @Html.DropDownList("HazirGiyimDto.PantoneId"
-                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.HazirGiyimDto.PantoneId.HasValue ? Model.HazirGiyimDto.PantoneId.ToString() : "")
+                                            @Html.DropDownList("HazirGiyim.PantoneId"
+                                               , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.HazirGiyim.PantoneId.HasValue ? Model.HazirGiyim.PantoneId.ToString() : "")
                                                , "Please Select"
                                                , htmlAttributes: new { @class = "form-control select2" })
-                                            @Html.ValidationMessageFor(model => model.HazirGiyimDto.PantoneId, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.HazirGiyim.PantoneId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.HazirGiyimDto.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.HazirGiyim.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-3">
-                                            @Html.DropDownList("HazirGiyimDto.Renkid"
-                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.HazirGiyimDto.Renkid.HasValue ? Model.HazirGiyimDto.Renkid.ToString() : "")
+                                            @Html.DropDownList("HazirGiyim.Renkid"
+                                            , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.HazirGiyim.Renkid.HasValue ? Model.HazirGiyim.Renkid.ToString() : "")
                                             , "Please Select"
                                             , htmlAttributes: new { @class = "form-control select2", @onchange = "setHtmlColorCode($(this))" })
-                                            @Html.ValidationMessageFor(model => model.HazirGiyimDto.Renkid, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.HazirGiyim.Renkid, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col-md-3">
                                             <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
@@ -579,36 +558,36 @@
                                 <div class="panel-body">
 
                                     @*<div class="form-group">
-                                            @Html.LabelFor(model => model.HazirGiyimDto.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-6">
-                                                @Html.DropDownList("HazirGiyimDto.KumasGoruntuId"
-                                                           , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.HazirGiyimDto.KumasGoruntuId.HasValue ? Model.HazirGiyimDto.KumasGoruntuId.ToString() : "")
-                                                           , "Please Select"
-                                                           , new { @class = "form-control select2" })
-                                            </div>
-                                        </div>*@
+                                @Html.LabelFor(model => model.HazirGiyim.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.DropDownList("HazirGiyim.KumasGoruntuId"
+                                               , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.HazirGiyim.KumasGoruntuId.HasValue ? Model.HazirGiyim.KumasGoruntuId.ToString() : "")
+                                               , "Please Select"
+                                               , new { @class = "form-control select2" })
+                                </div>
+                            </div>*@
 
                                     @*<div class="form-group">
-                                            @Html.LabelFor(model => model.HazirGiyimDto.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-6">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        @Html.HiddenFor(model => model.HazirGiyimDto.KoleksiyonKategoriId)
-                                                        @Html.TextBoxFor(model => model.HazirGiyimDto.KoleksiyonKategori.Name, new { @class = "form-control" })
-                                                        <br />
-                                                        <div id="treeKoleksiyonKategorileri"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
+                                @Html.LabelFor(model => model.HazirGiyim.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            @Html.HiddenFor(model => model.HazirGiyim.KoleksiyonKategoriId)
+                                            @Html.TextBoxFor(model => model.HazirGiyim.KoleksiyonKategori.Name, new { @class = "form-control" })
+                                            <br />
+                                            <div id="treeKoleksiyonKategorileri"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
 
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.HazirGiyimDto.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.HazirGiyim.RafyeriTurkiyeId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.HazirGiyimDto.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.HazirGiyimDto.RafyeriTurkiye.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.HazirGiyim.RafyeriTurkiyeId)
+                                                    @Html.TextBoxFor(x => x.HazirGiyim.RafyeriTurkiye.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -617,12 +596,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(x => x.HazirGiyimDto.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(x => x.HazirGiyim.RafyeriYunanistanId, new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
-                                                    @Html.HiddenFor(x => x.HazirGiyimDto.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.HazirGiyimDto.RafyeriYunanistan.Name, new { @class = "form-control" })
+                                                    @Html.HiddenFor(x => x.HazirGiyim.RafyeriYunanistanId)
+                                                    @Html.TextBoxFor(x => x.HazirGiyim.RafyeriYunanistan.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>
@@ -809,28 +788,28 @@
 
 
             });
-            //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_En", 0.1, 150, 0.1,false,2);
-            //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_Boy", 0.1, 150, 0.1,false, 2);
-            //ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_Gram", 0.1, 1000, 0.1, false, 2);
+            //ComponentsNoUiSliders.myNoUiSlidersStater("#En", 0.1, 150, 0.1,false,2);
+            //ComponentsNoUiSliders.myNoUiSlidersStater("#Boy", 0.1, 150, 0.1,false, 2);
+            //ComponentsNoUiSliders.myNoUiSlidersStater("#Gram", 0.1, 1000, 0.1, false, 2);
 
             for (var i = 0; i < 5; i++) {
 
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xs", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__S", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__M", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__L", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xl", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xl2", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xl3", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xl4", 0.1, 200, 0.1, false, 2);
-                ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_BedenOlculeri_" + i + "__Xl5", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xs", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__S", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__M", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__L", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xl", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xl2", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xl3", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xl4", 0.1, 200, 0.1, false, 2);
+                ComponentsNoUiSliders.myNoUiSlidersStater("#BedenOlculeri_" + i + "__Xl5", 0.1, 200, 0.1, false, 2);
             }
 
-            ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_YikamaTalimatiYikamaMaxDerecesi", 20, 100, 5);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_YikamaTalimatiUtulemeMaxDerecesi", 20, 100, 5);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_YikamaTalimatiCekemezlik", -30, 30, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_YikamaTalimatiDonmezlik", -30, 30, 1);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#HazirGiyimDto_YikamaTalimatiYikamaAdedi", 1, 30, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_YikamaMaxDerecesi", 20, 100, 5);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_UtulemeMaxDerecesi", 20, 100, 5);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_Cekemezlik", -30, 30, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_Donmezlik", -30, 30, 1);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#YikamaTalimati_YikamaAdedi", 1, 30, 1);
 
             //
 
@@ -838,30 +817,30 @@
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeHazirGiyimKategorileri"
                 , "/ZetaCodeNormalIplik/JSTreeHazirGiyimKategorileri"
-                , "#HazirGiyimDto_UrunKategoriId"
-                , "#HazirGiyimDto_UrunKategori_Name");
+                , "#HazirGiyim_UrunKategoriId"
+                , "#HazirGiyim_UrunKategori_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriTurkiye"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
-                , "#HazirGiyimDto_RafyeriTurkiyeId"
-                , "#HazirGiyimDto_RafyeriTurkiye_Name");
+                , "#HazirGiyim_RafyeriTurkiyeId"
+                , "#HazirGiyim_RafyeriTurkiye_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriYunanistan"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
-                , "#HazirGiyimDto_RafyeriYunanistanId"
-                , "#HazirGiyimDto_RafyeriYunanistan_Name");
+                , "#HazirGiyim_RafyeriYunanistanId"
+                , "#HazirGiyim_RafyeriYunanistan_Name");
 
 
             //modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeBoyaIslemleri"
             //    , "/ZetaCodeNormalIplik/JSTreeBoyaIslemleri"
-            //    , "#HazirGiyimDto_BoyaIslemleriIds"
-            //    , "#HazirGiyimDto_BoyaIslemleri", true, ".form-group");
+            //    , "#HazirGiyim_BoyaIslemleriIds"
+            //    , "#HazirGiyim_BoyaIslemleri", true, ".form-group");
 
 
             //modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeAksesuarlar"
             //    , "/ZetaCodeNormalIplik/JSTreeAksesuarlar"
-            //    , "#HazirGiyimDto_AksesuarIds"
-            //    , "#HazirGiyimDto_Aksesuarlar", true, ".form-group");
+            //    , "#HazirGiyim_AksesuarIds"
+            //    , "#HazirGiyim_Aksesuarlar", true, ".form-group");
 
 
 

@@ -1,6 +1,7 @@
 ﻿using FollowMe.Web;
 using FollowMe.Web.Controllers;
 using Helezon.FollowMe.Service.ContainerDtos;
+using Helezon.FollowMe.Service.DataTransferObjects;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -205,26 +206,26 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var normalIplikler = GetNormalIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
             var fanteziIplikler = GetFanteziIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
 
-            model.Iplikler.AddRange(model.ZetaCodeNormalIplikDtos.Select(x => new ZetaCodeVm
+            model.Iplikler.AddRange(model.ZetaCodeNormalIplikDtos.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Normaliplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
             }));
 
-            model.Iplikler.AddRange(model.ZetaCodeFanteziIplikDtos.Select(x => new ZetaCodeVm
+            model.Iplikler.AddRange(model.ZetaCodeFanteziIplikDtos.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Fanteziiplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
             }));
 
 
-            model.Collections.Iplikler.AddRange(normalIplikler.Select(x => new ZetaCodeVm
+            model.Collections.Iplikler.AddRange(normalIplikler.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Normaliplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
             }));
 
-            model.Collections.Iplikler.AddRange(fanteziIplikler.Select(x => new ZetaCodeVm
+            model.Collections.Iplikler.AddRange(fanteziIplikler.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Fanteziiplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
@@ -232,7 +233,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.Iplikler.Any())
             {
-                model.Iplikler.Add(new ZetaCodeVm());
+                model.Iplikler.Add(new ZetaCodeDto());
             }
 
 

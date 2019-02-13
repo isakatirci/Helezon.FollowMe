@@ -38,6 +38,10 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 var container = new AksesuarContainerDto();
 
+                container.AksesuarKompozisyonlar = model.AksesuarKompozisyonlar;
+                container.Aksesuar = model.Aksesuar;
+
+
                 GetAksesuarService().InsertOrUpdate(container);
             });
 

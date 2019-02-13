@@ -238,26 +238,26 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var normalKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
             var fanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
 
-            model.Kumaslar.AddRange(model.KumasFantazi.KumasOrmeDokumalar.Select(x => new ZetaCodeVm
+            model.Kumaslar.AddRange(model.KumasOrmeDokumalar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "NormalKumas",
-                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+                ZetaCode = x.ZetaCode + ", " + x.Ad
             }));
 
-            model.Kumaslar.AddRange(model.KumasFantazi.KumasFanteziler.Select(x => new ZetaCodeVm
+            model.Kumaslar.AddRange(model.KumasFanteziler.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "FanteziKumas",
-                ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
+                ZetaCode = x.ZetaCode + ", " + x.Ad
             }));
 
 
-            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeVm
+            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "NormalKumas",
                 ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
             }));
 
-            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeVm
+            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "FanteziKumas",
                 ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
@@ -265,7 +265,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.Kumaslar.Any())
             {
-                model.Kumaslar.Add(new ZetaCodeVm());
+                model.Kumaslar.Add(new ZetaCodeDto());
             }
            
         }

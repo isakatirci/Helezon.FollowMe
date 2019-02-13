@@ -28,11 +28,13 @@ namespace Helezon.FollowMe.Service
     {
         private readonly IRepositoryAsync<ZetaCodeAksesuar> _repository;
         private readonly IRepositoryAsync<ZetaCodeAksesuarKompozisyon> _repoKompozisyon;
-        
+        private readonly IZetaCodeService _zetaCodeService;
+
         public AksesuarService(IRepositoryAsync<ZetaCodeAksesuar> repository) : base(repository)
         {
             _repository = repository;
             _repoKompozisyon = _repository.GetRepositoryAsync<ZetaCodeAksesuarKompozisyon>();
+            _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
         }
 
         public List<ZetaCodeAksesuarDto> GetZetaCodeIsimler(string companyId)
@@ -46,6 +48,11 @@ namespace Helezon.FollowMe.Service
                 }).ToList();
         }
 
+        public override void Insert(ZetaCodeAksesuar entity)
+        {
+            entity.Id = _zetaCodeService.GetZetaCodeForKumasAksesuarInsert();
+            base.Insert(entity);
+        }
         public void InsertOrUpdate(AksesuarContainerDto container)
         {
             try

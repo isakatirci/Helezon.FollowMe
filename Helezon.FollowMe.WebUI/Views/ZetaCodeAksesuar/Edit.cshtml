@@ -57,14 +57,13 @@
                                     <div class="form-horizontal form-bordered form-row-stripped">
                                         <div class="form-body">
                                             @if (update)
-                                            {
+                                            {                                        
+
                                                 <div class="form-group">
                                                     @Html.LabelFor(model => model.Aksesuar.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        <div class="checkbox">
-                                                            @Html.EditorFor(model => model.Aksesuar.IsPassive, new { SelectName = "AksesuarDto.IsPassive", SelectId = "ZetaCodeNormalIplikDto_IsPassive" })
-                                                            @Html.ValidationMessageFor(model => model.Aksesuar.IsPassive, "", new { @class = "text-danger" })
-                                                        </div>
+                                                        @Html.DropDownList("Aksesuar.IsPassive", MyHtmlHelpers.SelectListForBoolean(Model.Aksesuar.IsPassive), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.Aksesuar.IsPassive, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
 
@@ -74,7 +73,7 @@
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
-                                                               id="ZetaCodeFanteziIplikDto_ZetaCode"
+                                                               id="Aksesuar_ZetaCode"
                                                                value="@Model.Aksesuar.ZetaCodeFormatli" />
                                                     </div>
                                                 </div>
@@ -90,18 +89,15 @@
                                                          , "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.Aksesuar.Master
-                                           , htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Aksesuar.Master, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    <div class="checkbox">
-                                                        @Html.EditorFor(model => model.Aksesuar.Master
-                                                   , new { SelectName = "AksesuarDto.Master", SelectId = "ZetaCodeNormalIplikDto_Master" })
-                                                        @Html.ValidationMessageFor(model => model.Aksesuar.Master
-                                                   , "", new { @class = "text-danger" })
-                                                    </div>
+                                                    @Html.DropDownList("Aksesuar.Master", MyHtmlHelpers.SelectListForBoolean(Model.Aksesuar.Master), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.Aksesuar.Master, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
+
 
 
                                             @if (!update)
@@ -111,7 +107,7 @@
                                                , "Blue Cod Name"
                                                , htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.DropDownList("AksesuarDto.CompanyId"
+                                                        @Html.DropDownList("Aksesuar.CompanyId"
                                                             , Model.Collections.Sirketler, "Please Select"
                                                             , htmlAttributes: new { @class = "form-control select2" })
                                                         @Html.ValidationMessageFor(model => model.Aksesuar.CompanyId
@@ -121,8 +117,8 @@
                                             }
                                             else
                                             {
-                                                <input type="hidden" name="AksesuarDto.SirketId"
-                                                       id="ZetaCodeNormalIplikDto_SirketId"
+                                                <input type="hidden" name="Aksesuar.CompanyId"
+                                                       id="Aksesuar_CompanyId"
                                                        value="@Model.Aksesuar.CompanyId" />
                                                 <div class="form-group">
                                                     @Html.LabelFor(model => model.Aksesuar.CompanyId
@@ -157,7 +153,7 @@
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.Aksesuar.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("AksesuarDto.Ulke"
+                                                    @Html.DropDownList("Aksesuar.Ulke"
     , Model.Collections.Ulkeler, "Please Select"
     , htmlAttributes: new { @class = "form-control select2" })
                                                     @Html.ValidationMessageFor(model => model.Aksesuar.Ulke, "", new { @class = "text-danger" })
@@ -165,14 +161,14 @@
                                             </div>
 
                                             @*<div class="form-group">
-                                                                                @Html.LabelFor(model => model.AksesuarDto.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                                                <div class="col-md-6">
-                                                                                    @Html.DropDownList("AksesuarDto.Ea"
-                                    , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
-                                    , htmlAttributes: new { @class = "form-control select2" })
-                                                                                    @Html.ValidationMessageFor(model => model.AksesuarDto.Ea, "", new { @class = "text-danger" })
-                                                                                </div>
-                                                                            </div>*@
+                                                    @Html.LabelFor(model => model.Aksesuar.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-6">
+                                                        @Html.DropDownList("Aksesuar.Ea"
+        , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
+        , htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.Aksesuar.Ea, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
 
 
                                             <div class="form-group">
@@ -182,34 +178,6 @@
                                                     @Html.ValidationMessageFor(model => model.Aksesuar.BlueUrunKodIsmi, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
-
-                              
-
-
-
-                                            @*<div class="form-group">
-                                        <label class="control-label col-md-2" for="AksesuarDto.IplikKategosiId">iplik Kategosi</label>
-                                        <div class="col-md-6">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <input type="hidden"
-                                                           name="AksesuarDto.IplikKategosiId"
-                                                           id="ZetaCodeNormalIplikDto_IplikKategosiId"
-                                                           value="@(Model.AksesuarDto.UrunKategorisi?.Id)" />
-                                                    <input type="text"
-                                                           name="AksesuarDto.IplikKategosiName"
-                                                           id="ZetaCodeNormalIplikDto_IplikKategosiName"
-                                                           readonly
-                                                           class="form-control"
-                                                           value="@(Model.AksesuarDto.UrunKategorisi?.Name)" />
-                                                    <br />
-                                                    <div id="treeIplikKategosiId"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
-
-
 
                                         </div>
                                     </div>
@@ -309,7 +277,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Aksesuar.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
-                                            @Html.DropDownList("AksesuarDto.PantoneId"
+                                            @Html.DropDownList("Aksesuar.PantoneId"
                                                , new SelectList(Model.Collections.PantoneRenkler, "Value", "Text", Model.Aksesuar.PantoneId.HasValue ? Model.Aksesuar.PantoneId.ToString() : "")
                                                , "Please Select"
                                                , htmlAttributes: new { @class = "form-control select2" })
@@ -319,7 +287,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Aksesuar.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-3">
-                                            @Html.DropDownList("AksesuarDto.Renkid"
+                                            @Html.DropDownList("Aksesuar.Renkid"
                                             , new SelectList(Model.Collections.Renkler, "Value", "Text", Model.Aksesuar.Renkid.HasValue ? Model.Aksesuar.Renkid.ToString() : "")
                                             , "Please Select"
                                             , htmlAttributes: new { @class = "form-control select2", @onchange = "setHtmlColorCode($(this))" })
@@ -349,22 +317,22 @@
                                 <div class="panel-body">
 
                                     @*<div class="form-group">
-                                        @Html.LabelFor(model => model.AksesuarDto.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Aksesuar.KumasGoruntuId, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
-                                            @Html.DropDownList("AksesuarDto.KumasGoruntuId"
-                                                       , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.AksesuarDto.KumasGoruntuId.HasValue ? Model.AksesuarDto.KumasGoruntuId.ToString() : "")
+                                            @Html.DropDownList("Aksesuar.KumasGoruntuId"
+                                                       , new SelectList(Model.Collections.KumasGoruntuleri, "Value", "Text", Model.Aksesuar.KumasGoruntuId.HasValue ? Model.Aksesuar.KumasGoruntuId.ToString() : "")
                                                        , "Please Select"
                                                        , new { @class = "form-control select2" })
                                         </div>
                                     </div>*@
 
                                     @*<div class="form-group">
-                                @Html.LabelFor(model => model.AksesuarDto.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Aksesuar.KoleksiyonKategoriId, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            @Html.HiddenFor(model => model.AksesuarDto.KoleksiyonKategoriId)
-                                            @Html.TextBoxFor(model => model.AksesuarDto.KoleksiyonKategori.Name, new { @class = "form-control" })
+                                            @Html.HiddenFor(model => model.Aksesuar.KoleksiyonKategoriId)
+                                            @Html.TextBoxFor(model => model.Aksesuar.KoleksiyonKategori.Name, new { @class = "form-control" })
                                             <br />
                                             <div id="treeKoleksiyonKategorileri"></div>
                                         </div>
@@ -580,36 +548,36 @@
                     //Örgü Detayları - Örme Düz
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeDuz"
-                        , "#AksesuarDto_OrguDetaylariIds"
-                        , "#AksesuarDto_OrguDetaylari", false, ".form-group", mycheckbox);
+                        , "#Aksesuar_OrguDetaylariIds"
+                        , "#Aksesuar_OrguDetaylari", false, ".form-group", mycheckbox);
                 } else if ($(dll).val() === "45"){
                     //Örgü Detayları - Örme Yuvarlak
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeYuvarlak"
-                        , "#AksesuarDto_OrguDetaylariIds"
-                        , "#AksesuarDto_OrguDetaylari", false, ".form-group", mycheckbox);
+                        , "#Aksesuar_OrguDetaylariIds"
+                        , "#Aksesuar_OrguDetaylari", false, ".form-group", mycheckbox);
                 }
                 else if ($(dll).val() === "46") {
                      //Örgü Detayları - Örme Çözgülü
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariOrmeCozgulu"
-                        , "#AksesuarDto_OrguDetaylariIds"
-                        , "#AksesuarDto_OrguDetaylari", false, ".form-group", mycheckbox);
+                        , "#Aksesuar_OrguDetaylariIds"
+                        , "#Aksesuar_OrguDetaylari", false, ".form-group", mycheckbox);
 
                 }
                 else if ($(dll).val() === "47") {
                     //Örgü Detayları - Dokuma
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariDokuma"
-                        , "#AksesuarDto_OrguDetaylariIds"
-                        , "#AksesuarDto_OrguDetaylari", false, ".form-group", mycheckbox);
+                        , "#Aksesuar_OrguDetaylariIds"
+                        , "#Aksesuar_OrguDetaylari", false, ".form-group", mycheckbox);
                 }
                 else if ($(dll).val() === "48") {
                     //Örgü Detayları - Nonwoven
                     modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeOrguDetaylari"
                         , "/ZetaCodeNormalIplik/JSTreeOrguDetaylariNonwoven"
-                        , "#AksesuarDto_OrguDetaylariIds"
-                        , "#AksesuarDto_OrguDetaylari", false, ".form-group", mycheckbox);
+                        , "#Aksesuar_OrguDetaylariIds"
+                        , "#Aksesuar_OrguDetaylari", false, ".form-group", mycheckbox);
                 }
             }
         }
@@ -708,49 +676,49 @@
 
 
             repeater();
-            ComponentsNoUiSliders.myNoUiSlidersStater("#AksesuarDto_En", 0.1, 150, 0.1,false,2);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#AksesuarDto_Boy", 0.1, 150, 0.1,false, 2);
-            ComponentsNoUiSliders.myNoUiSlidersStater("#AksesuarDto_Gram", 0.1, 1000, 0.1, false, 2);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Aksesuar_En", 0.1, 150, 0.1,false,2);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Aksesuar_Boy", 0.1, 150, 0.1,false, 2);
+            ComponentsNoUiSliders.myNoUiSlidersStater("#Aksesuar_Gram", 0.1, 1000, 0.1, false, 2);
    
 
 
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeKoleksiyonKategorileri"
                 , "/ZetaCodeNormalIplik/JSTreeKoleksiyonKategorileri"
-                , "#AksesuarDto_KoleksiyonKategoriId"
-                , "#AksesuarDto_KoleksiyonKategori_Name");
+                , "#Aksesuar_KoleksiyonKategoriId"
+                , "#Aksesuar_KoleksiyonKategori_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriTurkiye"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
-                , "#AksesuarDto_RafyeriTurkiyeId"
-                , "#AksesuarDto_RafyeriTurkiye_Name");
+                , "#Aksesuar_RafyeriTurkiyeId"
+                , "#Aksesuar_RafyeriTurkiye_Name");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeRafyeriYunanistan"
                 , "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
-                , "#AksesuarDto_RafyeriYunanistanId"
-                , "#AksesuarDto_RafyeriYunanistan_Name");
+                , "#Aksesuar_RafyeriYunanistanId"
+                , "#Aksesuar_RafyeriYunanistan_Name");
 
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeBoyaIslemleri"
                 , "/ZetaCodeNormalIplik/JSTreeBoyaIslemleri"
-                , "#AksesuarDto_BoyaIslemleriIds"
-                , "#AksesuarDto_BoyaIslemleri", true, ".form-group");
+                , "#Aksesuar_BoyaIslemleriIds"
+                , "#Aksesuar_BoyaIslemleri", true, ".form-group");
 
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeAksesuarlar"
                 , "/ZetaCodeNormalIplik/JSTreeAksesuarlar"
-                , "#AksesuarDto_AksesuarIds"
-                , "#AksesuarDto_Aksesuarlar", true, ".form-group");
+                , "#Aksesuar_AksesuarIds"
+                , "#Aksesuar_Aksesuarlar", true, ".form-group");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeMakineMarkalar"
                 , "/ZetaCodeNormalIplik/JSTreeMakineMarkalar"
-                , "#AksesuarDto_MakineMarkaId"
-                , "#AksesuarDto_MakineMarkasi_Name", false, ".form-group");
+                , "#Aksesuar_MakineMarkaId"
+                , "#Aksesuar_MakineMarkasi_Name", false, ".form-group");
 
             modulKumasOrmeDokuma.ajaxTreeFillTermTree("#treeMakineModeller"
                 , "/ZetaCodeNormalIplik/JSTreeMakineModeller"
-                , "#AksesuarDto_MakineModelId"
-                , "#AksesuarDto_MakineModeli_Name", false, ".form-group");
+                , "#Aksesuar_MakineModelId"
+                , "#Aksesuar_MakineModeli_Name", false, ".form-group");
 
         });
     </script>

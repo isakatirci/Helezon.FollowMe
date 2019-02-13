@@ -193,6 +193,12 @@ namespace FollowMe.Web.Controllers
         {       
             return new IplikNoService(new Repository<Helezon.FollowMe.Entities.Models.IplikNo>(_followMeDbContext, UnitOfWorkAsync));
         }
+
+        public IHazirGiyimService GetHazirGiyimService()
+        {
+            return new HazirGiyimService(new Repository<Helezon.FollowMe.Entities.Models.ZetaCodeHazirGiyim>(_followMeDbContext, UnitOfWorkAsync));
+        }
+
         public IOthersService GetOthersService()
         {
             return new OthersService();

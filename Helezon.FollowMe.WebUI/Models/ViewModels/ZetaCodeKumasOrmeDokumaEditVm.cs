@@ -18,14 +18,15 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public ZetaCodeKumasMakineDto KumasMakine { get; set; }
         public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
 
-        public List<ZetaCodeVm> Iplikler { get; set; }
+        public List<ZetaCodeDto> Iplikler { get; set; }
         public ZetaCodeKumasOrmeDokumaEditVm()
         {
             KumasOrmeDokuma = new ZetaCodeKumasOrmeDokumaDto();
             ZetaCodeFanteziIplikDtos = new List<ZetaCodeFanteziIplikDto>();
             ZetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
             Collections = new ZetaCodeKumasOrmeDokumaCollections();
-            Iplikler = new List<ZetaCodeVm>();
+            Iplikler = new List<ZetaCodeDto>();
+            Company = new CompanyDto();
             KumasMakine = new ZetaCodeKumasMakineDto();
             YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
 
@@ -57,7 +58,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         //
         //
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
-        public List<ZetaCodeVm> Iplikler { get; set; }
+        public List<ZetaCodeDto> Iplikler { get; set; }
 
 
         //public List<SelectListItem> NormalIplikler { get; set; }
@@ -72,7 +73,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             OrguCesidleri = new List<SelectListItem>();
             OrguKabiliyetleri = new List<SelectListItem>();
             OrguDigerleri = new List<SelectListItem>();
-            Iplikler = new List<ZetaCodeVm>();
+            Iplikler = new List<ZetaCodeDto>();
         }
     }
 }

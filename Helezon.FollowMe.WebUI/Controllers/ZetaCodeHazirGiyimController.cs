@@ -1,5 +1,8 @@
 ﻿using FollowMe.Web;
 using FollowMe.Web.Controllers;
+using Helezon.FollowMe.Service;
+using Helezon.FollowMe.Service.ContainerDtos;
+using Helezon.FollowMe.Service.DataTransferObjects;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -29,6 +32,35 @@ namespace Helezon.FollowMe.WebUI.Controllers
             FillCollections(model);
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Edit(HazirGiyimEditVm model)
+        {
+            var result = HandleException(() =>
+            {
+                var container = new HazirGiyimContainerDto();
+                var fanteziKumaslar = new List<ZetaCodeDto>();
+                var ormeDokumaKumaslar = new List<ZetaCodeDto>();
+                if (model.Kumaslar != null && model.Kumaslar.Any())
+                {
+
+                }
+                container.KumasFanteziler = fanteziKumaslar;
+                container.KumasOrmeDokumalar = ormeDokumaKumaslar;
+                container.Aksesuarlar = model.Aksesuarlar;
+                container.HazirGiyim = model.HazirGiyim;              
+                GetHazirGiyimService().InsertOrUpdate(container);
+            });
+
+            if (result)
+                return RedirectToActionPermanent(actionName: "Index", controllerName: "ZetaCode");
+
+            FillCollections(model);
+            return View(model);
+          
+        }
+
+
         public ActionResult Card()
         {
             return View(new ZetaCodeKumasOrmeDokumaCardVm());
@@ -79,11 +111,11 @@ namespace Helezon.FollowMe.WebUI.Controllers
             }).ToList();
 
 
-            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri().Select(x => new SelectListItem
+            model.Collections.YikamaSekilleri = new HashSet<PairIdNameDto>(GetOthersService().GetYikamaSekilleri().Select(x => new PairIdNameDto
             {
-                Value = x.Id,
-                Text = x.Name
-            }).ToList();
+                Id = x.Id,
+                Name = x.Name
+            }));
 
             model.Collections.BaskiGoruntuler = GetTermService().GetTermsByTaxonomyId((int)TaxonomyType.BaskiGoruntuler).Select(x => new SelectListItem
             {
@@ -95,38 +127,38 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var fanteziKumaslar = GetKumasFanteziService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
             var aksesuarlar = GetAksesuarService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
 
-            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasOrmeDokuma.Select(x => new ZetaCodeVm
+            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasOrmeDokuma.Select(x => new ZetaCodeDto
             //{
             //    Id = x.Id + "|" + "NormalKumas",
             //    ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
             //}));
 
-            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasFantazi.Select(x => new ZetaCodeVm
+            //model.Kumaslar.AddRange(model.HazirGiyimDto.ZetaCodeKumasFantazi.Select(x => new ZetaCodeDto
             //{
             //    Id = x.Id + "|" + "FanteziKumas",
             //    ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
             //}));
 
-            //model.Aksesuarlar.AddRange(model.HazirGiyimDto.ZetaCodeAksesuar.Select(x => new ZetaCodeVm
+            //model.Aksesuarlar.AddRange(model.HazirGiyimDto.ZetaCodeAksesuar.Select(x => new ZetaCodeDto
             //{
             //    Id = x.Id.ToString(),
             //    ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
             //}));
 
 
-            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeVm
+            model.Collections.Kumaslar.AddRange(normalKumaslar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "NormalKumas",
                 ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
             }));
 
-            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeVm
+            model.Collections.Kumaslar.AddRange(fanteziKumaslar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "FanteziKumas",
                 ZetaCode = x.ZetaCode + ", " + x.UrunIsmi
             }));
 
-            model.Collections.Aksesuarlar.AddRange(aksesuarlar.Select(x => new ZetaCodeVm
+            model.Collections.Aksesuarlar.AddRange(aksesuarlar.Select(x => new ZetaCodeDto
             {
                 Id = x.Id.ToString(),
                 ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
@@ -136,12 +168,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.Kumaslar.Any())
             {
-                model.Kumaslar.Add(new ZetaCodeVm());
+                model.Kumaslar.Add(new ZetaCodeDto());
             }
 
             if (!model.Aksesuarlar.Any())
             {
-                model.Aksesuarlar.Add(new ZetaCodeVm());
+                model.Aksesuarlar.Add(new ZetaCodeDto());
             }
 
         }

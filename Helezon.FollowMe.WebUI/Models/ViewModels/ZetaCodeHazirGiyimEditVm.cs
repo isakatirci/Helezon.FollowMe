@@ -8,24 +8,25 @@ using Helezon.FollowMe.Service.DataTransferObjects;
 
 namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
-    public class ZetaCodeVm
-    {
-        public string Id { get; set; }
-        public string ZetaCode { get; set; }
-    }
     public class HazirGiyimEditVm
     {
-        public ZetaCodeHazirGiyimDto HazirGiyimDto { get; internal set; }
+        public ZetaCodeHazirGiyimDto HazirGiyim { get; set; }
         public HazirGiyimEditVmCollections Collections { get; set; }
-        public List<ZetaCodeVm> Kumaslar { get; set; }
-        public List<ZetaCodeVm> Aksesuarlar { get; set; }
+        public List<ZetaCodeDto> Kumaslar { get; set; }
+        public List<ZetaCodeDto> Aksesuarlar { get; set; }
+        public List<BedenOlculeriDto> BedenOlculeri { get; set; }
+        public CompanyDto Company { get; set; }
+        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
+
 
         public HazirGiyimEditVm()
         {
             Collections = new HazirGiyimEditVmCollections();
-            HazirGiyimDto = new ZetaCodeHazirGiyimDto();
-            Kumaslar = new List<ZetaCodeVm>();
-            Aksesuarlar = new List<ZetaCodeVm>();
+            HazirGiyim = new ZetaCodeHazirGiyimDto();
+            Kumaslar = new List<ZetaCodeDto>();
+            Aksesuarlar = new List<ZetaCodeDto>();
+            Company = new CompanyDto();
+            YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
         }
     }
     public class HazirGiyimEditVmCollections
@@ -34,10 +35,10 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<SelectListItem> Ulkeler { get; set; }
         public List<SelectListItem> PantoneRenkler { get; set; }
         public List<SelectListItem> BaskiGoruntuler { get; set; }
-        public List<SelectListItem> YikamaSekilleri { get; set; }
+        public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
         public List<SelectListItem> BedenKalipIsimleri { get; set; }
-        public List<ZetaCodeVm> Kumaslar { get; set; }
-        public List<ZetaCodeVm> Aksesuarlar { get; set; }
+        public List<ZetaCodeDto> Kumaslar { get; set; }
+        public List<ZetaCodeDto> Aksesuarlar { get; set; }
 
         public List<SelectListItem> Renkler { get; set; }
 
@@ -46,8 +47,8 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
         public HazirGiyimEditVmCollections()
         {
-            Kumaslar = new List<ZetaCodeVm>();
-            Aksesuarlar = new List<ZetaCodeVm>();
+            Kumaslar = new List<ZetaCodeDto>();
+            Aksesuarlar = new List<ZetaCodeDto>();
         }
     }
 }

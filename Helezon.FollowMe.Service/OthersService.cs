@@ -9,8 +9,8 @@ namespace Helezon.FollowMe.Service
 {
     public class PairIdNameDto
     {
-        public string Id { get; internal set; }
-        public string Name { get; internal set; }
+        public string Id { get;  set; }
+        public string Name { get;  set; }
     }
 
 
