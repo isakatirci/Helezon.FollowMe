@@ -512,7 +512,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
 
 
-        public ActionResult ZetaCodeNormalIplikCard(int? id,string companyId)
+        public ActionResult Card(int? id,string companyId)
         {
             if (!id.HasValue || id < 1 || string.IsNullOrWhiteSpace(companyId))           
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -561,7 +561,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
    
 
             var photoEditUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
-                                    , Url.Encode("/ZetaCodeNormalIplik/ZetaCodeNormalIplikCard?Id=" + normalIplik.Id + "&companyId=" + normalIplik.SirketId)
+                                    , Url.Encode("/ZetaCodeNormalIplik/Card?Id=" + normalIplik.Id + "&companyId=" + normalIplik.SirketId)
                                     , (int)EntityType.ZetaCodeNormalIplik
                                     , normalIplik.Id
                                     , normalIplik.SirketId);

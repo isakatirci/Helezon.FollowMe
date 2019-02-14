@@ -1,7 +1,28 @@
 ﻿@model System.Data.DataTable[]
-@{
 
+@functions{
 
+    public string ZetaCodeLink(string type, string id)
+    {
+        switch (type)
+        {
+            case "HazirGiyim":
+                return "/ZetaCodeHazirGiyim/Card?companyId=5&id=" + id;
+            case "Aksesuar":
+                return "/ZetaCodeAksesuar/Card?companyId=5&id=" + id;
+            case "KumasFantezi":
+                return "/ZetaCodeKumasFantezi/Card?companyId=5&id=" + id;
+            case "KumasOrme":
+                return "/ZetaCodeKumasOrme/Card?companyId=5&id=" + id;
+            case "Fanteziiplik":
+                return "/ZetaCodeFanteziIplik/Card?companyId=5&id=" + id;
+            case "Normaliplik":
+                return "/ZetaCodeNormalIplik/Card?companyId=5&id=" + id;
+            //
+            default:
+                return string.Empty;
+        }
+    }
 
 }
 
@@ -166,14 +187,14 @@
                         <tr>
                             @if (Model != null)
                             {
-
-                                for (int j = 0; j < 50; j++)
+                                <td>
+                                    Zeta Code
+                                </td>
+                                for (int i = 1; i < Model[0].Columns.Count-1; i++)
                                 {
-                                    <text>
-                                        <th>
-                                            @("Column" + j)
-                                        </th>
-                                    </text>
+                                    <td>
+                                        @Model[0].Columns[i].ToString()
+                                    </td>
                                 }
                             }
                         </tr>
@@ -187,14 +208,18 @@
                                 for (int i = 0; i < Model[k].Rows.Count; i++)
                                 {
                                     <tr id="row_@i">
-                                        @if (Model[k].Columns.Count > 7)
+                                        @{ 
+
+                                            string kod = Model[k].Rows[i][0].ToString();
+                                            string type = Model[k].Rows[i][Model[k].Columns.Count-1].ToString();
+
+                                        }
+                                        <td>@(Html.Raw(string.Format("<a href=\"{1}\">{0}</a>", kod.PadLeft(4, '0'), ZetaCodeLink(type, kod))))</td>
+                                        @for (int j = 1; j < Model[k].Columns.Count - 1; j++)
                                         {
-                                            for (int j = 0; j < Model[k].Columns.Count; j++)
-                                            {
-                                                <td>
-                                                    @Model[k].Rows[i][j].ToString()
-                                                </td>
-                                            }
+                                            <td>
+                                                @Model[k].Rows[i][j].ToString()
+                                            </td>
                                         }
                                     </tr>
                                 }

@@ -11,114 +11,142 @@ namespace Helezon.FollowMe.WebUI.Controllers
     public class ZetaCodeController : Controller
     {
         string[] NormalIplikColumns = {
-             "Id"
-            ,"UrunIsmi"
-            ,"Master"
-            ,"ZetaCode"
-            ,"ZetaCodePrevious"
-            ,"IplikKategosiId"
-            ,"SirketId"
-            ,"UlkeId"
-            ,"BlueUrunKodIsmi"
-            ,"BlueKod"
-            ,"BlueSiparisNo"
-            ,"UretimTeknolojisiId"
-            ,"PantoneId"
-            ,"Renkid"
-            ,"RafyeriTurkiyeId"
-            ,"RafyeriYunanistanId"
-            ,"IplikNoCinsi"
-            ,"NE"
-            ,"NM"
-            ,"DNY"
-            ,"FL"
-            ,"EA"
-            ,"IsPassive"
-            ,"CreatedOn"
-            ,"CreatedBy"
-            ,"ChangedOn"
-            ,"ChangedBy"
+                "Id"
+                ,"UrunIsmi"
+                ,"Master"
+                //,"ZetaCode"
+                ,"ZetaCodePrevious"
+                ,"SirketId"
+                ,"UlkeId"    
+                ,"BlueUrunKodIsmi"
+                ,"BlueKod"
+                , "BlueSiparisNo"
+                , "PantoneId"
+                , "Renkid"
+                , "IplikKategosiId"
+                , "IplikNoCinsi"     
+                , "NM"
+                , "DNY"
+                , "FL"
+                , "EA"                
+                , "RafyeriTurkiyeId"
+                , "RafyeriYunanistanId"                 
+                , "IsPassive"
+                , "CreatedOn"
+                , "CreatedBy"
+                , "ChangedOn"
+                , "ChangedBy"
+                , "UretimTeknolojisiId"
+                , "NE"
+                ,""//En
+                ,""//Gramaj
+                ,""//"//BaskiliEn
+                ,""//Renk
+                ,""//KumasMakineId
+                ,""//IplikKullanimOrani
+                ,""//MetreTulOrani
+                ,""//KoleksiyonKategoriId
+                ,""//KumasGoruntuId
+                ,""//OrguTipiId
+                ,""//BoyaIslemleriIds
+                ,""//OrguDetaylariIds
+                ,""//UrunKategorisiId
+                ,""//Boy
+                ,""//Gram
+                ,""//KategoriId
+                ,""//UrunKategoriId
+                ,""//BaskiGoruntuId
+                 ,"Normaliplik"
         };
         string[] FanteziIplikColumns = {
                "Id"
               ,"UrunIsmi"
-              ,"IplikKategosiId"
-              ,"SirketId"
-              ,"Master"
-              ,"ZetaCode"
+               ,"Master"
+                //,"ZetaCode"
               ,"ZetaCodePrevious"
+              ,"SirketId"
+               ,"UlkeId"
+               ,"BlueUrunKodIsmi"
+                 ,"BlueKod"
+                   ,"BlueSiparisNo"
+                     ,"PantoneId"
+              ,"Renkid"
+              ,"IplikKategosiId"
+             ,"IplikNoCinsi"
               ,"NM"
+                 ,"DNY"
               ,"FL"
               ,"EA"
-              ,"DNY"
-              ,"IplikNoCinsi"
-              ,"UlkeId"
-              ,"BlueUrunKodIsmi"
-              ,"BlueKod"
-              ,"BlueSiparisNo"
+             
+           
+             
+           
               ,"RafyeriTurkiyeId"
               ,"RafyeriYunanistanId"
-              ,"PantoneId"
-              ,"Renkid"
+         
               ,"IsPassive"
               ,"CreatedOn"
               ,"CreatedBy"
               ,"ChangedOn"
               ,"ChangedBy"
-        };
-        string[] KumasOrmeDokumaColumns = {
-           "Id"
-          ,"RafyeriTurkiyeId"
-          ,"RafyeriYunanistanId"
-          ,"UrunKategorisiId"
-          ,"ZetaCode"
-          ,"ZetaCodePrevious"
-          ,"BlueSiparisNo"
-          ,"CompanyId"
-          ,"Master"
-          ,"UrunIsmi"
-          ,"BlueUrunKodu"
-          ,"En"
-          ,"Gramaj"
-          ,"Renk"
-          ,"MenseyiUlkeId"
-          ,"PantoneId"
-          ,"Renkid"
-          ,"BlueUrunKodIsmi"
-          ,"KumasMakineId"
-          ,"IplikKullanimOrani"
-          ,"MetreTulOrani"
-          ,"KoleksiyonKategoriId"
-          ,"KumasGoruntuId"
-          ,"OrguTipiId"
-          ,"BoyaIslemleriIds"
-          ,"OrguDetaylariIds"
-          ,"IsPassive"
-          ,"CreatedOn"
-          ,"CreatedBy"
-          ,"ChangedOn"
-          ,"ChangedBy"
+
+                ,""//UretimTeknolojisiId
+                ,""//NE
+                ,""//En
+                ,""//Gramaj
+                ,""//"//BaskiliEn
+                ,""//Renk
+                ,""//KumasMakineId
+                ,""//IplikKullanimOrani
+                ,""//MetreTulOrani
+                ,""//KoleksiyonKategoriId
+                ,""//KumasGoruntuId
+                ,""//OrguTipiId
+                ,""//BoyaIslemleriIds
+                ,""//OrguDetaylariIds
+                ,""//UrunKategorisiId
+                ,""//Boy
+                ,""//Gram
+                ,""//KategoriId
+                ,""//UrunKategoriId
+                ,""//BaskiGoruntuId
+                ,"Fanteziiplik"
+
+
 
         };
-        string[] KumasFanteziColumns = {
-                 "Id"
+        string[] KumasOrmeDokumaColumns = {
+                "Id"
+                ,"UrunIsmi"
+                ,"Master"
+                //,"ZetaCode"
+                ,"ZetaCodePrevious"
+                ,"CompanyId"
+                ,"MenseyiUlkeId"
+                ,"BlueUrunKodIsmi"
+                ,"BlueUrunKodu"
+                ,"BlueSiparisNo"
+                ,"PantoneId"
+                ,"Renkid"    
+                ,""//IplikKategorisiId
+                ,""//IplikNoCinsi
+                ,""//NM
+                ,""//DNY
+                ,""//FL
+                ,""//EA
                 ,"RafyeriTurkiyeId"
                 ,"RafyeriYunanistanId"
-                ,"UrunKategorisiId"
-                ,"ZetaCode"
-                ,"ZetaCodePrevious"
-                ,"BlueSiparisNo"
-                ,"Master"
-                ,"UrunIsmi"
-                ,"BlueUrunKodu"
+                ,"IsPassive"
+                ,"CreatedOn"
+                ,"CreatedBy"
+                ,"ChangedOn"
+                ,"ChangedBy"
+                ,""//UretimTeknolojisiId
+                ,""//NE
                 ,"En"
                 ,"Gramaj"
-                ,"BaskiliEn"
-                ,"Renk"
-                ,"MenseyiUlkeId"
-                ,"PantoneId"
-                ,"Renkid"
-                ,"BlueUrunKodIsmi"
+                ,""//BaskiliEn
+                ,"Renk" 
                 ,"KumasMakineId"
                 ,"IplikKullanimOrani"
                 ,"MetreTulOrani"
@@ -127,77 +155,235 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 ,"OrguTipiId"
                 ,"BoyaIslemleriIds"
                 ,"OrguDetaylariIds"
+                ,"UrunKategorisiId"
+                ,""//Boy
+                ,""//Gram
+                ,""//KategoriId
+                ,""//UrunKategoriId
+                ,""//BaskiGoruntuId
+                 ,"KumasOrme"
+
+        };
+        string[] KumasFanteziColumns = {
+            "Id"
+            ,"UrunIsmi"
+            ,"Master"
+            // ,"ZetaCode"
+            ,"ZetaCodePrevious"
+            ,"CompanyId"
+            ,"MenseyiUlkeId"
+            ,"BlueUrunKodIsmi"
+            ,"BlueUrunKodu"
+            ,"BlueSiparisNo"
+            ,"PantoneId"
+            ,"Renkid"
+            ,""//IplikKategorisiId
+            ,""//IplikNoCinsi
+            ,""//NM
+            ,""//DNY
+            ,""//FL
+            ,""//EA
+            ,"RafyeriTurkiyeId"
+            ,"RafyeriYunanistanId"
+            ,"IsPassive"
+            ,"CreatedOn"
+            ,"CreatedBy"
+            ,"ChangedOn"
+            ,"ChangedBy"
+            ,""//UretimTeknolojisiId
+            ,""//NE
+            ,"En"
+            ,"Gramaj"
+            ,"BaskiliEn"
+            ,"Renk"        
+            ,"KumasMakineId"
+            ,"IplikKullanimOrani"
+            ,"MetreTulOrani"
+            ,"KoleksiyonKategoriId"
+            ,"KumasGoruntuId"
+            ,"OrguTipiId"
+            ,"BoyaIslemleriIds"
+            ,"OrguDetaylariIds"
+            ,"UrunKategorisiId"
+
+            ,""//Boy
+            ,""//Gram
+            ,""//KategoriId
+            ,""//UrunKategoriId
+            ,""//BaskiGoruntuId
+             ,"KumasFantezi"
+
+
+        };
+        string[] AksesuarColumns = {
+                     "Id"
+                    ,""//UrunIsmi
+                    ,"Master"
+                    // ,"ZetaCode"
+                    ,"ZetaCodePrevious"
+                    ,"CompanyId"
+                    ,"UlkeId"             
+                    ,"BlueUrunKodIsmi"
+                    ,""//BlueUrunKodu
+                    ,"BlueSiparisNo"          
+                    ,"PantoneId"
+                    ,"Renkid"
+                    ,""//IplikKategorisiId
+                    ,""//IplikNoCinsi
+                    ,""//NM
+                    ,""//DNY
+                    ,""//FL
+                    ,""//EA
+                    ,"RafyeriTurkiyeId"
+                    ,"RafyeriYunanistanId"
+                    ,"IsPassive"
+                    ,"CreatedOn"
+                    ,"CreatedBy"
+                    ,"ChangedOn"
+                    ,"ChangedBy"
+                    ,""//UretimTeknolojisiId
+                    ,""//NE
+                    ,"En"
+                    ,""//Gramaj
+                    ,""//BaskiliEn
+                    ,""//Renk
+                    ,""//KumasMakineId
+                    ,""//IplikKullanimOrani
+                    ,""//MetreTulOrani
+                    ,""//KoleksiyonKategoriId
+                    ,""//KumasGoruntuId
+                    ,""//OrguTipiId
+                    ,""//BoyaIslemleriIds
+                    ,""//OrguDetaylariIds
+                    ,""//UrunKategorisiId
+                    ,"Boy"
+                    ,"Gram"
+                    ,"KategoriId"
+                    ,""//UrunKategoriId
+                    ,""//BaskiGoruntuId
+                      ,"Aksesuar"
+
+        };
+        string[] HazirGiyimColumns = {
+                "Id"
+                ,""//UrunIsmi
+                ,"Master"
+                //ZetaCode
+                ,"ZetaCodePrevious"
                 ,"CompanyId"
+                ,"UlkeId"
+                ,"BlueUrunKodIsmi"
+                ,""//BlueUrunKodu
+                ,"BlueSiparisNo"
+                ,"PantoneId"
+                ,"Renkid"
+                ,""//IplikKategorisiId
+                ,""//IplikNoCinsi
+                ,""//NM
+                ,""//DNY
+                ,""//FL
+                ,""//EA
+                ,"RafyeriTurkiyeId"
+                ,"RafyeriYunanistanId"
                 ,"IsPassive"
                 ,"CreatedOn"
                 ,"CreatedBy"
                 ,"ChangedOn"
                 ,"ChangedBy"
-
-        };
-        string[] AksesuarColumns = {
-               "Id"
-              ,"CompanyId"
-              ,"UlkeId"
-              ,"Master"
-              ,"BlueUrunKodIsmi"
-              ,"BlueSiparisNo"
-              ,"ZetaCode"
-              ,"PantoneId"
-              ,"Renkid"
-              ,"RafyeriTurkiyeId"
-              ,"RafyeriYunanistanId"
-              ,"ZetaCodePrevious"
-              ,"En"
-              ,"Boy"
-              ,"Gram"
-              ,"KategoriId"
-              ,"IsPassive"
-              ,"CreatedOn"
-              ,"CreatedBy"
-              ,"ChangedOn"
-              ,"ChangedBy"
-        };
-        string[] HazirGiyimColumns = {
-               "Id"
-              ,"UrunKategoriId"
-              ,"CompanyId"
-              ,"UlkeId"
-              ,"Master"
-              ,"BlueUrunKodIsmi"
-              ,"BlueSiparisNo"
-              ,"ZetaCode"
-              ,"PantoneId"
-              ,"Renkid"
-              ,"RafyeriTurkiyeId"
-              ,"RafyeriYunanistanId"
-              ,"ZetaCodePrevious"
-              ,"En"
-              ,"Boy"
-              ,"Gram"
-              ,"KategoriId"
-              ,"BaskiGoruntuId"
-              ,"IsPassive"
-              ,"CreatedOn"
-              ,"CreatedBy"
-              ,"ChangedOn"
-              ,"ChangedBy"
+                ,""//UretimTeknolojisiId
+                ,""//NE
+                ,"En"
+                ,""//Gramaj
+                ,""//BaskiliEn
+                ,""//Renk
+                ,""//KumasMakineId
+                ,""//IplikKullanimOrani
+                ,""//MetreTulOrani
+                ,""//KoleksiyonKategoriId
+                ,""//KumasGoruntuId
+                ,""//OrguTipiId
+                ,""//BoyaIslemleriIds
+                ,""//OrguDetaylariIds
+                ,""//UrunKategorisiId
+                ,"Boy"
+                ,"Gram"
+                ,"KategoriId"
+                ,"UrunKategoriId"       
+                ,"BaskiGoruntuId"
+                ,"HazirGiyim"
         };
 
         private List<string> GetMappingColumns(string[] columns)
         {
+
+            string[] columnNames = {
+                    "Id"
+                    ,"UrunIsmi"//
+                    ,"Master"
+                    //"ZetaCode"
+                    ,"ZetaCodePrevious"
+                    ,"CompanyId"
+                    ,"UlkeId"
+                    ,"BlueUrunKodIsmi"
+                    ,"BlueUrunKodu"
+                    ,"BlueSiparisNo"
+                    ,"PantoneId"
+                    ,"Renkid"
+                    ,"IplikKategorisiId"
+                    ,"IplikNoCinsi"
+                    ,"NM"
+                    ,"DNY"
+                    ,"FL"
+                    ,"EA"
+                    ,"RafyeriTurkiyeId"
+                    ,"RafyeriYunanistanId"
+                    ,"IsPassive"
+                    ,"CreatedOn"
+                    ,"CreatedBy"
+                    ,"ChangedOn"
+                    ,"ChangedBy"
+                    ,"UretimTeknolojisiId"
+                    ,"NE"
+                    ,"En"
+                    ,"Gramaj"
+                    ,"BaskiliEn"
+                    ,"Renk"
+                    ,"KumasMakineId"
+                    ,"IplikKullanimOrani"
+                    ,"MetreTulOrani"
+                    ,"KoleksiyonKategoriId"
+                    ,"KumasGoruntuId"
+                    ,"OrguTipiId"
+                    ,"BoyaIslemleriIds"
+                    ,"OrguDetaylariIds"
+                    ,"UrunKategorisiId"
+                    ,"Boy"
+                    ,"Gram"
+                    ,"KategoriId"
+                    ,"UrunKategoriId"
+                    ,"BaskiGoruntuId"
+            };
+
+
             var list = new List<string>();
-            for (int i = 0; i < 50; i++)
+            //if (columnNames.Length != columns.Length)
+            //{
+            //    throw new Exception("Boyutları Farklı");
+            //}
+            for (int i = 0; i < columnNames.Length; i++)
             {
-                if (columns.Length > i)
+                if (!string.IsNullOrWhiteSpace(columns[i]))
                 {
-                    list.Add(string.Format("CONVERT(nvarchar(250),{0}) as Column{1}", columns[i], i));
+                    list.Add(string.Format("CONVERT(nvarchar(250),{0}) as {1}", columns[i], columnNames[i]));
                 }
                 else
                 {
-                    list.Add(string.Format("CONVERT(nvarchar(250),'') as Column{0}", i));
+                    list.Add(string.Format("'' as {0}", columnNames[i]));
                 }
             }
+
+            list.Add(string.Format("'{0}' as Type", columns.Last()));
+
             return list;
         }
         private string GetMappingColumnsJoin(string[] columns)

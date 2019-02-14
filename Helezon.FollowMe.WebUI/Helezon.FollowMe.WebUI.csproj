@@ -6700,7 +6700,7 @@
     <Content Include="Views\ZetaCodeNormalIplik\_Edit.cshtml" />
     <Content Include="Views\ZetaCodeNormalIplik\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutZetaCode.cshtml" />
-    <Content Include="Views\ZetaCodeNormalIplik\ZetaCodeNormalIplikCard.cshtml" />
+    <Content Include="Views\ZetaCodeNormalIplik\Card.cshtml" />
     <Content Include="Views\ZetaCodeAksesuar\Create.cshtml" />
     <Content Include="Views\ZetaCodeHazirGiyim\Create.cshtml" />
     <Content Include="Views\ZetaCodeKumasFantazi\Create.cshtml" />
