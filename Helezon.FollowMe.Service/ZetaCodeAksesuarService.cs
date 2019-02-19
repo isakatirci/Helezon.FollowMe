@@ -18,6 +18,7 @@ namespace Helezon.FollowMe.Service
     {
         List<ZetaCodeAksesuarDto> GetZetaCodeIsimler(string companyId);
         void InsertOrUpdate(AksesuarContainerDto container);
+        AksesuarContainerDto GetCard(int id, string company);
     }
 
     /// <summary>
@@ -29,12 +30,52 @@ namespace Helezon.FollowMe.Service
         private readonly IRepositoryAsync<ZetaCodeAksesuar> _repository;
         private readonly IRepositoryAsync<ZetaCodeAksesuarKompozisyon> _repoKompozisyon;
         private readonly IZetaCodeService _zetaCodeService;
+        private readonly ITermService _termService;
+        private readonly IOthersService _othersService;
+        private readonly IRepositoryAsync<Renk> _repoRenk;
+        private readonly IRepositoryAsync<PantoneRenk> _repoPantoneRenk;
+        private readonly IRepositoryAsync<Company> _repoCompany;
 
         public AksesuarService(IRepositoryAsync<ZetaCodeAksesuar> repository) : base(repository)
         {
             _repository = repository;
             _repoKompozisyon = _repository.GetRepositoryAsync<ZetaCodeAksesuarKompozisyon>();
+            _repoCompany = _repository.GetRepositoryAsync<Company>();
+            _repoPantoneRenk = _repository.GetRepositoryAsync<PantoneRenk>();
+            _repoRenk = _repository.GetRepositoryAsync<Renk>();
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+            _termService = new TermService(_repository.GetRepositoryAsync<Term>());
+            _othersService = new OthersService();
+        }
+
+        public AksesuarContainerDto GetCard(int id, string company)
+        {
+            var container = new AksesuarContainerDto();
+            var aksesuar = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (aksesuar == null)
+            {
+                return container;
+            }
+            if (aksesuar.Renkid.HasValue)
+            {
+                container.Renk = _repoRenk.QueryableNoTracking().FirstOrDefault(x => x.Id == aksesuar.Renkid);
+            }
+            if (aksesuar.PantoneId.HasValue)
+            {
+                container.PantoneRenk = _repoPantoneRenk.QueryableNoTracking().FirstOrDefault(x => x.Id == aksesuar.PantoneId);
+            }
+            if (!string.IsNullOrWhiteSpace(aksesuar.CompanyId))
+            {
+                container.Company = _repoCompany.QueryableNoTracking().FirstOrDefault(x => x.Id == aksesuar.CompanyId);
+            }
+            if (aksesuar.UlkeId.HasValue)
+            {
+                container.Ulke = _othersService.GetCountryById(aksesuar.UlkeId.Value);
+            }            
+            container.RafyeriTurkiye = _termService.GetTermById(aksesuar.RafyeriTurkiyeId.Value);
+            container.RafyeriTurkiye = _termService.GetTermById(aksesuar.RafyeriYunanistanId.Value);
+
+            return container;
         }
 
         public List<ZetaCodeAksesuarDto> GetZetaCodeIsimler(string companyId)
@@ -58,7 +99,7 @@ namespace Helezon.FollowMe.Service
             try
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
-                var aksesuar = AutoMapperConfig.Mapper.Map<ZetaCodeAksesuarDto, ZetaCodeAksesuar>(container.Aksesuar);
+                var aksesuar = container.Aksesuar;
                 if (aksesuar.Id > 0)
                 {
                     this.Update(aksesuar);
@@ -69,7 +110,7 @@ namespace Helezon.FollowMe.Service
                 }
                 _repository.UnitOfWorkAsync().SaveChanges();
 
-                var kompozisyonlar = AutoMapperConfig.Mapper.Map<List<ZetaCodeAksesuarKompozisyonDto>,List<ZetaCodeAksesuarKompozisyon>>(container.AksesuarKompozisyonlar); ;
+                var kompozisyonlar = container.AksesuarKompozisyonlar; ;
 
                 if (kompozisyonlar != null && kompozisyonlar.Any())
                 {

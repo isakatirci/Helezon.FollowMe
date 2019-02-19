@@ -61,8 +61,8 @@
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
-                                                               id="FanteziIplik_ZetaCode"
-                                                               value="@Model.FanteziIplik.ZetaCodeFormat()" />
+                                                               id="FanteziIplik_Id"
+                                                               value="@Model.FanteziIplik.Id" />
                                                     </div>
                                                 </div>
                                             }
@@ -127,21 +127,17 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.FanteziIplik.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("FanteziIplik.Ulke"
-    , Model.Collections.Ulkeler, "Please Select"
-    , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.FanteziIplik.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("Ulke.Id", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
                                             @*<div class="form-group">
                                                 @Html.LabelFor(model => model.FanteziIplik.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("FanteziIplik.Ea"
-    , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"
-    , htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.DropDownList("FanteziIplik.Ea" , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"    , htmlAttributes: new { @class = "form-control select2" })
                                                     @Html.ValidationMessageFor(model => model.FanteziIplik.Ea, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>*@
@@ -163,13 +159,13 @@
                                                             <input type="hidden"
                                                                    name="FanteziIplik.IplikKategosiId"
                                                                    id="ZetaCodeNormalIplikDto_IplikKategosiId"
-                                                                   value="@Model.FanteziIplik.IplikKategosi.Id" />
+                                                                   value="@Model.IplikKategosi.Id" />
                                                             <input type="text"
                                                                    name="FanteziIplik.IplikKategosiName"
                                                                    id="ZetaCodeNormalIplikDto_IplikKategosiName"
                                                                    readonly
                                                                    class="form-control"
-                                                                   value="@Model.FanteziIplik.IplikKategosi.Name" />
+                                                                   value="@Model.IplikKategosi.Name" />
                                                             <br />
                                                             <div id="treeIplikKategosiId"></div>
                                                         </div>
@@ -343,13 +339,13 @@
                                                     <input type="hidden"
                                                            name="FanteziIplik.RafyeriTurkiyeId"
                                                            id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
-                                                           value="@Model.FanteziIplik.RafyeriTurkiye.Id" />
+                                                           value="@Model.RafyeriTurkiye.Id" />
                                                     <input type="text"
                                                            name="FanteziIplik.RafyeriTurkiyeName"
                                                            id="ZetaCodeNormalIplikDto_RafyeriTurkiyeName"
                                                            readonly
                                                            class="form-control"
-                                                           value="@Model.FanteziIplik.RafyeriTurkiye.Name" />
+                                                           value="@Model.RafyeriTurkiye.Name" />
                                                     <br />
                                                     <div id="treeRafyeriTurkiyeId">
                                                     </div>
@@ -366,13 +362,13 @@
                                                     <input type="hidden"
                                                            name="FanteziIplik.RafyeriYunanistanId"
                                                            id="ZetaCodeNormalIplikDto_RafyeriYunanistanId"
-                                                           value="@Model.FanteziIplik.RafyeriYunanistan.Id" />
+                                                           value="@Model.RafyeriYunanistan.Id" />
                                                     <input type="text"
                                                            name="FanteziIplik.RafyeriYunanistanName"
                                                            id="ZetaCodeNormalIplikDto_RafyeriYunanistanName"
                                                            class="form-control"
                                                            readonly
-                                                           value="@Model.FanteziIplik.RafyeriYunanistan.Name" />
+                                                           value="@Model.RafyeriYunanistan.Name" />
                                                     <br />
                                                     <div id="treeRafyeriYunanistanId">
                                                     </div>

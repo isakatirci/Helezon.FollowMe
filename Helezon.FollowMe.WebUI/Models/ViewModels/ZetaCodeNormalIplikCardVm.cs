@@ -1,4 +1,6 @@
-﻿using Helezon.FollowMe.Service.DataTransferObjects;
+﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service.ContainerDtos;
+using Helezon.FollowMe.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,13 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeNormalIplikCardVm
     {
-        public ZetaCodeNormalIplikDto ZetaCodeNormalIplikDto { get; set; }
-        public List<TermDto> ParentIplikCategories { get; internal set; }
-        public List<Tuple<string, string>> IplikKategoriDetay { get; internal set; }
+        public NormalIplikContainerDto Container { get; set; }     
+     
+        public string PictureEditUrl { get; set; }      
 
         public ZetaCodeNormalIplikCardVm()
         {
-            IplikKategoriDetay = new List<Tuple<string, string>>();
+            Container = new NormalIplikContainerDto();
         }
     }
 }

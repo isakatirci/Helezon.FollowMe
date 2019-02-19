@@ -69,14 +69,14 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.KumasFantazi.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.KumasFantazi.Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
-                                                               id="KumasFantazi_ZetaCode"
+                                                               id="KumasFantazi_Id"
                                                                @*name="KumasFantazi.ZetaCode"*@
-                                                               value="@Model.KumasFantazi.ZetaCodeFormatli" />
+                                                               value="@Model.KumasFantazi.Id" />
                                                     </div>
                                                 </div>
                                             }
@@ -147,12 +147,12 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasFantazi.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("KumasFantazi.Ulke"
+                                                    @Html.DropDownList("Ulke.Id"
     , Model.Collections.Ulkeler, "Please Select"
     , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.KumasFantazi.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -301,7 +301,7 @@
 
                 @Html.Partial("_MyPartialKumasMakine", new ZetaCodeKumasMakineEditVm
                    {
-                       Makine = Model.ZetaCodeKumasMakine,
+                       Makine = Model.Makine,
                        Collections = new ZetaCodeKumasMakineEditVmCollections
                        {
                            Elastanlar = Model.Collections.Elastanlar,
@@ -353,14 +353,14 @@
                                                                             @Html.Label("_3AdimIslemlerId", "3. Adım İşlemleri", htmlAttributes: new { @class = "control-label col-md-2" })
                                                                             <div class="col-md-6">
                                                                                 @Html.DropDownList("_3AdimIslemlerId",new SelectList(Model.AdimIslemleri, dataTextField: "Name", dataValueField: "Id",selectedValue: Model.KumasFantezi3AdimIslemleri[i]._3AdimIslemlerId), "Please Select", htmlAttributes: new { @class = "form-control select2" })
-                                                                                @Html.ValidationMessageFor(model => model.ZetaCodeKumasMakine.TupAcikEnId, "", new { @class = "text-danger" })
+                                                                                @Html.ValidationMessageFor(model => model.Makine.TupAcikEnId, "", new { @class = "text-danger" })
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             @Html.Label("DesenKodu", "Desen Kodu", htmlAttributes: new { @class = "control-label col-md-2" })
                                                                             <div class="col-md-6">
                                                                                 @Html.TextBox("DesenKodu", Model.KumasFantezi3AdimIslemleri[i].DesenKodu, new { @class = "form-control" })
-                                                                                @Html.ValidationMessageFor(model => model.ZetaCodeKumasMakine.TupAcikEnId, "", new { @class = "text-danger" })
+                                                                                @Html.ValidationMessageFor(model => model.Makine.TupAcikEnId, "", new { @class = "text-danger" })
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -484,7 +484,7 @@
                                                   readonly
                                                   cols="20"
                                                   id="KumasFantazi_OrguDetaylari"
-                                                  value="@(string.Join(",",Model.KumasFantazi.OrguDetaylari.Select(x => x.Name)))"
+                                                  value="@(string.Join(",",Model.OrguDetaylari.Select(x => x.Name)))"
                                                   class="form-control"></textarea>
                                         <br />
                                         <div class="panel panel-default">
@@ -521,7 +521,7 @@
                                                   rows="3"
                                                   readonly
                                                   cols="20"
-                                                  value="@(string.Join(",",Model.KumasFantazi.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
+                                                  value="@(string.Join(",",Model.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
                                         <div class="panel panel-default">
                                             <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                 <div id="treeBoyaIslemleri">
@@ -630,7 +630,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.KumasFantazi.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.KumasFantazi.RafyeriTurkiye.Name, new { @class = "form-control", @readonly = "" })
+                                                    @Html.TextBoxFor(x => x.RafyeriTurkiye.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -644,7 +644,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.KumasFantazi.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.KumasFantazi.RafyeriYunanistan.Name, new { @class = "form-control", @readonly = "" })
+                                                    @Html.TextBoxFor(x => x.RafyeriYunanistan.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>

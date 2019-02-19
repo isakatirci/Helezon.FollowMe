@@ -13,7 +13,7 @@
                     <label class="control-label col-md-2">Makine Markası</label>
                     <div class="col-md-6">
                         @Html.HiddenFor(x => x.Makine.MarkaId)
-                        @Html.TextBoxFor(x => x.Makine.MakineMarkasi.Name, new { @class = "form-control", @readonly = "" })
+                        @Html.TextBoxFor(x => x.MakineMarkasi.Name, new { @class = "form-control", @readonly = "" })
                         <br />
                         <div class="panel panel-default">
                             <div class="panel-body" style="height:200px; overflow-y:auto;">
@@ -27,7 +27,7 @@
                     <label class="control-label col-md-2">Makine Modeli</label>
                     <div class="col-md-6">
                         @Html.HiddenFor(x => x.Makine.ModelId)
-                        @Html.TextBoxFor(x => x.Makine.MakineModeli.Name, new { @class = "form-control", @readonly = "" })
+                        @Html.TextBoxFor(x => x.MakineModeli.Name, new { @class = "form-control", @readonly = "" })
                         <br />
                         <div class="panel panel-default">
                             <div class="panel-body" style="height:200px; overflow-y:auto;">
@@ -53,7 +53,7 @@
                                   readonly
                                   cols="20"
                                   id="Aksesuarlar"
-                                  value="@(string.Join(",",Model.Makine.Aksesuarlar.Select(x => x.Name)))"
+                                  value="@(string.Join(",",Model.Aksesuarlar.Select(x => x.Name)))"
                                   class="form-control"></textarea>
                         <br />
                         <div class="panel panel-default">

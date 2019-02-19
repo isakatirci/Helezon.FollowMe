@@ -69,13 +69,13 @@
 
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.HazirGiyim.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.HazirGiyim.Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         <input type="text"
                                                                readonly
                                                                class="form-control transform_none"
-                                                               id="ZetaCodeFanteziIplikDto_ZetaCode"
-                                                               value="@Model.HazirGiyim.ZetaCodeFormatli" />
+                                                               id="HazirGiyim_Id"
+                                                               value="@Model.HazirGiyim.Id" />
                                                     </div>
                                                 </div>
                                             }
@@ -151,12 +151,10 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.HazirGiyim.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("HazirGiyim.Ulke"
-, Model.Collections.Ulkeler, "Please Select"
-, htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.HazirGiyim.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("Ulke.Id", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -175,7 +173,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             @Html.HiddenFor(model => model.HazirGiyim.UrunKategoriId)
-                                                            @Html.TextBoxFor(model => model.HazirGiyim.UrunKategori.Name, new { @class = "form-control" })
+                                                            @Html.TextBoxFor(model => model.UrunKategori.Name, new { @class = "form-control" })
                                                             <br />
                                                             <div id="treeHazirGiyimKategorileri"></div>
                                                         </div>
@@ -587,7 +585,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.HazirGiyim.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.HazirGiyim.RafyeriTurkiye.Name, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(x => x.RafyeriTurkiye.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -601,7 +599,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.HazirGiyim.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.HazirGiyim.RafyeriYunanistan.Name, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(x => x.RafyeriYunanistan.Name, new { @class = "form-control" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>

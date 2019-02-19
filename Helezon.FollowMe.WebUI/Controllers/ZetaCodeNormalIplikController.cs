@@ -53,7 +53,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
         public ActionResult Create(string operation)
         {
-            ZetaCodeNormalIplikVm model = new ZetaCodeNormalIplikVm();
+            ZetaCodeNormalIplikEditVm model = new ZetaCodeNormalIplikEditVm();
             if (operation.IsNullOrWhiteSpace().Not())
             {
                 if (string.Equals(operation, "masterbluesiparis", StringComparison.InvariantCulture))
@@ -64,25 +64,25 @@ namespace Helezon.FollowMe.WebUI.Controllers
             FillCollections(model);
             return View(viewName: "Edit", model: model);
         }
-        public ActionResult Index()
-        {
-            var list = GetNormalIplikService().GetAllNormalIplikler(include:true);
-            //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
-            var model = new List<ZetaCodeNormalIplikVm>();
-            foreach (var item in list)
-            {
-                model.Add(new ZetaCodeNormalIplikVm {
-                    NormalIplik = item
-                });
-            }
-            return View(model);
-        }
+        //public ActionResult Index()
+        //{
+        //    var list = GetNormalIplikService().GetAllNormalIplikler(include:true);
+        //    //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
+        //    var model = new List<ZetaCodeNormalIplikEditVm>();
+        //    foreach (var item in list)
+        //    {
+        //        model.Add(new ZetaCodeNormalIplikEditVm {
+        //            NormalIplik = item
+        //        });
+        //    }
+        //    return View(model);
+        //}
 
         // GET: ZetaCodeNormalIplik/Details/5
 
         // GET: ZetaCodeNormalIplik/Create
 
-        public void FillCollections(ZetaCodeNormalIplikVm model
+        public void FillCollections(ZetaCodeNormalIplikEditVm model
             ,string sirketId = ""
             ,int? ulkeId = null
             ,int pantoneRenkId = 0
@@ -112,7 +112,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.IplikNolar.Any())
             {
-                model.IplikNolar.Add(new IplikNoDto());
+                model.IplikNolar.Add(new Entities.Models.IplikNo());
             }
 
 
@@ -418,19 +418,23 @@ namespace Helezon.FollowMe.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ZetaCodeNormalIplikDto zetaCodeNormalIplik = GetNormalIplikService().GetZetaCodeNormalIplikById(id.Value, companyId);
-            if (zetaCodeNormalIplik == null)
+
+            var container = GetNormalIplikService().GetCard(id.Value, companyId);
+
+            var normalIplik = container.NormalIplik;
+
+            if (normalIplik == null && normalIplik.Id < 1)
             {
                 return HttpNotFound();
             }
-            var model = new ZetaCodeNormalIplikVm();
-            model.NormalIplik = zetaCodeNormalIplik;
+            var model = new ZetaCodeNormalIplikEditVm();
+            model.NormalIplik = normalIplik;
             FillCollections(model
-                ,sirketId: zetaCodeNormalIplik.SirketId
-                ,ulkeId:zetaCodeNormalIplik.UlkeId
-                ,pantoneRenkId: zetaCodeNormalIplik.PantoneId??0
-                ,renkId: zetaCodeNormalIplik.Renkid??0
-                ,uretimTeknolojitermId:zetaCodeNormalIplik.UretimTeknolojisiId??0);
+                ,sirketId: normalIplik.SirketId
+                ,ulkeId:normalIplik.UlkeId
+                ,pantoneRenkId: normalIplik.PantoneId??0
+                ,renkId: normalIplik.Renkid??0
+                ,uretimTeknolojitermId:normalIplik.UretimTeknolojisiId??0);
 
             //model.ZetaCodeNormalIplikDto.ZetaCodeNormalIplikSirketName
             //    = model.Collections.Sirketler.FirstOrDefault(x => x.Value == model.ZetaCodeNormalIplikDto.SirketId)?.Text;
@@ -451,10 +455,10 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ZetaCodeNormalIplikVm model)
+        public ActionResult Edit(ZetaCodeNormalIplikEditVm model)
         {
             var container = new NormalIplikContainerDto();
-            model.NormalIplik.Renkid = model.NormalIplik.RenkIdFormat.AsInt();
+            model.NormalIplik.Renkid = model.Renk?.Id;
             container.NormalIplik = model.NormalIplik;
             container.Degrede = model.Degrede;
             container.Flam = model.Flam;
@@ -517,14 +521,14 @@ namespace Helezon.FollowMe.WebUI.Controllers
             if (!id.HasValue || id < 1 || string.IsNullOrWhiteSpace(companyId))           
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var normalIplik = GetNormalIplikService().GetAllNormalIplikler(id.Value, companyId,include:true).FirstOrDefault();
-            if (normalIplik  == null)
-            {
-                return new HttpNotFoundResult();
-            }
+            var container = GetNormalIplikService().GetCard(id.Value, companyId);
+            var normalIplik = container.NormalIplik;
+            //if (normalIplik == null || normalIplik.Id < 1)
+            //{
+            //    return new HttpNotFoundResult();
+            //}
             var model = new ZetaCodeNormalIplikCardVm();
-
-
+            model.Container = container;
 
             //if (normalIplik.IplikKategoriFlam != null)
             //{
@@ -555,9 +559,9 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             //}
 
-            model.ZetaCodeNormalIplikDto = normalIplik;
-            model.ParentIplikCategories = GetTermService().GetAllParentsById(normalIplik.IplikKategosiId);
-            model.ParentIplikCategories.Reverse();
+            //model.ZetaCodeNormalIplikDto = normalIplik;
+            //model.ParentIplikCategories = GetTermService().GetAllParentsById(normalIplik.IplikKategosiId);
+            //model.ParentIplikCategories.Reverse();
    
 
             var photoEditUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
@@ -566,8 +570,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
                                     , normalIplik.Id
                                     , normalIplik.SirketId);
 
-            model.ZetaCodeNormalIplikDto.PictureEditUrl = photoEditUrl;
-            model.ZetaCodeNormalIplikDto.PictureUrl = GetZetaCodeNormalIplikPictureService().GetZetaCodeNormalIplikPictureUrl(model.ZetaCodeNormalIplikDto.Id,model.ZetaCodeNormalIplikDto.SirketId);
+            model.PictureEditUrl = photoEditUrl;
+            //model.PictureUrl = GetZetaCodeNormalIplikPictureService().GetZetaCodeNormalIplikPictureUrl(model.ZetaCodeNormalIplikDto.Id,model.ZetaCodeNormalIplikDto.SirketId);
 
             return View(model);
         }

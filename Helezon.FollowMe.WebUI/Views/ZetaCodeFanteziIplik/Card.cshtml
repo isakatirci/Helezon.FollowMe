@@ -56,7 +56,7 @@
                         </div>                       
                         <div class="btn-group">
                             <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeNormalIplik/Edit?id={0}&companyId={1}"
-                                                                         ,Model.ZetaCodeFanteziIplikDto.Id,Model.ZetaCodeFanteziIplikDto.SirketId))'" class="btn btn-default">
+                                                                         ,Model.Container.FanteziIplik.Id,Model.Container.FanteziIplik.SirketId))'" class="btn btn-default">
 
                                 Edit
 
@@ -90,8 +90,8 @@
                                         <tr>
                                             <td>
                                                 <img style="width:250px;max-width:250px;height:300px;max-height:300px" 
-                                                     src="@Html.Raw(Model.PictureUrl)" 
-                                                     alt="@Html.Raw(Model.ZetaCodeFanteziIplikDto.ZetaCodeFormatli)">
+                                                     src="@Html.Raw(Model.Container.PictureUrl)" 
+                                                     alt="@Html.Raw(Model.Container.FanteziIplik.Id)">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -110,8 +110,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.Raw(Model.ZetaCodeFanteziIplikDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@Model.ZetaCodeFanteziIplikDto.IplikKategosi.Name</td>
+                                                        <td>@Html.Raw(Model.Container.FanteziIplik.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>@Model.Container.IplikKategosi.Name</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -126,7 +126,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@(Model.ZetaCodeFanteziIplikDto.Company.Code + " " + Model.ZetaCodeFanteziIplikDto.Company.Name)</td>
+                                                        <td>@(Model.Container.Company.Code + " " + Model.Container.Company.Name)</td>
                                                     </tr>
                                                
 
@@ -146,7 +146,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.ZetaCodeFanteziIplikDto.ZetaCodeFormatli</td>
+                                                        <td>@Model.Container.FanteziIplik.Id</td>
                                                         <td>@(Model.Renkler)</td>
                                                     </tr>
                                                 </tbody>
@@ -164,7 +164,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            @Model.ZetaCodeFanteziIplikDto.UrunIsmi
+                                                            @Model.Container.FanteziIplik.UrunIsmi
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -222,7 +222,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.BlueSiparisNo</td>
+                                                            <td>@Model.Container.FanteziIplik.BlueSiparisNo</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -245,11 +245,11 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
-                                                                            <td>@Model.ZetaCodeFanteziIplikDto.RafyeriTurkiye.Name</td>
+                                                                            <td>@Model.Container.RafyeriTurkiye.Name</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>GR ASKI RAF NO</th>
-                                                                            <td>@Model.ZetaCodeFanteziIplikDto.RafyeriYunanistan.Name</td>
+                                                                            <td>@Model.Container.RafyeriYunanistan.Name</td>
                                                                         </tr>                                                                    
                                                                     </tbody>
                                                                 </table>
@@ -286,11 +286,11 @@
                                             <tr>
                                                 <td style="width:50%;max-width:50%">
                                                     <table>
-                                                        @for (int i = 0; i < Model.ParentIplikCategories.Count; i++)
+                                                        @for (int i = 0; i < Model.Container.AnaIplikKategorileri.Count; i++)
                                                         {
                                                             <tr>
                                                                 <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
-                                                                <td>@Model.ParentIplikCategories[i].Name</td>
+                                                                <td>@Model.Container.AnaIplikKategorileri[i].Name</td>
                                                             </tr>
 
                                                         }                                                      
@@ -300,15 +300,15 @@
                                                     <table>                                                    
                                                         <tr>
                                                             <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.ZetaCodePrevious</td>
+                                                            <td>@Model.Container.FanteziIplik.ZetaCodePrevious</td>
                                                         </tr>
                                                         <tr>
                                                             <th>URUN MENSEI</th>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.Ulke.Name</td>
+                                                            <td>@Model.Container.Ulke.Name</td>
                                                         </tr>
                                                         <tr>
                                                             <th>BLUE URUN KODU</th>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.BlueUrunKodIsmi</td>
+                                                            <td>@Model.Container.FanteziIplik.BlueUrunKodIsmi</td>
                                                         </tr>
                                                                                                            
                                                     </table>
@@ -335,11 +335,11 @@
                                                     
                                                         <text>
                                                             <th>IPLIK NUMARASI</th>
-                                                            @*<td>@Model.ZetaCodeFanteziIplikDto.Ne</td>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.Dny</td>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.Nm</td>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.Ea</td>
-                                                            <td>@Model.ZetaCodeFanteziIplikDto.Fl</td>*@
+                                                            @*<td>@Model.Container.FanteziIplik.Ne</td>
+                                                            <td>@Model.Container.FanteziIplik.Dny</td>
+                                                            <td>@Model.Container.FanteziIplik.Nm</td>
+                                                            <td>@Model.Container.FanteziIplik.Ea</td>
+                                                            <td>@Model.Container.FanteziIplik.Fl</td>*@
                                                         </text>
                                                     
 
@@ -384,9 +384,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    @*<td>@(Model.ZetaCodeFanteziIplikDto.Renk?.Ad)</td>
-                                                    <td>@(Model.ZetaCodeFanteziIplikDto.Renk?.IplikRenkKodu)</td>
-                                                    <td>@(Model.ZetaCodeFanteziIplikDto.PantoneRenk?.PantoneKodu + " " + Model.ZetaCodeFanteziIplikDto.PantoneRenk?.PantoneRengi) </td>*@
+                                                    @*<td>@(Model.Container.FanteziIplik.Renk?.Ad)</td>
+                                                    <td>@(Model.Container.FanteziIplik.Renk?.IplikRenkKodu)</td>
+                                                    <td>@(Model.Container.FanteziIplik.PantoneRenk?.PantoneKodu + " " + Model.Container.FanteziIplik.PantoneRenk?.PantoneRengi) </td>*@
                                                 </tr>
                                             </tbody>
                                         </table>

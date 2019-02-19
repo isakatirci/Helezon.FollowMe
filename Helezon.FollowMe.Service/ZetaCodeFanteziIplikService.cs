@@ -20,11 +20,12 @@ namespace Helezon.FollowMe.Service
     public interface IFanteziIplikService : IService<ZetaCodeFanteziIplik>
     {
         void InsertOrUpdate(FanteziIplikContainerDto entity);
-        List<ZetaCodeFanteziIplikDto> GetAllFanteziIplikler(int? id = null, string companyId = null);
+        List<ZetaCodeFanteziIplik> GetAllFanteziIplikler(int? id = null, string companyId = null);
         ZetaCodeFanteziIplikDto GetFanteziIplikById(int value, string companyId, bool includeNormalIplikler = false);
         List<ZetaCodeFanteziIplikDto> GetAllZetaCodeAndUrunIsmiOfFantaziIplikler(int? fanteziIplikId = null);
         ZetaCodeFanteziIplikDto GetRenklerOfFanteziIplik(int fanteziplikId);
         List<ZetaCodeFanteziIplikDto> GetZetaCodeIsimler(string companyId);
+        FanteziIplikContainerDto GetCard(int id,string compantId);
     }
 
     /// <summary>
@@ -39,6 +40,7 @@ namespace Helezon.FollowMe.Service
         private readonly IRepositoryAsync<ZetaCodeNormalIplik> _repoNormalIplik;
         private readonly IRepositoryAsync<ZetaCodeFanteziIplikNormalIplik> _repoFanteziIplikNormalIplik;
         private readonly IZetaCodeService _zetaCodeService;
+        private readonly IRepositoryAsync<ZetaCodeFanteziIplikPicture> _repoFanteziIplikPicture;
 
 
         public FanteziIplikService(IRepositoryAsync<ZetaCodeFanteziIplik> repository) : base(repository)
@@ -46,6 +48,7 @@ namespace Helezon.FollowMe.Service
             _repository = repository;
             _termService = new TermService(_repository.GetRepositoryAsync<Term>());
             _othersService = new OthersService();
+            _repoFanteziIplikPicture = _repository.GetRepositoryAsync<ZetaCodeFanteziIplikPicture>();
             _repoNormalIplik = _repository.GetRepositoryAsync<ZetaCodeNormalIplik>();
             _repoFanteziIplikNormalIplik= _repository.GetRepositoryAsync<ZetaCodeFanteziIplikNormalIplik>();
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
@@ -111,7 +114,7 @@ namespace Helezon.FollowMe.Service
         {
             try
             {
-                var fanteziIplik = AutoMapperConfig.Mapper.Map<ZetaCodeFanteziIplikDto, ZetaCodeFanteziIplik>(container.FanteziIplik);
+                var fanteziIplik = container.FanteziIplik;
              
                 _repository.UnitOfWorkAsync().BeginTransaction();
                 fanteziIplik.SirketId = container.Company.Id;
@@ -135,13 +138,13 @@ namespace Helezon.FollowMe.Service
 
         }
 
-        public List<ZetaCodeFanteziIplikDto> GetAllFanteziIplikler(int? id = null, string companyId = null)
+        public List<ZetaCodeFanteziIplik> GetAllFanteziIplikler(int? id = null, string companyId = null)
         {
-            var zetaCodeNormalIplikler = _repository.Query(QueryFanteziIplik(id, companyId))
+            var zetaCodeNormalIplikler = _repository.QueryableNoTracking()
                 //.Include(x => x.ZetaCodeNormalIplik)
                 //.Include(x => x.Company)
                 .Select(x => x).ToList();
-            var zetaCodeNormalIplikDtos = new List<ZetaCodeFanteziIplikDto>();
+            //var zetaCodeNormalIplikDtos = new List<ZetaCodeFanteziIplikDto>();
 
             //foreach (var iplik in zetaCodeNormalIplikler)
             //{
@@ -153,7 +156,7 @@ namespace Helezon.FollowMe.Service
             //    zetaCodeNormalIplikDtos.Add(iplikDto);
             //}
 
-            return zetaCodeNormalIplikDtos;
+            return zetaCodeNormalIplikler;
         }
 
         private Expression<Func<ZetaCodeFanteziIplik, bool>> QueryFanteziIplik(int? id = null, string companyId = null)
@@ -206,6 +209,27 @@ namespace Helezon.FollowMe.Service
                 UrunIsmi = x.UrunIsmi,
                 ZetaCode = x.ZetaCode
             }).ToList();
+        }
+
+
+
+        public FanteziIplikContainerDto GetCard(int id,string compantId)
+        {
+            var cotainer = new FanteziIplikContainerDto();
+            var fanteziIplik = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (fanteziIplik == null)
+            {
+                return cotainer;
+            }
+            var picture = _repoFanteziIplikPicture.QueryableNoTracking().FirstOrDefault(x=>x.ZetaCodeFanteziIplikId ==  fanteziIplik.Id && x.CompanyId == fanteziIplik.SirketId);
+            if (picture != null)
+            {
+                cotainer.PictureUrl = picture.Name;
+            }
+            cotainer.FanteziIplik = fanteziIplik;
+            cotainer.AnaIplikKategorileri = _termService.GetAllParentsById(fanteziIplik.IplikKategosiId);
+            cotainer.AnaIplikKategorileri.Reverse();
+            return cotainer;
         }
 
         //public ZetaCodeFanteziIplikDto GetNormalIpliklerOfFanteziIplikByFanteziIplikId(int fantaziIplikId, string companyId, bool includeNormalIplikler = false)

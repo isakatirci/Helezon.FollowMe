@@ -1,4 +1,6 @@
-﻿using Helezon.FollowMe.Service.DataTransferObjects;
+﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service;
+using Helezon.FollowMe.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,31 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
     public delegate string ElyafOraniMethod(int? value);
     public delegate string GetSelectListWithId(int? id);
  
-    public class ZetaCodeNormalIplikVm
+    public class ZetaCodeNormalIplikEditVm
     {
         //public string Operation { get; set; }
-        public ZetaCodeNormalIplikDto NormalIplik { get; set; }
+        public ZetaCodeNormalIplik NormalIplik { get; set; }
         public ZetaCodeNormalIplikViewCollections Collections { get; set; }
-        public List<IplikNoDto> IplikNolar { get; set; }
-        public ZetaCodeNormalIplikVm()
+        public List<IplikNo> IplikNolar { get; set; }
+        public Term IplikKategosi { get; set; }
+        public Term RafyeriYunanistan { get; set; }
+        public Term RafyeriTurkiye { get; set; }
+
+        public ZetaCodeNormalIplikEditVm()
         {
+            RafyeriTurkiye = new Term();
+            RafyeriYunanistan = new Term();
             Collections = new ZetaCodeNormalIplikViewCollections();       
-            NormalIplik = new ZetaCodeNormalIplikDto();
-            Company = new CompanyDto();
-            IplikNolar = new List<IplikNoDto>();
-            //ZetaCodeNormalIplikDto.IplikNo = new List<IplikNoDto>();
-            //ZetaCodeNormalIplikDto.IplikNo.Add(new IplikNoDto());
+            NormalIplik = new ZetaCodeNormalIplik();
+            Company = new Company();
+            IplikNolar = new List<IplikNo>();
+            Ulke = new PairIdNameDto();
+            IplikKategosi = new Term();
+            //ZetaCodeNormalIplik.IplikNo = new List<IplikNo>();
+            //ZetaCodeNormalIplik.IplikNo.Add(new IplikNo());
         }
-        public CompanyDto Company { get; set; }
+        public Company Company { get; set; }
+        public PairIdNameDto Ulke { get; set; }        
 
         public IplikNoGuideMethod NE { get; set; }
         public IplikNoGuideMethod NM { get; set; }
@@ -35,13 +46,13 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public IplikNoGuideMethod EA { get; set; }
         public GetSelectListWithId Renkler { get; set; }
         public ElyafOraniMethod ElyafOrani { get; set; }
-
-        public IplikKategoriDegredeDto Degrede { get; set; }//IplikKategoriFlam
-        public IplikKategoriFlamDto Flam { get; set; }
-        public IplikKategoriKirciliDto Kircili { get; set; }
-        public IplikKategoriKrepDto Krep { get; set; }
-        public IplikKategoriNopeliDto Nopeli { get; set; }
-        public IplikKategoriSimDto Sim { get; set; }
+        public Renk Renk { get; set; }
+        public IplikKategoriDegrede Degrede { get; set; }//IplikKategoriFlam
+        public IplikKategoriFlam Flam { get; set; }
+        public IplikKategoriKircili Kircili { get; set; }
+        public IplikKategoriKrep Krep { get; set; }
+        public IplikKategoriNopeli Nopeli { get; set; }
+        public IplikKategoriSim Sim { get; set; }
     }
 
     public class ZetaCodeNormalIplikViewCollections

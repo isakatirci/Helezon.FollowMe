@@ -21,6 +21,7 @@ namespace Helezon.FollowMe.Service
     public interface IHazirGiyimService : IService<ZetaCodeHazirGiyim>
     {
         void InsertOrUpdate(HazirGiyimContainerDto container);
+        HazirGiyimContainerDto GetCard(int id, string companyId);
     }
 
     /// <summary>
@@ -34,6 +35,11 @@ namespace Helezon.FollowMe.Service
         private readonly IRepositoryAsync<ZetaCodeHazirGiyimKumasFantezi> _repoKumasFanteziler;
         private readonly IRepositoryAsync<ZetaCodeHazirGiyimKumasOrmeDokuma> _repoKumasOrmeDokumalar;
         private readonly IZetaCodeService _zetaCodeService;
+        private readonly ITermService _termService;
+        private readonly IOthersService _othersService;
+        private readonly IRepositoryAsync<Renk> _repoRenk;
+        private readonly IRepositoryAsync<PantoneRenk> _repoPantoneRenk;
+        private readonly IRepositoryAsync<Company> _repoCompany;
 
         public HazirGiyimService(IRepositoryAsync<ZetaCodeHazirGiyim> repository) : base(repository)
         {
@@ -42,11 +48,46 @@ namespace Helezon.FollowMe.Service
             _repoKumasFanteziler = _repository.GetRepositoryAsync<ZetaCodeHazirGiyimKumasFantezi>();
             _repoKumasOrmeDokumalar = _repository.GetRepositoryAsync<ZetaCodeHazirGiyimKumasOrmeDokuma>();
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+            _repoCompany = _repository.GetRepositoryAsync<Company>();
+            _repoPantoneRenk = _repository.GetRepositoryAsync<PantoneRenk>();
+            _repoRenk = _repository.GetRepositoryAsync<Renk>();
+            _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+            _termService = new TermService(_repository.GetRepositoryAsync<Term>());
+            _othersService = new OthersService();
         }
 
         public List<ZetaCodeHazirGiyim> GetAllHazirGiyim(string companyId, int? hazirGiyimId = null)
         {
             return _repository.GetAllHazirGiyim(companyId, hazirGiyimId);
+        }
+
+        public HazirGiyimContainerDto GetCard(int id, string companyId)
+        {
+            var container = new HazirGiyimContainerDto();
+            var entity = _repository.QueryableNoTracking().FirstOrDefault(x=>x.Id == id);
+            if (entity == null)
+            {
+                return container;
+            }
+            container.HazirGiyim = entity;
+            if (entity.Renkid.HasValue)
+            {
+                container.Renk = _repoRenk.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.Renkid);
+            }
+            if (entity.PantoneId.HasValue)
+            {
+                container.PantoneRenk = _repoPantoneRenk.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.PantoneId);
+            }
+            if (entity.UlkeId.HasValue)
+            {
+                container.Ulke = _othersService.GetCountryById(entity.UlkeId.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(entity.CompanyId))
+            {
+                container.Company = _repoCompany.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.CompanyId);
+            }
+            return container;
+            
         }
 
         public ZetaCodeHazirGiyim GetHazirGiyim(string companyId, int hazirGiyimId)
@@ -66,7 +107,7 @@ namespace Helezon.FollowMe.Service
             try
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
-                var hazirGiyim = AutoMapperConfig.Mapper.Map<ZetaCodeHazirGiyimDto, ZetaCodeHazirGiyim>(container.HazirGiyim);
+                var hazirGiyim = container.HazirGiyim;
                 if (hazirGiyim.Id > 0)
                 {
                     this.Update(hazirGiyim);

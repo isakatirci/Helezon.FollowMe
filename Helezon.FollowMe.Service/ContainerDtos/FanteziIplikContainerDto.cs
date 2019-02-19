@@ -10,8 +10,31 @@ namespace Helezon.FollowMe.Service.ContainerDtos
 {
     public class FanteziIplikContainerDto
     {
-        public ZetaCodeFanteziIplikDto FanteziIplik { get; set; }
+
+        public ZetaCodeFanteziIplik FanteziIplik { get; set; }
         public CompanyDto Company { get; set; }
-        public List<ZetaCodeNormalIplikDto> NormalIplikler { get; set; }
+        public List<ZetaCodeNormalIplik> NormalIplikler { get; set; }
+        public List<Term> AnaIplikKategorileri { get;  set; }
+        public string PictureUrl { get; set; }
+        public PantoneRenk PantoneRenk { get; set; }
+        public Renk Renk { get; set; }
+        public Term RafyeriTurkiye { get; set; }
+        public Term RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public Term IplikKategosi { get; set; }
+        
+        public FanteziIplikContainerDto()
+        {
+            Ulke = new PairIdNameDto();
+            PantoneRenk = new PantoneRenk();
+            Renk = new Renk();
+            IplikKategosi = new Term();
+            RafyeriTurkiye = new Term();
+            RafyeriYunanistan = new Term();
+            FanteziIplik = new ZetaCodeFanteziIplik();
+            Company = new CompanyDto();
+            NormalIplikler = new List<ZetaCodeNormalIplik>();
+            AnaIplikKategorileri = new List<Term>();
+        }
     }
 }

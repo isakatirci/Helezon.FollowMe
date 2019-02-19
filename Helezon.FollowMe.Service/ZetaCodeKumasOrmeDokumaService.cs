@@ -19,6 +19,7 @@ namespace Helezon.FollowMe.Service
     {
         void InsertOrUpdate(KumasOrmeDokumaContainerDto container);
         List<ZetaCodeKumasOrmeDokumaDto> GetZetaCodeIsimler(string companyId);
+        KumasOrmeDokumaContainerDto GetCard(int id, string companyId);
     }
 
     /// <summary>
@@ -32,6 +33,10 @@ namespace Helezon.FollowMe.Service
         private readonly IRepositoryAsync<ZetaCodeYikamaTalimati> _repoYikamaTalimati;
         private readonly IRepositoryAsync<ZetaCodeNormalIplik> _repoNormalIplik;
         private readonly IRepositoryAsync<ZetaCodeFanteziIplik> _repoFanteziIplik;
+        private readonly IRepositoryAsync<ZetaCodeNormalKumasFanteziIplik> _repoFanteziIplikler;
+        private readonly IRepositoryAsync<ZetaCodeNormalKumasNormalIplik> _repoNormalIplikler;
+
+
         private readonly ZetaCodeService _zetaCodeService;
         //
         public KumasOrmeDokumaService(IRepositoryAsync<ZetaCodeKumasOrmeDokuma> repository) : base(repository)
@@ -42,6 +47,9 @@ namespace Helezon.FollowMe.Service
             _repoNormalIplik= _repository.GetRepositoryAsync<ZetaCodeNormalIplik>();
             _repoFanteziIplik = _repository.GetRepositoryAsync<ZetaCodeFanteziIplik>();
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+            _repoNormalIplikler = _repository.GetRepositoryAsync<ZetaCodeNormalKumasNormalIplik>();
+            _repoFanteziIplikler = _repository.GetRepositoryAsync<ZetaCodeNormalKumasFanteziIplik>();
+
         }
 
         private void MetreKgOraniHesapla(ZetaCodeKumasOrmeDokuma kumasOrmeDokuma)
@@ -78,7 +86,7 @@ namespace Helezon.FollowMe.Service
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
 
-                var kumasOrmeDokuma = AutoMapperConfig.Mapper.Map<ZetaCodeKumasOrmeDokumaDto, ZetaCodeKumasOrmeDokuma>(container.KumasOrmeDokuma);
+                var kumasOrmeDokuma = container.KumasOrmeDokuma;
                 if (kumasOrmeDokuma.Id > 0)
                 {
                     this.Update(kumasOrmeDokuma);
@@ -90,7 +98,7 @@ namespace Helezon.FollowMe.Service
 
                 _repository.UnitOfWorkAsync().SaveChanges();
 
-                var yikamaTalimati = AutoMapperConfig.Mapper.Map<ZetaCodeYikamaTalimatiDto, ZetaCodeYikamaTalimati>(container.YikamaTalimati);
+                var yikamaTalimati = container.YikamaTalimati;
 
 
 
@@ -103,7 +111,7 @@ namespace Helezon.FollowMe.Service
                     _repoYikamaTalimati.Insert(yikamaTalimati);
                 }
 
-                var kumasMakine = AutoMapperConfig.Mapper.Map<ZetaCodeKumasMakineDto, ZetaCodeKumasMakine>(container.KumasMakine);
+                var kumasMakine = container.KumasMakine;
                 if (kumasMakine.Id > 0)
                 {
                     _repoKumasMakine.Update(kumasMakine);
@@ -121,33 +129,33 @@ namespace Helezon.FollowMe.Service
                 _repository.UnitOfWorkAsync().SaveChanges();
                 if (container.NormalIplikler != null && container.NormalIplikler.Any())
                 {
-                    var normalIplikler = AutoMapperConfig.Mapper.Map<List<ZetaCodeNormalKumasNormalIplikDto>, List<ZetaCodeNormalKumasNormalIplik>>(container.NormalIplikler);
+                    var normalIplikler =container.NormalIplikler;
                     for (int i = 0; i < normalIplikler.Count; i++)
                     {
-                        if (normalIplikler[i].NormalKumasId > 0)
-                        {
+                        //if (normalIplikler[i].NormalKumasId > 0)
+                        //{
 
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
 
-                        }
+                        //}
                     }
                 }
 
                 if (container.FanteziIplikler != null && container.FanteziIplikler.Any())
                 {
-                    var fanteziIplikler = AutoMapperConfig.Mapper.Map<List<ZetaCodeNormalKumasFanteziIplikDto>, List<ZetaCodeNormalKumasFanteziIplik>>(container.FanteziIplikler);
+                    var fanteziIplikler = container.FanteziIplikler;
                     for (int i = 0; i < fanteziIplikler.Count; i++)
                     {
-                        if (fanteziIplikler[i].NormalKumasId > 0)
-                        {
+                        //if (fanteziIplikler[i].NormalKumasId > 0)
+                        //{
 
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
 
-                        }
+                        //}
                     }
                 }
 
@@ -161,7 +169,66 @@ namespace Helezon.FollowMe.Service
                 throw;
             }
         }
-     
+
+
+        //        private readonly IRepositoryAsync<ZetaCodeKumasMakine> _repoKumasMakine;
+        //        private readonly IRepositoryAsync<ZetaCodeYikamaTalimati> _repoYikamaTalimati;
+        //        private readonly IRepositoryAsync<ZetaCodeNormalIplik> _repoNormalIplik;
+        //        private readonly IRepositoryAsync<ZetaCodeFanteziIplik> _repoFanteziIplik;
+
+        public KumasOrmeDokumaContainerDto GetCard(int id, string companyId)
+        {
+            var container = new KumasOrmeDokumaContainerDto();
+            var entity = _repository.QueryableNoTracking().FirstOrDefault(x=>x.Id == id);
+            if (entity == null)
+            {
+                return container;
+            }
+
+            if (entity.KumasMakineId.HasValue)
+            {
+                container.KumasMakine = _repoKumasMakine.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.KumasMakineId);
+            }
+
+            if (entity.YikamaTalimatiId.HasValue)
+            {
+                container.YikamaTalimati = _repoYikamaTalimati.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.YikamaTalimatiId);
+            }
+
+            if (entity.YikamaTalimatiId.HasValue)
+            {
+                container.YikamaTalimati = _repoYikamaTalimati.QueryableNoTracking().FirstOrDefault(x => x.Id == entity.YikamaTalimatiId);
+            }
+
+            var normalIpliklerQuery = _repoNormalIplikler.QueryableNoTracking();
+            var fanteziIpliklerQuery = _repoFanteziIplikler.QueryableNoTracking();
+            var normalIplikQuery = _repoNormalIplik.QueryableNoTracking();
+            var fanteziIplikQuery = _repoFanteziIplik.QueryableNoTracking();
+            var kumasQuery = _repository.QueryableNoTracking();
+
+            var normalIplikler = (from k in kumasQuery
+                     join n in normalIpliklerQuery on k.Id equals n.NormalKumasId
+                     join i in normalIplikQuery on n.NormalIplikId equals i.Id
+                     select i).ToList();
+
+
+            var fanteziIplikler = (from k in kumasQuery
+                      join f in fanteziIpliklerQuery on k.Id equals f.NormalKumasId
+                      join i in fanteziIplikQuery on f.FanzteziIplikId equals i.Id
+                      select i).ToList();
+
+            if (normalIplikler.Any())
+            {
+                container.NormalIplikler = normalIplikler;
+            }
+
+            if (fanteziIplikler.Any())
+            {
+                container.FanteziIplikler = fanteziIplikler;
+            }
+
+            return container;
+        }
     }
 
 }

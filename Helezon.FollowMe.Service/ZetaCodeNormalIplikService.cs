@@ -24,7 +24,7 @@ namespace Helezon.FollowMe.Service
         List<PantoneRenkDto> GetPantoneRenkler();
         List<RenkDto> GetRenkler(int dilId = 2);
         //int GetSiparisNoByCompanyCode(int code);
-        ZetaCodeNormalIplikDto GetZetaCodeNormalIplikById(int id, string companyId, bool includeIplikNo = true);
+        ZetaCodeNormalIplik GetZetaCodeNormalIplikById(int id, string companyId, bool includeIplikNo = true);
         List<ZetaCodeNormalIplikDto> GetAllNormalIplikler(int? id = null, string companyId = null,bool include = false);
         void GetSequenceBlueSiparisNo(SequenceBlueSiparisNo sequenceBlueSiparisNo);
         List<IplikNoGuideDto> GetIplikNoGuideByColumnName(string column);
@@ -34,7 +34,7 @@ namespace Helezon.FollowMe.Service
         IplikKategoriKrepDto GetIplikKategoriKrepByZetaCodeNormalIplikId(int? normalIplikId);
         IplikKategoriNopeliDto GetIplikKategoriNopeliByZetaCodeNormalIplikId(int? normalIplikId);
         IplikKategoriKirciliDto GetIplikKategoriKirciliByZetaCodeNormalIplikId(int? normalIplikId);
-        ZetaCodeNormalIplikDto GetZetaCodeNormalIplikByMaster();
+        ZetaCodeNormalIplik GetZetaCodeNormalIplikByMaster();
         IplikKategoriFlamDto GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId);
         ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId);
         List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null);
@@ -107,7 +107,7 @@ namespace Helezon.FollowMe.Service
         //    return temp == 0 ? 1 : (++temp);           
         //}
 
-        public ZetaCodeNormalIplikDto GetZetaCodeNormalIplikById(int id, string companyId, bool includeIplikNo = true)
+        public ZetaCodeNormalIplik GetZetaCodeNormalIplikById(int id, string companyId, bool includeIplikNo = true)
         {
             var entity = _repository.Queryable().FirstOrDefault(x => x.Id == id && !x.IsPassive && x.SirketId == companyId);
             if (entity == null)
@@ -310,7 +310,7 @@ namespace Helezon.FollowMe.Service
             return termName;
         }
 
-        private void IplikUrunIsmiOlustur(ZetaCodeNormalIplikDto normalIplikDto) {
+        private void IplikUrunIsmiOlustur(ZetaCodeNormalIplik normalIplikDto) {
             var iplikNoCinsi = string.Empty;
             var iplikKategorisi = string.Empty;
             var uretimTeknolojisi = string.Empty;
@@ -389,16 +389,27 @@ namespace Helezon.FollowMe.Service
             normalIplikDto.UrunIsmi = urunIsmi;
         }
 
-        public void InsertOrUpdate(NormalIplikContainerDto normalIplikContainerDto)
+        public NormalIplikContainerDto GetCard(int id, string companyId)
+        {
+            var container = new NormalIplikContainerDto();
+            var normalIplik = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (normalIplik == null)
+            {
+                return container;
+            }
+            container.NormalIplik = normalIplik;
+            return container;
+        }
+
+        public void InsertOrUpdate(NormalIplikContainerDto container)
         {
             try
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
-                var normalIplikDto = normalIplikContainerDto.NormalIplik;
-                IplikUrunIsmiOlustur(normalIplikDto);
-                if (normalIplikDto.Master)
+                var normalIplik = container.NormalIplik;
+                IplikUrunIsmiOlustur(normalIplik);
+                if (normalIplik.Master)
                     _repository.UnitOfWorkAsync().ExecuteSqlCommand("UPDATE ZetaCodeNormalIplik SET Master = 0 WHERE MASTER = 1");
-                var normalIplik = AutoMapperConfig.Mapper.Map<ZetaCodeNormalIplikDto, ZetaCodeNormalIplik>(normalIplikDto);
                 var iplikNoService = new IplikNoService(_repository.GetRepositoryAsync<IplikNo>());
                 var repoSim = _repository.GetRepositoryAsync<IplikKategoriSim>();
                 var repoDegrede = _repository.GetRepositoryAsync<IplikKategoriDegrede>();
@@ -407,7 +418,7 @@ namespace Helezon.FollowMe.Service
                 var repoKrep = _repository.GetRepositoryAsync<IplikKategoriKrep>();
                 var repoNopeli = _repository.GetRepositoryAsync<IplikKategoriNopeli>();
 
-                normalIplik.SirketId = normalIplikContainerDto.Company.Id;
+                normalIplik.SirketId = container.Company.Id;
 
                 if (normalIplik.Id > 0)
                 {
@@ -421,9 +432,9 @@ namespace Helezon.FollowMe.Service
                 _repository.UnitOfWorkAsync().SaveChanges();          
 
 
-                if (normalIplikContainerDto.Degrede != null)
+                if (container.Degrede != null)
                 {
-                    var degrede = AutoMapperConfig.Mapper.Map<IplikKategoriDegredeDto, IplikKategoriDegrede>(normalIplikContainerDto.Degrede);
+                    var degrede = container.Degrede;
                     degrede.ZetaCodeNormalIplikId = normalIplik.Id;
                     if (degrede.Id > 0)
                     {
@@ -434,28 +445,28 @@ namespace Helezon.FollowMe.Service
                         _repoDegrede.Insert(degrede);
                     }
                 }
-                var flam = normalIplikContainerDto.Degrede;
+                var flam = container.Degrede;
                 if (flam != null)
                 {
                     flam.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
-                var kircili = normalIplikContainerDto.Degrede;
+                var kircili = container.Degrede;
                 if (kircili != null)
                 {
                     kircili.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
-                var krep = normalIplikContainerDto.Degrede;
+                var krep = container.Degrede;
                 if (krep != null)
                 {
                     krep.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
 
-                var nopeli = normalIplikContainerDto.Degrede;
+                var nopeli = container.Degrede;
                 if (nopeli != null)
                 {
                     nopeli.ZetaCodeNormalIplikId = normalIplik.Id;
                 }
-                var sim = normalIplikContainerDto.Degrede;
+                var sim = container.Degrede;
                 if (sim != null)
                 {
                     sim.ZetaCodeNormalIplikId = normalIplik.Id;
@@ -464,7 +475,7 @@ namespace Helezon.FollowMe.Service
                 var activeIplikNoIds = new List<int>();    
                 
                 var sum = 0;
-                var iplikNolar= AutoMapperConfig.Mapper.Map<List<IplikNoDto>, List<IplikNo>>(normalIplikContainerDto.IplikNolar); 
+                var iplikNolar= container.IplikNolar; 
                 foreach (var iplikNo in iplikNolar)
                 {
                     sum += iplikNo.ElyafOrani ?? 0;
@@ -578,23 +589,23 @@ namespace Helezon.FollowMe.Service
             return AutoMapperConfig.Mapper.Map<IplikKategoriFlam, IplikKategoriFlamDto>(flam);
         }
 
-        public ZetaCodeNormalIplikDto GetZetaCodeNormalIplikByMaster()
+        public ZetaCodeNormalIplik GetZetaCodeNormalIplikByMaster()
         {
-            //var master = _repository.Queryable().Where(x => x.Master).Select(x => new { x.Id, x.SirketId }).FirstOrDefault();
-            //if (master != null)
-            //{
+            var master = _repository.QueryableNoTracking().Where(x => x.Master).Select(x => new { x.Id, x.SirketId }).FirstOrDefault();
+            if (master != null)
+            {
 
-            //    var temp = GetZetaCodeNormalIplikById(master.Id, master.SirketId);
-            //    temp.Id = 0;
-            //    foreach (var iplikNo in temp.IplikNo)
-            //    {
-            //        iplikNo.Id = 0;
-            //        iplikNo.ZetaCodeNormalIplikId = 0;
-            //        iplikNo.ZetaCodeNormalIplik = null;
-            //    }
-            //    return temp;
+                var temp = GetZetaCodeNormalIplikById(master.Id, master.SirketId);
+                temp.Id = 0;
+                //foreach (var iplikNo in temp.IplikNoCinsi)
+                //{
+                //    iplikNo.Id = 0;
+                //    iplikNo.ZetaCodeNormalIplikId = 0;
+                //    iplikNo.ZetaCodeNormalIplik = null;
+                //}
+                return temp;
 
-            //}
+            }
             return null;
         }
     }

@@ -19,6 +19,7 @@ namespace Helezon.FollowMe.Service
     {
         void InsertOrUpdate(KumasFantaziContainerDto container);
         List<ZetaCodeKumasFantaziDto> GetZetaCodeIsimler(string companyId);
+        KumasFantaziContainerDto GetCard(int id, string companyId);
     }
 
     /// <summary>
@@ -80,7 +81,7 @@ namespace Helezon.FollowMe.Service
             {
                 _repository.UnitOfWorkAsync().BeginTransaction();
 
-                var kumasFantazi = AutoMapperConfig.Mapper.Map<ZetaCodeKumasFantaziDto, ZetaCodeKumasFantazi>(container.KumasFantazi);
+                var kumasFantazi = container.KumasFantazi;
                 if (kumasFantazi.Id > 0)
                 {
                     this.Update(kumasFantazi);
@@ -91,7 +92,7 @@ namespace Helezon.FollowMe.Service
                 }
                 _repository.UnitOfWorkAsync().SaveChanges();
 
-                var yikamaTalimati = AutoMapperConfig.Mapper.Map<ZetaCodeYikamaTalimatiDto, ZetaCodeYikamaTalimati>(container.YikamaTalimati);             
+                var yikamaTalimati = container.YikamaTalimati;             
 
                 if (yikamaTalimati.Id > 0)
                 {
@@ -102,7 +103,7 @@ namespace Helezon.FollowMe.Service
                     _repoYikamaTalimati.Insert(yikamaTalimati);
                 }
 
-                var kumasMakine = AutoMapperConfig.Mapper.Map<ZetaCodeKumasMakineDto, ZetaCodeKumasMakine>(container.KumasMakine);
+                var kumasMakine = container.KumasMakine;
                 if (kumasMakine.Id > 0)
                 {
                     _repoKumasMakine.Update(kumasMakine);
@@ -120,39 +121,39 @@ namespace Helezon.FollowMe.Service
                 _repository.UnitOfWorkAsync().SaveChanges();
                 if (container.KumasFanteziler != null && container.KumasFanteziler.Any())
                 {
-                    var kumasFanteziler = AutoMapperConfig.Mapper.Map<List<ZetaCodeKumasFanteziKumasFanteziDto>, List<ZetaCodeKumasFanteziKumasFantezi>>(container.KumasFanteziler);
+                    var kumasFanteziler = container.KumasFanteziler;
                     for (int i = 0; i < kumasFanteziler.Count; i++)
                     {
-                        if (kumasFanteziler[i].KumasOtherFanteziId < 1)
-                            continue;
-                        kumasFanteziler[i].KumasFanteziId = kumasFantazi.Id;
-                        if (kumasFanteziler[i].Id > 0)
-                        {
-                            _repoKumasFanteziKumasFantezi.Update(kumasFanteziler[i]);
-                        }
-                        else
-                        {
-                            _repoKumasFanteziKumasFantezi.Insert(kumasFanteziler[i]);
-                        }
+                        //if (kumasFanteziler[i].KumasOtherFanteziId < 1)
+                        //    continue;
+                        //kumasFanteziler[i].KumasFanteziId = kumasFantazi.Id;
+                        //if (kumasFanteziler[i].Id > 0)
+                        //{
+                        //    _repoKumasFanteziKumasFantezi.Update(kumasFanteziler[i]);
+                        //}
+                        //else
+                        //{
+                        //    _repoKumasFanteziKumasFantezi.Insert(kumasFanteziler[i]);
+                        //}
                     }
                 }              
 
                 if (container.KumasOrmeDokumalar != null && container.KumasOrmeDokumalar.Any())
                 {
-                    var ormeDokumalar= AutoMapperConfig.Mapper.Map<List<ZetaCodeKumasFanteziKumasOrmeDokumaDto>, List<ZetaCodeKumasFanteziKumasOrmeDokuma>>(container.KumasOrmeDokumalar);
+                    var ormeDokumalar= container.KumasOrmeDokumalar;
                     for (int i = 0; i < ormeDokumalar.Count; i++)
                     {
-                        if (ormeDokumalar[i].KumasOrmeDokumaId < 1)                        
-                            continue;                        
-                        ormeDokumalar[i].KumasFanteziId = kumasFantazi.Id;
-                        if (ormeDokumalar[i].Id > 0)
-                        {
-                            _repoKumasFanteziKumasOrmeDokuma.Update(ormeDokumalar[i]);
-                        }
-                        else
-                        {
-                            _repoKumasFanteziKumasOrmeDokuma.Insert(ormeDokumalar[i]);
-                        }
+                        //if (ormeDokumalar[i].KumasOrmeDokumaId < 1)                        
+                        //    continue;                        
+                        //ormeDokumalar[i].KumasFanteziId = kumasFantazi.Id;
+                        //if (ormeDokumalar[i].Id > 0)
+                        //{
+                        //    _repoKumasFanteziKumasOrmeDokuma.Update(ormeDokumalar[i]);
+                        //}
+                        //else
+                        //{
+                        //    _repoKumasFanteziKumasOrmeDokuma.Insert(ormeDokumalar[i]);
+                        //}
                     }
                 }
                 _repository.UnitOfWorkAsync().SaveChanges();
@@ -163,6 +164,26 @@ namespace Helezon.FollowMe.Service
                 _repository.UnitOfWorkAsync().Rollback();
                 throw;
             }
+        }
+
+        public KumasFantaziContainerDto GetCard(int id, string companyId)
+        {
+            var container = new KumasFantaziContainerDto();
+            var kumasFantazi = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (kumasFantazi == null)
+            {
+                return container;
+            }
+            container.KumasFantazi = kumasFantazi;
+            if (kumasFantazi.YikamaTalimatiId.HasValue)
+            {
+                container.YikamaTalimati = _repoYikamaTalimati.QueryableNoTracking().FirstOrDefault(x => x.Id == kumasFantazi.YikamaTalimatiId);
+            }
+            if (kumasFantazi.KumasMakineId.HasValue)
+            {
+                container.KumasMakine = _repoKumasMakine.QueryableNoTracking().FirstOrDefault(x => x.Id == kumasFantazi.KumasMakineId);
+            }
+            return container;
         }
     }
 

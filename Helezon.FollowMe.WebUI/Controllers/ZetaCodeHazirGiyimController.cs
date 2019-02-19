@@ -61,9 +61,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
 
 
-        public ActionResult Card()
+        public ActionResult Card(int id, string companyId)
         {
-            return View(new ZetaCodeKumasOrmeDokumaCardVm());
+            var card = new ZetaCodeHazirGiyimCardVm();
+            var container = GetHazirGiyimService().GetCard(id, companyId);
+            card.Container = container;
+            return View(card);
         }
         public void FillCollections(HazirGiyimEditVm model
                         , string sirketId = ""

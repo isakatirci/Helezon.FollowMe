@@ -21,6 +21,7 @@ namespace Helezon.FollowMe.Entities.Models
     public partial class ZetaCodeHazirGiyim: Entity
     {
         public int Id { get; set; } // Id (Primary key)
+        public string UrunIsmi { get; set; } // UrunIsmi (length: 300)
         public int? UrunKategoriId { get; set; } // UrunKategoriId
         public string CompanyId { get; set; } // CompanyId (length: 128)
         public int? UlkeId { get; set; } // UlkeId

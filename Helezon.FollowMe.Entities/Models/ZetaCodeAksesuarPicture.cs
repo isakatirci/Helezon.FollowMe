@@ -16,15 +16,21 @@ namespace Helezon.FollowMe.Entities.Models
 {
     using Repository.Pattern.Ef6;
 
-    // ZetaCode_NormalKumas_NormalIplik
+    // ZetaCodeAksesuarPicture
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public partial class ZetaCodeNormalKumasNormalIplik: Entity
+    public partial class ZetaCodeAksesuarPicture: Entity
     {
         public int Id { get; set; } // Id (Primary key)
-        public int NormalKumasId { get; set; } // NormalKumasId
-        public int NormalIplikId { get; set; } // NormalIplikId
+        public string Name { get; set; } // Name (length: 200)
+        public string Extension { get; set; } // Extension (length: 50)
+        public bool IsFeatured { get; set; } // IsFeatured
+        public int ZetaCodeNormalIplikId { get; set; } // ZetaCodeNormalIplikId
+        public string CompanyId { get; set; } // CompanyId (length: 128)
+        public bool IsPassive { get; set; } // IsPassive
+        public System.DateTime? CreatedOn { get; set; } // CreatedOn
+        public string CreatedBy { get; set; } // CreatedBy (length: 128)
 
-        public ZetaCodeNormalKumasNormalIplik()
+        public ZetaCodeAksesuarPicture()
         {
             InitializePartial();
         }

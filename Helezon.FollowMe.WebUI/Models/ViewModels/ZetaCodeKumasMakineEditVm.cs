@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.DataTransferObjects;
 
@@ -10,12 +11,19 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeKumasMakineEditVm
     {
-        public ZetaCodeKumasMakineDto Makine { get; set; }
+        public ZetaCodeKumasMakine Makine { get; set; }
+        public Term MakineMarkasi { get; set; }
+        public Term MakineModeli { get; set; }
+        public List<Term> Aksesuarlar { get; set; }
+        //
         public ZetaCodeKumasMakineEditVmCollections Collections { get; set; }
         public ZetaCodeKumasMakineEditVm()
         {
             Collections = new ZetaCodeKumasMakineEditVmCollections();
-            Makine = new ZetaCodeKumasMakineDto();
+            MakineMarkasi = new Term();
+            MakineModeli = new Term();
+            Aksesuarlar = new List<Term>();
+            Makine = new ZetaCodeKumasMakine();
         }
     }
 

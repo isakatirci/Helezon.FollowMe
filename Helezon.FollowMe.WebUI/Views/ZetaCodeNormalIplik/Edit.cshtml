@@ -1,4 +1,4 @@
-﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeNormalIplikVm
+﻿@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeNormalIplikEditVm
 
 @{
     ViewBag.Title = "";
@@ -52,8 +52,7 @@
                                                 <div class="form-group">
                                                     @Html.LabelFor(model => model.NormalIplik.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.EditorFor(model => model.NormalIplik.ZetaCodeFormat
-                                                        , new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
+                                                        @Html.EditorFor(model => model.NormalIplik.Id, new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
                                                         @Html.ValidationMessageFor(model => model.NormalIplik.ZetaCode, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
@@ -116,12 +115,12 @@
 
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.NormalIplik.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     @Html.DropDownList("NormalIplik.Ulke.Id"
                                                    , Model.Collections.Ulkeler,"Please Select"
                                                    , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.NormalIplik.Ulke.Id, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -147,7 +146,7 @@
                                                                    id="NormalIplik_IplikKategosiName"
                                                                    readonly
                                                                    class="form-control"
-                                                                   value="@Model.NormalIplik.IplikKategosiName" />
+                                                                   value="@Model.IplikKategosi.Name" />
                                                             <br />
                                                             <div id="treeIplikKategosiId"></div>
                                                         </div>
@@ -296,7 +295,7 @@
                                                                                                id="ElyafCinsiKalitesiName"
                                                                                                class="form-control"
                                                                                                readonly
-                                                                                               value="@Model.IplikNolar[i].ElyafCinsiKalitesiName" />
+                                                                                               value="@Model.IplikNolar[i].ElyafCinsiKalitesi" />
                                                                                         <br />
                                                                                         <div class="treeElyafCinsiKalitesi"></div>
                                                                                     </div>
@@ -404,7 +403,7 @@
                                                            id="NormalIplik_RafyeriTurkiyeName"
                                                            readonly
                                                            class="form-control"
-                                                           value="@Model.NormalIplik.RafyeriTurkiyeName" />
+                                                           value="@Model.RafyeriTurkiye.Name" />
                                                     <br />
                                                     <div id="treeRafyeriTurkiyeId">
                                                     </div>
@@ -427,7 +426,7 @@
                                                            id="NormalIplik_RafyeriYunanistanName"
                                                            class="form-control"
                                                            readonly
-                                                           value="@Model.NormalIplik.RafyeriYunanistanName" />
+                                                           value="@Model.RafyeriYunanistan.Name" />
                                                     <br />
                                                     <div id="treeRafyeriYunanistanId">
                                                     </div>

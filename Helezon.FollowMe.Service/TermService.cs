@@ -20,11 +20,11 @@ namespace Helezon.FollowMe.Service
     public interface ITermService : IService<Term>
     {
         List<JsTreeDataDto> GetJsTreeData(string companyId, int taxonomyId);
-        List<TermDto> GetTermsByTaxonomyId(int taxonomyId);
+        List<Term> GetTermsByTaxonomyId(int taxonomyId);
         string GetTermNameById(int? id);
-        TermDto GetTermById(int? id);
-        TermDto GetParentTermById(int termId);
-        List<TermDto> GetAllParentsById(int? termid);
+        Term GetTermById(int? id);
+        Term GetParentTermById(int termId);
+        List<Term> GetAllParentsById(int? termid);
     }
 
     /// <summary>
@@ -118,16 +118,16 @@ namespace Helezon.FollowMe.Service
           
         }
 
-        public List<TermDto> GetTermsByTaxonomyId(int taxonomyId)
+        public List<Term> GetTermsByTaxonomyId(int taxonomyId)
         {
-            return AutoMapperConfig.Mapper.Map<List<Term>,List<TermDto>>(_repoTerm.Queryable().Where(x=>x.TaxonomyId == taxonomyId).ToList());
+            return _repoTerm.QueryableNoTracking().Where(x=>x.TaxonomyId == taxonomyId).ToList();
         }
 
-        public TermDto GetTermById(int? id)
+        public Term GetTermById(int? id)
         {
             if (!id.HasValue)            
-                return new TermDto();            
-            return AutoMapperConfig.Mapper.Map<Term,TermDto>(_repoTerm.Queryable().FirstOrDefault(x => x.Id == id));
+                return new Term();            
+            return _repoTerm.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
         }
         public string GetTermNameById(int? id)
         {
@@ -136,9 +136,9 @@ namespace Helezon.FollowMe.Service
             return GetTermById(id)?.Name ?? string.Empty;
         }
 
-        public List<TermDto> GetAllParentsById(int? termid)
+        public List<Term> GetAllParentsById(int? termid)
         {
-            var parents = new List<TermDto>();
+            var parents = new List<Term>();
             if (!termid.HasValue)
             {
                 return parents;
@@ -163,7 +163,7 @@ namespace Helezon.FollowMe.Service
             return parents;
         }
 
-        public TermDto GetParentTermById(int termid)
+        public Term GetParentTermById(int termid)
         {
             var term = GetTermById(termid);
             if (term != null)

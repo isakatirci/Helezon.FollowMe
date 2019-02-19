@@ -11,32 +11,46 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class KumasFanteziEditVm
     {
-        public ZetaCodeKumasFantaziDto KumasFantazi { get; set; }
+        public ZetaCodeKumasFantazi KumasFantazi { get; set; }
         public List<SelectListItem> FanteziKumaslar { get; set; }
         public List<SelectListItem> OrmeDokumaKumaslar { get; set; }
         public List<ZetaCodeDto> Kumaslar { get; set; }
         public KumasFanteziEditVmCollections Collections { get; set; }
-        public CompanyDto Company { get; set; }
-        public ZetaCodeKumasMakineDto ZetaCodeKumasMakine { get; set; }
-
-        public List<ZetaCodeKumasFantezi3AdimIslemleriDto> KumasFantezi3AdimIslemleri { get; set; }
+        public Company Company { get; set; }
+        //public ZetaCodeKumasMakine ZetaCodeKumasMakine { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public List<Term> OrguDetaylari { get;  set; }
+        public List<Term> BoyaIslemleri { get;  set; }
+        
+        public List<ZetaCodeKumasFantezi3AdimIslemleri> KumasFantezi3AdimIslemleri { get; set; }
         //
-        public ZetaCodeKumasMakineDto Makine { get; set; }
-        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
-        public ZetaCodeYikamaTalimatiDto ZetaCodeYikamaTalimati { get; set; }
-        public List<TermDto> AdimIslemleri { get; internal set; }
+        public ZetaCodeKumasMakine Makine { get; set; }
+        public ZetaCodeYikamaTalimati YikamaTalimati { get; set; }
+        public ZetaCodeYikamaTalimati ZetaCodeYikamaTalimati { get; set; }
+        public List<Term> AdimIslemleri { get; internal set; }
         public List<ZetaCodeDto> KumasOrmeDokumalar { get;  set; }
         public List<ZetaCodeDto> KumasFanteziler { get;  set; }
+        public Term RafyeriYunanistan { get; set; }
+        public Term RafyeriTurkiye { get; set; }
 
         public KumasFanteziEditVm()
         {
-            KumasFantazi = new ZetaCodeKumasFantaziDto();
-            //KumasFantaziDto.Company = new CompanyDto();
+            RafyeriTurkiye = new Term();
+            RafyeriYunanistan = new Term();
+            BoyaIslemleri = new List<Term>();
+            OrguDetaylari = new List<Term>();
+            YikamaTalimati = new ZetaCodeYikamaTalimati();
+            Makine = new ZetaCodeKumasMakine();
+            KumasFantazi = new ZetaCodeKumasFantazi();
             Collections = new KumasFanteziEditVmCollections();
             Kumaslar = new List<ZetaCodeDto>();
-            KumasFantezi3AdimIslemleri = new List<ZetaCodeKumasFantezi3AdimIslemleriDto>();
-            ZetaCodeYikamaTalimati = new ZetaCodeYikamaTalimatiDto();
-            ZetaCodeKumasMakine = new ZetaCodeKumasMakineDto();
+            KumasFantezi3AdimIslemleri = new List<ZetaCodeKumasFantezi3AdimIslemleri>();
+            ZetaCodeYikamaTalimati = new ZetaCodeYikamaTalimati();
+            //ZetaCodeKumasMakine = new ZetaCodeKumasMakine();
+            KumasFanteziler = new List<ZetaCodeDto>();
+            KumasOrmeDokumalar = new List<ZetaCodeDto>();
+            AdimIslemleri = new List<Term>();
+            Ulke = new PairIdNameDto();
         }
     }
     public class KumasFanteziEditVmCollections
@@ -54,24 +68,12 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<SelectListItem> OrguCesidleri { get; set; }
         public List<SelectListItem> OrguKabiliyetleri { get; set; }
         public List<SelectListItem> OrguDigerleri { get; set; }
-        public List<TermDto> AdimIslemleri { get; set; }
+        public List<Term> AdimIslemleri { get; set; }
         public List<SelectListItem> FanteziKumaslar { get; set; }
         public List<SelectListItem> OrmeDokumaKumaslar { get; set; }
-        //
         public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
-
-        //
-        //
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
         public List<ZetaCodeDto> Kumaslar { get; set; }
-
-
-        //public List<SelectListItem> NormalIplikler { get; set; }
-
-
-        //public SelectList BoyaYonu { get; internal set; }
-        //public SelectList BoyaTipi { get; internal set; }
-
         public KumasFanteziEditVmCollections()
         {
             OrguTipleri = new List<SelectListItem>();

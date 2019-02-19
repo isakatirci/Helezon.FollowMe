@@ -1,8 +1,9 @@
 ﻿
-@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeKumasOrmeDokumaCardVm
+@model Helezon.FollowMe.WebUI.Models.ViewModels.ZetaCodeHazirGiyimCardVm
 
 @using FollowMe.Web.Controllers;
 @{
+    //ZetaCodeHazirGiyimCardVm
     ViewBag.Title = "";
     ViewBag.Action = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -57,7 +58,7 @@
                         </div>
                         <div class="btn-group">
                             <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeKumasOrmeDokuma/Edit?id={0}&companyId={1}"
-                                                                         ,Model.ZetaCodeKumasOrmeDokumaDto.Id,Model.ZetaCodeKumasOrmeDokumaDto.CompanyId))'" class="btn btn-default">
+                                                                         ,Model.Container.HazirGiyim.Id,Model.Container.HazirGiyim.CompanyId))'" class="btn btn-default">
 
                                 Edit
 
@@ -81,7 +82,7 @@
                                             <th>
                                                 Z CODE PHOTO
                                                 <a href="javascript:void(0);"
-                                                   onclick="location.href='@Html.Raw(Model.PictureEditUrl)'">
+                                                   onclick="location.href='@Html.Raw(Model.Container.PictureEditUrl)'">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </th>
@@ -91,8 +92,8 @@
                                         <tr>
                                             <td>
                                                 <img style="width:250px;max-width:250px;height:300px;max-height:300px"
-                                                     src="@Html.Raw(Model.PictureUrl)"
-                                                     alt="@Html.Raw(Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodeFormatli)">
+                                                     src="@Html.Raw(Model.Container.PictureUrl)"
+                                                     alt="@Html.Raw(Model.Container.HazirGiyim.Id)">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -111,8 +112,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.Raw(Model.ZetaCodeKumasOrmeDokumaDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.UrunKategorisi?.Name)</td>
+                                                        <td>@Html.Raw(Model.Container.HazirGiyim.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>HAZIR GIYIM</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -127,7 +128,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Company?.Code + " " + Model.ZetaCodeKumasOrmeDokumaDto.Company?.Name)</td>
+                                                        <td>@(Model.Container.Company.Code + " " + Model.Container.Company.Name)</td>
                                                     </tr>
 
 
@@ -147,8 +148,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodeFormatli</td>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Renk)</td>
+                                                        <td>@Model.Container.HazirGiyim.Id</td>
+                                                        <td>@(Model.Container.Renk.Ad)</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -165,7 +166,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            @Model.ZetaCodeKumasOrmeDokumaDto.UrunIsmi
+                                                            @Model.Container.HazirGiyim.UrunIsmi
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -193,7 +194,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>@Model.ZetaCodeKumasOrmeDokumaDto.BlueSiparisNo</td>
+                                                            <td>@Model.Container.HazirGiyim.BlueSiparisNo</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -216,11 +217,11 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
-                                                                            <td>@(Model.ZetaCodeKumasOrmeDokumaDto.RafyeriTurkiye?.Name)</td>
+                                                                            <td>@(Model.Container.RafyeriTurkiye.Name)</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>GR ASKI RAF NO</th>
-                                                                            <td>@(Model.ZetaCodeKumasOrmeDokumaDto.RafyeriYunanistan?.Name)</td>
+                                                                            <td>@(Model.Container.RafyeriYunanistan.Name)</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -284,15 +285,15 @@
                                                                 <table>
                                                                     <tr>
                                                                         <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
-                                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodePrevious</td>
+                                                                        <td>@Model.Container.HazirGiyim.ZetaCodePrevious</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>URUN MENSEI</th>
-                                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Ulke?.Name)</td>
+                                                                        <td>@(Model.Container.Ulke.Name)</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>BLUE URUN KODU</th>
-                                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.BlueUrunKodIsmi</td>
+                                                                        <td>@Model.Container.HazirGiyim.BlueUrunKodIsmi</td>
                                                                     </tr>
                                                                 </table>
                                                             </td>

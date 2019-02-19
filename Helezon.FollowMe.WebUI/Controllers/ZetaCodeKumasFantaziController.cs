@@ -51,18 +51,18 @@ namespace Helezon.FollowMe.WebUI.Controllers
                         var iplikTipi = arr[1].Trim();
                         if (string.Equals(iplikTipi, "FanteziKumas", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            container.KumasFanteziler.Add(new ZetaCodeKumasFanteziKumasFanteziDto {
-                                KumasFanteziId = model.KumasFantazi.Id,
-                                KumasOtherFanteziId = id.AsInt()
+                            //container.KumasFanteziler.Add(new ZetaCodeKumasFanteziKumasFanteziDto {
+                            //    KumasFanteziId = model.KumasFantazi.Id,
+                            //    KumasOtherFanteziId = id.AsInt()
 
-                            });
+                            //});
                         }
                         else if (string.Equals(iplikTipi, "NormalKumas", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            container.KumasOrmeDokumalar.Add(new ZetaCodeKumasFanteziKumasOrmeDokumaDto {
-                                KumasFanteziId = model.KumasFantazi.Id,
-                                KumasOrmeDokumaId = id.AsInt()
-                            });
+                            //container.KumasOrmeDokumalar.Add(new ZetaCodeKumasFanteziKumasOrmeDokumaDto {
+                            //    KumasFanteziId = model.KumasFantazi.Id,
+                            //    KumasOrmeDokumaId = id.AsInt()
+                            //});
                         }
 
                     }
@@ -76,12 +76,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 {
                     for (int i = 0; i < model.KumasFantezi3AdimIslemleri.Count; i++)
                     {
-                        if (string.IsNullOrWhiteSpace(model.KumasFantezi3AdimIslemleri[i]._3AdimIslemlerId)
+                        if (model.KumasFantezi3AdimIslemleri[i]._3AdimIslemlerId.HasValue
                         && string.IsNullOrWhiteSpace(model.KumasFantezi3AdimIslemleri[i].DesenKodu))
                         {
                             break;
                         }
-                        container.KumasFantezi3AdimIslemleri.Add(new ZetaCodeKumasFantezi3AdimIslemleriDto
+                        container.KumasFantezi3AdimIslemleri.Add(new Entities.Models.ZetaCodeKumasFantezi3AdimIslemleri
                         {
                             DesemRengi1= model.KumasFantezi3AdimIslemleri[i].DesemRengi1.Split('|')[0],
                             DesemRengi2 = model.KumasFantezi3AdimIslemleri[i].DesemRengi2.Split('|')[0],
@@ -105,17 +105,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
             return View(model);
         }
 
-        public ActionResult Card()
+        public ActionResult Card(int id, string companyId)
         {
+            var viewModel = new ZetaCodeKumasFantaziCardVm();
+            var container = GetKumasFanteziService().GetCard(id,companyId);
 
-            var normal = new ZetaCodeKumasFantaziCardVm();
-            //normal.ParentUrunKategoriler.Add(new TermDto());
-            //normal.ParentUrunKategoriler.Add(new TermDto());
-            //normal.ParentUrunKategoriler.Add(new TermDto());
-            //normal.ParentUrunKategoriler.Add(new TermDto());
-            //normal.ParentUrunKategoriler.Add(new TermDto());
-
-            return View(normal);
+            return View(viewModel);
         }
         public void FillCollections(KumasFanteziEditVm model
                              , string sirketId = ""
@@ -189,7 +184,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.KumasFantezi3AdimIslemleri.Any())
             {
-                model.KumasFantezi3AdimIslemleri.Add(new ZetaCodeKumasFantezi3AdimIslemleriDto());
+                model.KumasFantezi3AdimIslemleri.Add(new Entities.Models.ZetaCodeKumasFantezi3AdimIslemleri());
             }
 
             model.OrmeDokumaKumaslar = new List<SelectListItem>();
@@ -224,15 +219,15 @@ namespace Helezon.FollowMe.WebUI.Controllers
             //
 
 
-            if (model.ZetaCodeKumasMakine == null)
+            if (model.Makine == null)
             {
-                model.ZetaCodeKumasMakine = new ZetaCodeKumasMakineDto();
+                model.Makine = new Entities.Models.ZetaCodeKumasMakine();
             }
 
 
             if (model.YikamaTalimati == null)
             {
-                model.YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
+                model.YikamaTalimati = new Entities.Models.ZetaCodeYikamaTalimati();
             }
 
             var normalKumaslar = GetKumasOrmeDokumaService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");

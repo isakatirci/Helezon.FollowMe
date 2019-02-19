@@ -550,6 +550,8 @@
     <Compile Include="Models\ViewModels\TermTaxonomyView.cs" />
     <Compile Include="Models\ViewModels\TermViewModel.cs" />
     <Compile Include="Models\ViewModels\ViewModelExtensions.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeAksesuarCardVm.cs" />
+    <Compile Include="Models\ViewModels\ZetaCodeHazirGiyimCardVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeKumasMakineEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeHazirGiyimEditVm.cs" />
     <Compile Include="Models\ViewModels\ZetaCodeFanteziIplikCardVm.cs" />

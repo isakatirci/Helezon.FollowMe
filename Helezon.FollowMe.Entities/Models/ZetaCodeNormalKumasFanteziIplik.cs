@@ -20,8 +20,9 @@ namespace Helezon.FollowMe.Entities.Models
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public partial class ZetaCodeNormalKumasFanteziIplik: Entity
     {
-        public int FanzteziIplikId { get; set; } // FanzteziIplikId (Primary key)
-        public int NormalKumasId { get; set; } // NormalKumasId (Primary key)
+        public int Id { get; set; } // Id (Primary key)
+        public int FanzteziIplikId { get; set; } // FanzteziIplikId
+        public int NormalKumasId { get; set; } // NormalKumasId
 
         public ZetaCodeNormalKumasFanteziIplik()
         {

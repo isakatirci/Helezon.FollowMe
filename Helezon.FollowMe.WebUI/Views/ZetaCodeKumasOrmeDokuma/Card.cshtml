@@ -57,7 +57,7 @@
                         </div>
                         <div class="btn-group">
                             <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeKumasOrmeDokuma/Edit?id={0}&companyId={1}"
-                                                                         ,Model.ZetaCodeKumasOrmeDokumaDto.Id,Model.ZetaCodeKumasOrmeDokumaDto.CompanyId))'" class="btn btn-default">
+                                                                         ,Model.Container.KumasOrmeDokuma.Id,Model.Container.KumasOrmeDokuma.CompanyId))'" class="btn btn-default">
 
                                 Edit
 
@@ -91,8 +91,8 @@
                                         <tr>
                                             <td>
                                                 <img style="width:250px;max-width:250px;height:300px;max-height:300px"
-                                                     src="@Html.Raw(Model.PictureUrl)"
-                                                     alt="@Html.Raw(Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodeFormatli)">
+                                                     src="@Html.Raw(Model.Container.PictureUrl)"
+                                                     alt="@Html.Raw(Model.Container.KumasOrmeDokuma.Id)">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -111,8 +111,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.Raw(Model.ZetaCodeKumasOrmeDokumaDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.UrunKategorisi?.Name)</td>
+                                                        <td>@Html.Raw(Model.Container.KumasOrmeDokuma.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>KUMAS</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -127,7 +127,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Company?.Code + " " + Model.ZetaCodeKumasOrmeDokumaDto.Company?.Name)</td>
+                                                        <td>@(Model.Container.Company.Code + " " + Model.Container.Company.Name)</td>
                                                     </tr>
 
 
@@ -147,8 +147,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodeFormatli</td>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Renk)</td>
+                                                        <td>@Model.Container.KumasOrmeDokuma.Id</td>
+                                                        <td>@(Model.Container.KumasOrmeDokuma.Renk)</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -165,7 +165,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            @Model.ZetaCodeKumasOrmeDokumaDto.UrunIsmi
+                                                            @Model.Container.KumasOrmeDokuma.UrunIsmi
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -183,8 +183,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.En</td>
-                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Gramaj)</td>
+                                                        <td>@Model.Container.KumasOrmeDokuma.En</td>
+                                                        <td>@(Model.Container.KumasOrmeDokuma.Gramaj)</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -211,7 +211,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>@Model.ZetaCodeKumasOrmeDokumaDto.BlueSiparisNo</td>
+                                                            <td>@Model.Container.KumasOrmeDokuma.BlueSiparisNo</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -234,11 +234,11 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
-                                                                            <td>@(Model.ZetaCodeKumasOrmeDokumaDto.RafyeriTurkiye?.Name)</td>
+                                                                            <td>@(Model.Container.RafyeriTurkiye.Name)</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>GR ASKI RAF NO</th>
-                                                                            <td>@(Model.ZetaCodeKumasOrmeDokumaDto.RafyeriYunanistan?.Name)</td>
+                                                                            <td>@(Model.Container.RafyeriYunanistan.Name)</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -275,11 +275,11 @@
                                             <tr>
                                                 <td style="width:50%;max-width:50%;vertical-align:top">
                                                     <table>
-                                                        @*@for (int i = 0; i < Model.ParentUrunKategoriler.Count; i++)
+                                                        @*@for (int i = 0; i < Model.Container.ParentUrunKategoriler.Count; i++)
                                                         {
                                                             <tr>
                                                                 <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
-                                                                <td>@Model.ParentUrunKategoriler[i].Name</td>
+                                                                <td>@Model.Container.ParentUrunKategoriler[i].Name</td>
                                                             </tr>
 
                                                         }*@
@@ -292,15 +292,15 @@
                                                                 <table>
                                                                     <tr>
                                                                         <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
-                                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.ZetaCodePrevious</td>
+                                                                        <td>@Model.Container.KumasOrmeDokuma.ZetaCodePrevious</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>URUN MENSEI</th>
-                                                                        <td>@(Model.ZetaCodeKumasOrmeDokumaDto.Ulke?.Name)</td>
+                                                                        <td>@(Model.Container.Ulke.Name)</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>BLUE URUN KODU</th>
-                                                                        <td>@Model.ZetaCodeKumasOrmeDokumaDto.BlueUrunKodIsmi</td>
+                                                                        <td>@Model.Container.KumasOrmeDokuma.BlueUrunKodIsmi</td>
                                                                     </tr>
                                                                 </table>
                                                             </td>

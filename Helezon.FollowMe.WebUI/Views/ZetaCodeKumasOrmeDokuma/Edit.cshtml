@@ -74,7 +74,7 @@
                                                                readonly
                                                                class="form-control transform_none"
                                                                id="ZetaCodeFanteziIplikDto_ZetaCode"
-                                                               value="@Model.KumasOrmeDokuma.ZetaCodeFormatli" />
+                                                               value="@Model.KumasOrmeDokuma.Id" />
                                                     </div>
                                                 </div>
                                             }
@@ -130,10 +130,10 @@
                                             }
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.KumasOrmeDokuma.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.Ulke, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("KumasOrmeDokuma.Ulke", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.KumasOrmeDokuma.Ulke, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("Ulke.Id", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -299,7 +299,7 @@
                                                   readonly
                                                   cols="20"
                                                   id="KumasOrmeDokuma_OrguDetaylari"
-                                                  value="@(string.Join(",",Model.KumasOrmeDokuma.OrguDetaylari.Select(x => x.Name)))"
+                                                  value="@(string.Join(",",Model.OrguDetaylari.Select(x => x.Name)))"
                                                   class="form-control"></textarea>
                                         <br />
                                         <div class="panel panel-default">
@@ -336,7 +336,7 @@
                                                   rows="3"
                                                   readonly
                                                   cols="20"
-                                                  value="@(string.Join(",",Model.KumasOrmeDokuma.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
+                                                  value="@(string.Join(",",Model.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
                                         <div class="panel panel-default">
                                             <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                 <div id="treeBoyaIslemleri">
@@ -447,7 +447,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.KumasOrmeDokuma.RafyeriTurkiyeId)
-                                                    @Html.TextBoxFor(x => x.KumasOrmeDokuma.RafyeriTurkiye.Name, new { @class = "form-control", @readonly = "" })
+                                                    @Html.TextBoxFor(x => x.RafyeriTurkiye.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriTurkiye">
                                                     </div>
@@ -461,7 +461,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:150px; overflow-y:auto;">
                                                     @Html.HiddenFor(x => x.KumasOrmeDokuma.RafyeriYunanistanId)
-                                                    @Html.TextBoxFor(x => x.KumasOrmeDokuma.RafyeriYunanistan.Name, new { @class = "form-control", @readonly = "" })
+                                                    @Html.TextBoxFor(x => x.RafyeriYunanistan.Name, new { @class = "form-control", @readonly = "" })
                                                     <br />
                                                     <div id="treeRafyeriYunanistan">
                                                     </div>

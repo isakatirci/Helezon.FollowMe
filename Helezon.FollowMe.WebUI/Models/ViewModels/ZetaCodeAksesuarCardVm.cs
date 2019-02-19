@@ -1,31 +1,33 @@
 ﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Helezon.FollowMe.Service.ContainerDtos
+namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
-    public class AksesuarContainerDto
+    public class ZetaCodeAksesuarCardVm
     {
-        public ZetaCodeAksesuar Aksesuar { get;  set; }
-        public List<ZetaCodeAksesuarKompozisyon> AksesuarKompozisyonlar { get; set; }
+        public ZetaCodeAksesuar Aksesuar { get; internal set; }
         public Company Company { get; set; }
         public PantoneRenk PantoneRenk { get; set; }
         public Renk Renk { get; set; }
-        public Term RafyeriTurkiye { get; set; }
-        public Term RafyeriYunanistan { get; set; }
         public PairIdNameDto Ulke { get; set; }
         public string PictureUrl { get; set; }
-        public AksesuarContainerDto()
+        public string PictureEditUrl { get; set; }
+        public Term RafyeriTurkiye { get; set; }
+        public Term RafyeriYunanistan { get; set; }
+        public List<ZetaCodeAksesuarKompozisyon> AksesuarKompozisyonlar { get; set; }
+
+        public ZetaCodeAksesuarCardVm()
         {
             Aksesuar = new ZetaCodeAksesuar();
             AksesuarKompozisyonlar = new List<ZetaCodeAksesuarKompozisyon>();
             Company = new Company();
-            PantoneRenk = new PantoneRenk();
             Renk = new Renk();
+            PantoneRenk = new PantoneRenk();
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
             Ulke = new PairIdNameDto();

@@ -77,9 +77,15 @@ namespace Helezon.FollowMe.WebUI.Controllers
             FillCollections(model);
             return View(model);
         }
-        public ActionResult Card()
+        public ActionResult Card(int id,string companyId)
         {
-            return View(new ZetaCodeKumasOrmeDokumaCardVm());
+            KumasOrmeDokumaContainerDto container = GetKumasOrmeDokumaService().GetCard(id,companyId);
+
+
+            var view = new ZetaCodeKumasOrmeDokumaCardVm();
+            view.Container = container;
+
+            return View(model: view);
         }
 
         public void FillCollections(ZetaCodeKumasOrmeDokumaEditVm model
@@ -182,37 +188,37 @@ namespace Helezon.FollowMe.WebUI.Controllers
             //    model.KumasOrmeDokumaDto.ZetaCodeNormalIplik.Add(new Service.DataTransferObjects.ZetaCodeNormalIplikDto());
             //}
 
-            if (!model.ZetaCodeFanteziIplikDtos.Any())
+            if (!model.ZetaCodeFanteziIplik.Any())
             {
-                model.ZetaCodeFanteziIplikDtos.Add(new Service.DataTransferObjects.ZetaCodeFanteziIplikDto());
+                model.ZetaCodeFanteziIplik.Add(new Entities.Models.ZetaCodeFanteziIplik());
             }          
 
             if (model.KumasMakine == null)
             {
-                model.KumasMakine = new Service.DataTransferObjects.ZetaCodeKumasMakineDto();
+                model.KumasMakine = new Entities.Models.ZetaCodeKumasMakine();
             }
 
             if (model.YikamaTalimati == null)
             {
-                model.YikamaTalimati = new Service.DataTransferObjects.ZetaCodeYikamaTalimatiDto();
+                model.YikamaTalimati = new Entities.Models.ZetaCodeYikamaTalimati();
             }
 
-            if (model.KumasMakine.Aksesuarlar == null)
+            if (model.Aksesuarlar == null)
             {
-                model.KumasMakine.Aksesuarlar = new List<Service.DataTransferObjects.TermDto>();
+                model.Aksesuarlar = new List<Entities.Models.Term>();
             }
 
 
             var normalIplikler = GetNormalIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
             var fanteziIplikler = GetFanteziIplikService().GetZetaCodeIsimler("CompanyId ile bu metot çağırılmalı");
 
-            model.Iplikler.AddRange(model.ZetaCodeNormalIplikDtos.Select(x => new ZetaCodeDto
+            model.Iplikler.AddRange(model.ZetaCodeNormalIplik.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Normaliplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi
             }));
 
-            model.Iplikler.AddRange(model.ZetaCodeFanteziIplikDtos.Select(x => new ZetaCodeDto
+            model.Iplikler.AddRange(model.ZetaCodeFanteziIplik.Select(x => new ZetaCodeDto
             {
                 Id = x.Id + "|" + "Fanteziiplik",
                 ZetaCode = ZetaCodeFormatli(x.ZetaCode) + ", " + x.UrunIsmi

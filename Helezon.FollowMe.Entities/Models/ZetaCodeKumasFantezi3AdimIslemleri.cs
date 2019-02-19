@@ -31,7 +31,7 @@ namespace Helezon.FollowMe.Entities.Models
         public string DesemRengi1 { get; set; } // DesemRengi1 (length: 50)
         public string DesemRengi2 { get; set; } // DesemRengi2 (length: 50)
         public string DesemRengi3 { get; set; } // DesemRengi3 (length: 50)
-        public string _3AdimIslemlerId { get; set; } // _3AdimIslemlerId (length: 10)
+        public int? _3AdimIslemlerId { get; set; } // _3AdimIslemlerId
 
         public ZetaCodeKumasFantezi3AdimIslemleri()
         {

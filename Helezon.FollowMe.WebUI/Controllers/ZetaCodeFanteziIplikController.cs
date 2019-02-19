@@ -18,20 +18,20 @@ namespace Helezon.FollowMe.WebUI.Controllers
     {
 
         // GET: ZetaCodeFanteziIplik
-        public ActionResult Index()
-        {
-            var fanteziIplikler = GetFanteziIplikService().GetAllFanteziIplikler();
-            //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
-            var model = new List<ZetaCodeFanteziIplikEditVm>();
-            foreach (var item in fanteziIplikler)
-            {
-                model.Add(new ZetaCodeFanteziIplikEditVm
-                {
-                    FanteziIplik = item
-                });
-            }
-            return View(model);
-        }
+        //public ActionResult Index()
+        //{
+        //    var fanteziIplikler = GetFanteziIplikService().GetAllFanteziIplikler();
+        //    //var zetaCodeNormalIplik = db.ZetaCodeNormalIplik.Include(z => z.PantoneRengi).Include(z => z.Renk);
+        //    var model = new List<ZetaCodeFanteziIplikEditVm>();
+        //    foreach (var item in fanteziIplikler)
+        //    {
+        //        model.Add(new ZetaCodeFanteziIplikEditVm
+        //        {
+        //            FanteziIplik = item
+        //        });
+        //    }
+        //    return View(model);
+        //}
 
    
 
@@ -96,16 +96,17 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var zetaCodeFanteziIplik = GetFanteziIplikService().GetFanteziIplikById(id.Value, companyId, includeNormalIplikler: true);
-            if (zetaCodeFanteziIplik == null)
+            var container = GetFanteziIplikService().GetCard(id.Value,companyId);
+            var fanteziIplik = container.FanteziIplik;
+            if (fanteziIplik == null || fanteziIplik.Id < 1)
             {
                 return HttpNotFound();
             }
             var model = new ZetaCodeFanteziIplikEditVm();
-            model.FanteziIplik = zetaCodeFanteziIplik;
+            model.FanteziIplik = fanteziIplik;
             FillCollections(model
-                , sirketId: zetaCodeFanteziIplik.SirketId
-                , ulkeId: zetaCodeFanteziIplik.Ulke?.Id.AsInt());
+                , sirketId: fanteziIplik.SirketId
+                , ulkeId: container.Ulke.Id.AsInt());
             return View(model);
         }
 
@@ -116,11 +117,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ZetaCodeFanteziIplikEditVm model)
         {
-
-
             var keys = Request.Form.Keys;
             var companyId = Request.Form["Company.Id"];//Company.Id
-
             var container = new FanteziIplikContainerDto();
             container.FanteziIplik = model.FanteziIplik;
             container.NormalIplikler = model.NormalIplikler;
@@ -137,7 +135,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             var fanteziIplik = model.FanteziIplik;
             FillCollections(model
                 , sirketId: fanteziIplik.SirketId
-                , ulkeId: fanteziIplik.Ulke?.Id.AsInt()
+                , ulkeId: container.Ulke.Id.AsInt()
                );
 
             return View(viewName: "Edit", model: model);
@@ -148,30 +146,17 @@ namespace Helezon.FollowMe.WebUI.Controllers
             if (!id.HasValue || id < 1 || string.IsNullOrWhiteSpace(companyId))
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var fanteziIplik = GetFanteziIplikService().GetAllFanteziIplikler(id.Value, companyId).FirstOrDefault();
-            if (fanteziIplik == null)
-            {
-                return new HttpNotFoundResult();
-            }
             var model = new ZetaCodeFanteziIplikCardVm();
-
-            model.ZetaCodeFanteziIplikDto = fanteziIplik;
-            model.ParentIplikCategories = GetTermService().GetAllParentsById(fanteziIplik.IplikKategosiId);
-            model.ParentIplikCategories.Reverse();
-
-            if (true)
-            {
-
-            }
+            var container = GetFanteziIplikService().GetCard(id.Value, companyId);
 
             var photoEditUrl = string.Format("/FileUpload/Edit?returnUrl={0}&entitytype={1}&entityId={2}&companyId={3}"
-                                    , Url.Encode("/ZetaCodeNormalIplik/Card?Id=" + fanteziIplik.Id + "&companyId=" + fanteziIplik.SirketId)
+                                    , Url.Encode("/ZetaCodeNormalIplik/Card?Id=" + container.FanteziIplik.Id + "&companyId=" + container.FanteziIplik.SirketId)
                                     , (int)EntityType.ZetaCodeNormalIplik
-                                    , fanteziIplik.Id
-                                    , fanteziIplik.SirketId);
+                                    , container.FanteziIplik.Id
+                                    , container.FanteziIplik.SirketId);
 
+            model.Container = container;
             model.PictureEditUrl = photoEditUrl;
-            model.PictureUrl = GetZetaCodeFanteziIplikPictureService().GetZetaCodeFanteziIplikPictureUrl(model.ZetaCodeFanteziIplikDto.Id, model.ZetaCodeFanteziIplikDto.SirketId);
             return View(model);
         }
 

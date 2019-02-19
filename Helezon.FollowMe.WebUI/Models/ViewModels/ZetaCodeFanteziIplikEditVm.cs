@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.DataTransferObjects;
 
@@ -10,16 +11,26 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeFanteziIplikEditVm
     {
-        public ZetaCodeFanteziIplikDto FanteziIplik { get; internal set; }
+        public ZetaCodeFanteziIplik FanteziIplik { get; internal set; }
         public ZetaCodeFanteziIplikViewCollections Collections { get; set; }
         public CompanyDto Company { get; set; }
-        public List<ZetaCodeNormalIplikDto> NormalIplikler { get; set; }
+        public List<ZetaCodeNormalIplik> NormalIplikler { get; set; }
+        public Term RafyeriTurkiye { get; set; }
+        public Term RafyeriYunanistan { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public Term IplikKategosi { get; set; }
+        
+
         public ZetaCodeFanteziIplikEditVm()
         {
+            Ulke = new PairIdNameDto();
+            RafyeriTurkiye = new Term();
+            RafyeriYunanistan = new Term();
+            IplikKategosi = new Term();
             Collections = new ZetaCodeFanteziIplikViewCollections();
-            FanteziIplik = new ZetaCodeFanteziIplikDto();
+            FanteziIplik = new ZetaCodeFanteziIplik();
             Company = new CompanyDto();
-            NormalIplikler = new List<ZetaCodeNormalIplikDto>();
+            NormalIplikler = new List<ZetaCodeNormalIplik>();
             //ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik = new List<ZetaCodeNormalIplikDto>();
             //ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Add(new ZetaCodeNormalIplikDto());
         }

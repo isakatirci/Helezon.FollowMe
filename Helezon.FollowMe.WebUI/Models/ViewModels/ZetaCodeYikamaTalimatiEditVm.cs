@@ -11,12 +11,12 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
     public class ZetaCodeYikamaTalimatiEditVm
     {
-        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
+        public ZetaCodeYikamaTalimati YikamaTalimati { get; set; }
         public ZetaCodeYikamaTalimatiEditVmCollections Collections { get; set; }
         public ZetaCodeYikamaTalimatiEditVm()
         {
             Collections = new ZetaCodeYikamaTalimatiEditVmCollections();
-            YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
+            YikamaTalimati = new ZetaCodeYikamaTalimati();
         }
     }
 

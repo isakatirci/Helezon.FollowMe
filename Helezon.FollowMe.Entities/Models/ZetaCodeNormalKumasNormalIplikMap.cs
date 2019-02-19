@@ -28,10 +28,11 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeNormalKumasNormalIplikMap(string schema)
         {
             ToTable("ZetaCode_NormalKumas_NormalIplik", schema);
-            HasKey(x => new { x.NormalKumasId, x.NormalIplikId });
+            HasKey(x => x.Id);
 
-            Property(x => x.NormalKumasId).HasColumnName(@"NormalKumasId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.NormalIplikId).HasColumnName(@"NormalIplikId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NormalKumasId).HasColumnName(@"NormalKumasId").HasColumnType("int").IsRequired();
+            Property(x => x.NormalIplikId).HasColumnName(@"NormalIplikId").HasColumnType("int").IsRequired();
             InitializePartial();
         }
         partial void InitializePartial();

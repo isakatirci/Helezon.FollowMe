@@ -284,6 +284,12 @@
     <Compile Include="Models\ZetaCodeAksesuarMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZetaCodeAksesuarPicture.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZetaCodeAksesuarPictureMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZetaCodeFanteziIplik.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>

@@ -41,7 +41,7 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.DesemRengi1).HasColumnName(@"DesemRengi1").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
             Property(x => x.DesemRengi2).HasColumnName(@"DesemRengi2").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
             Property(x => x.DesemRengi3).HasColumnName(@"DesemRengi3").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x._3AdimIslemlerId).HasColumnName(@"_3AdimIslemlerId").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
+            Property(x => x._3AdimIslemlerId).HasColumnName(@"_3AdimIslemlerId").HasColumnType("int").IsOptional();
             InitializePartial();
         }
         partial void InitializePartial();

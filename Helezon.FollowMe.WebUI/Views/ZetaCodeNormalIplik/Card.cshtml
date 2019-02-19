@@ -56,7 +56,7 @@
                         </div>                       
                         <div class="btn-group">
                             <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeNormalIplik/Edit?id={0}&companyId={1}"
-                                                                         ,Model.ZetaCodeNormalIplikDto.Id,Model.ZetaCodeNormalIplikDto.SirketId))'" class="btn btn-default">
+                                                                         ,Model.Container.NormalIplik.Id,Model.Container.NormalIplik.SirketId))'" class="btn btn-default">
 
                                 Edit
 
@@ -80,7 +80,7 @@
                                             <th>
                                                 Z CODE PHOTO
                                                 <a href="javascript:void(0);"
-                                                   onclick="location.href='@Html.Raw(Model.ZetaCodeNormalIplikDto.PictureEditUrl)'">
+                                                   onclick="location.href='@Html.Raw(Model.PictureEditUrl)'">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </th>
@@ -90,8 +90,8 @@
                                         <tr>
                                             <td>
                                                 <img style="width:250px;max-width:250px;height:300px;max-height:300px" 
-                                                     src="@Html.Raw(Model.ZetaCodeNormalIplikDto.PictureUrl)" 
-                                                     alt="@Html.Raw(Model.ZetaCodeNormalIplikDto.ZetaCodeFormat)">
+                                                     src="@Html.Raw(Model.Container.PictureUrl)" 
+                                                     alt="@Html.Raw(Model.Container.NormalIplik.Id)">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -110,8 +110,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Html.Raw(Model.ZetaCodeNormalIplikDto.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@Model.ZetaCodeNormalIplikDto.IplikKategosiName</td>
+                                                        <td>@Html.Raw(Model.Container.NormalIplik.IsPassive ? "PASSIVE" : "ACTIVE")</td>
+                                                        <td>@Model.Container.IplikKategorisi.Name</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -126,7 +126,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@(Model.ZetaCodeNormalIplikDto.Company.Code + " " + Model.ZetaCodeNormalIplikDto.Company.Name)</td>
+                                                        <td>@(Model.Container.Company.Code + " " + Model.Container.Company.Name)</td>
                                                     </tr>
                                                
 
@@ -146,8 +146,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.ZetaCodeNormalIplikDto.ZetaCodeFormat</td>
-                                                        <td>@(Model.ZetaCodeNormalIplikDto.Renk.Ad + "/" + Model.ZetaCodeNormalIplikDto.PantoneRenk.PantoneKodu + " " + Model.ZetaCodeNormalIplikDto.PantoneRenk.PantoneRengi )</td>
+                                                        <td>@Model.Container.NormalIplik.Id</td>
+                                                        <td>@(Model.Container.Renk.Ad + "/" + Model.Container.PantoneRenk.PantoneKodu + " " + Model.Container.PantoneRenk.PantoneRengi )</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -164,7 +164,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            @Model.ZetaCodeNormalIplikDto.UrunIsmi
+                                                            @Model.Container.NormalIplik.UrunIsmi
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -222,7 +222,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.BlueSiparisNo</td>
+                                                            <td>@Model.Container.NormalIplik.BlueSiparisNo</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -245,11 +245,11 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <th style="width:60%;max-width:60%">TR ASKI RAF NO</th>
-                                                                            <td>@Model.ZetaCodeNormalIplikDto.RafyeriTurkiyeName</td>
+                                                                            <td>@Model.Container.RafyeriTurkiye.Name</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>GR ASKI RAF NO</th>
-                                                                            <td>@Model.ZetaCodeNormalIplikDto.RafyeriYunanistanName</td>
+                                                                            <td>@Model.Container.RafyeriYunanistan.Name</td>
                                                                         </tr>                                                                    
                                                                     </tbody>
                                                                 </table>
@@ -286,19 +286,19 @@
                                             <tr>
                                                 <td style="width:50%;max-width:50%">
                                                     <table>
-                                                        @for (int i = 0; i < Model.ParentIplikCategories.Count; i++)
+                                                        @for (int i = 0; i < Model.Container.ParentIplikCategories.Count; i++)
                                                         {
                                                             <tr>
                                                                 <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
-                                                                <td>@Model.ParentIplikCategories[i].Name</td>
+                                                                <td>@Model.Container.ParentIplikCategories[i].Name</td>
                                                             </tr>
 
                                                         }
-                                                        @foreach (var i in Model.IplikKategoriDetay)
+                                                        @foreach (var i in Model.Container.IplikKategoriDetaylari)
                                                         {
                                                             <tr>
-                                                                <th>@i.Item1</th>
-                                                                <td>@i.Item2</td>
+                                                                <th>@i.Id</th>
+                                                                <td>@i.Name</td>
                                                             </tr>
                                                         }
                                                     </table>
@@ -307,15 +307,15 @@
                                                     <table>                                                    
                                                         <tr>
                                                             <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.ZetaCodePrevious</td>
+                                                            <td>@Model.Container.NormalIplik.ZetaCodePrevious</td>
                                                         </tr>
                                                         <tr>
                                                             <th>URUN MENSEI</th>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Ulke?.Name</td>
+                                                            <td>@Model.Container.Ulke.Name</td>
                                                         </tr>
                                                         <tr>
                                                             <th>BLUE URUN KODU</th>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.BlueUrunKodIsmi</td>
+                                                            <td>@Model.Container.NormalIplik.BlueUrunKodIsmi</td>
                                                         </tr>
                                                                                                            
                                                     </table>
@@ -342,11 +342,11 @@
                                                     
                                                         <text>
                                                             <th>IPLIK NUMARASI</th>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Ne</td>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Dny</td>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Nm</td>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Ea</td>
-                                                            <td>@Model.ZetaCodeNormalIplikDto.Fl</td>
+                                                            <td>@Model.Container.NormalIplik.Ne</td>
+                                                            <td>@Model.Container.NormalIplik.Dny</td>
+                                                            <td>@Model.Container.NormalIplik.Nm</td>
+                                                            <td>@Model.Container.NormalIplik.Ea</td>
+                                                            <td>@Model.Container.NormalIplik.Fl</td>
                                                         </text>
                                                     
 
@@ -391,9 +391,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>@(Model.ZetaCodeNormalIplikDto.Renk?.Ad)</td>
-                                                    <td>@(Model.ZetaCodeNormalIplikDto.Renk?.IplikRenkKodu)</td>
-                                                    <td>@(Model.ZetaCodeNormalIplikDto.PantoneRenk?.PantoneKodu + " " + Model.ZetaCodeNormalIplikDto.PantoneRenk?.PantoneRengi) </td>
+                                                    <td>@(Model.Container.Renk.Ad)</td>
+                                                    <td>@(Model.Container.Renk.IplikRenkKodu)</td>
+                                                    <td>@(Model.Container.PantoneRenk.PantoneKodu + " " + Model.Container.PantoneRenk.PantoneRengi) </td>
                                                 </tr>
                                             </tbody>
                                         </table>

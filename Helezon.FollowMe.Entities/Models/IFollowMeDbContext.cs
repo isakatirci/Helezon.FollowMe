@@ -54,6 +54,7 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         System.Data.Entity.DbSet<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar
         System.Data.Entity.DbSet<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon
+        System.Data.Entity.DbSet<ZetaCodeAksesuarPicture> ZetaCodeAksesuarPicture { get; set; } // ZetaCodeAksesuarPicture
         System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         System.Data.Entity.DbSet<ZetaCodeFanteziIplikNormalIplik> ZetaCodeFanteziIplikNormalIplik { get; set; } // ZetaCode_FanteziIplik_NormalIplik
         System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture

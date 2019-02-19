@@ -56,6 +56,7 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<TermTaxonomy> TermTaxonomy { get; set; } // TermTaxonomy
         public System.Data.Entity.DbSet<ZetaCodeAksesuar> ZetaCodeAksesuar { get; set; } // ZetaCodeAksesuar
         public System.Data.Entity.DbSet<ZetaCodeAksesuarKompozisyon> ZetaCodeAksesuarKompozisyon { get; set; } // ZetaCodeAksesuarKompozisyon
+        public System.Data.Entity.DbSet<ZetaCodeAksesuarPicture> ZetaCodeAksesuarPicture { get; set; } // ZetaCodeAksesuarPicture
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; } // ZetaCodeFanteziIplik
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplikNormalIplik> ZetaCodeFanteziIplikNormalIplik { get; set; } // ZetaCode_FanteziIplik_NormalIplik
         public System.Data.Entity.DbSet<ZetaCodeFanteziIplikPicture> ZetaCodeFanteziIplikPicture { get; set; } // ZetaCodeFanteziIplikPicture
@@ -168,6 +169,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermTaxonomyMap());
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarMap());
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarKompozisyonMap());
+            modelBuilder.Configurations.Add(new ZetaCodeAksesuarPictureMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikNormalIplikMap());
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap());
@@ -231,6 +233,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new TermTaxonomyMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeAksesuarKompozisyonMap(schema));
+            modelBuilder.Configurations.Add(new ZetaCodeAksesuarPictureMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikNormalIplikMap(schema));
             modelBuilder.Configurations.Add(new ZetaCodeFanteziIplikPictureMap(schema));

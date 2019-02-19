@@ -1,4 +1,5 @@
-﻿using Helezon.FollowMe.Service;
+﻿using Helezon.FollowMe.Entities.Models;
+using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -10,25 +11,39 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeKumasOrmeDokumaEditVm
     {
-        public ZetaCodeKumasOrmeDokumaDto KumasOrmeDokuma { get; set; }
+        public ZetaCodeKumasOrmeDokuma KumasOrmeDokuma { get; set; }
         public ZetaCodeKumasOrmeDokumaCollections Collections { get; set; }
-        public List<ZetaCodeFanteziIplikDto> ZetaCodeFanteziIplikDtos { get; set; }
-        public List<ZetaCodeNormalIplikDto> ZetaCodeNormalIplikDtos { get; set; }
-        public CompanyDto Company { get; set; }
-        public ZetaCodeKumasMakineDto KumasMakine { get; set; }
-        public ZetaCodeYikamaTalimatiDto YikamaTalimati { get; set; }
+        public List<ZetaCodeFanteziIplik> ZetaCodeFanteziIplik { get; set; }
+        public List<ZetaCodeNormalIplik> ZetaCodeNormalIplik { get; set; }
+        public Company Company { get; set; }
+        public ZetaCodeKumasMakine KumasMakine { get; set; }
+        public PairIdNameDto Ulke { get; set; }
+        public ZetaCodeYikamaTalimati YikamaTalimati { get; set; }
+        public List<Term> Aksesuarlar { get; set; }
+        public List<Term> OrguDetaylari { get; set; }
+        public List<Term> BoyaIslemleri { get; set; }
+
+        public Term RafyeriTurkiye { get; set; }
+        public Term RafyeriYunanistan { get; set; }
+        //
 
         public List<ZetaCodeDto> Iplikler { get; set; }
         public ZetaCodeKumasOrmeDokumaEditVm()
         {
-            KumasOrmeDokuma = new ZetaCodeKumasOrmeDokumaDto();
-            ZetaCodeFanteziIplikDtos = new List<ZetaCodeFanteziIplikDto>();
-            ZetaCodeNormalIplikDtos = new List<ZetaCodeNormalIplikDto>();
+            KumasOrmeDokuma = new ZetaCodeKumasOrmeDokuma();
+            ZetaCodeFanteziIplik = new List<ZetaCodeFanteziIplik>();
+            ZetaCodeNormalIplik = new List<ZetaCodeNormalIplik>();
             Collections = new ZetaCodeKumasOrmeDokumaCollections();
             Iplikler = new List<ZetaCodeDto>();
-            Company = new CompanyDto();
-            KumasMakine = new ZetaCodeKumasMakineDto();
-            YikamaTalimati = new ZetaCodeYikamaTalimatiDto();
+            Company = new Company();
+            KumasMakine = new ZetaCodeKumasMakine();
+            YikamaTalimati = new ZetaCodeYikamaTalimati();
+            Aksesuarlar = new List<Term>();
+            Ulke = new PairIdNameDto();
+            OrguDetaylari = new List<Term>();
+            BoyaIslemleri = new List<Term>();
+            RafyeriTurkiye = new Term();
+            RafyeriYunanistan = new Term();
 
         }
     }

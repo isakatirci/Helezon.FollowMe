@@ -55,9 +55,19 @@ namespace Helezon.FollowMe.WebUI.Controllers
         }
 
 
-        public ActionResult Card()
+        public ActionResult Card(int id, string companyId)
         {
-            return View(new ZetaCodeKumasOrmeDokumaCardVm());
+            var card = GetAksesuarService().GetCard(id: id, company: companyId);         
+            var view = new ZetaCodeAksesuarCardVm();
+            view.Aksesuar = card.Aksesuar;
+            view.AksesuarKompozisyonlar = card.AksesuarKompozisyonlar;
+            view.PantoneRenk = card.PantoneRenk;
+            view.Renk = card.Renk;
+            view.RafyeriTurkiye = card.RafyeriTurkiye;
+            view.RafyeriYunanistan = card.RafyeriYunanistan;
+            view.Company = card.Company;
+            view.PictureUrl = card.PictureUrl;
+            return View(model: view);
         }
         public void FillCollections(AksesuarEditVm model
                         , string sirketId = ""
@@ -90,7 +100,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.AksesuarKompozisyonlar.Any())
             {
-                model.AksesuarKompozisyonlar.Add(new ZetaCodeAksesuarKompozisyonDto());
+                model.AksesuarKompozisyonlar.Add(new Entities.Models.ZetaCodeAksesuarKompozisyon());
             }
 
 

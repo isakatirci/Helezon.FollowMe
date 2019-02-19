@@ -31,6 +31,7 @@ namespace Helezon.FollowMe.Entities.Models
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.UrunIsmi).HasColumnName(@"UrunIsmi").HasColumnType("nvarchar").IsOptional().HasMaxLength(300);
             Property(x => x.UrunKategoriId).HasColumnName(@"UrunKategoriId").HasColumnType("int").IsOptional();
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.UlkeId).HasColumnName(@"UlkeId").HasColumnType("int").IsOptional();
