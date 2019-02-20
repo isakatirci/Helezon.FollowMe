@@ -8,7 +8,7 @@
                class="form-control"
                id="IplikKategoriDegrede_BoyamaProsesi"
                value="@(Model?.BoyamaProsesi)"
-               name="ZetaCodeNormalIplikDto.IplikKategoriDegrede.BoyamaProsesiFormat">
+               name="IplikKategoriDegrede.BoyamaProsesiFormat">
     </div>
 
 </div>*@
@@ -17,7 +17,7 @@
         Boya Tipi:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriDegrede.BoyaTipi"
+        @Html.DropDownList("IplikKategoriDegrede.BoyaTipi"
        , (IEnumerable<SelectListItem>)ViewBag.BoyaTipi, "Please Select"
        , new { @class = "form-control select2" })
 
@@ -25,7 +25,7 @@
             class="form-control mask_number transform_none"
             id="IplikKategoriFlam_FlamUzunlugu"
             value="@Model.FlamUzunluguFormat"
-            name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat">*@
+            name="IplikKategoriFlamDto.FlamUzunluguFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -33,9 +33,9 @@
         Boya Yönü:
     </label>
     <div class="col-md-6">
-        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriDegrede.Id",Model?.Id)
+        @Html.Hidden("IplikKategoriDegrede.Id",Model?.Id)
 
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriDegrede.BoyaYonu"
+        @Html.DropDownList("IplikKategoriDegrede.BoyaYonu"
        , (IEnumerable<SelectListItem>)ViewBag.BoyaYonu,"Please Select"
        , new { @class = "form-control select2" })
 
@@ -43,7 +43,7 @@
         class="form-control mask_number transform_none"
         id="IplikKategoriFlam_FlamUzunlugu"
         value="@Model.FlamUzunluguFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat">*@
+        name="IplikKategoriFlamDto.FlamUzunluguFormat">*@
     </div>
 </div>
 

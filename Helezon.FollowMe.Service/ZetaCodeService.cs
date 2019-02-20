@@ -53,7 +53,7 @@ namespace Helezon.FollowMe.Service
         public int GetZetaCodeForIplikInsert(string companyId = "00000000-0000-0000-0000-000000000002") {
 
             var code = GetZetaCodeForIplik(companyId);
-            this.Insert(new ZetaCodes { CompanyId =companyId, ZetaCode = code });
+            this.Insert(new ZetaCodes { CompanyId = companyId, ZetaCode = code });
             return code;
         }
 

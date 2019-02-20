@@ -410,22 +410,27 @@ namespace Helezon.FollowMe.Service
                 IplikUrunIsmiOlustur(normalIplik);
                 if (normalIplik.Master)
                     _repository.UnitOfWorkAsync().ExecuteSqlCommand("UPDATE ZetaCodeNormalIplik SET Master = 0 WHERE MASTER = 1");
-                var iplikNoService = new IplikNoService(_repository.GetRepositoryAsync<IplikNo>());
+                var repoIplikNo = _repository.GetRepositoryAsync<IplikNo>();
                 var repoSim = _repository.GetRepositoryAsync<IplikKategoriSim>();
                 var repoDegrede = _repository.GetRepositoryAsync<IplikKategoriDegrede>();
                 var repoFlam = _repository.GetRepositoryAsync<IplikKategoriFlam>();
                 var repoKircili = _repository.GetRepositoryAsync<IplikKategoriKircili>();
                 var repoKrep = _repository.GetRepositoryAsync<IplikKategoriKrep>();
                 var repoNopeli = _repository.GetRepositoryAsync<IplikKategoriNopeli>();
+                //var _zetaCodeService= new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
 
-                normalIplik.SirketId = container.Company.Id;
+                ////normalIplik.SirketId = container.Company.Id;
+
+                //normalIplik.Id = _zetaCodeService.GetZetaCodeForIplikInsert();
 
                 if (normalIplik.Id > 0)
                 {
+                    normalIplik.ChangedOn = DateTime.UtcNow;
                     this.Update(normalIplik);
                 }
                 else
                 {
+                    normalIplik.CreatedOn = DateTime.UtcNow;
                     this.Insert(normalIplik);
                 }
 
@@ -445,68 +450,123 @@ namespace Helezon.FollowMe.Service
                         _repoDegrede.Insert(degrede);
                     }
                 }
-                var flam = container.Degrede;
+                var flam = container.Flam;
                 if (flam != null)
                 {
                     flam.ZetaCodeNormalIplikId = normalIplik.Id;
-                }
-                var kircili = container.Degrede;
-                if (kircili != null)
-                {
-                    kircili.ZetaCodeNormalIplikId = normalIplik.Id;
-                }
-                var krep = container.Degrede;
-                if (krep != null)
-                {
-                    krep.ZetaCodeNormalIplikId = normalIplik.Id;
-                }
-
-                var nopeli = container.Degrede;
-                if (nopeli != null)
-                {
-                    nopeli.ZetaCodeNormalIplikId = normalIplik.Id;
-                }
-                var sim = container.Degrede;
-                if (sim != null)
-                {
-                    sim.ZetaCodeNormalIplikId = normalIplik.Id;
-                }
-
-                var activeIplikNoIds = new List<int>();    
-                
-                var sum = 0;
-                var iplikNolar= container.IplikNolar; 
-                foreach (var iplikNo in iplikNolar)
-                {
-                    sum += iplikNo.ElyafOrani ?? 0;
-                    if (iplikNo.Id > 0)
+                    if (flam.Id > 0)
                     {
-                        iplikNoService.Update(iplikNo);
-                        activeIplikNoIds.Add(iplikNo.Id);
+                        _repoFlam.Update(flam);
                     }
                     else
                     {
-                        iplikNoService.Insert(iplikNo);
+                        _repoFlam.Insert(flam);
+                    }
+                }
+                var kircili = container.Kircili;
+                if (kircili != null)
+                {
+                    kircili.ZetaCodeNormalIplikId = normalIplik.Id;
+                    if (kircili.Id > 0)
+                    {
+                        _repoKircili.Update(kircili);
+                    }
+                    else
+                    {
+                        _repoKircili.Insert(kircili);
+                    }
+                }
+                var krep = container.Krep;
+                if (krep != null)
+                {
+                    kircili.ZetaCodeNormalIplikId = normalIplik.Id;
+                    if (krep.Id > 0)
+                    {
+                        _repoKrep.Update(krep);
+                    }
+                    else
+                    {
+                        _repoKrep.Insert(krep);
+                    }
+                }
+
+                var nopeli = container.Nopeli;
+                if (nopeli != null)
+                {
+                    nopeli.ZetaCodeNormalIplikId = normalIplik.Id;
+                    if (nopeli.Id > 0)
+                    {
+                        _repoNopeli.Update(nopeli);
+                    }
+                    else
+                    {
+                        _repoNopeli.Insert(nopeli);
+                    }
+                }
+                var sim = container.Sim;
+                if (sim != null)
+                {
+                    sim.ZetaCodeNormalIplikId = normalIplik.Id;
+                    if (nopeli.Id > 0)
+                    {
+                        _repoSim.Update(sim);
+                    }
+                    else
+                    {
+                        _repoSim.Insert(sim);
+                    }
+                }
+
+                //İplik Noları kaydet             
+
+                var existingIplikNoIds = new List<int>();   
+                var sum = 0;
+                var iplikNolar = container.IplikNolar; 
+                foreach (var iplikNo in iplikNolar)
+                {
+                    iplikNo.ZetaCodeNormalIplikId = normalIplik.Id;
+                    sum += iplikNo.ElyafOrani ?? 0;
+                    if (iplikNo.Id > 0)
+                    {
+                        repoIplikNo.Update(iplikNo);
+                        existingIplikNoIds.Add(iplikNo.Id);
+                    }
+                    else
+                    {
+                        repoIplikNo.Insert(iplikNo);
                     }
                 }
 
                 if (normalIplik.Id > 0)
                 {
-                    var passiveIplikNolar = iplikNoService.Queryable()
-                        .Where(x => x.ZetaCodeNormalIplikId == normalIplik.Id && !activeIplikNoIds.Contains(x.Id) && !x.IsPassive).ToList();
+                    var passiveIplikNolar = repoIplikNo.Queryable()
+                        .Where(x => x.ZetaCodeNormalIplikId == normalIplik.Id && !existingIplikNoIds.Contains(x.Id) && !x.IsPassive).ToList();
                     foreach (var passiveIplikNo in passiveIplikNolar)
                     {
                         passiveIplikNo.IsPassive = true;
-                        iplikNoService.Update(passiveIplikNo);
+                        repoIplikNo.Update(passiveIplikNo);
                     }
                 }
+
+                //----------------------------------//
+
 
                 _repository.UnitOfWorkAsync().SaveChanges();
 
                 if (iplikNolar != null && iplikNolar.Any() && sum != 100)
                 {
                     throw new Exception("Elyaf Oranı %100 olmalıdır");
-                }           
+                }
+
+                if (container.RafyeriTurkiye != null)
+                {
+                    normalIplik.RafyeriTurkiyeId = container.RafyeriTurkiye.Id;
+                }
+
+                if (container.RafyeriYunanistan != null)
+                {
+                    normalIplik.RafyeriYunanistanId = container.RafyeriYunanistan.Id;
+                }
 
                 _repository.UnitOfWorkAsync().SaveChanges();
                 _repository.UnitOfWorkAsync().Commit();
@@ -515,6 +575,7 @@ namespace Helezon.FollowMe.Service
             catch (Exception ex)
             {
                 _repository.UnitOfWorkAsync().Rollback();
+                container.NormalIplik.Id = 0;
                 throw;
             }
            

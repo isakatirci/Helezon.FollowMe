@@ -13,7 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using FollowMe.Web;
 using FollowMe.Web.Controllers;
-using FollowMe.Web.Models;
+using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Service;
 using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.Service.DataTransferObjects;
@@ -89,18 +89,20 @@ namespace Helezon.FollowMe.WebUI.Controllers
             ,int renkId = 0
             ,int uretimTeknolojitermId = 0)
         {
-            model.Collections.Sirketler
-                = new SelectList(GetCompanyService().GetParentCompanyIdAndNames(1,sirketId), "Id", "Name", sirketId);
-            var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name , Value = x.Id}).ToList();
-            var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value,ulkeId?.ToString()) == 0);
-            if (ulke != null)
-            {
-                ulke.Selected = true;
-            }
-            model.Collections.Ulkeler = temp;
+            model.Collections.Sirketler = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
+            model.Collections.Ulkeler = GetOthersService().GetAllCountry();
+            //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value,ulkeId?.ToString()) == 0);
+            //if (ulke != null)
+            //{
+            //    ulke.Selected = true;
+            //}
             model.Collections.PantoneRenkleri = new SelectList(GetNormalIplikService().GetPantoneRenkler()
                 .Select(x => new { Id = x.Id.ToString(), PantoneKodu = x.PantoneKodu + " " + x.PantoneRengi }), "Id", "PantoneKodu", pantoneRenkId.ToString());
-            model.Renkler = new GetSelectListWithId(GetSelectListRenkler);
+            model.Collections.Renkler = GetNormalIplikService().GetRenkler(2).Select(x => new SelectListItem
+            {
+                Value = string.Format("{0}|{1}", x.Id, x.HtmlKod ?? string.Empty),
+                Text = x.Ad
+            }).ToList();
             model.Collections.UretimTeknolojileri = new SelectList(GetTermService().GetTermsByTaxonomyId(31), "Id", "Name", uretimTeknolojitermId);
             model.NE = new IplikNoGuideMethod(GetSelectListNE);
             model.NM = new IplikNoGuideMethod(GetSelectListNM);
@@ -112,7 +114,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (!model.IplikNolar.Any())
             {
-                model.IplikNolar.Add(new Entities.Models.IplikNo());
+                model.IplikNolar.Add(new IplikNoVm());
             }
 
 
@@ -139,39 +141,39 @@ namespace Helezon.FollowMe.WebUI.Controllers
             return GetSelectListIplikNoGuide(value, "Ea");
         }
 
-        public string GetSelectListRenkler(int? id)
-        {
+        //public string GetSelectListRenkler(int? id)
+        //{
 
-            //https://medium.com/@ulkutokmak/asp-net-mvc-html-helpers-484ae121e383
-            var renkler = GetNormalIplikService().GetRenkler(2).Select(x=> new SelectListItem {
-                Value = string.Format("{0}|{1}",x.Id,x.HtmlKod??string.Empty),
-                Text= x.Ad            });
+        //    //https://medium.com/@ulkutokmak/asp-net-mvc-html-helpers-484ae121e383
+        //    var renkler = GetNormalIplikService().GetRenkler(2).Select(x=> new SelectListItem {
+        //        Value = string.Format("{0}|{1}",x.Id,x.HtmlKod??string.Empty),
+        //        Text= x.Ad            });
 
-            var sb = new StringBuilder(150);
-            sb.AppendLine(@"<select class=""form-control select2"" onchange=""setHtmlColorCode($(this))"" id=""NormalIplik_RenkIdFormat"" name=""NormalIplik.RenkIdFormat"">");
-            var flag = id.HasValue;
-            if (!flag)
-            {
-                sb.AppendLine(@"<option value="""" selected> Please Select </option>");
-            }
+        //    var sb = new StringBuilder(150);
+        //    sb.AppendLine(@"<select class=""form-control select2"" onchange=""setHtmlColorCode($(this))"" id=""HtmlRenk"" name=""HtmlRenk"">");
+        //    var flag = id.HasValue;
+        //    if (!flag)
+        //    {
+        //        sb.AppendLine(@"<option value="""" selected> Please Select </option>");
+        //    }
 
-            foreach (var item in renkler)
-            {
-                if (flag && string.CompareOrdinal(item.Value.Split('|')[0], id.Value.ToString()) == 0)
-                {
-                    flag = false;
-                    sb.AppendLine(@"<option value=""" + item.Value + @""" selected> " + item.Text + " </option>");
-                }
-                else
-                {
-                    sb.AppendLine(@"<option value=""" + item.Value + @"""> " + item.Text + " </option>");
-                }
+        //    foreach (var item in renkler)
+        //    {
+        //        if (flag && string.CompareOrdinal(item.Value.Split('|')[0], id.Value.ToString()) == 0)
+        //        {
+        //            flag = false;
+        //            sb.AppendLine(@"<option value=""" + item.Value + @""" selected> " + item.Text + " </option>");
+        //        }
+        //        else
+        //        {
+        //            sb.AppendLine(@"<option value=""" + item.Value + @"""> " + item.Text + " </option>");
+        //        }
 
-            }
+        //    }
 
-            sb.AppendLine(@"  </select>");
-            return sb.ToString();
-        }
+        //    sb.AppendLine(@"  </select>");
+        //    return sb.ToString();
+        //}
         public string GetSelectListElyafOrani(int? yuzde)
         {
             var temp = elyafOrani.Value;
@@ -467,7 +469,33 @@ namespace Helezon.FollowMe.WebUI.Controllers
             container.Nopeli = model.Nopeli;
             container.Krep = model.Krep;
             container.Company = model.Company;
-            container.IplikNolar = model.IplikNolar;
+            container.RafyeriTurkiye = model.RafyeriTurkiye;
+            container.RafyeriYunanistan = model.RafyeriYunanistan;
+            if (!string.IsNullOrWhiteSpace(model.RenkIdHtmlKod))
+            {
+                var parts = model.RenkIdHtmlKod.Split('|');
+                var id = parts[0].AsInt();
+                container.NormalIplik.Renkid = id;
+                //container.Renk = new Renk() { Id = id, HtmlKod = parts[1] };
+            }
+
+            if (model.IplikNolar.Any())
+            {
+                var iplikNolar = new List<IplikNo>();
+                foreach (var iplikNo in model.IplikNolar)
+                {
+                    iplikNolar.Add(new IplikNo()
+                    {
+                        Id = iplikNo.Id,
+                        ElyafCinsiKalitesi = iplikNo.TermId,
+                        ElyafOrani = iplikNo.ElyafOrani
+                    });
+                }
+                container.IplikNolar = iplikNolar;
+            }
+
+
+
 
             Action action = () =>
             {

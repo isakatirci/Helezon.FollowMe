@@ -5,14 +5,14 @@
         Sim Kesim Boyutu:
     </label>
     <div class="col-md-6">
-        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriSim.Id", Model?.Id)
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriSim.SimKesimBoyutu", (IEnumerable<SelectListItem>)ViewBag.SimKesimBoyutu, new { @class = "form-control" })
+        @Html.Hidden("Sim.Id", Model?.Id)
+        @Html.DropDownList("Sim.SimKesimBoyutu", (IEnumerable<SelectListItem>)ViewBag.SimKesimBoyutu, new { @class = "form-control" })
 
         @*<input type="text"
         class="form-control mask_number transform_none"
-        id="IplikKategoriSim_SimKesimBoyutu"
+        id="Sim_SimKesimBoyutu"
         value="@Model.SimKesimBoyutu"
-        name="ZetaCodeNormalIplikDto.IplikKategoriSimDto.SimKesimBoyutuFormat">*@
+        name="SimDto.SimKesimBoyutuFormat">*@
     </div>
 </div>
 

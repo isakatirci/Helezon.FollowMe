@@ -50,10 +50,10 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.NormalIplik.ZetaCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.NormalIplik.Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
                                                         @Html.EditorFor(model => model.NormalIplik.Id, new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
-                                                        @Html.ValidationMessageFor(model => model.NormalIplik.ZetaCode, "", new { @class = "text-danger" })
+                                                        @Html.ValidationMessageFor(model => model.NormalIplik.Id, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
@@ -61,8 +61,7 @@
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.NormalIplik.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.NormalIplik.ZetaCodePrevious
-                                                    , new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                                    @Html.EditorFor(model => model.NormalIplik.ZetaCodePrevious, new { htmlAttributes = new { @class = "form-control transform_none" } })
                                                     @Html.ValidationMessageFor(model => model.NormalIplik.ZetaCodePrevious, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -77,22 +76,20 @@
                                             @if (!update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.Company.Id, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.NormalIplik.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.DropDownList("Company.Id"
-                                                       , Model.Collections.Sirketler, "Please Select"
-                                                       , htmlAttributes: new { @class = "form-control select2"})
-                                                        @Html.ValidationMessageFor(model => model.Company.Id, "", new { @class = "text-danger" })
+                                                        @Html.DropDownList("NormalIplik.SirketId",new SelectList(Model.Collections.Sirketler, dataValueField:"Id",dataTextField : "Name", selectedValue: @Model.NormalIplik.SirketId), "Please Select", htmlAttributes: new { @class = "form-control select2"})
+                                                        @Html.ValidationMessageFor(model => model.NormalIplik.SirketId, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
                                             else
                                             {
-                                                <input type="hidden" name="Company.Id" id="Company_Id" value="@Model.Company.Id" />
+                                                <input type="hidden" name="NormalIplik.SirketId" id="NormalIplik_SirketId" value="@Model.NormalIplik.SirketId" />
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.Company.Id, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.NormalIplik.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" readonly value="@(Model.Company.Code + " "+Model.Company.Name)" />
+                                                        <input type="text" class="form-control" readonly value="@(Model.Company.Code + " " + Model.Company.Name)" />
                                                     </div>
                                                 </div>
                                             }
@@ -111,16 +108,11 @@
                                             }
 
 
-
-
-
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.NormalIplik.UlkeId, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("NormalIplik.Ulke.Id"
-                                                   , Model.Collections.Ulkeler,"Please Select"
-                                                   , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("NormalIplik.UlkeId", new SelectList(Model.Collections.Ulkeler, dataTextField: "Name", dataValueField: "Id", selectedValue: @Model.NormalIplik.UlkeId), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.NormalIplik.UlkeId, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
@@ -133,17 +125,17 @@
                                             </div>
 
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.NormalIplik.IplikKategosiId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.IplikKategosi.Id, "İplik Kategorisi", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             <input type="hidden"
-                                                                   name="NormalIplik.IplikKategosiId"
-                                                                   id="NormalIplik_IplikKategosiId"
-                                                                   value="@Model.NormalIplik.IplikKategosiId" />
+                                                                   name="IplikKategosi.Id"
+                                                                   id="IplikKategosi_Id"
+                                                                   value="@Model.IplikKategosi.Id" />
                                                             <input type="text"
-                                                                   name="NormalIplik.IplikKategosiName"
-                                                                   id="NormalIplik_IplikKategosiName"
+                                                                   name="IplikKategosi.Name"
+                                                                   id="IplikKategosi_Name"
                                                                    readonly
                                                                    class="form-control"
                                                                    value="@Model.IplikKategosi.Name" />
@@ -268,7 +260,7 @@
                                     <div class="form-body">
                                         <div class="form-group">
                                             <div class="mt-repeater form-horizontal">
-                                                <div data-repeater-list="NormalIplik.IplikNo">
+                                                <div data-repeater-list="IplikNolar">
                                                     @{
                                                         for (int i =0;i< Model.IplikNolar.Count;i++)
                                                         {
@@ -283,19 +275,20 @@
                                                                                     <div class="panel-body" id="iplik_no@(i)">
                                                                                         <label class="control-label">Elyaf Cinsi Kalitesi</label>
                                                                                         <input type="hidden"
+                                                                                               id="Id"
                                                                                                name="Id"
                                                                                                value="@Model.IplikNolar[i].Id" />
                                                                                         <input type="hidden"
-                                                                                               name="ElyafCinsiKalitesi"
-                                                                                               id="ElyafCinsiKalitesi"
-                                                                                               value="@Model.IplikNolar[i].ElyafCinsiKalitesi" />
+                                                                                               id="TermId"
+                                                                                               name="TermId"
+                                                                                               value="@Model.IplikNolar[i].TermId" />
                                                                                         <br />
                                                                                         <input type="text"
-                                                                                               name="ElyafCinsiKalitesiName"
-                                                                                               id="ElyafCinsiKalitesiName"
+                                                                                               name="TermName"
+                                                                                               id="TermName"
                                                                                                class="form-control"
                                                                                                readonly
-                                                                                               value="@Model.IplikNolar[i].ElyafCinsiKalitesi" />
+                                                                                               value="@Model.IplikNolar[i].TermName" />
                                                                                         <br />
                                                                                         <div class="treeElyafCinsiKalitesi"></div>
                                                                                     </div>
@@ -365,7 +358,10 @@
                                         @Html.LabelFor(model => model.NormalIplik.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
 
                                         <div class="col-md-3">
-                                            @Html.Raw(Model.Renkler(Model.NormalIplik.Renkid))
+                                            @Html.DropDownList("RenkIdHtmlKod", new SelectList(Model.Collections.Renkler, dataValueField:"Value",  dataTextField: "Text",  selectedValue: Model.Renk.Id +"|" + Model.Renk.HtmlKod)
+                                         , "Please Select"
+                                         , htmlAttributes: new { @class = "form-control select2 ", @onchange= "setHtmlColorCode($(this))" })
+                                            @Html.ValidationMessageFor(model => model.NormalIplik.PantoneId, "", new { @class = "text-danger" })
                                             @Html.ValidationMessageFor(model => model.NormalIplik.Renkid, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col-md-3">
@@ -390,17 +386,17 @@
                             <div class="form-body">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.NormalIplik.RafyeriTurkiyeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.RafyeriTurkiye.Id, "Rafyeri Türkiye", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                     <input type="hidden"
-                                                           name="NormalIplik.RafyeriTurkiyeId"
-                                                           id="NormalIplik_RafyeriTurkiyeId"
-                                                           value="@Model.NormalIplik.RafyeriTurkiyeId" />
+                                                           name="RafyeriTurkiye.Id"
+                                                           id="RafyeriTurkiye_Id"
+                                                           value="@Model.RafyeriTurkiye.Id" />
                                                     <input type="text"
-                                                           name="NormalIplik.RafyeriTurkiyeName"
-                                                           id="NormalIplik_RafyeriTurkiyeName"
+                                                           name="RafyeriTurkiye.Name"
+                                                           id="RafyeriTurkiye_Name"
                                                            readonly
                                                            class="form-control"
                                                            value="@Model.RafyeriTurkiye.Name" />
@@ -413,17 +409,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.NormalIplik.RafyeriYunanistanId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.RafyeriYunanistan.Id, "Rafyeri Yunanistan", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                     <input type="hidden"
-                                                           name="NormalIplik.RafyeriYunanistanId"
-                                                           id="NormalIplik_RafyeriYunanistanId"
-                                                           value="@Model.NormalIplik.RafyeriYunanistanId" />
+                                                           name="RafyeriYunanistan.Id"
+                                                           id="RafyeriYunanistan_Id"
+                                                           value="@Model.RafyeriYunanistan.Id" />
                                                     <input type="text"
                                                            name="NormalIplik.RafyeriYunanistanName"
-                                                           id="NormalIplik_RafyeriYunanistanName"
+                                                           id="RafyeriYunanistan_Name"
                                                            class="form-control"
                                                            readonly
                                                            value="@Model.RafyeriYunanistan.Name" />
@@ -550,10 +546,12 @@
         });
 
         function setHtmlColorCode(dll) {
-            var htmlColorText = dll.find("option:selected").val();
-            if (htmlColorText.length > 0) {
-                dll.closest(".form-group").find("#renkidhtml").css('background-color', htmlColorText.split("|")[1]);
-            }
+            if (dll) {
+                var htmlColorText = dll.find("option:selected").val();
+                if (htmlColorText && htmlColorText.length > 0) {
+                    dll.closest(".form-group").find("#renkidhtml").css('background-color', htmlColorText.split("|")[1]);
+                }
+            }            
         }
 
         //$("#repeater-button").click(function () {
@@ -742,9 +740,9 @@
                             texts.push(node.text);
                         }
                     
-                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find("#ElyafCinsiKalitesi");
+                        var txtElyafCinsiKalitesi = $(selector).closest(".panel-body").find("#TermId");
                         txtElyafCinsiKalitesi.empty();
-                        var txtElyafCinsiKalitesiName = $(selector).closest(".panel-body").find("#ElyafCinsiKalitesiName");
+                        var txtElyafCinsiKalitesiName = $(selector).closest(".panel-body").find("#TermName");
                         txtElyafCinsiKalitesiName.empty();
                    
                         $(txtElyafCinsiKalitesiName).val(texts.join(', '));
@@ -838,9 +836,9 @@
 
         function getDynamicForms() {
 
-            var self = $("#NormalIplik_IplikKategosiName");
+            var self = $("#IplikKategosi_Name");
             if (self.val().length > 0) {
-                var iplikKategosiId = $("#NormalIplik_IplikKategosiId").val();
+                var iplikKategosiId = $("#IplikKategosi_Id").val();
                 if (iplikKategosiId === "296" || iplikKategosiId === "316") {
                     //FLAM
                     getPartialIplikKategoriForm("flam");
@@ -878,7 +876,7 @@
             setVisibleIplikNo($("#NormalIplik_IplikNoCinsi"));
 
             modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategoriler"
-                , "#NormalIplik_IplikKategosiId", "#NormalIplik_IplikKategosiName", getDynamicForms);
+                , "#IplikKategosi_Id", "#IplikKategosi_Name", getDynamicForms);
 
             modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeUretimTeknolojisiId", "/ZetaCodeNormalIplik/JSTreeUretimTeknolojisi"
                 , "#NormalIplik_UretimTeknolojisiId", "#NormalIplik_UretimTeknolojisiName");
@@ -892,12 +890,12 @@
 
 
             modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
-                , "#NormalIplik_RafyeriTurkiyeId", "#NormalIplik_RafyeriTurkiyeName");
+                , "#RafyeriTurkiye_Id", "#RafyeriTurkiye_Name");
 
             modulZetaCodeNormalIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
-                , "#NormalIplik_RafyeriYunanistanId", "#NormalIplik_RafyeriYunanistanName");
+                , "#RafyeriYunanistan_Id", "#RafyeriYunanistan_Name");
 
-            setHtmlColorCode($("#NormalIplik_RenkIdFormat"));
+            setHtmlColorCode($("#NormalIplik_Renkid"));
             modulZetaCodeNormalIplikVm.repeater();
 
         });

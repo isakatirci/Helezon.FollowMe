@@ -12,25 +12,37 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
     public delegate string IplikNoGuideMethod(string value);
     public delegate string ElyafOraniMethod(int? value);
     public delegate string GetSelectListWithId(int? id);
- 
+
+
+    public class IplikNoVm
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int ElyafOrani { get; set; } // Name (length: 200)  
+        public int TermId { get; set; } // Id (Primary key)
+        public string TermName { get; set; } // Name (length: 200)      
+
+    }
+
     public class ZetaCodeNormalIplikEditVm
     {
         //public string Operation { get; set; }
         public ZetaCodeNormalIplik NormalIplik { get; set; }
+        public string RenkIdHtmlKod { get; set; }
         public ZetaCodeNormalIplikViewCollections Collections { get; set; }
-        public List<IplikNo> IplikNolar { get; set; }
+        public List<IplikNoVm> IplikNolar { get; set; }
         public Term IplikKategosi { get; set; }
         public Term RafyeriYunanistan { get; set; }
         public Term RafyeriTurkiye { get; set; }
 
         public ZetaCodeNormalIplikEditVm()
         {
+            Renk = new Renk();
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
             Collections = new ZetaCodeNormalIplikViewCollections();       
             NormalIplik = new ZetaCodeNormalIplik();
             Company = new Company();
-            IplikNolar = new List<IplikNo>();
+            IplikNolar = new List<IplikNoVm>();
             Ulke = new PairIdNameDto();
             IplikKategosi = new Term();
             //ZetaCodeNormalIplik.IplikNo = new List<IplikNo>();
@@ -44,7 +56,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public IplikNoGuideMethod DYN { get; set; }
         public IplikNoGuideMethod FL { get; set; }
         public IplikNoGuideMethod EA { get; set; }
-        public GetSelectListWithId Renkler { get; set; }
+       
         public ElyafOraniMethod ElyafOrani { get; set; }
         public Renk Renk { get; set; }
         public IplikKategoriDegrede Degrede { get; set; }//IplikKategoriFlam
@@ -57,8 +69,9 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
     public class ZetaCodeNormalIplikViewCollections
     {
-        public SelectList Sirketler { get; set; }
-        public List<SelectListItem> Ulkeler { get; set; }
+        public List<SelectListItem> Renkler { get; set; }
+        public List<CompanyDto> Sirketler { get; set; }
+        public List<PairIdNameDto> Ulkeler { get; set; }
         public SelectList PantoneRenkleri { get; set; }
         public SelectList UretimTeknolojileri { get; set; }
 

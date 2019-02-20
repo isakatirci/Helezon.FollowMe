@@ -5,15 +5,15 @@
         İki Flam Arasındaki Mesafe:
     </label>
     <div class="col-md-6">
-        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriFlam.Id",Model?.Id)
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamlarArasindakiMesafe"
+        @Html.Hidden("Flam.Id",Model?.Id)
+        @Html.DropDownList("Flam.FlamlarArasindakiMesafe"
        , (IEnumerable<SelectListItem>)ViewBag.Mesafe
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
-        id="IplikKategoriFlam_FlamlarArasindakiMesafe"
+        id="Flam_FlamlarArasindakiMesafe"
         value="@Model.FlamlarArasindakiMesafeFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamlarArasindakiMesafeFormat">*@
+        name="FlamDto.FlamlarArasindakiMesafeFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -21,15 +21,15 @@
         Flam Uzunluğu:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamUzunlugu"
+        @Html.DropDownList("Flam.FlamUzunlugu"
        , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
        , new { @class = "form-control select2" })
 
         @*<input type="text"
             class="form-control mask_number transform_none"
-            id="IplikKategoriFlam_FlamUzunlugu"
+            id="Flam_FlamUzunlugu"
             value="@Model.FlamUzunluguFormat"
-            name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamUzunluguFormat">*@
+            name="FlamDto.FlamUzunluguFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -37,14 +37,14 @@
         Flam Yüksekliği:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriFlam.FlamYuksekligi"
+        @Html.DropDownList("Flam.FlamYuksekligi"
        , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
        , new { @class = "form-control select2" })
         @*<input type="text"
             class="form-control mask_number transform_none"
-            id="IplikKategoriFlam_FlamYuksekligi"
+            id="Flam_FlamYuksekligi"
             value="@Model.FlamYuksekligiFormat"
-            name="ZetaCodeNormalIplikDto.IplikKategoriFlamDto.FlamYuksekligiFormat">*@
+            name="FlamDto.FlamYuksekligiFormat">*@
     </div>
 </div>
 

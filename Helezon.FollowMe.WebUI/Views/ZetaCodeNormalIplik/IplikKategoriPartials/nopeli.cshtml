@@ -6,15 +6,15 @@
     </label>
     <div class="col-md-6">
         
-        @Html.Hidden("ZetaCodeNormalIplikDto.IplikKategoriKrep.Id", Model?.Id)
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafe"
+        @Html.Hidden("Krep.Id", Model?.Id)
+        @Html.DropDownList("Nopeli.NoktalarArasiMesafe"
        , (IEnumerable<SelectListItem>)ViewBag.Mesafe
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
-        id="IplikKategoriNopeli_NoktalarArasiMesafe"
+        id="Nopeli_NoktalarArasiMesafe"
         value="@Model.NoktalarArasiMesafeFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktalarArasiMesafeFormat">*@
+        name="Nopeli.NoktalarArasiMesafeFormat">*@
     </div>
 </div>
 <div class="form-group">
@@ -22,15 +22,15 @@
         Nokta Uzunluğu:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunlugu"
+        @Html.DropDownList("Nopeli.NoktaUzunlugu"
        , (IEnumerable<SelectListItem>)ViewBag.Uzunluk
        , new { @class = "form-control select2" })
 
         @*<input type="text"
         class="form-control mask_number transform_none"
-        id="IplikKategoriNopeli_NoktaUzunlugu"
+        id="Nopeli_NoktaUzunlugu"
         value="@Model.NoktaUzunluguFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaUzunluguFormat">*@
+        name="Nopeli.NoktaUzunluguFormat">*@
     </div>
 </div>
 
@@ -39,14 +39,14 @@
         Nokta Yüksekliği:
     </label>
     <div class="col-md-6">
-        @Html.DropDownList("ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligiFormat"
+        @Html.DropDownList("Nopeli.NoktaYuksekligiFormat"
        , (IEnumerable<SelectListItem>)ViewBag.Yukseklik
        , new { @class = "form-control select2" })
         @*<input type="text"
         class="form-control mask_number transform_none"
-        id="IplikKategoriNopeli_NoktaYuksekligi"
+        id="Nopeli_NoktaYuksekligi"
         value="@Model.NoktaYuksekligiFormat"
-        name="ZetaCodeNormalIplikDto.IplikKategoriNopeli.NoktaYuksekligiFormat">*@
+        name="Nopeli.NoktaYuksekligiFormat">*@
     </div>
 </div>
 
