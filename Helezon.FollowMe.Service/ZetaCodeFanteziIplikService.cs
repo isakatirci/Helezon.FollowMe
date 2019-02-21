@@ -112,27 +112,90 @@ namespace Helezon.FollowMe.Service
 
         public void InsertOrUpdate(FanteziIplikContainerDto container)
         {
+            var tran = _repository.UnitOfWorkAsync();
+
             try
             {
-                var fanteziIplik = container.FanteziIplik;
-             
-                _repository.UnitOfWorkAsync().BeginTransaction();
-                fanteziIplik.SirketId = container.Company.Id;
-                fanteziIplik.SirketId = container.Company.Id;
+                tran.BeginTransaction();
+                var fanteziIplik = container.FanteziIplik;   
+                
                 if (fanteziIplik.Id > 0)
                 {
+                    fanteziIplik.ChangedOn = DateTime.UtcNow;
                     this.Update(fanteziIplik);
                 }
                 else
                 {
+                    fanteziIplik.CreatedOn = DateTime.UtcNow;
                     this.Insert(fanteziIplik);
                 }
-                _repository.UnitOfWorkAsync().SaveChanges();
-                _repository.UnitOfWorkAsync().Commit();
+
+                tran.SaveChanges();
+
+                var oncekiNormalIplikler = (from fi in _repoFanteziIplikNormalIplik.Queryable()
+                                              where fi.FanzteziIplikId == fanteziIplik.Id
+                                              select fi).ToList();
+
+                if (oncekiNormalIplikler.Any())
+                {
+                    foreach (var item in oncekiNormalIplikler)
+                    {
+                        item.IsPassive = true;
+                        item.ChangedOn = DateTime.UtcNow;
+                        _repoFanteziIplikNormalIplik.Update(item);
+                    }                  
+                }
+                tran.SaveChanges();
+
+                if (container.NormalIplikler.Any())
+                {
+                    //_repoFanteziIplikNormalIplik
+                    for (int i = 0; i < container.NormalIplikler.Count; i++)
+                    {
+                        var normalIplik = container.NormalIplikler[i];
+
+                        var oncekiNormalIplik = oncekiNormalIplikler.FirstOrDefault(x => x.FanzteziIplikId == fanteziIplik.Id && x.NormalIplikId == normalIplik.Id);
+
+                        if (oncekiNormalIplik != null)
+                        {
+                            oncekiNormalIplik.IsPassive = false;
+                            oncekiNormalIplik.FanzteziIplikId = fanteziIplik.Id;
+                            oncekiNormalIplik.NormalIplikId = normalIplik.Id;
+                            oncekiNormalIplik.ChangedOn = DateTime.UtcNow;
+                            _repoFanteziIplikNormalIplik.Update(oncekiNormalIplik);
+                        }
+                        else
+                        {
+                            _repoFanteziIplikNormalIplik.Insert(new ZetaCodeFanteziIplikNormalIplik()
+                            {
+                                NormalIplikId = normalIplik.Id,
+                                FanzteziIplikId = fanteziIplik.Id,
+                                CreatedOn = DateTime.UtcNow
+                            });
+                        }
+                    }
+                }
+                tran.SaveChanges();
+
+                if (container.RafyeriTurkiye != null)
+                {
+                    fanteziIplik.RafyeriTurkiyeId = container.RafyeriTurkiye.Id;
+                }
+
+                if (container.RafyeriYunanistan != null)
+                {
+                    fanteziIplik.RafyeriYunanistanId = container.RafyeriYunanistan.Id;
+                }
+
+
+
+
+                tran.Commit();
             }
             catch (Exception ex)
             {
-                _repository.UnitOfWorkAsync().Rollback();
+                tran.Rollback();
+                container.FanteziIplik.Id = 0;
                 throw;
             }
 

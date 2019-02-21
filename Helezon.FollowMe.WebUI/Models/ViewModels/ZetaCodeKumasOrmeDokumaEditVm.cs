@@ -55,7 +55,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
         public List<SelectListItem> NormalIplikler { get; set; }
         public List<SelectListItem> FanteziIplikler { get; set; }
-        
+
 
         public HashSet<PairIdNameDto> TupAcikEnler { get; set; }
         public HashSet<PairIdNameDto> Elastanlar { get; set; }

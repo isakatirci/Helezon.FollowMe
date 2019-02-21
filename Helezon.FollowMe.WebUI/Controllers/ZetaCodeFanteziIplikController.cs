@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FollowMe.Web;
 using FollowMe.Web.Controllers;
-using FollowMe.Web.Models;
+using Helezon.FollowMe.Entities.Models;
 using Helezon.FollowMe.Service.ContainerDtos;
 using Helezon.FollowMe.WebUI.Models.ViewModels;
 
@@ -47,9 +47,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                                         , string sirketId = ""
                                         , int? ulkeId = null)
         {
-            var blueCompanies = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
-            model.Collections.Sirketler
-                = new SelectList(blueCompanies, "Id", "Name", sirketId);
+          
             var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
             var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
             if (ulke != null)
@@ -67,12 +65,48 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.Collections.FlIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
             model.Collections.NmIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
 
-            model.Collections.Ulkeler = temp;
-            model.Collections.NormalIplikler = GetNormalIplikService().GetAllZetaCodeAndUrunIsmiOfNormalIplikler().Select(x => new SelectListItem {
-                Value = x.Id.ToString(), Text = x.ZetaCodeFormat() + ", " + x.UrunIsmi
-            }).ToList();
+            model.Collections.Sirketler = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
+            model.Collections.Ulkeler = GetOthersService().GetAllCountry();
 
-           
+
+            var normalIplikler = GetNormalIplikService().GetAllZetaCodeAndUrunIsmiOfNormalIplikler();
+
+            if (normalIplikler.Any())
+            {
+                for (int i = 0; i < normalIplikler.Count; i++)
+                {
+                    var id = normalIplikler[i].Id;
+                    var name = normalIplikler[i].UrunIsmi;
+                    model.Collections.TumIplikler.Add(new MyPairNameValue()
+                    {
+                        Name = name,
+                        Value = string.Format("{0}|{1}", id, "Normaliplik")
+                    });
+                }
+            }
+
+            var fanteziIplikler = GetFanteziIplikService().GetAllZetaCodeAndUrunIsmiOfFantaziIplikler();
+
+            if (fanteziIplikler.Any())
+            {
+                for (int i = 0; i < fanteziIplikler.Count; i++)
+                {
+                    var id = fanteziIplikler[i].Id;
+                    var name = fanteziIplikler[i].UrunIsmi;
+                    model.Collections.TumIplikler.Add(new MyPairNameValue()
+                    {
+                        Name = name,
+                        Value = string.Format("{0}|{1}", id, "Fanteziiplik")
+                    });
+                }
+            }
+
+
+
+            if (!model.KarsimdakiIplikler.Any())
+            {
+                model.KarsimdakiIplikler.Add(new MyPairNameValue());
+            }
 
         }
 
@@ -117,13 +151,29 @@ namespace Helezon.FollowMe.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ZetaCodeFanteziIplikEditVm model)
         {
-            var keys = Request.Form.Keys;
-            var companyId = Request.Form["Company.Id"];//Company.Id
+            
             var container = new FanteziIplikContainerDto();
             container.FanteziIplik = model.FanteziIplik;
-            container.NormalIplikler = model.NormalIplikler;
-            model.Company.Id = companyId;
-            container.Company = model.Company;
+            var normalIplikler = new List<ZetaCodeNormalIplik>();
+            //var fanteziIplikler = new List<ZetaCodeFanteziIplik>();
+            if (model.KarsimdakiIplikler.Any())
+            {
+                for (int i = 0; i < model.KarsimdakiIplikler.Count; i++)
+                {
+                    var parts = model.KarsimdakiIplikler[i].Value.Split('|');
+                    var id = parts[0];
+                    var iplikTipi = parts[1];
+                    if (iplikTipi.Equals("Normaliplik", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        normalIplikler.Add(new ZetaCodeNormalIplik() { Id = id.AsInt() });
+                    }
+                    //else if (iplikTipi.Equals("Fanteziiplik", StringComparison.InvariantCultureIgnoreCase))
+                    //{
+                    //    fanteziIplikler.Add(new ZetaCodeFanteziIplik() { Id = id.AsInt() });
+                    //}
+                }
+            }
+            container.NormalIplikler = normalIplikler;
             Action action = () =>
             {
                 GetFanteziIplikService().InsertOrUpdate(container);

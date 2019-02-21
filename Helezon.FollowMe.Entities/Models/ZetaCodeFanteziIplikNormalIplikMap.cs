@@ -28,10 +28,16 @@ namespace Helezon.FollowMe.Entities.Models
         public ZetaCodeFanteziIplikNormalIplikMap(string schema)
         {
             ToTable("ZetaCode_FanteziIplik_NormalIplik", schema);
-            HasKey(x => new { x.NormalIplikId, x.FanzteziIplikId });
+            HasKey(x => x.Id);
 
-            Property(x => x.NormalIplikId).HasColumnName(@"NormalIplikId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.FanzteziIplikId).HasColumnName(@"FanzteziIplikId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NormalIplikId).HasColumnName(@"NormalIplikId").HasColumnType("int").IsRequired();
+            Property(x => x.FanzteziIplikId).HasColumnName(@"FanzteziIplikId").HasColumnType("int").IsRequired();
+            Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
+            Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
+            Property(x => x.ChangedOn).HasColumnName(@"ChangedOn").HasColumnType("datetime2").IsOptional();
+            Property(x => x.ChangedBy).HasColumnName(@"ChangedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
             InitializePartial();
         }
         partial void InitializePartial();

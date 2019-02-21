@@ -89,18 +89,16 @@
                                             @if (!update)
                                             {
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.Company.Id, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.LabelFor(model => model.FanteziIplik.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
-                                                        @Html.DropDownList("Company.Id"
-        , Model.Collections.Sirketler, "Please Select"
-        , htmlAttributes: new { @class = "form-control select2" })
-                                                        @Html.ValidationMessageFor(model => model.Company.Id, "", new { @class = "text-danger" })
+                                                        @Html.DropDownList("FanteziIplik.SirketId", new SelectList(Model.Collections.Sirketler, dataValueField: "Id", dataTextField: "Name", selectedValue: @Model.FanteziIplik.SirketId), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.FanteziIplik.SirketId, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             }
                                             else
                                             {
-                                                <input type="hidden" name="Company.Id" id="Company_Id" value="@Model.Company.Id" />
+                                                <input type="hidden" name="FanteziIplik.SirketId" id="FanteziIplik_SirketId" value="@Model.FanteziIplik.SirketId" />
                                                 <div class="form-group">
                                                     @Html.LabelFor(model => model.FanteziIplik.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
                                                     <div class="col-md-6">
@@ -108,6 +106,7 @@
                                                     </div>
                                                 </div>
                                             }
+
 
 
                                             @if (update)
@@ -123,24 +122,23 @@
                                             }
 
 
-
-
-
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.Ulke.Id, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                @Html.LabelFor(model => model.FanteziIplik.UlkeId, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
-                                                    @Html.DropDownList("Ulke.Id", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.Ulke.Id, "", new { @class = "text-danger" })
+                                                    @Html.DropDownList("FanteziIplik.UlkeId", new SelectList(Model.Collections.Ulkeler, dataTextField: "Name", dataValueField: "Id", selectedValue: @Model.FanteziIplik.UlkeId), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(model => model.FanteziIplik.UlkeId, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
 
+
+
                                             @*<div class="form-group">
-                                                @Html.LabelFor(model => model.FanteziIplik.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-6">
-                                                    @Html.DropDownList("FanteziIplik.Ea" , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"    , htmlAttributes: new { @class = "form-control select2" })
-                                                    @Html.ValidationMessageFor(model => model.FanteziIplik.Ea, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>*@
+            @Html.LabelFor(model => model.FanteziIplik.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("FanteziIplik.Ea" , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"    , htmlAttributes: new { @class = "form-control select2" })
+                @Html.ValidationMessageFor(model => model.FanteziIplik.Ea, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
 
                                             <div class="form-group">
@@ -152,17 +150,17 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="control-label col-md-2" for="FanteziIplik.IplikKategosiId">iplik Kategosi</label>
+                                                @Html.LabelFor(model => model.IplikKategosi.Id, "İplik Kategorisi", htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-6">
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             <input type="hidden"
-                                                                   name="FanteziIplik.IplikKategosiId"
-                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiId"
+                                                                   name="IplikKategosi.Id"
+                                                                   id="IplikKategosi_Id"
                                                                    value="@Model.IplikKategosi.Id" />
                                                             <input type="text"
-                                                                   name="FanteziIplik.IplikKategosiName"
-                                                                   id="ZetaCodeNormalIplikDto_IplikKategosiName"
+                                                                   name="IplikKategosi.Name"
+                                                                   id="IplikKategosi_Name"
                                                                    readonly
                                                                    class="form-control"
                                                                    value="@Model.IplikKategosi.Name" />
@@ -195,7 +193,7 @@
                             <div class="form-horizontal form-bordered form-row-stripped">
                                 <div class="form-body">
                                     @{
-                                        var normalIplikCount = Model.NormalIplikler.Count;
+                                        var normalIplikCount = Model.KarsimdakiIplikler.Count;
                                     }
                                     <div class="form-group">
                                         <label class="control-label col-md-2" for="normal_iplik_count">İplik No Cinsi</label>
@@ -227,7 +225,7 @@
                                     <div class="form-group ea_iplik_no" style="display: none;">
                                         <label class="control-label col-md-2 ea_iplik_no" for="">Ea</label>
                                         <div class="col-md-6">
-                                            @Html.DropDownList("Model.FanteziIplik.Ne"
+                                            @Html.DropDownList("FanteziIplik.Ne"
                                                                                    , new SelectList(Model.Collections.EaIpliNolar, "Value", "Text", Model.FanteziIplik?.Ea)
                                                                                    , new { @class = "form-control select2" })
                                         </div>
@@ -235,7 +233,7 @@
                                     <div class="form-group nm_iplik_no" style="display: none;">
                                         <label class="control-label col-md-2 nm_iplik_no" for="">Nm</label>
                                         <div class="col-md-6">
-                                            @Html.DropDownList("Model.FanteziIplik.Nm"
+                                            @Html.DropDownList("FanteziIplik.Nm"
                                    , new SelectList(Model.Collections.NmIpliNolar, "Value", "Text", Model.FanteziIplik?.Nm)
                                    , new { @class = "form-control select2" })
                                         </div>
@@ -243,7 +241,7 @@
                                     <div class="form-group dny_iplik_no" style="display: none;">
                                         <label class="control-label col-md-2 dny_iplik_no" for="">Dny</label>
                                         <div class="col-md-6">
-                                            @Html.DropDownList("Model.FanteziIplik.Nm"
+                                            @Html.DropDownList("FanteziIplik.Nm"
                                            , new SelectList(Model.Collections.DnyIpliNolar, "Value", "Text", Model.FanteziIplik?.Dny)
                                            , new { @class = "form-control select2" })
                                         </div>                                      
@@ -251,7 +249,7 @@
                                     <div class="form-group fl_iplik_no" style="display: none;">
                                         <label class="control-label col-md-2 " for="">Fl</label>
                                         <div class="col-md-6">
-                                            @Html.DropDownList("Model.FanteziIplik.Nm"
+                                            @Html.DropDownList("FanteziIplik.Nm"
                                            , new SelectList(Model.Collections.FlIpliNolar, "Value", "Text", Model.FanteziIplik?.Fl)
                                            , new { @class = "form-control select2" })
                                         </div>
@@ -268,11 +266,11 @@
                                     <div class="form-horizontal form-bordered form-row-stripped">
                                         <div class="form-body">
                                             <div class="mt-repeater">
-                                                <div data-repeater-list="FanteziIplik.ZetaCodeNormalIplik">
+                                                <div data-repeater-list="KarsimdakiIplikler">
                                                     @{
-                                                        for (int i = 0; i < Model.NormalIplikler.Count; i++)
+                                                        for (int i = 0; i < Model.KarsimdakiIplikler.Count; i++)
                                                         {
-                                                            
+
                                                             <text>
                                                                 <div data-repeater-item>
                                                                     <div class="mt-repeater-item">
@@ -280,15 +278,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-2">
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <input type="hidden"
-                                                                                           class="normal_iplik_id"
-                                                                                           name="Id"
-                                                                                           value="@Model.NormalIplikler[i].Id" />
-                                                                                    <br />
-                                                                                    @Html.DropDownList("NormalIplik"
-                                                                                   , new SelectList(Model.Collections.NormalIplikler, "Value", "Text", Model.NormalIplikler[i].Id.ToString()),"Please Select"
-                                                                                   , new { @class = "form-control select2 normal_iplik", @onchange = "setNormalIplikId($(this))" })
+                                                                                <div class="col-md-6">                                                                                   
+                                                                                    @Html.DropDownList("Value", new SelectList(Model.Collections.TumIplikler, "Value", "Name", Model.KarsimdakiIplikler[i].Value), "Please Select", new { @class = "form-control select2 normal_iplik" })
                                                                                 </div>
                                                                                 <div class="col-md-2">
                                                                                     <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
@@ -296,9 +287,9 @@
                                                                                     </a>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row" id="normal_iplik_form">
-                                                                                @Html.Action("GetNormalIplikRenkler", new { normalIplikId = Model.NormalIplikler[i].Id })
-                                                                            </div>
+                                                                            @*<div class="row" id="normal_iplik_form">
+                                                                                @Html.Action("GetNormalIplikRenkler", new { normalIplikId = Model.KarsimdakiIplikler[i].Id })
+                                                                            </div>*@
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -332,17 +323,17 @@
                             <div class="form-body">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="ZetaCodeNormalIplikDto_RafyeriTurkiyeId" class="control-label col-md-2"></label>
+                                        <label for="RafyeriTurkiye_Id" class="control-label col-md-2"></label>
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                     <input type="hidden"
-                                                           name="FanteziIplik.RafyeriTurkiyeId"
-                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeId"
+                                                           name="RafyeriTurkiye.Id"
+                                                           id="RafyeriTurkiye_Id"
                                                            value="@Model.RafyeriTurkiye.Id" />
                                                     <input type="text"
-                                                           name="FanteziIplik.RafyeriTurkiyeName"
-                                                           id="ZetaCodeNormalIplikDto_RafyeriTurkiyeName"
+                                                           name="RafyeriTurkiye.Name"
+                                                           id="RafyeriTurkiye_Name"
                                                            readonly
                                                            class="form-control"
                                                            value="@Model.RafyeriTurkiye.Name" />
@@ -355,17 +346,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="ZetaCodeNormalIplikDto_RafyeriYunanistanId" class="control-label col-md-2"></label>
+                                        <label for="RafyeriYunanistan_Id" class="control-label col-md-2"></label>
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" style="height:200px; overflow-y:auto;">
                                                     <input type="hidden"
-                                                           name="FanteziIplik.RafyeriYunanistanId"
-                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanId"
+                                                           name="RafyeriYunanistan.Id"
+                                                           id="RafyeriYunanistan_Id"
                                                            value="@Model.RafyeriYunanistan.Id" />
                                                     <input type="text"
-                                                           name="FanteziIplik.RafyeriYunanistanName"
-                                                           id="ZetaCodeNormalIplikDto_RafyeriYunanistanName"
+                                                           name="RafyeriYunanistan.Name"
+                                                           id="RafyeriYunanistan_Name"
                                                            class="form-control"
                                                            readonly
                                                            value="@Model.RafyeriYunanistan.Name" />
@@ -420,7 +411,7 @@
                     self.closest(".form-body").find(".dny_iplik_no").show();
                     self.closest(".form-body").find(".nm_iplik_no").hide();
                     self.closest(".form-body").find(".fl_iplik_no").show();
-                    if ($("#ZetaCodeNormalIplikDto_IplikKategosiId").val() === "326") {
+                    if ($("#IplikKategosi_Id").val() === "326") {
                         self.closest(".form-body").find(".ea_iplik_no").show();
                     } else {
                         self.closest(".form-body").find(".ea_iplik_no").hide();
@@ -431,7 +422,7 @@
                     self.closest(".form-body").find(".fl_iplik_no").hide();
                     self.closest(".form-body").find(".ea_iplik_no").hide();
                 } 
-                //326 - ZetaCodeNormalIplikDto_IplikKategosiId
+                //326 - IplikKategosi_Id
 
             } else {
                 self.closest(".form-body").find(".ne_iplik_no").hide();
@@ -662,14 +653,14 @@
         $(document).ready(function () {
 
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeIplikKategosiId", "/ZetaCodeNormalIplik/JSTreeIplikKategorilerFantezi"
-                , "#ZetaCodeNormalIplikDto_IplikKategosiId", "#ZetaCodeNormalIplikDto_IplikKategosiName", refreshIplikNo);
+                , "#IplikKategosi_Id", "#IplikKategosi_Name", refreshIplikNo);
 
 
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriTurkiyeId", "/ZetaCodeNormalIplik/JSTreeRafyeriTurkiyeId"
-                , "#ZetaCodeNormalIplikDto_RafyeriTurkiyeId", "#ZetaCodeNormalIplikDto_RafyeriTurkiyeName");
+                , "#RafyeriTurkiye_Id", "#RafyeriTurkiye_Name");
 
             modulFantezilIplikVm.ajaxTreeFillTermTree("#treeRafyeriYunanistanId", "/ZetaCodeNormalIplik/JSTreeRafyeriYunanistanId"
-                , "#ZetaCodeNormalIplikDto_RafyeriYunanistanId", "#ZetaCodeNormalIplikDto_RafyeriYunanistanName");
+                , "#RafyeriYunanistan_Id", "#RafyeriYunanistan_Name");
 
             modulFantezilIplikVm.repeater();
         });
