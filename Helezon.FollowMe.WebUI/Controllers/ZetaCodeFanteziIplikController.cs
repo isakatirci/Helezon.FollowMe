@@ -45,7 +45,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
         public void FillCollections(ZetaCodeFanteziIplikEditVm model
                                         , string sirketId = ""
-                                        , int? ulkeId = null)
+                                        , int? ulkeId = null
+              , int pantoneRenkId = 0)
         {
           
             var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
@@ -67,6 +68,16 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             model.Collections.Sirketler = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
             model.Collections.Ulkeler = GetOthersService().GetAllCountry();
+
+
+
+            model.Collections.PantoneRenkleri = new SelectList(GetNormalIplikService().GetPantoneRenkler()
+       .Select(x => new { Id = x.Id.ToString(), PantoneKodu = x.PantoneKodu + " " + x.PantoneRengi }), "Id", "PantoneKodu", pantoneRenkId.ToString());
+            model.Collections.Renkler = GetNormalIplikService().GetRenkler(2).Select(x => new SelectListItem
+            {
+                Value = string.Format("{0}|{1}", x.Id, x.HtmlKod ?? string.Empty),
+                Text = x.Ad
+            }).ToList();
 
 
             var normalIplikler = GetNormalIplikService().GetAllZetaCodeAndUrunIsmiOfNormalIplikler();
@@ -173,6 +184,18 @@ namespace Helezon.FollowMe.WebUI.Controllers
                     //}
                 }
             }
+
+            if (!string.IsNullOrWhiteSpace(model.RenkIdHtmlKod))
+            {
+                var parts = model.RenkIdHtmlKod.Split('|');
+                var id = parts[0].AsInt();
+                container.FanteziIplik.Renkid = id;
+                //container.Renk = new Renk() { Id = id, HtmlKod = parts[1] };
+            }
+
+            container.RafyeriTurkiye = model.RafyeriTurkiye;
+            container.RafyeriYunanistan = model.RafyeriYunanistan;
+
             container.NormalIplikler = normalIplikler;
             Action action = () =>
             {

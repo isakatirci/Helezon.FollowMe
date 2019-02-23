@@ -111,7 +111,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>@Html.Raw(Model.Container.FanteziIplik.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@Model.Container.IplikKategosi.Name</td>
+                                                        <td>IPLIK</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -146,8 +146,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.Container.FanteziIplik.Id</td>
-                                                        <td>@(Model.Renkler)</td>
+                                                        <td>@("Z-" + Model.Container.FanteziIplik.Id.ToString().PadLeft(4, '0'))</td>
+                                                        <td>@(Model.Container.Renk.Ad + "/" + Model.Container.PantoneRenk.PantoneKodu + " " + Model.Container.PantoneRenk.PantoneRengi )</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -170,37 +170,7 @@
                                                 </tbody>
                                             </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr></tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                    </tr>                  
                                 </table>
                             </td>
                             <td rowspan="10" valign="top" style="width:25%;min-width:25%;vertical-align:top!important">
@@ -286,17 +256,29 @@
                                             <tr>
                                                 <td style="width:50%;max-width:50%">
                                                     <table>
-                                                        @for (int i = 0; i < Model.Container.AnaIplikKategorileri.Count; i++)
-                                                        {
-                                                            <tr>
-                                                                <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
-                                                                <td>@Model.Container.AnaIplikKategorileri[i].Name</td>
-                                                            </tr>
-
-                                                        }                                                      
+                                                        <tr>
+                                                            <th style="width:50%;max-width:50%">URUN KATEGORY 1</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 2</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 3</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 4</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 5</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
                                                     </table>
                                                 </td>
-                                                <td>
+                                                <td style="vertical-align:top">
                                                     <table>                                                    
                                                         <tr>
                                                             <th style="width:50%;max-width:50%">ESKI Z-CODE NO</th>

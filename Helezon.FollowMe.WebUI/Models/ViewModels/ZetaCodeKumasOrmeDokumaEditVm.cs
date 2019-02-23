@@ -24,8 +24,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<Term> BoyaIslemleri { get; set; }
 
         public Term RafyeriTurkiye { get; set; }
-        public Term RafyeriYunanistan { get; set; }
-        //
+        public Term RafyeriYunanistan { get; set; }     
 
         public List<ZetaCodeDto> Iplikler { get; set; }
         public ZetaCodeKumasOrmeDokumaEditVm()

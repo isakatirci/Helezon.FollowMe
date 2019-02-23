@@ -56,7 +56,7 @@
                         </div>                       
                         <div class="btn-group">
                             <button type="button" onclick="location.href='@Html.Raw(string.Format("/ZetaCodeNormalIplik/Edit?id={0}&companyId={1}"
-                                                                         ,Model.Container.NormalIplik.Id,Model.Container.NormalIplik.SirketId))'" class="btn btn-default">
+    , Model.Container.NormalIplik.Id, Model.Container.NormalIplik.SirketId))'" class="btn btn-default">
 
                                 Edit
 
@@ -111,7 +111,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>@Html.Raw(Model.Container.NormalIplik.IsPassive ? "PASSIVE" : "ACTIVE")</td>
-                                                        <td>@Model.Container.IplikKategorisi.Name</td>
+                                                        <td>IPLIK</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -122,18 +122,15 @@
                                             <table>
                                                 <thead>
                                                     <tr><th>FIRMA CODENAME</th></tr>
-                                                
+
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>@(Model.Container.Company.Code + " " + Model.Container.Company.Name)</td>
                                                     </tr>
-                                               
-
-</tbody>
+                                                </tbody>
                                             </table>
                                         </td>
-                                       
                                     </tr>
                                     <tr>
                                         <td>
@@ -146,7 +143,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>@Model.Container.NormalIplik.Id</td>
+                                                        <td>@("Z-" + Model.Container.NormalIplik.Id.ToString().PadLeft(4, '0'))</td>
                                                         <td>@(Model.Container.Renk.Ad + "/" + Model.Container.PantoneRenk.PantoneKodu + " " + Model.Container.PantoneRenk.PantoneRengi )</td>
                                                     </tr>
                                                 </tbody>
@@ -284,23 +281,28 @@
                                     <td>
                                         <table>
                                             <tr>
-                                                <td style="width:50%;max-width:50%">
+                                                <td >
                                                     <table>
-                                                        @for (int i = 0; i < Model.Container.ParentIplikCategories.Count; i++)
-                                                        {
-                                                            <tr>
-                                                                <th style="width:50%;max-width:50%">URUN KATEGORİ @(i + 1)</th>
-                                                                <td>@Model.Container.ParentIplikCategories[i].Name</td>
-                                                            </tr>
-
-                                                        }
-                                                        @foreach (var i in Model.Container.IplikKategoriDetaylari)
-                                                        {
-                                                            <tr>
-                                                                <th>@i.Id</th>
-                                                                <td>@i.Name</td>
-                                                            </tr>
-                                                        }
+                                                        <tr>
+                                                            <th style="width:50%;max-width:50%">URUN KATEGORY 1</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 2</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 3</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 4</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>URUN KATEGORY 5</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                                 <td>
@@ -356,7 +358,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td>                                    
+
                                         <table>
                                             <thead>
                                                 <tr>
@@ -368,13 +371,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                                                @{
+
+                                                    for (int i = 0; i < Model.Container.IplikNoDtos.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>@Model.Container.IplikNoDtos[i].IplikNo.ElyafOrani</td>
+                                                            <td>@Model.Container.IplikNoDtos[i].ElyafCinsiKalitesi.Name</td>
+                                                            <td>?</td>
+                                                            <td>?</td>
+                                                            <td>?</td>
+                                                        </tr>
+
+                                                    }
+                                                }
                                             </tbody>
                                         </table>
                                     </td>

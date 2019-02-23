@@ -16,7 +16,7 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public interface IIplikNoService : IService<IplikNo>
     {
-
+        List<IplikNoDto> GetNormalIplikIplikNolar(int normalIplikId);
     }
 
     /// <summary>
@@ -25,10 +25,24 @@ namespace Helezon.FollowMe.Service
     /// </summary>
     public class IplikNoService : Service<IplikNo>, IIplikNoService
     {
+        private readonly IRepositoryAsync<IplikNo> _repoIplikNo;
+
         public IplikNoService(IRepositoryAsync<IplikNo> repository) : base(repository)
         {
-
+            _repoIplikNo = repository;
         }
-     
+        public List<IplikNoDto> GetNormalIplikIplikNolar(int normalIplikId)
+        {
+
+            var queryIplikNo = _repoIplikNo.QueryableNoTracking();
+            var queryTerm = _repoIplikNo.GetRepositoryAsync<Term>().QueryableNoTracking();
+
+            var temp = (from i in queryIplikNo
+                        join t in queryTerm on i.ElyafCinsiKalitesi equals t.Id
+                        where i.ZetaCodeNormalIplikId == normalIplikId
+                        select new IplikNoDto { ElyafCinsiKalitesi = t, IplikNo = i }).ToList();
+
+            return temp;
+        }
     }
 }

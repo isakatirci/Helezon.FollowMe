@@ -89,6 +89,8 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Mappings\AutoMapper\Profiles\BusinessProfile.cs" />
     <Compile Include="Mappings\AutoMapper\Profiles\MappingProfile.cs" />
+    <Compile Include="ProductService.cs" />
+    <Compile Include="RenkService.cs" />
     <Compile Include="ZetaCodeService.cs" />
     <Compile Include="ZetaCodeAksesuarService.cs" />
     <Compile Include="ZetaCodeFanteziIplikPictureService.cs" />

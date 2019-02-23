@@ -481,17 +481,19 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             if (model.IplikNolar.Any())
             {
-                var iplikNolar = new List<IplikNo>();
+                var iplikNolar = new List<IplikNoDto>();
                 foreach (var iplikNo in model.IplikNolar)
                 {
-                    iplikNolar.Add(new IplikNo()
+                    iplikNolar.Add(new IplikNoDto()
                     {
-                        Id = iplikNo.Id,
-                        ElyafCinsiKalitesi = iplikNo.TermId,
-                        ElyafOrani = iplikNo.ElyafOrani
+                        IplikNo = new IplikNo {
+                            Id = iplikNo.Id,
+                            ElyafCinsiKalitesi = iplikNo.TermId,
+                            ElyafOrani = iplikNo.ElyafOrani
+                        }                       
                     });
                 }
-                container.IplikNolar = iplikNolar;
+                container.IplikNoDtos = iplikNolar;
             }
 
 
@@ -556,7 +558,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             //    return new HttpNotFoundResult();
             //}
             var model = new ZetaCodeNormalIplikCardVm();
-            model.Container = container;
+            model.Container = container;           
 
             //if (normalIplik.IplikKategoriFlam != null)
             //{

@@ -42,6 +42,11 @@ namespace Helezon.FollowMe.Service
         private readonly IZetaCodeService _zetaCodeService;
         private readonly IRepositoryAsync<ZetaCodeFanteziIplikPicture> _repoFanteziIplikPicture;
 
+        private readonly IRenkService _renkService;
+        private readonly IPantoneRenkService _pantoneRenkService;
+        private readonly ICompanyService _companyService;
+
+
 
         public FanteziIplikService(IRepositoryAsync<ZetaCodeFanteziIplik> repository) : base(repository)
         {
@@ -52,6 +57,11 @@ namespace Helezon.FollowMe.Service
             _repoNormalIplik = _repository.GetRepositoryAsync<ZetaCodeNormalIplik>();
             _repoFanteziIplikNormalIplik= _repository.GetRepositoryAsync<ZetaCodeFanteziIplikNormalIplik>();
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
+
+            _renkService = new RenkService(_repository.GetRepositoryAsync<Renk>());
+            _pantoneRenkService = new PantoneRenkService(_repository.GetRepositoryAsync<PantoneRenk>());
+            _companyService = new CompanyService(_repository.GetRepositoryAsync<Company>());
+
         }
 
 
@@ -187,8 +197,8 @@ namespace Helezon.FollowMe.Service
                     fanteziIplik.RafyeriYunanistanId = container.RafyeriYunanistan.Id;
                 }
 
-
-
+                this.Update(fanteziIplik);
+                tran.SaveChanges();
 
                 tran.Commit();
             }
@@ -278,21 +288,41 @@ namespace Helezon.FollowMe.Service
 
         public FanteziIplikContainerDto GetCard(int id,string compantId)
         {
-            var cotainer = new FanteziIplikContainerDto();
+            var container = new FanteziIplikContainerDto();
             var fanteziIplik = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
             if (fanteziIplik == null)
             {
-                return cotainer;
+                return container;
             }
             var picture = _repoFanteziIplikPicture.QueryableNoTracking().FirstOrDefault(x=>x.ZetaCodeFanteziIplikId ==  fanteziIplik.Id && x.CompanyId == fanteziIplik.SirketId);
             if (picture != null)
             {
-                cotainer.PictureUrl = picture.Name;
+                container.PictureUrl = picture.Name;
             }
-            cotainer.FanteziIplik = fanteziIplik;
-            cotainer.AnaIplikKategorileri = _termService.GetAllParentsById(fanteziIplik.IplikKategosiId);
-            cotainer.AnaIplikKategorileri.Reverse();
-            return cotainer;
+            container.FanteziIplik = fanteziIplik;
+            container.AnaIplikKategorileri = _termService.GetAllParentsById(fanteziIplik.IplikKategosiId);
+            container.AnaIplikKategorileri.Reverse();
+
+
+
+            if (!string.IsNullOrWhiteSpace(fanteziIplik.SirketId))
+            {
+                var company = _companyService.GetCompanyById(fanteziIplik.SirketId);
+                container.Company = company;
+            }
+
+
+            container.Renk = _renkService.GetRenkById(fanteziIplik.Renkid);
+            container.PantoneRenk = _pantoneRenkService.GetPantoneRenkById(fanteziIplik.PantoneId);
+            container.RafyeriTurkiye = _termService.GetTermById(fanteziIplik.RafyeriTurkiyeId);
+            container.RafyeriYunanistan = _termService.GetTermById(fanteziIplik.RafyeriYunanistanId);
+            container.Ulke = _othersService.GetCountryById(fanteziIplik.UlkeId);
+
+
+
+
+
+            return container;
         }
 
         //public ZetaCodeFanteziIplikDto GetNormalIpliklerOfFanteziIplikByFanteziIplikId(int fantaziIplikId, string companyId, bool includeNormalIplikler = false)

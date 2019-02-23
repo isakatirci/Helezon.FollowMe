@@ -24,6 +24,28 @@
         }
     }
 
+    public string ZetaCodeLinkEdit(string type, string id)
+    {
+        switch (type)
+        {
+            case "HazirGiyim":
+                return "/ZetaCodeHazirGiyim/Edit?companyId=5&id=" + id;
+            case "Aksesuar":
+                return "/ZetaCodeAksesuar/Edit?companyId=5&id=" + id;
+            case "KumasFantezi":
+                return "/ZetaCodeKumasFantazi/Edit?companyId=5&id=" + id;
+            case "KumasOrme":
+                return "/ZetaCodeKumasOrmeDokuma/Edit?companyId=5&id=" + id;
+            case "Fanteziiplik":
+                return "/ZetaCodeFanteziIplik/Edit?companyId=5&id=" + id;
+            case "Normaliplik":
+                return "/ZetaCodeNormalIplik/Edit?companyId=5&id=" + id;
+            //
+            default:
+                return string.Empty;
+        }
+    }
+
 }
 
 @section afterGlobalStyles
@@ -217,7 +239,7 @@
                                 string type = Model[k].Rows[i][Model[k].Columns.Count - 1].ToString();
 
                             }
-                            <td>Edit</td>
+                            <td>@(Html.Raw(string.Format("<a href=\"{0}\">Edit</a>", ZetaCodeLinkEdit(type, kod))))</td>
                             <td>@(Html.Raw(string.Format("<a href=\"{1}\">{0}</a>", kod.PadLeft(4, '0'), ZetaCodeLink(type, kod))))</td>
                             @for (int j = 1; j < Model[k].Columns.Count - 1; j++)
                             {

@@ -46,6 +46,7 @@ namespace Helezon.FollowMe.Entities.Models
         System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
         System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
         System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        System.Data.Entity.DbSet<Product> Product { get; set; } // Product
         System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
         System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
         System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo

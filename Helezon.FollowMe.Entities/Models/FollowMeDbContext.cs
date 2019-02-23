@@ -48,6 +48,7 @@ namespace Helezon.FollowMe.Entities.Models
         public System.Data.Entity.DbSet<PersonnelPicture> PersonnelPicture { get; set; } // PersonnelPicture
         public System.Data.Entity.DbSet<PersonnelTelephone> PersonnelTelephone { get; set; } // PersonnelTelephone
         public System.Data.Entity.DbSet<PersonnelTerm> PersonnelTerm { get; set; } // PersonnelTerm
+        public System.Data.Entity.DbSet<Product> Product { get; set; } // Product
         public System.Data.Entity.DbSet<RafBilgisi> RafBilgisi { get; set; } // RafBilgisi
         public System.Data.Entity.DbSet<Renk> Renk { get; set; } // Renk
         public System.Data.Entity.DbSet<SequenceBlueSiparisNo> SequenceBlueSiparisNo { get; set; } // SequenceBlueSiparisNo
@@ -161,6 +162,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new PersonnelPictureMap());
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap());
             modelBuilder.Configurations.Add(new PersonnelTermMap());
+            modelBuilder.Configurations.Add(new ProductMap());
             modelBuilder.Configurations.Add(new RafBilgisiMap());
             modelBuilder.Configurations.Add(new RenkMap());
             modelBuilder.Configurations.Add(new SequenceBlueSiparisNoMap());
@@ -225,6 +227,7 @@ namespace Helezon.FollowMe.Entities.Models
             modelBuilder.Configurations.Add(new PersonnelPictureMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTelephoneMap(schema));
             modelBuilder.Configurations.Add(new PersonnelTermMap(schema));
+            modelBuilder.Configurations.Add(new ProductMap(schema));
             modelBuilder.Configurations.Add(new RafBilgisiMap(schema));
             modelBuilder.Configurations.Add(new RenkMap(schema));
             modelBuilder.Configurations.Add(new SequenceBlueSiparisNoMap(schema));

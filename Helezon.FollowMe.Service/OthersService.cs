@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helezon.FollowMe.Entities.Models;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,25 @@ namespace Helezon.FollowMe.Service
         public string Name { get;  set; }
     }
 
+    public class IplikNoDto
+    {
+        public IplikNo IplikNo { get; set; }
+        public Term ElyafCinsiKalitesi { get; set; }
+    }
+
+    public class MyNameValueDto
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+
 
     public interface IOthersService
     {
         List<PairIdNameDto> GetAllCountry();
         HashSet<PairIdNameDto> GetAllBoyaTipi();
         HashSet<PairIdNameDto> GetAllBoyaYonu();
-        PairIdNameDto GetCountryById(int id);
+        PairIdNameDto GetCountryById(int? id);
         //PairIdNameDto GetCountryById(int id);
         //string GetCountryNameById(int id);
         HashSet<PairIdNameDto> GetAllMakineModelYillari();
@@ -343,11 +356,16 @@ namespace Helezon.FollowMe.Service
         {
             return _boyaYonu.Value;
         }
-        public PairIdNameDto GetCountryById(int id)
+        public PairIdNameDto GetCountryById(int? id)
         {
-            if (!_ulkeler.Value.ContainsKey(id))
+            if (!id.HasValue)
+            {
                 return new PairIdNameDto();
-            return _ulkeler.Value[id]; 
+            }
+
+            if (!_ulkeler.Value.ContainsKey(id.Value))
+                return new PairIdNameDto();
+            return _ulkeler.Value[id.Value];
         }
 
 

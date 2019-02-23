@@ -12,7 +12,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
     {
 
         public ZetaCodeFanteziIplik FanteziIplik { get; set; }
-        public CompanyDto Company { get; set; }
+        public Company Company { get; set; }
         public List<ZetaCodeNormalIplik> NormalIplikler { get; set; }
         public List<Term> AnaIplikKategorileri { get;  set; }
         public string PictureUrl { get; set; }
@@ -32,7 +32,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
             FanteziIplik = new ZetaCodeFanteziIplik();
-            Company = new CompanyDto();
+            Company = new Company();
             NormalIplikler = new List<ZetaCodeNormalIplik>();
             AnaIplikKategorileri = new List<Term>();
         }

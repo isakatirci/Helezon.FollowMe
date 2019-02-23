@@ -133,12 +133,12 @@
 
 
                                             @*<div class="form-group">
-            @Html.LabelFor(model => model.FanteziIplik.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.DropDownList("FanteziIplik.Ea" , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"    , htmlAttributes: new { @class = "form-control select2" })
-                @Html.ValidationMessageFor(model => model.FanteziIplik.Ea, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                                        @Html.LabelFor(model => model.FanteziIplik.Ea, "Ea İplik No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("FanteziIplik.Ea" , new SelectList(Model.Collections.EaIpliNolar,"Value","Text"), "Please Select"    , htmlAttributes: new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.FanteziIplik.Ea, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
 
 
                                             <div class="form-group">
@@ -244,7 +244,7 @@
                                             @Html.DropDownList("FanteziIplik.Nm"
                                            , new SelectList(Model.Collections.DnyIpliNolar, "Value", "Text", Model.FanteziIplik?.Dny)
                                            , new { @class = "form-control select2" })
-                                        </div>                                      
+                                        </div>
                                     </div>
                                     <div class="form-group fl_iplik_no" style="display: none;">
                                         <label class="control-label col-md-2 " for="">Fl</label>
@@ -278,7 +278,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-2">
                                                                                 </div>
-                                                                                <div class="col-md-6">                                                                                   
+                                                                                <div class="col-md-6">
                                                                                     @Html.DropDownList("Value", new SelectList(Model.Collections.TumIplikler, "Value", "Name", Model.KarsimdakiIplikler[i].Value), "Please Select", new { @class = "form-control select2 normal_iplik" })
                                                                                 </div>
                                                                                 <div class="col-md-2">
@@ -288,8 +288,8 @@
                                                                                 </div>
                                                                             </div>
                                                                             @*<div class="row" id="normal_iplik_form">
-                                                                                @Html.Action("GetNormalIplikRenkler", new { normalIplikId = Model.KarsimdakiIplikler[i].Id })
-                                                                            </div>*@
+                                                                        @Html.Action("GetNormalIplikRenkler", new { normalIplikId = Model.KarsimdakiIplikler[i].Id })
+                                                                    </div>*@
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -305,7 +305,48 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_renkler"> Renk </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_renkler" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-horizontal form-bordered form-row-stripped">
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.FanteziIplik.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            @Html.DropDownList("FanteziIplik.PantoneId", Model.Collections.PantoneRenkleri
+                                           , "Please Select"
+                                           , htmlAttributes: new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.FanteziIplik.PantoneId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.FanteziIplik.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <div class="col-md-3">
+                                            @Html.DropDownList("RenkIdHtmlKod", new SelectList(Model.Collections.Renkler, dataValueField:"Value",  dataTextField: "Text",  selectedValue: Model.Renk.Id +"|" + Model.Renk.HtmlKod)
+                                         , "Please Select"
+                                         , htmlAttributes: new { @class = "form-control select2 ", @onchange= "setHtmlColorCode($(this))" })
+                                            @Html.ValidationMessageFor(model => model.FanteziIplik.PantoneId, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.FanteziIplik.Renkid, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -401,6 +442,15 @@
     
         function validateSomeFields() {
 
+        }
+
+        function setHtmlColorCode(dll) {
+            if (dll) {
+                var htmlColorText = dll.find("option:selected").val();
+                if (htmlColorText && htmlColorText.length > 0) {
+                    dll.closest(".form-group").find("#renkidhtml").css('background-color', htmlColorText.split("|")[1]);
+                }
+            }
         }
 
         function setVisibleIplikNo(dll) {

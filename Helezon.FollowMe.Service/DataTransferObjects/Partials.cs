@@ -249,8 +249,8 @@ namespace Helezon.FollowMe.Service.DataTransferObjects
 
     }
 
-    public partial class IplikNoDto
-    {
-        public string ElyafCinsiKalitesiName { get; set; }
-    }
+    //public partial class IplikNoDto
+    //{
+    //    public string ElyafCinsiKalitesiName { get; set; }
+    //}
 }

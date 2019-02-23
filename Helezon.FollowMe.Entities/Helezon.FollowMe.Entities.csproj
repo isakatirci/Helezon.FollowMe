@@ -236,6 +236,12 @@
     <Compile Include="Models\PersonnelTermMap.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductMap.cs">
+      <DependentUpon>FollowMeModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RafBilgisi.cs">
       <DependentUpon>FollowMeModels.tt</DependentUpon>
     </Compile>

@@ -26,7 +26,7 @@ namespace Helezon.FollowMe.Service
     {
         string FistCompanyName();
         List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType, string sirketId);
-        CompanyDto GetCompanyById(string companyId);
+        Company GetCompanyById(string companyId);
         CompanyDto GetCompanyCodeById(string companyId);
     }
 
@@ -61,12 +61,12 @@ namespace Helezon.FollowMe.Service
                 }).FirstOrDefault();
         }
 
-        public CompanyDto GetCompanyById(string companyId)
+        public Company GetCompanyById(string companyId)
         {
-            var company  = _repository.Queryable().FirstOrDefault(x => x.Id == companyId);
+            var company  = _repository.QueryableNoTracking().FirstOrDefault(x => x.Id == companyId);
             if (company == null)            
-                return null;            
-            return AutoMapperConfig.Mapper.Map<Company, CompanyDto>(company);            
+                return new Company();            
+            return company;            
         }
 
         public Expression<Func<Company, bool>> p1(int companyRootType, string sirketId)

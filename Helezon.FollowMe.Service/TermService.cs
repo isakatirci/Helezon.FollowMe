@@ -125,9 +125,16 @@ namespace Helezon.FollowMe.Service
 
         public Term GetTermById(int? id)
         {
-            if (!id.HasValue)            
-                return new Term();            
-            return _repoTerm.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (!id.HasValue)
+            {
+                return new Term();
+            }
+            var term = _repoTerm.QueryableNoTracking().FirstOrDefault(x => x.Id == id);
+            if (term != null)
+            {
+                return term;
+            }
+            return new Term();
         }
         public string GetTermNameById(int? id)
         {

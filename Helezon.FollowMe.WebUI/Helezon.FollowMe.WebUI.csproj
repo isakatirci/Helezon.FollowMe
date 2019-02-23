@@ -235,6 +235,7 @@
     <Compile Include="Controllers\Old\HomeController.cs" />
     <Compile Include="Controllers\Old\ManageController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\TelephoneController.cs" />
     <Compile Include="Controllers\TermsController.cs" />
@@ -6738,6 +6739,9 @@
     <Content Include="Views\ZetaCodeHazirGiyim\Card.cshtml" />
     <Content Include="Views\Shared\_MyPartialKumasMakine.cshtml" />
     <Content Include="Views\Shared\_MyPartialYikamaTalimati.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

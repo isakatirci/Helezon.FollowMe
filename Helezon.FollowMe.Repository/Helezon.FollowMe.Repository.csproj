@@ -64,6 +64,7 @@
     <Compile Include="Code\QueryableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AksesuarRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ZetaCodeHazirGiyimRepository.cs" />
     <Compile Include="Repositories\IplikNoRepository.cs" />
     <Compile Include="Repositories\TermRepository.cs" />

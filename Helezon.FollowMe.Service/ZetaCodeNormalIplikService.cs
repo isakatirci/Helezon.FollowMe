@@ -52,6 +52,9 @@ namespace Helezon.FollowMe.Service
         private readonly IOthersService _othersService;
         private readonly ICompanyService _companyService;
 
+        private readonly IRenkService _renkService;
+        private readonly IPantoneRenkService _pantoneRenkService;
+        private readonly IIplikNoService _iplikNoService;
 
         private readonly IRepositoryAsync<IplikKategoriDegrede> _repoDegrede;
         private readonly IRepositoryAsync<IplikKategoriFlam> _repoFlam;
@@ -66,13 +69,18 @@ namespace Helezon.FollowMe.Service
         public ZetaCodeNormalIplikService(IRepositoryAsync<ZetaCodeNormalIplik> repository) : base(repository)
         {
             _repository = repository;
+
+            _renkService = new RenkService(_repository.GetRepositoryAsync<Renk>());
+            _pantoneRenkService = new PantoneRenkService(_repository.GetRepositoryAsync<PantoneRenk>());
+            _iplikNoService = new IplikNoService(_repository.GetRepositoryAsync<IplikNo>());
+
             _repoDegrede = repository.GetRepositoryAsync<IplikKategoriDegrede>();
             _repoFlam = repository.GetRepositoryAsync<IplikKategoriFlam>();
             _repoKircili = repository.GetRepositoryAsync<IplikKategoriKircili>();
             _repoKrep = repository.GetRepositoryAsync<IplikKategoriKrep>();
             _repoNopeli = repository.GetRepositoryAsync<IplikKategoriNopeli>();
             _repoSim = repository.GetRepositoryAsync<IplikKategoriSim>();
-            _termService = new TermService(_repository.GetRepositoryAsync<Term>());
+            _termService = new TermService(_repository.GetRepositoryAsync<Term>());          
             _othersService = new OthersService();
             _companyService = new CompanyService(_repository.GetRepositoryAsync<Company>());
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
@@ -389,6 +397,7 @@ namespace Helezon.FollowMe.Service
             normalIplikDto.UrunIsmi = urunIsmi;
         }
 
+
         public NormalIplikContainerDto GetCard(int id, string companyId)
         {
             var container = new NormalIplikContainerDto();
@@ -398,6 +407,22 @@ namespace Helezon.FollowMe.Service
                 return container;
             }
             container.NormalIplik = normalIplik;
+
+            if (!string.IsNullOrWhiteSpace(normalIplik.SirketId))
+            {
+                var company = _companyService.GetCompanyById(normalIplik.SirketId);
+                container.Company = company;
+            }
+
+
+            container.Renk = _renkService.GetRenkById(normalIplik.Renkid);
+            container.PantoneRenk = _pantoneRenkService.GetPantoneRenkById(normalIplik.PantoneId);
+            container.RafyeriTurkiye = _termService.GetTermById(normalIplik.RafyeriTurkiyeId);
+            container.RafyeriYunanistan = _termService.GetTermById(normalIplik.RafyeriYunanistanId);
+            container.Ulke = _othersService.GetCountryById(normalIplik.UlkeId);
+            container.IplikNoDtos = _iplikNoService.GetNormalIplikIplikNolar(normalIplik.Id);          
+
+
             return container;
         }
 
@@ -521,19 +546,19 @@ namespace Helezon.FollowMe.Service
 
                 var existingIplikNoIds = new List<int>();   
                 var sum = 0;
-                var iplikNolar = container.IplikNolar; 
-                foreach (var iplikNo in iplikNolar)
+                var iplikNolar = container.IplikNoDtos; 
+                foreach (var iplikNoDto in iplikNolar)
                 {
-                    iplikNo.ZetaCodeNormalIplikId = normalIplik.Id;
-                    sum += iplikNo.ElyafOrani ?? 0;
-                    if (iplikNo.Id > 0)
+                    iplikNoDto.IplikNo.ZetaCodeNormalIplikId = normalIplik.Id;
+                    sum += iplikNoDto.IplikNo.ElyafOrani ?? 0;
+                    if (iplikNoDto.IplikNo.Id > 0)
                     {
-                        repoIplikNo.Update(iplikNo);
-                        existingIplikNoIds.Add(iplikNo.Id);
+                        repoIplikNo.Update(iplikNoDto.IplikNo);
+                        existingIplikNoIds.Add(iplikNoDto.IplikNo.Id);
                     }
                     else
                     {
-                        repoIplikNo.Insert(iplikNo);
+                        repoIplikNo.Insert(iplikNoDto.IplikNo);
                     }
                 }
 

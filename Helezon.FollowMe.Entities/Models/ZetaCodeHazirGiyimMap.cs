@@ -49,14 +49,6 @@ namespace Helezon.FollowMe.Entities.Models
             Property(x => x.Gram).HasColumnName(@"Gram").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.KategoriId).HasColumnName(@"KategoriId").HasColumnType("int").IsOptional();
             Property(x => x.BaskiGoruntuId).HasColumnName(@"BaskiGoruntuId").HasColumnType("int").IsOptional();
-            Property(x => x.YikamaTalimatiKuruTemizleme).HasColumnName(@"YikamaTalimatiKuruTemizleme").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiYikamaSekli).HasColumnName(@"YikamaTalimatiYikamaSekli").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiYikamaMaxDerecesi).HasColumnName(@"YikamaTalimatiYikamaMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiUtulemeMaxDerecesi).HasColumnName(@"YikamaTalimatiUtulemeMaxDerecesi").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiTersYikama).HasColumnName(@"YikamaTalimatiTersYikama").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.YikamaTalimatiCekemezlik).HasColumnName(@"YikamaTalimatiCekemezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.YikamaTalimatiDonmezlik).HasColumnName(@"YikamaTalimatiDonmezlik").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.YikamaTalimatiYikamaAdedi).HasColumnName(@"YikamaTalimatiYikamaAdedi").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
             Property(x => x.IsPassive).HasColumnName(@"IsPassive").HasColumnType("bit").IsRequired();
             Property(x => x.CreatedOn).HasColumnName(@"CreatedOn").HasColumnType("datetime2").IsOptional();
             Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
