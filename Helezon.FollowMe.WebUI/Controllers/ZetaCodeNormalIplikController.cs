@@ -90,7 +90,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             ,int uretimTeknolojitermId = 0)
         {
             model.Collections.Sirketler = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
-            model.Collections.Ulkeler = GetOthersService().GetAllCountry();
+            //model.Collections.Ulkeler = GetOthersService().GetAllCountry();
             //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value,ulkeId?.ToString()) == 0);
             //if (ulke != null)
             //{
@@ -347,7 +347,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             var data = GetOthersService().GetAllAksesuar().Select(x=> new JsTreeDataDto
             {
-                id = x.Id.ToString(),
+                id = x.Value.ToString(),
                 text = x.Name,
                 parent =  "#" 
             }).ToList();

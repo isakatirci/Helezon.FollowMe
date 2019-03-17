@@ -1,0 +1,62 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_rafyerleri"> RAF YERLERI </a>
+        </h4>
+    </div>
+    <div id="collapse_rafyerleri" class="panel-collapse collapse">
+        <div class="form-horizontal form-bordered form-row-stripped">
+            <div class="form-body">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RafyeriTurkiye.Id, "Rafyeri Türkiye", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                    <input type="hidden"
+                                           name="RafyeriTurkiye.Id"
+                                           id="RafyeriTurkiye_Id"
+                                           value="@Model.RafyeriTurkiye.Id" />
+                                    <input type="text"
+                                           name="RafyeriTurkiye.Name"
+                                           id="RafyeriTurkiye_Name"
+                                           readonly
+                                           class="form-control"
+                                           value="@Model.RafyeriTurkiye.Name" />
+                                    <br />
+                                    <div id="treeRafyeriTurkiyeId">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RafyeriYunanistan.Id, "Rafyeri Yunanistan", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                    <input type="hidden"
+                                           name="RafyeriYunanistan.Id"
+                                           id="RafyeriYunanistan_Id"
+                                           value="@Model.RafyeriYunanistan.Id" />
+                                    <input type="text"
+                                           name="RafyeriYunanistan.Name"
+                                           id="RafyeriYunanistan_Name"
+                                           class="form-control"
+                                           readonly
+                                           value="@Model.RafyeriYunanistan.Name" />
+                                    <br />
+                                    <div id="treeRafyeriYunanistanId">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

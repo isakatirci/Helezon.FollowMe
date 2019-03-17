@@ -1,0 +1,167 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+@{
+    var update = Model.Update;
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_kumas_ve_aksesuar"> KUMAS VE AKSESUAR SECME  </a>
+        </h4>
+    </div>
+    <div id="collapse_kumas_ve_aksesuar" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+                    @{
+                        //var normalIplikCount = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count;
+                        var normalIplikCount = 0;
+                    }
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="normal_iplik_count">Kaç Kumaştan Oluşuyor</label>
+                        <div class="col-md-6">
+                            <select id="kumas_counter" class="form-control">
+                                <option value="">Please Select</option>
+                                <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
+                                <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
+                                <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
+                                <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
+                                <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" href="javascript:void(0);"> Zeta Code Kumaşlar </a>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal form-bordered form-row-stripped">
+                        <div class="form-body">
+                            <div class="mt-repeater1">
+                                <div data-repeater-list="Kumaslar">
+                                    @{
+                                        for (int i = 0; i < Model.Kumaslar.Count; i++)
+                                        {
+
+                                            <text>
+                                                <div data-repeater-item>
+                                                    <div class="mt-repeater-item">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    @Html.DropDownList("Id"
+                                                                        , new SelectList(Model.Collections.Kumaslar, "Id", "ZetaCode", Model.Kumaslar[i].Value)
+                                                                        , "Please Select"
+                                                                        , new { @class = "form-control select2", @onchange = "" })
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0">
+                                                                        <i class="fa fa-close"></i> Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" id="">
+                                                                @*@Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </text>
+                                        }
+                                    }
+                                </div>
+                                <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
+                                    <i class="fa fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+                    @{
+                        //var normalIplikCount = Model.ZetaCodeFanteziIplikDto.ZetaCodeNormalIplik.Count;
+                        normalIplikCount = 0;
+                    }
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="normal_iplik_count">Kaç Aksesuardan Oluşuyor</label>
+                        <div class="col-md-6">
+                            <select id="aksesuar_counter" class="form-control">
+                                <option value="">Please Select</option>
+                                <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
+                                <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
+                                <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
+                                <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
+                                <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" href="javascript:void(0);"> Zeta Code Aksesuarlar </a>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal form-bordered form-row-stripped">
+                        <div class="form-body">
+                            <div class="mt-repeater2">
+                                <div data-repeater-list="Aksesuarlar">
+                                    @{
+                                        for (int i = 0; i < Model.Aksesuarlar.Count; i++)
+                                        {
+
+                                            <text>
+                                                <div data-repeater-item>
+                                                    <div class="mt-repeater-item">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    @Html.DropDownList("Id"
+                                                                        , new SelectList(Model.Collections.Aksesuarlar, "Id", "ZetaCode", Model.Aksesuarlar[i].Id)
+                                                                        , "Please Select"
+                                                                        , new { @class = "form-control select2", @onchange = "" })
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0">
+                                                                        <i class="fa fa-close"></i> Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" id="">
+                                                                @*@Html.Action("GetNormalIplikRenkler", new { normalIplikId = normalIplik.Id })*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </text>
+                                        }
+                                    }
+                                </div>
+                                <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
+                                    <i class="fa fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

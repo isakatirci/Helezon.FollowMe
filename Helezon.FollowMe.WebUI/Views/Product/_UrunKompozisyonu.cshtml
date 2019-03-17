@@ -1,0 +1,78 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+@{
+    var update = Model.Update;
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_urun_komposizyonu"> URUN KOMPOSIZYONU  </a>
+        </h4>
+    </div>
+    <div id="collapse_urun_komposizyonu" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+                    @Html.EditorFor(model => model.Product.En, "MyTouchSpin")
+                    @Html.EditorFor(model => model.Product.Boy, "MyTouchSpin")
+                    @Html.EditorFor(model => model.Product.Gram, "MyTouchSpin")
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="normal_iplik_count">Kompozisyon Adeti Belirleyiniz</label>
+                        <div class="col-md-6">
+                            @{
+
+                                var normalIplikCount = 0;
+                            }
+                            <select id="normal_iplik_count" class="form-control">
+                                <option value="">Please Select</option>
+                                <option @(normalIplikCount == 1 ? "selected" : "") value="1">1</option>
+                                <option @(normalIplikCount == 2 ? "selected" : "") value="2">2</option>
+                                <option @(normalIplikCount == 3 ? "selected" : "") value="3">3</option>
+                                <option @(normalIplikCount == 4 ? "selected" : "") value="4">4</option>
+                                <option @(normalIplikCount == 5 ? "selected" : "") value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-repeater">
+                        <div data-repeater-list="AksesuarKompozisyonlar">
+                            @{
+                                for (int i = 0; i < Model.AksesuarKompozisyonlar.Count; i++)
+                                {
+                                    <text>
+                                        <div data-repeater-item>
+                                            <div class="mt-repeater-item">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-2" for=""></label>
+                                                    <div class="col-md-4">
+                                                        @Html.DropDownList("UrunKompozisyonId",new SelectList(Model.Collections.UrunKompozisyonlar, "Id", "Name"), optionLabel: "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.DropDownList("YuzdeOrani", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control select2 yuzde_orani" })
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete" style="margin-top: 0;">
+                                                            <i class="fa fa-close"></i> Delete
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </text>
+                                }
+                            }
+                        </div>
+                        <a href="javascript:;" data-repeater-create class="btn btn-default mt-repeater-add">
+                            <i class="fa fa-plus"></i> Add
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

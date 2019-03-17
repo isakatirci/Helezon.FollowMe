@@ -86,20 +86,20 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             var blueCompanies = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
 
-            model.Collections.BedenKalipIsimleri = GetOthersService().GetBedenKaliplari().Select(x => new SelectListItem
-            {
-                Value = x.Id,
-                Text = x.Name
-            }).ToList(); ;
+            //model.Collections.BedenKalipIsimleri = GetOthersService().GetBedenKaliplari().Select(x => new SelectListItem
+            //{
+            //    Value = x.Id,
+            //    Text = x.Name
+            //}).ToList(); ;
 
-            model.Collections.Sirketler
-                = new SelectList(blueCompanies, "Id", "Name", sirketId);
-            var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
-            var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
-            if (ulke != null)
-            {
-                ulke.Selected = true;
-            }
+            //model.Collections.Sirketler
+            //    = new SelectList(blueCompanies, "Id", "Name", sirketId);
+            //var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
+            //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
+            //if (ulke != null)
+            //{
+            //    ulke.Selected = true;
+            //}
 
             model.Collections.PantoneRenkler = GetNormalIplikService().GetPantoneRenkler().Select(x => new SelectListItem
             {
@@ -114,11 +114,11 @@ namespace Helezon.FollowMe.WebUI.Controllers
             }).ToList();
 
 
-            model.Collections.YikamaSekilleri = new HashSet<PairIdNameDto>(GetOthersService().GetYikamaSekilleri().Select(x => new PairIdNameDto
-            {
-                Id = x.Id,
-                Name = x.Name
-            }));
+            //model.Collections.YikamaSekilleri = new HashSet<PairIdNameDto>(GetOthersService().GetYikamaSekilleri().Select(x => new PairIdNameDto
+            //{
+            //    Id = x.Id,
+            //    Name = x.Name
+            //}));
 
             model.Collections.BaskiGoruntuler = GetTermService().GetTermsByTaxonomyId((int)TaxonomyType.BaskiGoruntuler).Select(x => new SelectListItem
             {
@@ -167,7 +167,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 ZetaCode = x.ZetaCode + ", " + x.UrunKompozisyonu
             }));
 
-            model.Collections.Ulkeler = temp;
+            //model.Collections.Ulkeler = temp;
 
             if (!model.Kumaslar.Any())
             {

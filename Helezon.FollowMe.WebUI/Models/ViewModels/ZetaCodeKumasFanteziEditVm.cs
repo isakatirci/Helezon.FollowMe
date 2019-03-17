@@ -17,13 +17,10 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<ZetaCodeDto> Kumaslar { get; set; }
         public KumasFanteziEditVmCollections Collections { get; set; }
         public Company Company { get; set; }
-        //public ZetaCodeKumasMakine ZetaCodeKumasMakine { get; set; }
         public PairIdNameDto Ulke { get; set; }
         public List<Term> OrguDetaylari { get;  set; }
-        public List<Term> BoyaIslemleri { get;  set; }
-        
-        public List<ZetaCodeKumasFantezi3AdimIslemleri> KumasFantezi3AdimIslemleri { get; set; }
-        //
+        public List<Term> BoyaIslemleri { get;  set; }        
+        public List<ZetaCodeKumasFantezi3AdimIslemleri> KumasFantezi3AdimIslemleri { get; set; }        
         public ZetaCodeKumasMakine Makine { get; set; }
         public ZetaCodeYikamaTalimati YikamaTalimati { get; set; }
         public ZetaCodeYikamaTalimati ZetaCodeYikamaTalimati { get; set; }

@@ -6740,8 +6740,21 @@
     <Content Include="Views\Shared\_MyPartialKumasMakine.cshtml" />
     <Content Include="Views\Shared\_MyPartialYikamaTalimati.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\_iplikElyafCinsiVeOrani.cshtml" />
+    <Content Include="Views\Product\_Group1.cshtml" />
+    <Content Include="Views\Product\_Renk.cshtml" />
+    <Content Include="Views\Product\_RafYerleri.cshtml" />
+    <Content Include="Views\Product\_iplikSecmeFantaziBukumluGipe.cshtml" />
+    <Content Include="Views\Product\_OrguDetaylari.cshtml" />
+    <Content Include="Views\Product\_Boyahaneislemleri.cshtml" />
+    <Content Include="Views\Product\_iplikSecme_.cshtml" />
+    <Content Include="Views\Product\_____iplikSecme.cshtml" />
+    <Content Include="Views\Product\_UrunKompozisyonu.cshtml" />
+    <Content Include="Views\Product\_KalipveBedenler.cshtml" />
+    <Content Include="Views\Product\_3Adimislemler.cshtml" />
+    <Content Include="Views\Product\_KumasveAksesuarSecme.cshtml" />
+    <Content Include="Views\Product\_iplikNoVeUretimTeknolojisi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

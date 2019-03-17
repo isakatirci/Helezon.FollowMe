@@ -26,7 +26,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
     public class ZetaCodeNormalIplikEditVm
     {
         //public string Operation { get; set; }
-        public Product NormalIplik { get; set; }
+        public ZetaCodeNormalIplik NormalIplik { get; set; }
         public string RenkIdHtmlKod { get; set; }
         public ZetaCodeNormalIplikViewCollections Collections { get; set; }
         public List<IplikNoVm> IplikNolar { get; set; }
@@ -40,7 +40,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
             Collections = new ZetaCodeNormalIplikViewCollections();       
-            NormalIplik = new Product();
+            NormalIplik = new ZetaCodeNormalIplik();
             Company = new Company();
             IplikNolar = new List<IplikNoVm>();
             Ulke = new PairIdNameDto();

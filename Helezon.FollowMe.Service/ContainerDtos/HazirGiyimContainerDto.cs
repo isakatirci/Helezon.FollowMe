@@ -15,7 +15,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
         public Company Company { get; set; }
         public PantoneRenk PantoneRenk { get; set; }
         public Renk Renk { get; set; }
-        public PairIdNameDto Ulke { get; set; }
+        public MyNameValueDto Ulke { get; set; }
         public string PictureUrl { get; set; }
         public string PictureEditUrl { get; set; }
         public Term RafyeriTurkiye { get; set; }
@@ -33,7 +33,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
             PantoneRenk = new PantoneRenk();
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
-            Ulke = new PairIdNameDto();
+            Ulke = new MyNameValueDto();
         }
     }
 }

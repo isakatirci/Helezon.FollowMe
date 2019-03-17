@@ -79,12 +79,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
             model.Collections.Sirketler
                 = new SelectList(blueCompanies, "Id", "Name", sirketId);
-            var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
-            var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
-            if (ulke != null)
-            {
-                ulke.Selected = true;
-            }
+            //var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
+            //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
+            //if (ulke != null)
+            //{
+            //    ulke.Selected = true;
+            //}
 
             model.Collections.PantoneRenkler = GetNormalIplikService().GetPantoneRenkler().Select(x => new SelectListItem
             {
@@ -110,7 +110,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
 
 
 
-            model.Collections.Ulkeler = temp;
+            //model.Collections.Ulkeler = temp;
 
         }
     }

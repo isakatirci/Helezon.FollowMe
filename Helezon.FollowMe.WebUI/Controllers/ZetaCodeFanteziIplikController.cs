@@ -49,12 +49,12 @@ namespace Helezon.FollowMe.WebUI.Controllers
               , int pantoneRenkId = 0)
         {
           
-            var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
-            var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
-            if (ulke != null)
-            {
-                ulke.Selected = true;
-            }
+            //var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
+            //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
+            //if (ulke != null)
+            //{
+            //    ulke.Selected = true;
+            //}
        
 
             model.Collections.EaIpliNolar = GetNormalIplikService().GetIplikNoGuideByColumnName("EA").Select(x => new SelectListItem() { Value = x.Ea.ToString(), Text = x.Ea.ToString() }).ToList();
@@ -67,7 +67,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
             model.Collections.NmIpliNolar.Insert(0, new SelectListItem { Value = "", Text = "Please Select", Selected = true });
 
             model.Collections.Sirketler = GetCompanyService().GetParentCompanyIdAndNames(1, sirketId);
-            model.Collections.Ulkeler = GetOthersService().GetAllCountry();
+            //model.Collections.Ulkeler = GetOthersService().GetAllCountry();
 
 
 
@@ -149,9 +149,9 @@ namespace Helezon.FollowMe.WebUI.Controllers
             }
             var model = new ZetaCodeFanteziIplikEditVm();
             model.FanteziIplik = fanteziIplik;
-            FillCollections(model
-                , sirketId: fanteziIplik.SirketId
-                , ulkeId: container.Ulke.Id.AsInt());
+            //FillCollections(model
+            //    , sirketId: fanteziIplik.SirketId
+            //    , ulkeId: container.Ulke.Id.AsInt());
             return View(model);
         }
 
@@ -206,10 +206,10 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 return RedirectToAction(controllerName:"ZetaCode",actionName: "Index");
 
             var fanteziIplik = model.FanteziIplik;
-            FillCollections(model
-                , sirketId: fanteziIplik.SirketId
-                , ulkeId: container.Ulke.Id.AsInt()
-               );
+            //FillCollections(model
+            //    , sirketId: fanteziIplik.SirketId
+            //    , ulkeId: container.Ulke.Id.AsInt()
+            //   );
 
             return View(viewName: "Edit", model: model);
         }

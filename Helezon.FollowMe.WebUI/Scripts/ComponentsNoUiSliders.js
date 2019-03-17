@@ -83,6 +83,7 @@
             });
 
         } catch (e) {
+            console.error(e);
             debugger;
         }
     }

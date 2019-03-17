@@ -22,10 +22,10 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 
     public class ZetaCodeYikamaTalimatiEditVmCollections
     {
-        public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
+        public HashSet<MyNameValueDto> YikamaSekilleri { get; set; }
         public ZetaCodeYikamaTalimatiEditVmCollections()
         {
-            YikamaSekilleri = new HashSet<PairIdNameDto>();
+            YikamaSekilleri = new HashSet<MyNameValueDto>();
         }
         //public HashSet<PairIdNameDto> TupAcikEnler { get; set; }
         //public HashSet<PairIdNameDto> Elastanlar { get; set; }

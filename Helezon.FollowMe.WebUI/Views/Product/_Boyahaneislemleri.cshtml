@@ -1,0 +1,35 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_boya_islemleri"> BOYAHANE İŞLEMLERİ </a>
+        </h4>
+    </div>
+    <div id="collapse_boya_islemleri" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                @Html.EditorFor(x => x.Product.En, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.Product.Gramaj, templateName: "MyTouchSpin")
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Product.BoyaIslemleriIds, new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.HiddenFor(x => x.Product.BoyaIslemleriIds)
+                        <textarea id="Product_BoyaIslemleri"
+                                  class="form-control"
+                                  rows="3"
+                                  readonly
+                                  cols="20"
+                                  value="@(string.Join(",",Model.BoyaIslemleri.Select(x => x.Name)))"></textarea>                                        <br />
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="height:200px; overflow-y:auto;">
+                                <div id="treeBoyaIslemleri">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

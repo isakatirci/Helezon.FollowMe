@@ -51,36 +51,20 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public SelectList Sirketler { get; set; }
         public List<SelectListItem> Ulkeler { get; set; }
         public List<SelectListItem> ModelYillari { get; set; }
-
         public List<SelectListItem> NormalIplikler { get; set; }
         public List<SelectListItem> FanteziIplikler { get; set; }
-
-
         public HashSet<PairIdNameDto> TupAcikEnler { get; set; }
         public HashSet<PairIdNameDto> Elastanlar { get; set; }
         public HashSet<PairIdNameDto> YikamaSekilleri { get; set; }
-
         public SelectList UrunKategorileri { get; set; }
-
         public List<SelectListItem> PantoneRenkler { get; set; }
         public List<SelectListItem> Renkler { get; set; }
-
         public List<SelectListItem> OrguTipleri { get; set; }
         public List<SelectListItem> OrguCesidleri { get; set; }
         public List<SelectListItem> OrguKabiliyetleri { get; set; }
-        public List<SelectListItem> OrguDigerleri { get; set; }
-        //
-        //
+        public List<SelectListItem> OrguDigerleri { get; set; }       
         public IEnumerable<SelectListItem> KumasGoruntuleri { get; set; }
         public List<ZetaCodeDto> Iplikler { get; set; }
-
-
-        //public List<SelectListItem> NormalIplikler { get; set; }
-
-
-        //public SelectList BoyaYonu { get; internal set; }
-        //public SelectList BoyaTipi { get; internal set; }
-
         public ZetaCodeKumasOrmeDokumaCollections()
         {
             OrguTipleri = new List<SelectListItem>();

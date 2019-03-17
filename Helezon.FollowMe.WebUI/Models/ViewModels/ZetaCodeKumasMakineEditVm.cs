@@ -11,7 +11,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
 {
     public class ZetaCodeKumasMakineEditVm
     {
-        public ZetaCodeKumasMakine Makine { get; set; }
+        public ZetaCodeKumasMakine KumasMakine { get; set; }
         public Term MakineMarkasi { get; set; }
         public Term MakineModeli { get; set; }
         public List<Term> Aksesuarlar { get; set; }
@@ -23,18 +23,18 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
             MakineMarkasi = new Term();
             MakineModeli = new Term();
             Aksesuarlar = new List<Term>();
-            Makine = new ZetaCodeKumasMakine();
+            KumasMakine = new ZetaCodeKumasMakine();
         }
     }
 
     public class ZetaCodeKumasMakineEditVmCollections
     {
-        public HashSet<PairIdNameDto> TupAcikEnler { get; set; }
-        public HashSet<PairIdNameDto> Elastanlar { get; set; }
+        public HashSet<MyNameValueDto> TupAcikEnler { get; set; }
+        public HashSet<MyNameValueDto> Elastanlar { get; set; }
         public ZetaCodeKumasMakineEditVmCollections()
         {
-            TupAcikEnler = new HashSet<PairIdNameDto>();
-            Elastanlar = new HashSet<PairIdNameDto>();
+            TupAcikEnler = new HashSet<MyNameValueDto>();
+            Elastanlar = new HashSet<MyNameValueDto>();
         }
     }
 }

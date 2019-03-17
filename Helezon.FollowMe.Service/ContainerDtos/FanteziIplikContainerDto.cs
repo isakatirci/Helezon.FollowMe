@@ -20,12 +20,12 @@ namespace Helezon.FollowMe.Service.ContainerDtos
         public Renk Renk { get; set; }
         public Term RafyeriTurkiye { get; set; }
         public Term RafyeriYunanistan { get; set; }
-        public PairIdNameDto Ulke { get; set; }
+        public MyNameValueDto Ulke { get; set; }
         public Term IplikKategosi { get; set; }
         
         public FanteziIplikContainerDto()
         {
-            Ulke = new PairIdNameDto();
+            Ulke = new MyNameValueDto();
             PantoneRenk = new PantoneRenk();
             Renk = new Renk();
             IplikKategosi = new Term();

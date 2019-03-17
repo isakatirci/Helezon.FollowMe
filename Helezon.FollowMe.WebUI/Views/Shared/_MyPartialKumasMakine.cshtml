@@ -10,9 +10,9 @@
         <div class="panel-body">
             <div class="form-horizontal form-bordered form-row-stripped">
                 <div class="form-group">
-                    <label class="control-label col-md-2">Makine Markası</label>
+                    <label class="control-label col-md-2">KumasMakine Markası</label>
                     <div class="col-md-6">
-                        @Html.HiddenFor(x => x.Makine.MarkaId)
+                        @Html.HiddenFor(x => x.MakineMarkasi.Id)
                         @Html.TextBoxFor(x => x.MakineMarkasi.Name, new { @class = "form-control", @readonly = "" })
                         <br />
                         <div class="panel panel-default">
@@ -24,9 +24,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Makine Modeli</label>
+                    <label class="control-label col-md-2">KumasMakine Modeli</label>
                     <div class="col-md-6">
-                        @Html.HiddenFor(x => x.Makine.ModelId)
+                        @Html.HiddenFor(x => x.MakineModeli.Id)
                         @Html.TextBoxFor(x => x.MakineModeli.Name, new { @class = "form-control", @readonly = "" })
                         <br />
                         <div class="panel panel-default">
@@ -37,18 +37,18 @@
                         </div>
                     </div>
                 </div>
-                @Html.EditorFor(x => x.Makine.ModelYili, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.Pus, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.Fine, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.YedekFine, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.Sistem, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.IgneSayisi, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.HamGr, templateName: "MyTouchSpin")
-                @Html.EditorFor(x => x.Makine.HamCm, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.ModelYili, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.Pus, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.Fine, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.YedekFine, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.Sistem, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.IgneSayisi, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.HamGr, templateName: "MyTouchSpin")
+                @Html.EditorFor(x => x.KumasMakine.HamCm, templateName: "MyTouchSpin")
                 <div class="form-group">
                     <label class="control-label col-md-2">Aksesuarlar</label>
                     <div class="col-md-6">
-                        @Html.HiddenFor(x => x.Makine.AksesuarIds)
+                        @Html.HiddenFor(x => x.KumasMakine.AksesuarIds)
                         <textarea rows="2"
                                   readonly
                                   cols="20"
@@ -65,17 +65,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(x => x.Makine.TupAcikEnId, "TupAcikEnler", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(x => x.KumasMakine.TupAcikEnId, "TupAcikEnler", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-6">
-                        @Html.DropDownList("Makine.TupAcikEnId", new SelectList(Model.Collections.TupAcikEnler, "Id", "Name", Model.Makine.TupAcikEnId), "Please Select", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.Makine.TupAcikEnId, "", new { @class = "text-danger" })
+                        @Html.DropDownList("KumasMakine.TupAcikEnId", new SelectList(Model.Collections.TupAcikEnler, "Value", "Name", Model.KumasMakine.TupAcikEnId), "Please Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.KumasMakine.TupAcikEnId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(x => x.Makine.ElastanId, "Elastanlar", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(x => x.KumasMakine.ElastanId, "Elastanlar", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-6">
-                        @Html.DropDownList("Makine.ElastanId", new SelectList(Model.Collections.Elastanlar, "Id", "Name", Model.Makine.ElastanId), "Please Select", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.Makine.ElastanId, "", new { @class = "text-danger" })
+                        @Html.DropDownList("KumasMakine.ElastanId", new SelectList(Model.Collections.Elastanlar, "Value", "Name", Model.KumasMakine.ElastanId), "Please Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.KumasMakine.ElastanId, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>        

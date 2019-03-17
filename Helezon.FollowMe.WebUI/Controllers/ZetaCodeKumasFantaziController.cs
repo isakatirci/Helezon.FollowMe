@@ -125,8 +125,8 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Text = "Örme Düz"
             });
 
-            model.Collections.TupAcikEnler = GetOthersService().GetAllTupAcikEn();
-            model.Collections.Elastanlar = GetOthersService().GetAllElastan();
+            //model.Collections.TupAcikEnler = GetOthersService().GetAllTupAcikEn();
+            //model.Collections.Elastanlar = GetOthersService().GetAllElastan();
 
             model.Collections.OrguTipleri.Add(new SelectListItem
             {
@@ -150,14 +150,14 @@ namespace Helezon.FollowMe.WebUI.Controllers
             });
 
 
-            model.Collections.Sirketler
-                = new SelectList(blueCompanies, "Id", "Name", sirketId);
-            var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
-            var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
-            if (ulke != null)
-            {
-                ulke.Selected = true;
-            }
+            //model.Collections.Sirketler
+            //    = new SelectList(blueCompanies, "Id", "Name", sirketId);
+            //var temp = GetOthersService().GetAllCountry().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList();
+            //var ulke = temp.FirstOrDefault(x => string.CompareOrdinal(x.Value, ulkeId?.ToString()) == 0);
+            //if (ulke != null)
+            //{
+            //    ulke.Selected = true;
+            //}
 
             model.Collections.PantoneRenkler = GetNormalIplikService().GetPantoneRenkler().Select(x => new SelectListItem
             {
@@ -178,7 +178,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                     Value = x.Id.ToString()
                 });
 
-            model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri();
+            //model.Collections.YikamaSekilleri = GetOthersService().GetYikamaSekilleri();
 
             model.AdimIslemleri = GetTermService().GetTermsByTaxonomyId((int)TaxonomyType.UcuncuAdimIslemleri);
 
@@ -214,7 +214,7 @@ namespace Helezon.FollowMe.WebUI.Controllers
                 Text = x.ZetaCode + "," + x.UrunIsmi
 
             }).ToList();
-            model.Collections.Ulkeler = temp;
+            //model.Collections.Ulkeler = temp;
 
             //
 

@@ -1,0 +1,122 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+@{
+    var update = Model.Update;
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_kalip_bedenler"> KALIP VE BEDENLER </a>
+        </h4>
+    </div>
+    <div id="collapse_kalip_bedenler" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Beden Ölçüleri
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"> </a>
+                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <ul class="nav nav-tabs tabs-left">
+                                <li class="active">
+                                    <a href="#tab_6_1" data-toggle="tab"> Boy </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_6_2" data-toggle="tab"> En </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_6_3" data-toggle="tab"> Kolboyu </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_6_4" data-toggle="tab"> Omuz </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_6_5" data-toggle="tab"> Ense </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_6_1">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xs, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].S, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].M, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].L, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl2, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl3, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl4, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[0].Xl5, "MyTouchSpin")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_6_2">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xs, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].S, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].M, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].L, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl2, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl3, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl4, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[1].Xl5, "MyTouchSpin")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_6_3">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xs, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].S, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].M, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].L, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl2, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl3, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl4, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[2].Xl5, "MyTouchSpin")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_6_4">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xs, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].S, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].M, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].L, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl2, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl3, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl4, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[3].Xl5, "MyTouchSpin")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_6_5">
+                                    <div class="form-horizontal form-bordered form-row-stripped">
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xs, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].S, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].M, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].L, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl2, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl3, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl4, "MyTouchSpin")
+                                        @Html.EditorFor(x => x.BedenOlculeri[4].Xl5, "MyTouchSpin")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

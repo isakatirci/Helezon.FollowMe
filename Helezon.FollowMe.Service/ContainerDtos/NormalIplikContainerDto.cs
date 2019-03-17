@@ -10,7 +10,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
 {
     public class NormalIplikContainerDto
     {
-        public Product NormalIplik { get; set; }
+        public ZetaCodeNormalIplik NormalIplik { get; set; }
         public IplikKategoriDegrede Degrede { get; set; }//IplikKategoriFlam
         public IplikKategoriFlam Flam { get; set; }
         public IplikKategoriKircili Kircili { get; set; }
@@ -26,20 +26,20 @@ namespace Helezon.FollowMe.Service.ContainerDtos
         public Renk Renk { get; set; }
         public Term RafyeriTurkiye { get; set; }
         public Term RafyeriYunanistan { get; set; }
-        public List<PairIdNameDto> IplikKategoriDetaylari { get; set; }
-        public PairIdNameDto Ulke { get; set; }
+        public List<MyNameValueDto> IplikKategoriDetaylari { get; set; }
+        public MyNameValueDto Ulke { get; set; }
 
         public List<IplikNoDto> IplikNoDtos { get; set; }
 
         public NormalIplikContainerDto()
         {
-            Ulke = new PairIdNameDto();
+            Ulke = new MyNameValueDto();
             IplikKategorisi = new Term();
             PantoneRenk = new PantoneRenk();
             Renk = new Renk();
             RafyeriTurkiye = new Term();
             RafyeriYunanistan = new Term();
-            NormalIplik = new Product();
+            NormalIplik = new ZetaCodeNormalIplik();
             Degrede = new IplikKategoriDegrede();
             Flam = new IplikKategoriFlam();
             Kircili = new IplikKategoriKircili();
@@ -49,7 +49,7 @@ namespace Helezon.FollowMe.Service.ContainerDtos
             //IplikNolar = new List<IplikNo>();
             ParentIplikCategories = new List<Term>();
             Company = new Company();
-            IplikKategoriDetaylari = new List<PairIdNameDto>();
+            IplikKategoriDetaylari = new List<MyNameValueDto>();
             IplikNoDtos = new List<IplikNoDto>();
         }
 

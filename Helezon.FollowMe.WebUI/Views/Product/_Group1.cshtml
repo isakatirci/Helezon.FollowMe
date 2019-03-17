@@ -1,0 +1,146 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+@{
+    var update = Model.Update;
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1"> Group #1 </a>
+        </h4>
+    </div>
+    <div id="collapse_1" class="panel-collapse in">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-horizontal form-bordered form-row-stripped">
+                        <div class="form-body">
+                            @if (update)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Product.IsPassive, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("Product.IsPassive", MyHtmlHelpers.SelectListForBoolean(Model.Product.IsPassive), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.Product.IsPassive, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Product.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Product.Id, new { htmlAttributes = new { @class = "form-control transform_none", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Product.Id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Product.ZetaCodePrevious, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Product.ZetaCodePrevious, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                    @Html.ValidationMessageFor(model => model.Product.ZetaCodePrevious, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Product.Master, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.DropDownList("Product.Master", MyHtmlHelpers.SelectListForBoolean(Model.Product.Master), "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.Product.Master, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @if (!update)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Product.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("Product.SirketId", Model.Collections.Companies, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(model => model.Product.SirketId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" name="Product.SirketId" id="Product_SirketId" value="@Model.Product.SirketId" />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Product.SirketId, "Blue Cod Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" readonly value="@(Model.Company.Code + " " + Model.Company.Name)" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (update)
+                            {
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Product.BlueSiparisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Product.BlueSiparisNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Product.BlueSiparisNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Product.UlkeId, "Ürün Menşei", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.DropDownList("Product.UlkeId", Model.Collections.Ulkeler, "Please Select", htmlAttributes: new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.Product.UlkeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Product.BlueUrunKodIsmi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Product.BlueUrunKodIsmi, new { htmlAttributes = new { @class = "form-control transform_none" } })
+                                    @Html.ValidationMessageFor(model => model.Product.BlueUrunKodIsmi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IplikKategosi.Id, "İplik Kategorisi", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <input type="hidden"
+                                                   name="IplikKategosi.Id"
+                                                   id="IplikKategosi_Id"
+                                                   value="@Model.IplikKategosi.Id" />
+                                            <input type="text"
+                                                   name="IplikKategosi.Name"
+                                                   id="IplikKategosi_Name"
+                                                   readonly
+                                                   class="form-control"
+                                                   value="@Model.IplikKategosi.Name" />
+                                            <br />
+                                            <div id="treeIplikKategosiId"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-horizontal iplik_kategori_forms">
+                        <div class="form-body" id="placeholderPartialIplikKategori">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+@{
+    var update = Model.Update;
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_ucuncu_adim"> 3. ADIM ISLEMLER </a>
+        </h4>
+    </div>
+    <div id="collapse_ucuncu_adim" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Product.BaskiGoruntuId, "Baskı Görüntü", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(x => x.Product.BaskiGoruntuId, Model.Collections.BaskiGoruntuler, "Please Select", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.Product.BaskiGoruntuId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

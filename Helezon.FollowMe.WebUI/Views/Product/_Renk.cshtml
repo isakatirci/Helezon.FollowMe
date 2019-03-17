@@ -1,0 +1,43 @@
+﻿@model Helezon.FollowMe.WebUI.Controllers.ProductVm
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_renkler"> RENK </a>
+        </h4>
+    </div>
+    <div id="collapse_renkler" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="form-horizontal form-bordered form-row-stripped">
+                <div class="form-body">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Product.PantoneId, "Pantone Renkle", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("Product.PantoneId", Model.Collections.PantoneRenkleri
+                           , "Please Select"
+                           , htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.Product.PantoneId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Product.Renkid, "Renkler", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-3">
+                            @Html.DropDownList("RenkIdHtmlKod", new SelectList(Model.Collections.Renkler, dataValueField:"Value",  dataTextField: "Text",  selectedValue: Model.Renk.Id +"|" + Model.Renk.HtmlKod)
+                         , "Please Select"
+                         , htmlAttributes: new { @class = "form-control select2 ", @onchange= "setHtmlColorCode($(this))" })
+                            @Html.ValidationMessageFor(model => model.Product.PantoneId, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Product.Renkid, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-default btn-block" id="renkidhtml">&nbsp;</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

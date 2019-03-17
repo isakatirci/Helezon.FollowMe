@@ -24,7 +24,7 @@ namespace Helezon.FollowMe.Service
         ZetaCodeFanteziIplikDto GetFanteziIplikById(int value, string companyId, bool includeNormalIplikler = false);
         List<ZetaCodeFanteziIplikDto> GetAllZetaCodeAndUrunIsmiOfFantaziIplikler(int? fanteziIplikId = null);
         ZetaCodeFanteziIplikDto GetRenklerOfFanteziIplik(int fanteziplikId);
-        List<ZetaCodeFanteziIplikDto> GetZetaCodeIsimler(string companyId);
+        List<ZetaCodeFanteziIplikDto> GetZetaCodeIsimler(string companyId="");
         FanteziIplikContainerDto GetCard(int id,string compantId);
     }
 
@@ -65,7 +65,7 @@ namespace Helezon.FollowMe.Service
         }
 
 
-        public List<ZetaCodeFanteziIplikDto> GetZetaCodeIsimler(string companyId)
+        public List<ZetaCodeFanteziIplikDto> GetZetaCodeIsimler(string companyId = "")
         {
             return _repository.QueryableNoTracking().Where(x => /*x.CompanyId == companyId &&*/ !x.IsPassive)
                 .Select(x => new ZetaCodeFanteziIplikDto

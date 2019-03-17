@@ -49,11 +49,7 @@ namespace Helezon.FollowMe.WebUI.Models.ViewModels
         public List<SelectListItem> BedenKalipIsimleri { get; set; }
         public List<ZetaCodeDto> Kumaslar { get; set; }
         public List<ZetaCodeDto> Aksesuarlar { get; set; }
-
         public List<SelectListItem> Renkler { get; set; }
-
-        //public SelectList BoyaYonu { get; internal set; }
-        //public SelectList BoyaTipi { get; internal set; }
 
         public HazirGiyimEditVmCollections()
         {

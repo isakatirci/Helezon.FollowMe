@@ -38,7 +38,7 @@ namespace Helezon.FollowMe.Service
         IplikKategoriFlamDto GetIplikKategoriFlamByZetaCodeNormalIplikId(int? normalIplikId);
         ZetaCodeNormalIplikDto GetRenklerOfNormalIplik(int normalIplikId);
         List<ZetaCodeNormalIplikDto> GetAllZetaCodeAndUrunIsmiOfNormalIplikler(int? normalIplikId = null);
-        List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId);
+        List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId="");
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ namespace Helezon.FollowMe.Service
             _companyService = new CompanyService(_repository.GetRepositoryAsync<Company>());
             _zetaCodeService = new ZetaCodeService(_repository.GetRepositoryAsync<ZetaCodes>());
         }
-        public List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId)
+        public List<ZetaCodeNormalIplikDto> GetZetaCodeIsimler(string companyId="")
         {
             return _repository.QueryableNoTracking().Where(x => /*x.CompanyId == companyId &&*/ !x.IsPassive)
                 .Select(x => new ZetaCodeNormalIplikDto

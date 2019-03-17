@@ -26,6 +26,7 @@ namespace Helezon.FollowMe.Service
     {
         string FistCompanyName();
         List<CompanyDto> GetParentCompanyIdAndNames(int companyRootType, string sirketId);
+        List<MyNameValueDto> GetRootCompanyIdAndNames(int companyRootType, string companyId);
         Company GetCompanyById(string companyId);
         CompanyDto GetCompanyCodeById(string companyId);
     }
@@ -90,6 +91,19 @@ namespace Helezon.FollowMe.Service
                      .Select(x => new CompanyDto { Id = x.Id, Name = x.Code + " " + x.Name })
                      .ToList();
         }
-      
+
+        public List<MyNameValueDto> GetRootCompanyIdAndNames(int companyRootType, string companyId)
+        {
+            return _repository
+                .QueryableNoTracking()
+                .Where(x => x.CompanyRootTypeId == companyRootType && x.ParentId == null)
+                .Select(x => new MyNameValueDto { Value = x.Id, Name = x.Code + " " + x.Name })
+                .ToList();
+        }
+
+        //List<Company> ICompanyService.GetRootCompanyIdAndNames(int companyRootType, string companyId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
